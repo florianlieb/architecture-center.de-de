@@ -1,6 +1,6 @@
 ---
-redirect_url: /azure/architecture/checklist/availability
-ms.openlocfilehash: 306ce9c49160562363b1f3e52286a764a34d353c
+redirect_url: /azure/architecture/resources/diagrams
+ms.openlocfilehash: e10b81ac17ecb7bb06bf428a352309cb41974d29
 ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT
 ms.contentlocale: de-DE
