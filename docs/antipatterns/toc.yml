@@ -1,0 +1,21 @@
+- name: Azure Architecture Center
+  href: /azure/architecture
+- name: Leistungsbezogene Antimuster
+  href: index.md
+  items:
+    - name: Ausgelastete Datenbank
+      href: busy-database/index.md
+    - name: Ausgelastetes Front-End
+      href: busy-front-end/index.md
+    - name: Zu viele E/A-Vorgänge
+      href: chatty-io/index.md
+    - name: Irrelevante Abrufe
+      href: extraneous-fetching/index.md
+    - name: Ungeeignete Instanziierung
+      href: improper-instantiation/index.md
+    - name: Monolithische Persistenz
+      href: monolithic-persistence/index.md
+    - name: Kein Caching
+      href: no-caching/index.md
+    - name: Synchrone E/A-Vorgänge
+      href: synchronous-io/index.md

@@ -1,0 +1,12 @@
+- name: Azure Architecture Center
+  href: /azure/architecture
+- name: Checklisten für die Entwurfsüberprüfung
+  items:
+    - name: Availability
+      href: availability.md
+    - name: DevOps
+      href: dev-ops.md
+    - name: Resilienz
+      href: resiliency.md
+    - name: Skalierbarkeit
+      href: scalability.md

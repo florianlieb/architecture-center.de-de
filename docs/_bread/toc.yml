@@ -1,0 +1,47 @@
+- name: Azure
+  tocHref: /azure/
+  topicHref: /azure
+  items:
+    - name: Architektur
+      tocHref: /azure/architecture/
+      topicHref: /azure/architecture
+      items:
+        - name: Bewährte Methoden
+          tocHref: /azure/architecture/best-practices
+          topicHref: /azure/architecture/best-practices
+        - name: Azure für AWS-Spezialisten
+          tocHref: /azure/architecture/aws-professional
+          topicHref: /azure/architecture/aws-professional
+        - name: Entwurf mit Blick auf Resilienz
+          tocHref: /azure/architecture/resiliency
+          topicHref: /azure/architecture/resiliency
+        - name: Checklisten für die Entwurfsüberprüfung
+          tocHref: /azure/architecture/checklist
+          topicHref: /azure/architecture/checklist
+        - name: Elasticsearch
+          tocHref: /azure/architecture/elasticsearch
+          topicHref: /azure/architecture/elasticsearch
+        - name: Verwalten der Identität in mehrinstanzenfähigen Anwendungen
+          tocHref: /azure/architecture/multitenant-identity
+        - name: Referenzarchitekturen
+          tocHref: /azure/architecture/reference-architectures
+          topicHref: /azure/architecture/reference-architectures
+        - name: Cloudentwurfsmuster
+          tocHref: /azure/architecture/patterns
+          topicHref: /azure/architecture/patterns
+        - name: Ressourcen
+          tocHref: /azure/architecture/resources
+          topicHref: /azure/architecture/resources
+        - name: Handbuch
+          tocHref: /azure/architecture/guide
+          topicHref: /azure/architecture/guide
+        - name: Leistungsbezogene Antimuster
+          tocHref: /azure/architecture/antipatterns
+          topicHref: /azure/architecture/
+        - name: Compliance
+          tocHref: /azure/architecture/compliance
+          topicHref: /azure/architecture/compliance
+          items:
+            - name: PCI-DSS
+              tocHref: /azure/architecture/compliance/pci-dss
+              topicHref: /azure/architecture/compliance/pci-dss

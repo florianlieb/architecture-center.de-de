@@ -1,0 +1,24 @@
+- name: Azure Architecture Center
+  href: /azure/architecture
+- name: Entwurf mit Blick auf Resilienz
+  items:
+    - name: Entwurf resilienter Anwendungen
+      href: index.md
+    - name: Checkliste für Resilienz
+      href: ../checklist/resiliency.md?toc=/azure/architecture/resiliency/toc.json
+    - name: Analyse im Fehlermodus
+      href: failure-mode-analysis.md
+    - name: Zusätzliche Anleitungen
+      items:
+        - name: Notfallwiederherstellung
+          href: disaster-recovery-azure-applications.md
+        - name: Hohe Verfügbarkeit
+          href: high-availability-azure-applications.md
+        - name: Wiederherstellung nach Datenbeschädigung oder unbeabsichtigtem Löschen
+          href: recovery-data-corruption.md
+        - name: Wiederherstellung nach lokalen Ausfällen
+          href: recovery-local-failures.md
+        - name: Wiederherstellung nach einer regionsweiten Dienstunterbrechung
+          href: recovery-loss-azure-region.md
+        - name: Wiederherstellung von einem lokalen Standort nach Azure
+          href: recovery-on-premises-azure.md
