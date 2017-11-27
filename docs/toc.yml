@@ -1,0 +1,145 @@
+- name: Azure Architecture Center
+  href: index.md
+- name: Anwendungsarchitekturleitfaden
+  href: guide/index.md
+  items:
+    - name: Architekturstile
+      href: guide/architecture-styles/index.md
+    - name: Auswahl der Technologie
+      href: guide/technology-choices/index.md
+      items: null
+    - name: Entwurfsprinzipien
+      href: guide/design-principles/index.md
+    - name: Säulen der Softwarequalität
+      href: guide/pillars.md
+    - name: Entwurfsmuster
+      href: patterns/index.md?toc=/azure/architecture/guide/toc.json
+- name: Referenzarchitekturen
+  href: reference-architectures/index.md
+  items:
+    - name: Identitätsverwaltung
+      href: reference-architectures/identity/index.md
+    - name: Hybrides Netzwerk
+      href: reference-architectures/hybrid-networking/index.md
+    - name: App Service-Webanwendung
+      href: reference-architectures/app-service-web-app/index.md
+    - name: Netzwerk-DMZ
+      href: reference-architectures/dmz/index.md
+    - name: SAP NetWeaver und SAP HANA
+      href: reference-architectures/sap/index.md
+    - name: SharePoint Server 2016
+      href: reference-architectures/sharepoint/index.md
+    - name: VM-Workloads (Linux)
+      href: reference-architectures/virtual-machines-linux/index.md
+    - name: VM-Workloads (Windows)
+      href: reference-architectures/virtual-machines-windows/index.md
+- name: Cloudentwurfsmuster
+  href: patterns/index.md
+  items:
+    - name: Verfügbarkeitsmuster
+      href: patterns/category/availability.md
+    - name: Datenverwaltungsmuster
+      href: patterns/category/data-management.md
+    - name: Entwurfs- und Implementierungsmuster
+      href: patterns/category/design-implementation.md
+    - name: Verwaltungs- und Überwachungsmuster
+      href: patterns/category/management-monitoring.md
+    - name: Nachrichtenmuster
+      href: patterns/category/messaging.md
+    - name: Leistungs- und Skalierbarkeitsmuster
+      href: patterns/category/performance-scalability.md
+    - name: Resilienzmuster
+      href: patterns/category/resiliency.md
+    - name: Sicherheitsmuster
+      href: patterns/category/security.md
+- name: Bewährte Methoden
+  items:
+    - name: API-Entwurf
+      href: best-practices/api-design.md
+    - name: API-Implementierung
+      href: best-practices/api-implementation.md
+    - name: Automatische Skalierung
+      href: best-practices/auto-scaling.md
+    - name: Hintergrundaufträge
+      href: best-practices/background-jobs.md
+    - name: Caching
+      href: best-practices/caching.md
+    - name: Content Delivery Network
+      href: best-practices/cdn.md
+    - name: Datenpartitionierung
+      href: best-practices/data-partitioning.md
+    - name: Überwachung und Diagnose
+      href: best-practices/monitoring.md
+    - name: Benennungskonventionen
+      href: best-practices/naming-conventions.md
+    - name: Behandeln vorübergehender Fehler
+      href: best-practices/transient-faults.md
+    - name: Wiederholungsleitfaden für bestimmte Dienste
+      href: best-practices/retry-service-specific.md
+- name: Leistungsbezogene Antimuster
+  href: antipatterns/index.md
+  items:
+    - name: Ausgelastete Datenbank
+      href: antipatterns/busy-database/index.md
+    - name: Ausgelastetes Front-End
+      href: antipatterns/busy-front-end/index.md
+    - name: Zu viele E/A-Vorgänge
+      href: antipatterns/chatty-io/index.md
+    - name: Irrelevante Abrufe
+      href: antipatterns/extraneous-fetching/index.md
+    - name: Ungeeignete Instanziierung
+      href: antipatterns/improper-instantiation/index.md
+    - name: Monolithische Persistenz
+      href: antipatterns/monolithic-persistence/index.md
+    - name: Kein Caching
+      href: antipatterns/no-caching/index.md
+    - name: Synchrone E/A-Vorgänge
+      href: antipatterns/synchronous-io/index.md
+- name: Checklisten für die Entwurfsüberprüfung
+  items:
+    - name: Availability
+      href: checklist/availability.md
+    - name: DevOps
+      href: checklist/dev-ops.md
+    - name: Resilienz
+      href: checklist/resiliency.md
+    - name: Skalierbarkeit
+      href: checklist/scalability.md
+- name: Entwurf mit Blick auf Resilienz
+  items:
+    - name: Entwurf resilienter Anwendungen
+      href: resiliency/index.md
+    - name: Checkliste für Resilienz
+      href: checklist/resiliency.md?toc=/azure/architecture/resiliency/toc.json
+    - name: Analyse im Fehlermodus
+      href: resiliency/failure-mode-analysis.md
+- name: Anleitungen zu Szenarien
+  items:
+    - name: Azure für AWS-Spezialisten
+      href: aws-professional/index.md
+    - name: Verwalten der Identität in mehrinstanzenfähigen Anwendungen
+      href: multitenant-identity/index.md
+    - name: Migration von Cloud Services zu Service Fabric
+      href: service-fabric/migrate-from-cloud-services.md
+    - name: Ausführen von Elasticsearch in Azure
+      href: elasticsearch/index.md
+    - name: Erweitern der Azure Resource Manager-Vorlagenfunktionen
+      href: building-blocks/extending-templates/index.md
+- name: Ressourcen
+  items:
+    - name: Azure-Roadmap
+      href: 'https://azure.microsoft.com/roadmap/'
+    - name: Microsoft Trust Center für Azure
+      href: 'https://www.microsoft.com/en-us/trustcenter/cloudservices/azure'
+    - name: Symbole und Diagramme
+      href: resources/diagrams.md
+    - name: Kalender der Azure-Updates
+      href: 'https://azure.microsoft.com/updates/'
+    - name: Training
+      href: 'https://azure.microsoft.com/community/training/'
+    - name: SQLCAT-Blog
+      href: 'https://blogs.msdn.microsoft.com/sqlcat/'
+    - name: AzureCAT-Blog
+      href: 'https://blogs.msdn.microsoft.com/azurecat/'
+    - name: Whitepaper
+      href: 'https://azure.microsoft.com/resources/whitepapers/'

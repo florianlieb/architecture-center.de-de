@@ -1,0 +1,30 @@
+- name: Azure Architecture Center
+  href: /azure/architecture
+- name: Verwalten der Identität in mehrinstanzenfähigen Anwendungen
+  items:
+    - name: Einführung
+      href: index.md
+    - name: Das Tailspin-Szenario
+      href: tailspin.md
+    - name: Authentifizierung
+      href: authenticate.md
+    - name: Anspruchsbasierte Identität
+      href: claims.md
+    - name: Mandantenanmeldung
+      href: signup.md
+    - name: Anwendungsrollen
+      href: app-roles.md
+    - name: Autorisierung
+      href: authorize.md
+    - name: Sichern einer Web-API
+      href: web-api.md
+    - name: Zwischenspeichern von Zugriffstoken
+      href: token-cache.md
+    - name: Clientassertion
+      href: client-assertion.md
+    - name: Schützen von Anwendungsgeheimnissen
+      href: key-vault.md
+    - name: Herstellen eines Verbunds mit der AD FS-Instanz eines Kunden
+      href: adfs.md
+    - name: Ausführen der Surveys-Anwendung
+      href: run-the-app.md

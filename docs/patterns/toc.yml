@@ -1,0 +1,86 @@
+- name: Azure Architecture Center
+  href: /azure/architecture
+- name: Cloudentwurfsmuster
+  href: index.md
+- name: Categories
+  items:
+    - name: Availability
+      href: category/availability.md
+    - name: Datenverwaltung
+      href: category/data-management.md
+    - name: Entwurf und Implementierung
+      href: category/design-implementation.md
+    - name: Nachrichten
+      href: category/messaging.md
+    - name: Verwaltung und Überwachung
+      href: category/management-monitoring.md
+    - name: Leistung und Skalierbarkeit
+      href: category/performance-scalability.md
+    - name: Resilienz
+      href: category/resiliency.md
+    - name: Sicherheit
+      href: category/security.md
+- name: Ambassador
+  href: ambassador.md
+- name: Antikorruptionsschicht
+  href: anti-corruption-layer.md
+- name: Back-Ends für Front-Ends
+  href: backends-for-frontends.md
+- name: Bulkhead
+  href: bulkhead.md
+- name: Cachefremd
+  href: cache-aside.md
+- name: Sicherung
+  href: circuit-breaker.md
+- name: Command and Query Responsibility Segregation (CQRS)
+  href: cqrs.md
+- name: Ausgleichende Transaktion
+  href: compensating-transaction.md
+- name: Konkurrierende Consumer
+  href: competing-consumers.md
+- name: Computeressourcenkonsolidierung
+  href: compute-resource-consolidation.md
+- name: Event Sourcing
+  href: event-sourcing.md
+- name: Externer Konfigurationsspeicher
+  href: external-configuration-store.md
+- name: Verbundidentität
+  href: federated-identity.md
+- name: Gatekeeper
+  href: gatekeeper.md
+- name: Gatewayaggregation
+  href: gateway-aggregation.md
+- name: Gatewayabladung
+  href: gateway-offloading.md
+- name: Gatewayrouting
+  href: gateway-routing.md
+- name: Überwachung des Integritätsendpunkts
+  href: health-endpoint-monitoring.md
+- name: Indextabelle
+  href: index-table.md
+- name: Auswahl einer übergeordneten Instanz
+  href: leader-election.md
+- name: Materialisierte Sicht
+  href: materialized-view.md
+- name: Pipes und Filter
+  href: pipes-and-filters.md
+- name: Prioritätswarteschlange
+  href: priority-queue.md
+- name: Warteschlangenbasierter Lastenausgleich
+  href: queue-based-load-leveling.md
+- name: Wiederholen
+  href: retry.md
+- name: Scheduler-Agent-Supervisor
+  href: scheduler-agent-supervisor.md
+- name: Sharding (Horizontales Partitionieren)
+  href: sharding.md
+- name: Sidecar
+  href: sidecar.md
+- name: Hosten von statischen Inhalten
+  href: static-content-hosting.md
+- name: Strangler
+  href: strangler.md
+- name: Drosselung
+  href: throttling.md
+- name: Valet-Schlüssel
+  href: valet-key.md

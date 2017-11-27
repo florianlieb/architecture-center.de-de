@@ -1,0 +1,60 @@
+- name: Azure Architecture Center
+  href: /azure/architecture
+- name: Anwendungsarchitekturleitfaden
+  href: index.md
+  items:
+    - name: Architekturstile
+      href: architecture-styles/index.md
+      items:
+        - name: Anwendung mit n-Schichten
+          href: architecture-styles/n-tier.md
+        - name: Web-Warteschlange-Worker
+          href: architecture-styles/web-queue-worker.md
+        - name: Microservices
+          href: architecture-styles/microservices.md
+        - name: CQRS
+          href: architecture-styles/cqrs.md
+        - name: Ereignisgesteuerte Architektur
+          href: architecture-styles/event-driven.md
+        - name: Große Datenmengen
+          href: architecture-styles/big-data.md
+        - name: Big Compute
+          href: architecture-styles/big-compute.md
+    - name: Auswahl der Technologie
+      href: technology-choices/index.md
+      items:
+        - name: Übersicht über Computeoptionen
+          href: technology-choices/compute-overview.md
+        - name: Vergleich der Computeoptionen
+          href: technology-choices/compute-comparison.md
+        - name: Übersicht über Datenspeicher
+          href: technology-choices/data-store-overview.md
+        - name: Vergleich der Datenspeicher
+          href: technology-choices/data-store-comparison.md
+    - name: Entwurfsprinzipien
+      href: design-principles/index.md
+      items:
+        - name: Entwurf mit Blick auf Selbstreparatur
+          href: design-principles/self-healing.md
+        - name: Herstellen von Redundanz für alle Anwendungskomponenten
+          href: design-principles/redundancy.md
+        - name: Minimieren der Koordinierung
+          href: design-principles/minimize-coordination.md
+        - name: Ausrichtung des Entwurfs auf horizontale Skalierung
+          href: design-principles/scale-out.md
+        - name: Umgehung von Beschränkungen durch Partitionierung
+          href: design-principles/partition.md
+        - name: Entwurf mit Blick auf den Betrieb
+          href: design-principles/design-for-operations.md
+        - name: Verwendung verwalteter Dienste
+          href: design-principles/managed-services.md
+        - name: Verwendung des idealen Datenspeichers
+          href: design-principles/use-the-best-data-store.md
+        - name: Entwurf mit Blick auf die Entwicklung
+          href: design-principles/design-for-evolution.md
+        - name: Ausrichtung des Entwurfs auf die Unternehmensanforderungen
+          href: design-principles/build-for-business.md
+    - name: Säulen der Softwarequalität
+      href: pillars.md
+    - name: Entwurfsmuster
+      href: ../patterns/index.md?toc=/azure/architecture/guide/toc.json
