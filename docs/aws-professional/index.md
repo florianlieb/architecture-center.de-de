@@ -5,11 +5,11 @@ keywords: AWS experts, Azure comparison, AWS comparison, difference between azur
 author: lbrader
 ms.date: 03/24/2017
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: 251489e7a6d78d82f3ed70ca2df6c88f8759f9a5
-ms.sourcegitcommit: fbcf9a1c25db13b2627a8a58bbc985cd01ea668d
+ms.openlocfilehash: 75fda82ee5ca7ca3665501fe428d1d01995e7422
+ms.sourcegitcommit: c53adf50d3a787956fc4ebc951b163a10eeb5d20
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/16/2017
+ms.lasthandoff: 11/23/2017
 ---
 # <a name="azure-for-aws-professionals"></a>Azure für AWS-Spezialisten
 
@@ -21,7 +21,7 @@ Sie lernen Folgendes:
 * Struktur der verfügbaren Lösungen in Azure
 * Unterschiede zwischen den wichtigsten Azure- und AWS-Diensten
 
- Die Funktionalität von Azure und AWS hat sich im Laufe der Zeit unabhängig voneinander weiterentwickelt, sodass bedeutende Unterschiede zwischen diesen hinsichtlich Implementierung und Entwurf bestehen.
+Die Funktionalität von Azure und AWS hat sich im Laufe der Zeit unabhängig voneinander weiterentwickelt, sodass bedeutende Unterschiede zwischen diesen hinsichtlich Implementierung und Entwurf bestehen.
 
 ## <a name="overview"></a>Übersicht
 
@@ -62,7 +62,7 @@ Diese Einschränkungen können bis zum Maximalwert erhöht werden, wenn Sie eine
 
 Der Begriff „Ressource“ wird in Azure und AWS deckungsgleich verwendet und bezeichnet Serverinstanzen, Speicherobjekte, Netzwerkgeräte oder sonstige Entitäten, die Sie innerhalb der Plattform erstellen oder konfigurieren können.
 
-Azure-Ressourcen werden über eines von zwei Modellen bereitgestellt und verwaltet: Azure Resource Manager oder das ältere [klassische Azure-Bereitstellungsmodell](/azure/azure-resource-manager/resource-manager-deployment-model).
+Azure-Ressourcen werden über eins von zwei Modellen bereitgestellt und verwaltet: [Azure Resource Manager](/azure/azure-resource-manager/resource-group-overview) oder das ältere [klassische Azure-Bereitstellungsmodell](/azure/azure-resource-manager/resource-manager-deployment-model).
 Neue Ressourcen werden mithilfe des Resource Manager-Modells erstellt.
 
 ### <a name="resource-groups"></a>Ressourcengruppen
@@ -166,7 +166,7 @@ Obwohl die Größen von AWS-Instanztypen und virtuellen Azure-Computern eine äh
 
 Im Gegensatz zur sekundengenauen Abrechnung in AWS werden On-Demand-VMs von Azure minutengenau abgerechnet.
 
-In Azure sind keine Pendants zu EC2 Spot Instances, Reserved Instances oder Dedicated Hosts vorhanden.
+In Azure sind keine Pendants zu EC2 Spot Instances oder Dedicated Hosts vorhanden.
 
 #### <a name="ebs-and-azure-storage-for-vm-disks"></a>EBS und Azure Storage für VM-Datenträger
 
@@ -232,16 +232,18 @@ In der AWS-Plattform ist der Cloudspeicher primär in drei Dienste unterteilt:
 In Azure Storage können mit an Abonnements gebundene [Speicherkonten](https://azure.microsoft.com/documentation/articles/storage-create-storage-account/) die folgenden Speicherdienste erstellt und verwaltet werden:
 
 -   [Blob Storage](https://azure.microsoft.com/documentation/articles/storage-create-storage-account/): Speichert alle Arten von Text- oder Binärdaten, z.B. ein Dokument, eine Mediendatei oder ein Installer einer Anwendung. Sie können Blob Storage für den privaten Zugriff einrichten oder Inhalte öffentlich im Internet zugänglich machen. Blob Storage dient demselben Zweck wie AWS S3 und EBS.
-
 -   [Table Storage](https://azure.microsoft.com/documentation/articles/storage-nodejs-how-to-use-table-storage/): Speichert strukturierte Datensätze. Table Storage ist ein Datenspeicher für NoSQL-Schlüsselattribute, der eine schnelle Entwicklung und einen schnellen Zugriff auf große Datenmengen ermöglicht. Dies lässt sich mit dem SimpleDB- and DynamoDB-Dienst von AWS vergleichen.
 
 -   [Queue Storage](https://azure.microsoft.com/documentation/articles/storage-nodejs-how-to-use-queues/): Bietet Messaging für die Workflowverarbeitung und die Kommunikation zwischen Komponenten von Clouddiensten.
 
 -   [File Storage](https://azure.microsoft.com/documentation/articles/storage-java-how-to-use-file-storage/): Bietet einen gemeinsam genutzten Speicher für Legacyanwendungen mit dem SMB-Standardprotokoll (Server Message Block). File Storage wird ähnlich wie EFS in der AWS-Plattform verwendet.
 
-#### <a name="glacier-and-azure-storage"></a>Glacier und Azure Storage
 
-In Azure Storage gibt es kein direktes Pendant zum Langzeit-Archivierungsspeicher Glacier von AWS. Für die Daten mit langer Aufbewahrungsdauer, auf die selten zugegriffen wird, bietet Azure die [kalte Azure-Blobspeicherebene](https://azure.microsoft.com/documentation/articles/storage-blob-storage-tiers/).
+
+
+ 
+#### <a name="glacier-and-azure-storage"></a>Glacier und Azure Storage 
+Im [Azure Storage-Standardarchiv](/azure/storage/blobs/storage-blob-storage-tiers) gibt es kein direktes Pendant zum Langzeit-Archivierungsspeicher Glacier von AWS. Für die Daten mit langer Aufbewahrungsdauer, auf die selten zugegriffen wird, bietet Azure die [kalte Azure-Blobspeicherebene](/azure/storage/blobs/storage-blob-storage-tiers).
 Kalte Speicher stellen im Vergleich zu standardmäßigen Blob Storages günstigere Speicher mit geringerer Leistung dar und sind mit der Klasse „AWS S3 – Infrequent Access“ vergleichbar.
 
 #### <a name="see-also"></a>Weitere Informationen
@@ -284,13 +286,17 @@ Azure bietet über seinen [ExpressRoute](https://azure.microsoft.com/documentati
 
 ### <a name="database-services"></a>Datenbankdienste
 
-#### <a name="rds-and-azure-sql-database-service"></a>RDS und Azure SQL-Datenbankdienst
+#### <a name="rds-and-azure-relational-database-services"></a>RDS und Azure-Dienste für relationale Datenbanken
 
-AWS und Azure verfolgen unterschiedliche Ansätze bei ihren Angeboten für relationale Datenbanken in der Cloud. Relational Database Service (RDS) von AWS unterstützt das Erstellen von Instanzen mit verschiedenen Datenbankmodulen wie Oracle und MySQL.
+In Azure stehen verschiedene Dienste für relationale Datenbanken zur Verfügung, die dem Dienst für relationale Datenbanken (Relational Database Service, RDS) von AWS entsprechen.
 
-Die [SQL-Datenbank](https://azure.microsoft.com/documentation/articles/sql-database-technical-overview/) ist das Clouddatenbankangebot von Azure. Es stellt über einen verwalteten Dienst einen hochgradig skalierbaren relationalen Datenspeicher zur Verfügung. Die SQL-Datenbank verwendet ihr eigenes Modul und unterstützt nicht die Erstellung anderer Datenbanktypen. Andere Datenbankmodule wie [SQL Server](https://azure.microsoft.com/services/virtual-machines/sql-server/), [Oracle](https://azure.microsoft.com/campaigns/oracle/) oder [MySQL](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-classic-mysql-2008r2/) können über Azure-VM-Instanzen bereitgestellt werden.
+-   [SQL-Datenbank](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview)
+-   [Azure Database for MySQL](https://docs.microsoft.com/azure/mysql/overview)
+-   [Azure-Datenbank für PostgreSQL](https://docs.microsoft.com/azure/postgresql/overview)
 
-Die Kosten für AWS RDS werden durch die Menge der Hardwareressourcen bestimmt, die Ihre Instanz verbraucht, z.B. CPU-, RAM- und Speicherkapazitäten sowie Netzwerkbandbreite. Beim SQL-Datenbankdienst hängen die Kosten von der Datenbankgröße, der Anzahl der gleichzeitigen Verbindungen und den Durchsatzstufen ab.
+Andere Datenbankmodule wie [SQL Server](https://azure.microsoft.com/services/virtual-machines/sql-server/), [Oracle](https://azure.microsoft.com/campaigns/oracle/) und [MySQL](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-classic-mysql-2008r2/) können über Azure-VM-Instanzen bereitgestellt werden.
+
+Die Kosten für AWS RDS werden durch die Menge der Hardwareressourcen bestimmt, die Ihre Instanz verbraucht, z.B. CPU-, RAM- und Speicherkapazitäten sowie Netzwerkbandbreite. Bei den Azure-Datenbankdiensten hängen die Kosten von der Datenbankgröße, der Anzahl der gleichzeitigen Verbindungen und den Durchsatzstufen ab.
 
 #### <a name="see-also"></a>Weitere Informationen
 
