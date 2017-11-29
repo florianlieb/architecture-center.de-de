@@ -243,7 +243,7 @@ In Azure Storage können mit an Abonnements gebundene [Speicherkonten](https://a
 
  
 #### <a name="glacier-and-azure-storage"></a>Glacier und Azure Storage 
-Im [Azure Storage-Standardarchiv](/azure/storage/blobs/storage-blob-storage-tiers) gibt es kein direktes Pendant zum Langzeit-Archivierungsspeicher Glacier von AWS. Für die Daten mit langer Aufbewahrungsdauer, auf die selten zugegriffen wird, bietet Azure die [kalte Azure-Blobspeicherebene](/azure/storage/blobs/storage-blob-storage-tiers).
+Im [Azure Storage-Archiv (Standard)](/azure/storage/blobs/storage-blob-storage-tiers) gibt es kein direktes Pendant zum Langzeit-Archivierungsspeicher Glacier von AWS. Für die Daten mit langer Aufbewahrungsdauer, auf die selten zugegriffen wird, bietet Azure die [kalte Azure-Blobspeicherebene](/azure/storage/blobs/storage-blob-storage-tiers).
 Kalte Speicher stellen im Vergleich zu standardmäßigen Blob Storages günstigere Speicher mit geringerer Leistung dar und sind mit der Klasse „AWS S3 – Infrequent Access“ vergleichbar.
 
 #### <a name="see-also"></a>Weitere Informationen
