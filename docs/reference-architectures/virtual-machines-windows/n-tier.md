@@ -6,11 +6,11 @@ ms.date: 11/22/2016
 pnp.series.title: Windows VM workloads
 pnp.series.next: multi-region-application
 pnp.series.prev: multi-vm
-ms.openlocfilehash: f3c375f8fccc633d9525a8afbd11c13037265f4a
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: e25d10d661ac4759f209bd27384303dee2ee454e
+ms.sourcegitcommit: 583e54a1047daa708a9b812caafb646af4d7607b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 11/28/2017
 ---
 # <a name="run-windows-vms-for-an-n-tier-application"></a>Ausführen von Windows-VMs für eine n-schichtige Anwendung
 
@@ -24,7 +24,7 @@ Anhand dieser Referenzarchitektur werden einige bewährte Methoden für die Ausf
 
 Es gibt viele Möglichkeiten für die Implementierung einer n-schichtigen Architektur. Das Diagramm zeigt eine typische 3-schichtige Webanwendung. Diese Architektur baut auf den Informationen unter [Run load-balanced VMs for scalability and availability][multi-vm] (Ausführen von VMs mit Lastenausgleich zur Erzielung von Skalierbarkeit und Verfügbarkeit) auf. In der Internet- und Unternehmensschicht werden VMs mit Lastenausgleich verwendet.
 
-* **Verfügbarkeitsgruppen:** Erstellen Sie eine [Verfügbarkeitsgruppe][azure-availability-sets] für jede Schicht, und stellen Sie mindestens zwei VMs in jeder Schicht bereit. Dies berechtigt die VMs zu einer höheren [Vereinbarung zum Servicelevel (SLA)][vm-sla] für VMs.
+* **Verfügbarkeitsgruppen:** Erstellen Sie eine [Verfügbarkeitsgruppe][azure-availability-sets] für jede Schicht, und stellen Sie mindestens zwei VMs in jeder Schicht bereit. Dies berechtigt die VMs zu einer höheren [Vereinbarung zum Servicelevel (SLA)][vm-sla] für VMs. Sie können eine einzelne VM in einer Verfügbarkeitsgruppe bereitstellen, die einzelne VM ist jedoch nicht für eine SLA-Garantie qualifiziert, es sei denn, die VM verwendet Azure Premium Storage für alle Betriebssystem- und Datenfestplatten.  
 * **Subnetze:** Erstellen Sie für jede Schicht ein separates Subnetz. Geben Sie mit der [CIDR]-Notation den Adressbereich und die Subnetzmaske an. 
 * **Lastenausgleichsmodule:** Verwenden Sie ein [Lastenausgleichsmodul mit Internetzugriff][load-balancer-external], um eingehenden Internetdatenverkehr auf die Internetschicht zu verteilen, und ein [internes Lastenausgleichsmodul][load-balancer-internal], um den Netzwerkdatenverkehr von der Internetschicht auf die Unternehmensschicht zu verteilen.
 * **Jumpbox:** Wird auch als [geschützter Host] bezeichnet. Dies ist eine geschützte VM im Netzwerk, die von Administratoren zum Herstellen der Verbindung mit anderen VMs verwendet wird. Die Jumpbox verfügt über eine NSG, bei der Remotedatenverkehr nur von öffentlichen IP-Adressen zugelassen wird, die in einer Liste mit sicheren Adressen enthalten sind. Die NSG sollte Remotedesktop-Datenverkehr (RDP) zulassen.
@@ -128,33 +128,50 @@ Vereinfachen Sie die Verwaltung des gesamten Systems durch den Einsatz von zentr
 
 ## <a name="deploy-the-solution"></a>Bereitstellen der Lösung
 
-Eine Bereitstellung für diese Architektur ist auf [GitHub][github-folder] verfügbar. Die Bereitstellung der Architektur erfolgt in drei Phasen. Um die Architektur bereitzustellen, gehen Sie folgendermaßen vor: 
+Eine Bereitstellung für diese Referenzarchitektur ist auf [GitHub][github-folder] verfügbar. 
 
-1. Klicken Sie auf die nachfolgende Schaltfläche, um mit der ersten Phase der Bereitstellung zu beginnen:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fvirtual-machines%2Fn-tier-windows%2FvirtualNetwork.azuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
-2. Nachdem der Link im Azure-Portal geöffnet wurde, geben Sie die folgenden Werte ein: 
-   * Der Name der **Ressourcengruppe** ist bereits in der Parameterdatei definiert. Wählen Sie also **Neu erstellen**, und geben Sie im Textfeld `ra-ntier-sql-network-rg` ein.
-   * Wählen Sie im Dropdownfeld **Standort** die Region aus.
-   * Lassen Sie die Textfelder für den **Vorlagenstamm-URI** bzw. **Parameterstamm-URI** unverändert.
-   * Überprüfen Sie die allgemeinen Geschäftsbedingungen, und aktivieren Sie dann das Kontrollkästchen **Ich stimme den oben genannten Geschäftsbedingungen zu**.
-   * Klicken Sie auf die Schaltfläche **Kaufen**.
-3. Suchen Sie in den Azure-Portalbenachrichtigungen nach einer Meldung, dass die erste Phase der Bereitstellung abgeschlossen ist.
-4. Klicken Sie auf die nachfolgende Schaltfläche, um mit der zweiten Phase der Bereitstellung zu beginnen:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fvirtual-machines%2Fn-tier-windows%2Fworkload.azuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
-5. Nachdem der Link im Azure-Portal geöffnet wurde, geben Sie die folgenden Werte ein: 
-   * Der Name der **Ressourcengruppe** ist bereits in der Parameterdatei definiert. Wählen Sie also **Neu erstellen**, und geben Sie im Textfeld `ra-ntier-sql-workload-rg` ein.
-   * Wählen Sie im Dropdownfeld **Standort** die Region aus.
-   * Lassen Sie die Textfelder für den **Vorlagenstamm-URI** bzw. **Parameterstamm-URI** unverändert.
-   * Überprüfen Sie die allgemeinen Geschäftsbedingungen, und aktivieren Sie dann das Kontrollkästchen **Ich stimme den oben genannten Geschäftsbedingungen zu**.
-   * Klicken Sie auf die Schaltfläche **Kaufen**.
-6. Suchen Sie in den Azure-Portalbenachrichtigungen nach einer Meldung, dass die zweite Phase der Bereitstellung abgeschlossen ist.
-7. Klicken Sie auf die nachfolgende Schaltfläche, um mit der dritten Phase der Bereitstellung zu beginnen:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fvirtual-machines%2Fn-tier-windows%2Fsecurity.azuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
-8. Nachdem der Link im Azure-Portal geöffnet wurde, geben Sie die folgenden Werte ein: 
-   * Der Name der **Ressourcengruppe** ist bereits in der Parameterdatei definiert. Wählen Sie also **Vorhandene verwenden** aus, und geben Sie im Textfeld `ra-ntier-sql-network-rg` ein.
-   * Wählen Sie im Dropdownfeld **Standort** die Region aus.
-   * Lassen Sie die Textfelder für den **Vorlagenstamm-URI** bzw. **Parameterstamm-URI** unverändert.
-   * Überprüfen Sie die allgemeinen Geschäftsbedingungen, und aktivieren Sie dann das Kontrollkästchen **Ich stimme den oben genannten Geschäftsbedingungen zu**.
-   * Klicken Sie auf die Schaltfläche **Kaufen**.
-9. Suchen Sie in den Azure-Portalbenachrichtigungen nach einer Meldung, dass die dritte Phase der Bereitstellung abgeschlossen ist.
-10. Die Parameterdateien enthalten einen hartcodierten Administratorbenutzernamen und das dazugehörige Kennwort, und es wird dringend empfohlen, beides sofort auf allen VMs zu ändern. Klicken Sie im Azure-Portal auf die einzelnen VMs und auf dem Blatt **Support + Problembehandlung** dann auf **Kennwort zurücksetzen**. Wählen Sie im Dropdownfeld **Modus** die Option **Kennwort zurücksetzen**, und wählen Sie dann einen neuen **Benutzernamen** und ein **Kennwort** aus. Klicken Sie auf die Schaltfläche **Aktualisieren**, um den neuen Benutzernamen und das Kennwort zu speichern. 
+### <a name="prerequisites"></a>Voraussetzungen
+
+Bevor Sie die Referenzarchitektur in Ihrem eigenen Abonnement bereitstellen können, müssen Sie die folgenden Schritte ausführen.
+
+1. Klonen oder Forken Sie das GitHub-Repository [AzureCAT-Referenzarchitekturen][ref-arch-repo], oder laden Sie die zugehörige ZIP-Datei herunter.
+
+2. Vergewissern Sie sich, dass Azure CLI 2.0 auf Ihrem Computer installiert ist. Um die Befehlszeilenschnittstelle zu installieren, befolgen Sie die Anweisungen unter [Installieren von Azure CLI 2.0][azure-cli-2].
+
+3. Installieren Sie das npm-Paket mit den [Azure Bausteinen][azbb].
+
+  ```bash
+  npm install -g @mspnp/azure-building-blocks
+  ```
+
+4. Melden Sie sich über eine Eingabeaufforderung, eine bash-Eingabeaufforderung oder die PowerShell-Eingabeaufforderung bei Ihrem Azure-Konto an. Verwenden Sie dazu die unten aufgeführten Befehle, und befolgen Sie die Anweisungen.
+
+  ```bash
+  az login
+  ```
+
+### <a name="deploy-the-solution-using-azbb"></a>Bereitstellen der Lösung mit azbb
+
+Um die Windows-VMs für eine n-schichtige Anwendungsreferenzarchitektur bereitzustellen, führen Sie die folgenden Schritte aus:
+
+1. Navigieren Sie zum `virtual-machines\n-tier-windows`-Ordner für das Repository, das Sie oben in Schritt 1 der Voraussetzungen als Klon erstellt haben.
+
+2. Die Parameterdatei gibt einen Standard-Administratorbenutzernamen und ein Standardkennwort für jede VM in der Bereitstellung an. Sie müssen diese vor der Bereitstellung der Referenzarchitektur ändern. Öffnen Sie die `n-tier-windows.json`-Datei, und ersetzen Sie jedes Feld **adminUsername** und **adminPassword** durch neue Einstellungen.
+  
+  > [!NOTE]
+  > Während dieser Bereitstellung werden sowohl in den **VirtualMachineExtension**-Objekten als auch in den **extensions**-Einstellungen für einige der **VirtualMachine**-Objekte mehrere Skripts ausgeführt. Für einige dieser Skripts sind der Administratorbenutzername und das Kennwort erforderlich, die Sie soeben geändert haben. Wir empfehlen Ihnen, diese Skripts zu überprüfen, um sicherzustellen, dass Sie die richtigen Anmeldeinformationen angegeben haben. Wenn Sie nicht die richtigen Anmeldeinformationen angegeben haben, tritt bei der Bereitstellung möglicherweise ein Fehler auf.
+  > 
+  > 
+
+Speichern Sie die Datei.
+
+3. Stellen Sie die Referenzarchitektur mithilfe des Befehlszeilentools **azbb** bereit, wie unten dargestellt.
+
+  ```bash
+  azbb -s <your subscription_id> -g <your resource_group_name> -l <azure region> -p n-tier-windows.json --deploy
+  ```
+
+Weitere Informationen zum Bereitstellen dieser Beispielreferenzarchitektur mithilfe von Azure-Bausteinen finden Sie im [GitHub-Repository][git].
 
 
 <!-- links -->
@@ -162,14 +179,16 @@ Eine Bereitstellung für diese Architektur ist auf [GitHub][github-folder] verf�
 [multi-dc]: multi-region-application.md
 [multi-vm]: multi-vm.md
 [n-tier]: n-tier.md
-
+[azbb]: https://github.com/mspnp/template-building-blocks/wiki/Install-Azure-Building-Blocks
 [azure-administration]: /azure/automation/automation-intro
 [azure-availability-sets]: /azure/virtual-machines/virtual-machines-windows-manage-availability#configure-each-application-tier-into-separate-availability-sets
 [azure-cli]: /azure/virtual-machines-command-line-tools
+[azure-cli-2]: https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest
 [azure-key-vault]: https://azure.microsoft.com/services/key-vault
 [geschützter Host]: https://en.wikipedia.org/wiki/Bastion_host
 [CIDR]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
 [chef]: https://www.chef.io/solutions/azure/
+[git]: https://github.com/mspnp/template-building-blocks
 [github-folder]: https://github.com/mspnp/reference-architectures/tree/master/virtual-machines/n-tier-windows
 [lb-external-create]: /azure/load-balancer/load-balancer-get-started-internet-portal
 [lb-internal-create]: /azure/load-balancer/load-balancer-get-started-ilb-arm-portal
@@ -181,6 +200,7 @@ Eine Bereitstellung für diese Architektur ist auf [GitHub][github-folder] verf�
 [private-ip-space]: https://en.wikipedia.org/wiki/Private_network#Private_IPv4_address_spaces
 [öffentliche IP-Adresse]: /azure/virtual-network/virtual-network-ip-addresses-overview-arm
 [puppet]: https://puppetlabs.com/blog/managing-azure-virtual-machines-puppet
+[ref-arch-repo]: https://github.com/mspnp/reference-architectures
 [sql-alwayson]: https://msdn.microsoft.com/library/hh510230.aspx
 [sql-alwayson-force-failover]: https://msdn.microsoft.com/library/ff877957.aspx
 [sql-alwayson-getting-started]: https://msdn.microsoft.com/library/gg509118.aspx

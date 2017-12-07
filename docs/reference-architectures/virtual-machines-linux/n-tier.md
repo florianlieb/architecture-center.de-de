@@ -2,15 +2,15 @@
 title: "Ausführen von Linux-VMs für eine n-schichtige Anwendung in Azure"
 description: "Vorgehensweise zum Ausführen von Linux-VMs in einer n-schichtigen Architektur in Microsoft Azure"
 author: MikeWasson
-ms.date: 11/22/2016
+ms.date: 11/22/2017
 pnp.series.title: Linux VM workloads
 pnp.series.next: multi-region-application
 pnp.series.prev: multi-vm
-ms.openlocfilehash: 673e090e306ffc421603371658c8273b10b980d4
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 98814685e0f33f2a1258bf8307a86f92d8a81968
+ms.sourcegitcommit: 583e54a1047daa708a9b812caafb646af4d7607b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 11/28/2017
 ---
 # <a name="run-linux-vms-for-an-n-tier-application"></a>Ausführen von Linux-VMs für eine n-schichtige Anwendung
 
@@ -24,9 +24,9 @@ Anhand dieser Referenzarchitektur werden einige bewährte Methoden für die Ausf
 
 Es gibt viele Möglichkeiten für die Implementierung einer n-schichtigen Architektur. Das Diagramm zeigt eine typische 3-schichtige Webanwendung. Diese Architektur baut auf den Informationen unter [Run load-balanced VMs for scalability and availability][multi-vm] (Ausführen von VMs mit Lastenausgleich zur Erzielung von Skalierbarkeit und Verfügbarkeit) auf. In der Internet- und Unternehmensschicht werden VMs mit Lastenausgleich verwendet.
 
-* **Verfügbarkeitsgruppen:** Erstellen Sie eine [Verfügbarkeitsgruppe][azure-availability-sets] für jede Schicht, und stellen Sie mindestens zwei VMs in jeder Schicht bereit.  Auf diese Weise können die VMs für eine höhere [Vereinbarung zum Servicelevel (SLA)][vm-sla] für VMs genutzt werden.
+* **Verfügbarkeitsgruppen:** Erstellen Sie eine [Verfügbarkeitsgruppe][azure-availability-sets] für jede Schicht, und stellen Sie mindestens zwei VMs in jeder Schicht bereit.  Dies berechtigt die VMs zu einer höheren [Vereinbarung zum Servicelevel (SLA)][vm-sla] für VMs. Sie können eine einzelne VM in einer Verfügbarkeitsgruppe bereitstellen, die einzelne VM ist jedoch nicht für eine SLA-Garantie qualifiziert, es sei denn, die VM verwendet Azure Premium Storage für alle Betriebssystem- und Datenfestplatten.  
 * **Subnetze:** Erstellen Sie für jede Schicht ein separates Subnetz. Geben Sie mit der [CIDR]-Notation den Adressbereich und die Subnetzmaske an. 
-* **Lastenausgleichsmodule:** Verwenden Sie ein [Lastenausgleichsmodul mit Internetzugriff][load-balancer-external], um eingehenden Internetdatenverkehr auf die Webschicht zu verteilen, und ein [internes Lastenausgleichsmodul][load-balancer-internal], um den Netzwerkdatenverkehr von der Webschicht auf die Unternehmensschicht zu verteilen.
+* **Lastenausgleichsmodule:** Verwenden Sie ein [Lastenausgleichsmodul mit Internetzugriff][load-balancer-external], um eingehenden Internetdatenverkehr auf die Internetschicht zu verteilen, und ein [internes Lastenausgleichsmodul][load-balancer-internal], um den Netzwerkdatenverkehr von der Internetschicht auf die Unternehmensschicht zu verteilen.
 * **Jumpbox:** Wird auch als [geschützter Host] bezeichnet. Dies ist eine geschützte VM im Netzwerk, die von Administratoren zum Herstellen der Verbindung mit anderen VMs verwendet wird. Die Jumpbox verfügt über eine NSG, bei der Remotedatenverkehr nur von öffentlichen IP-Adressen zugelassen wird, die in einer Liste mit sicheren Adressen enthalten sind. Die NSG sollte SSH-Datenverkehr (Secure Shell) zulassen.
 * **Überwachung:** Mit Überwachungssoftware wie [Nagios], [Zabbix] oder [Icinga] können Informationen über die Antwortzeit, die VM-Betriebszeit und die allgemeine Integrität Ihres Systems bereitstellen. Installieren Sie die Überwachungssoftware auf einer VM, die sich in einem separaten Verwaltungssubnetz befindet.
 * **NSGs:** Verwenden Sie [Netzwerksicherheitsgruppen][nsg] (NSGs), um den Netzwerkdatenverkehr im VNET zu beschränken. In der hier gezeigten 3-schichtigen Architektur akzeptiert die Datenbankschicht beispielsweise keinen Datenverkehr vom Web-Front-End, sondern nur von der Unternehmensschicht und dem Verwaltungssubnetz.
@@ -48,7 +48,7 @@ Geben Sie für jedes Subnetz den Adressraum für das Subnetz in CIDR-Notation an
 
 ### <a name="network-security-groups"></a>Netzwerksicherheitsgruppen
 
-Verwenden Sie NSG-Regeln, um den Datenverkehr zwischen den Schichten zu beschränken. In der oben gezeigten 3-schichtigen Architektur kommuniziert die Webschicht beispielsweise nicht direkt mit der Datenbankschicht. Um dies zu erzwingen, sollte die Datenbankschicht eingehenden Datenverkehr aus dem Subnetz der Webschicht blockieren.  
+Verwenden Sie NSG-Regeln, um den Datenverkehr zwischen den Schichten zu beschränken. In der oben gezeigten 3-schichtigen Architektur kommuniziert die Internetschicht beispielsweise nicht direkt mit der Datenbankschicht. Um dies zu erzwingen, sollte die Datenbankschicht eingehenden Datenverkehr aus dem Subnetz der Internetschicht blockieren.  
 
 1. Erstellen Sie eine NSG, und ordnen Sie diese dem Subnetz der Datenbankschicht zu.
 2. Fügen Sie eine Regel hinzu, die den gesamten eingehenden Datenverkehr vom VNET ablehnt. (Verwenden Sie den `VIRTUAL_NETWORK`-Tag in der Regel.) 
@@ -63,9 +63,9 @@ Verwenden Sie NSG-Regeln, um den Datenverkehr zwischen den Schichten zu beschrä
 
 ### <a name="load-balancers"></a>Load Balancer
 
-Das externe Lastenausgleichsmodul verteilt den Internetdatenverkehr auf die Webschicht. Erstellen Sie eine öffentliche IP-Adresse für dieses Lastenausgleichsmodul. Weitere Informationen finden Sie unter [Erstellen eines Load Balancers mit Internetzugriff im Azure-Portal][lb-external-create].
+Das externe Lastenausgleichsmodul verteilt den Internetdatenverkehr auf die Internetschicht. Erstellen Sie eine öffentliche IP-Adresse für dieses Lastenausgleichsmodul. Weitere Informationen finden Sie unter [Erstellen eines Load Balancers mit Internetzugriff im Azure-Portal][lb-external-create].
 
-Das interne Lastenausgleichsmodul verteilt den Netzwerkdatenverkehr von der Webschicht auf die Unternehmensschicht. Um diesem Lastenausgleichsmodul eine private IP-Adresse zuzuweisen, erstellen Sie eine Front-End-IP-Konfiguration, und ordnen Sie diese dem Subnetz für die Unternehmensschicht zu. Weitere Informationen finden Sie unter [Erstellen eines internen Lastenausgleichs über das Azure-Portal][lb-internal-create].
+Das interne Lastenausgleichsmodul verteilt den Netzwerkdatenverkehr von der Internetschicht auf die Unternehmensschicht. Um diesem Lastenausgleichsmodul eine private IP-Adresse zuzuweisen, erstellen Sie eine Front-End-IP-Konfiguration, und ordnen Sie diese dem Subnetz für die Unternehmensschicht zu. Weitere Informationen finden Sie unter [Erstellen eines internen Lastenausgleichs über das Azure-Portal][lb-internal-create].
 
 ### <a name="cassandra"></a>Cassandra
 
@@ -105,7 +105,7 @@ Für die Erstellung einer DMZ zwischen dem öffentlichen Internet und dem virtue
 
 ## <a name="scalability-considerations"></a>Überlegungen zur Skalierbarkeit
 
-Die Lastenausgleichsmodule verteilen den Netzwerkdatenverkehr auf die Internet- und Unternehmensschicht. Führen Sie eine horizontale Skalierung durch, indem Sie neue VM-Instanzen hinzufügen. Beachten Sie, dass die Internet- und Unternehmensschicht je nach Auslastung unabhängig voneinander skaliert werden können. Um das Risiko von Komplikationen zu reduzieren, die durch die Notwendigkeit zur Aufrechterhaltung der Clientaffinität verursacht werden, sollten die VMs in der Webschicht zustandslos sein. Die VMs, die die Geschäftslogik hosten, sollten ebenfalls zustandslos sein.
+Die Lastenausgleichsmodule verteilen den Netzwerkdatenverkehr auf die Internet- und Unternehmensschicht. Führen Sie eine horizontale Skalierung durch, indem Sie neue VM-Instanzen hinzufügen. Beachten Sie, dass die Internet- und Unternehmensschicht je nach Auslastung unabhängig voneinander skaliert werden können. Um das Risiko von Komplikationen zu reduzieren, die durch die Notwendigkeit zur Aufrechterhaltung der Clientaffinität verursacht werden, sollten die VMs in der Internetschicht zustandslos sein. Die VMs, die die Geschäftslogik hosten, sollten ebenfalls zustandslos sein.
 
 ## <a name="manageability-considerations"></a>Überlegungen zur Verwaltbarkeit
 
@@ -113,31 +113,59 @@ Vereinfachen Sie die Verwaltung des gesamten Systems durch den Einsatz von zentr
 
 ## <a name="deploy-the-solution"></a>Bereitstellen der Lösung
 
-Eine Bereitstellung für diese Architektur ist in [GitHub][github-folder] verfügbar. Die Bereitstellung der Architektur erfolgt in drei Phasen. Um die Architektur bereitzustellen, gehen Sie folgendermaßen vor: 
+Eine Bereitstellung für diese Referenzarchitektur ist auf [GitHub][github-folder] verfügbar. 
 
-1. Klicken Sie auf die Schaltfläche unten:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fvirtual-machines%2Fn-tier-linux%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
-2. Nachdem der Link im Azure-Portal geöffnet wurde, geben Sie die folgenden Werte ein: 
-   * Der Name der **Ressourcengruppe** ist bereits in der Parameterdatei definiert. Wählen Sie also **Neu erstellen**, und geben Sie im Textfeld `ra-ntier-cassandra-rg` ein.
-   * Wählen Sie im Dropdownfeld **Standort** die Region aus.
-   * Lassen Sie die Textfelder für den **Vorlagenstamm-URI** bzw. **Parameterstamm-URI** unverändert.
-   * Überprüfen Sie die allgemeinen Geschäftsbedingungen, und aktivieren Sie dann das Kontrollkästchen **Ich stimme den oben genannten Geschäftsbedingungen zu**.
-   * Klicken Sie auf die Schaltfläche **Kaufen**.
-3. Suchen Sie in den Azure-Portalbenachrichtigungen nach einer Meldung, dass die Bereitstellung abgeschlossen ist.
-4. Die Parameterdateien enthalten einen hartcodierten Administratorbenutzernamen und das dazugehörige Kennwort, und es wird dringend empfohlen, beides sofort auf allen VMs zu ändern. Klicken Sie im Azure-Portal auf die einzelnen VMs und auf dem Blatt **Support + Problembehandlung** dann auf **Kennwort zurücksetzen**. Wählen Sie im Dropdownfeld **Modus** die Option **Kennwort zurücksetzen**, und wählen Sie dann einen neuen **Benutzernamen** und ein **Kennwort** aus. Klicken Sie auf die Schaltfläche **Aktualisieren**, um den neuen Benutzernamen und das Kennwort dauerhaft zu übernehmen.
+### <a name="prerequisites"></a>Voraussetzungen
+
+Bevor Sie die Referenzarchitektur in Ihrem eigenen Abonnement bereitstellen können, müssen Sie die folgenden Schritte ausführen.
+
+1. Klonen oder Forken Sie das GitHub-Repository [AzureCAT-Referenzarchitekturen][ref-arch-repo], oder laden Sie die zugehörige ZIP-Datei herunter.
+
+2. Vergewissern Sie sich, dass Azure CLI 2.0 auf Ihrem Computer installiert ist. Um die Befehlszeilenschnittstelle zu installieren, befolgen Sie die Anweisungen unter [Installieren von Azure CLI 2.0][azure-cli-2].
+
+3. Installieren Sie das npm-Paket mit den [Azure Bausteinen][azbb].
+
+  ```bash
+  npm install -g @mspnp/azure-building-blocks
+  ```
+
+4. Melden Sie sich über eine Eingabeaufforderung, eine bash-Eingabeaufforderung oder die PowerShell-Eingabeaufforderung bei Ihrem Azure-Konto an. Verwenden Sie dazu die unten aufgeführten Befehle, und befolgen Sie die Anweisungen.
+
+  ```bash
+  az login
+  ```
+
+### <a name="deploy-the-solution-using-azbb"></a>Bereitstellen der Lösung mit azbb
+
+Um die Linux VMs für eine n-schichtige Anwendungsreferenzarchitektur bereitzustellen, führen Sie die folgenden Schritte aus:
+
+1. Navigieren Sie zum `virtual-machines\n-tier-linux`-Ordner für das Repository, das Sie oben in Schritt 1 der Voraussetzungen als Klon erstellt haben.
+
+2. Die Parameterdatei gibt einen Standard-Administratorbenutzernamen und ein Standardkennwort für jede VM in der Bereitstellung an. Sie müssen diese vor der Bereitstellung der Referenzarchitektur ändern. Öffnen Sie die `n-tier-linux.json`-Datei, und ersetzen Sie jedes Feld **adminUsername** und **adminPassword** durch neue Einstellungen.   Speichern Sie die Datei.
+
+3. Stellen Sie die Referenzarchitektur mithilfe des Befehlszeilentools **azbb** bereit, wie unten dargestellt.
+
+  ```bash
+  azbb -s <your subscription_id> -g <your resource_group_name> -l <azure region> -p n-tier-linux.json --deploy
+  ```
+
+Weitere Informationen zum Bereitstellen dieser Beispielreferenzarchitektur mithilfe von Azure-Bausteinen finden Sie im [GitHub-Repository][git].
 
 <!-- links -->
 [multi-dc]: multi-region-application.md
 [dmz]: ../dmz/secure-vnet-dmz.md
 [multi-vm]: ./multi-vm.md
 [naming conventions]: /azure/guidance/guidance-naming-conventions
-
+[azbb]: https://github.com/mspnp/template-building-blocks/wiki/Install-Azure-Building-Blocks
 [azure-administration]: /azure/automation/automation-intro
 [azure-availability-sets]: /azure/virtual-machines/virtual-machines-linux-manage-availability
+[azure-cli-2]: https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest
 [geschützter Host]: https://en.wikipedia.org/wiki/Bastion_host
 [cassandra-in-azure]: https://docs.datastax.com/en/datastax_enterprise/4.5/datastax_enterprise/install/installAzure.html
 [CIDR]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
 [chef]: https://www.chef.io/solutions/azure/
 [datastax]: http://www.datastax.com/products/datastax-enterprise
+[git]: https://github.com/mspnp/template-building-blocks
 [github-folder]: https://github.com/mspnp/reference-architectures/tree/master/virtual-machines/n-tier-linux
 [lb-external-create]: /azure/load-balancer/load-balancer-get-started-internet-portal
 [lb-internal-create]: /azure/load-balancer/load-balancer-get-started-ilb-arm-portal
@@ -150,6 +178,7 @@ Eine Bereitstellung für diese Architektur ist in [GitHub][github-folder] verfü
 [private-ip-space]: https://en.wikipedia.org/wiki/Private_network#Private_IPv4_address_spaces
 [öffentliche IP-Adresse]: /azure/virtual-network/virtual-network-ip-addresses-overview-arm
 [puppet]: https://puppetlabs.com/blog/managing-azure-virtual-machines-puppet
+[ref-arch-repo]: https://github.com/mspnp/reference-architectures
 [vm-sla]: https://azure.microsoft.com/support/legal/sla/virtual-machines
 [vnet faq]: /azure/virtual-network/virtual-networks-faq
 [visio-download]: https://archcenter.azureedge.net/cdn/vm-reference-architectures.vsdx
