@@ -3,11 +3,11 @@ title: "Kriterien für die Auswahl einer Azure-Compute-Option"
 description: Dieser Artikel vergleicht Azure-Computedienste unter verschiedenen Aspekten miteinander.
 author: MikeWasson
 layout: LandingPage
-ms.openlocfilehash: 640793b56c1713f63456bab75ab4b9289d22a53c
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 36b57d1fb674b5a1452a0e8208de836963b2b01b
+ms.sourcegitcommit: c53adf50d3a787956fc4ebc951b163a10eeb5d20
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 11/23/2017
 ---
 # <a name="criteria-for-choosing-an-azure-compute-option"></a>Kriterien für die Auswahl einer Azure-Compute-Option
 
@@ -17,14 +17,14 @@ Der Begriff *Compute* bezieht sich auf das Hostingmodell für die Computeressour
 
 | Kriterien | Virtual Machines | App Service | Service Fabric | Azure-Funktionen | Azure Container Service | Cloud Services | Azure Batch |
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
-| Anwendungskomposition | Agnostisch | Anwendungen | Dienste, ausführbare Gastdateien | Functions | Container | Rollen | Geplante Aufträge  |
-| Dichte | Agnostisch | Mehrere Apps pro Instanz über App-Pläne | Mehrere Dienste pro VM | Keine dedizierten Instanzen<a href="#note1"><sup>1</sup></a> | Mehrere Container pro VM | Eine Rolleninstanz pro VM | Mehrere Apps pro VM |
-| Mindestanzahl von Knoten | 1<a href="#note2"><sup>2</sup></a>  | 1 | 5<a href="#note3"><sup>3</sup></a> | Keine dedizierten Knoten<a href="#note1"><sup>1</sup></a> | 3 | 2 | 1<a href="#note4"><sup>4</sup></a> |
+| Anwendungskomposition | Agnostisch | Anwendungen | Dienste, ausführbare Gastdateien, Container | Functions | Container | Rollen | Geplante Aufträge  |
+| Dichte | Agnostisch | Mehrere Apps pro Instanz über App-Pläne | Mehrere Dienste pro VM | Keine dedizierten Instanzen <a href="#note1"><sup>1</sup></a> | Mehrere Container pro VM | Eine Rolleninstanz pro VM | Mehrere Apps pro VM |
+| Mindestanzahl von Knoten | 1 <a href="#note2"><sup>2</sup></a>  | 1 | 5 <a href="#note3"><sup>3</sup></a> | Keine dedizierten Knoten <a href="#note1"><sup>1</sup></a> | 3 | 2 | 1 <a href="#note4"><sup>4</sup></a> |
 | Zustandsverwaltung | Zustandslos oder zustandsbehaftet | Zustandslos | Zustandslos oder zustandsbehaftet | Zustandslos | Zustandslos oder zustandsbehaftet | Zustandslos | Zustandslos |
-| Webhosting | Agnostisch | Integriert | Selbstgehostet, IIS in Containern | Nicht zutreffend | Agnostisch | Integriert (IIS) | Nein |
-| Betriebssystem | Windows, Linux | Windows, Linux (Vorschau)  | Windows, Linux (Vorschau) | Nicht zutreffend | Windows, Linux | Windows | Windows, Linux |
-| Bereitstellung in dediziertem VNET möglich? | Unterstützt | Unterstützt<a href="#note5"><sup>5</sup></a> | Unterstützt | Nicht unterstützt | Unterstützt | Unterstützt<a href="#note6"><sup>6</sup></a> | Unterstützt |
-| Hybridkonnektivität | Unterstützt | Unterstützt<a href="#note1"><sup>7</sup></a>  | Unterstützt | Nicht unterstützt | Unterstützt | Unterstützt<a href="#note8"><sup>8</sup></a> | Unterstützt |
+| Webhosting | Agnostisch | Integriert | Agnostisch | Nicht zutreffend | Agnostisch | Integriert (IIS) | Nein |
+| Betriebssystem | Windows, Linux | Windows, Linux  | Windows, Linux | Nicht zutreffend | Windows (Vorschau), Linux | Windows | Windows, Linux |
+| Bereitstellung in dediziertem VNET möglich? | Unterstützt | Unterstützt <a href="#note5"><sup>5</sup></a> | Unterstützt | Nicht unterstützt | Unterstützt | Unterstützt <a href="#note6"><sup>6</sup></a> | Unterstützt |
+| Hybridkonnektivität | Unterstützt | Unterstützt <a href="#note1"><sup>7</sup></a>  | Unterstützt | Nicht unterstützt | Unterstützt | Unterstützt <a href="#note8"><sup>8</sup></a> | Unterstützt |
 
 Hinweise
 
@@ -41,9 +41,9 @@ Hinweise
 
 | Kriterien | Virtual Machines | App Service | Service Fabric | Azure-Funktionen | Azure Container Service | Cloud Services | Azure Batch |
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
-| Lokales Debugging | Agnostisch | IIS Express, weitere<a href="#note1b"><sup>1</sup></a> | Lokaler Knotencluster | Azure Functions-Befehlszeilenschnittstelle | Lokale Containerruntime | Lokaler Emulator | Nicht unterstützt |
+| Lokales Debugging | Agnostisch | IIS Express, weitere <a href="#note1b"><sup>1</sup></a> | Lokaler Knotencluster | Azure Functions-Befehlszeilenschnittstelle | Lokale Containerruntime | Lokaler Emulator | Nicht unterstützt |
 | Programmiermodell | Agnostisch | Webanwendung, WebJobs für Hintergrundtasks | Ausführbare Gastdatei, Dienstmodell, Akteurmodell, Container | Funktionen mit Auslösern | Agnostisch | Webrolle, Workerrolle | Befehlszeilenanwendung |
-| Ressourcen-Manager | Unterstützt | Unterstützt | Unterstützt | Unterstützt | Unterstützt | Eingeschränkt<a href="#note2b"><sup>2</sup></a> | Unterstützt |  
+| Ressourcen-Manager | Unterstützt | Unterstützt | Unterstützt | Unterstützt | Unterstützt | Eingeschränkt <a href="#note2b"><sup>2</sup></a> | Unterstützt |  
 | Anwendungsupdate | Keine integrierte Unterstützung | Bereitstellungsslots | Rollierendes Upgrade (pro Dienst) | Keine integrierte Unterstützung | Je nach Orchestrator, die meisten unterstützen rollierende Updates | VIP-Austausch oder rollierendes Update | Nicht zutreffend |
 
 Hinweise
@@ -58,7 +58,7 @@ Hinweise
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
 | Automatische Skalierung | VM-Skalierungsgruppen | Integrierter Dienst | VM-Skalierungsgruppen | Integrierter Dienst | Nicht unterstützt | Integrierter Dienst | N/V |
 | Load Balancer | Azure Load Balancer | Integriert | Azure Load Balancer | Integriert | Azure Load Balancer | Integriert | Azure Load Balancer |
-| Skalierungslimit | Plattformimage: 1.000 Knoten pro VMSS, benutzerdefiniertes Image: 100 Knoten pro VMSS | 20 Instanzen, 50 mit App Service-Umgebung | 100 Knoten pro VMSS | Unendlich<a href="#note1c"><sup>1</sup></a> | 100 | Kein definiertes Limit, maximal 200 empfohlen | Standardmäßig maximal 20 Kerne; wenden Sie sich für eine Erhöhung an den Kundendienst |
+| Skalierungslimit | Plattformimage: 1.000 Knoten pro VMSS, benutzerdefiniertes Image: 100 Knoten pro VMSS | 20 Instanzen, 50 mit App Service-Umgebung | 100 Knoten pro VMSS | Unendlich <a href="#note1c"><sup>1</sup></a> | 100 | Kein definiertes Limit, maximal 200 empfohlen | Standardmäßig maximal 20 Kerne; wenden Sie sich für eine Erhöhung an den Kundendienst |
 
 Hinweise
 

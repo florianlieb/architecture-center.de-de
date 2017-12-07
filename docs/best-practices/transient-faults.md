@@ -4,11 +4,11 @@ description: "Anleitungen für die Vorgangswiederholung zur Behandlung vorüberg
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 05558abad8938788d09caa5df8b1f088ce3b5bdc
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 9562e3447b2219fe2f3df96cfca24b845efa39b0
+ms.sourcegitcommit: c53adf50d3a787956fc4ebc951b163a10eeb5d20
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 11/23/2017
 ---
 # <a name="transient-fault-handling"></a>Behandeln vorübergehender Fehler
 
@@ -93,7 +93,7 @@ Die folgenden Richtlinien werden Ihnen helfen, für Ihre Anwendungen einen geeig
 * **Weitere Überlegungen**
   
   * Wenn Sie die Werte für die Anzahl der Wiederholungen und die Wiederholungsintervalle für eine Richtlinie festlegen, sollten Sie bedenken, ob der Dienst oder die Ressource Teil eines lang andauernden oder aus mehreren Schritten bestehenden Vorgangs ist. Es kann schwierig oder teuer sein, alle anderen Verfahrensschritte zu kompensieren, die bereits erfolgreich abgeschlossen wurden, wenn einer fehlschlägt. In diesem Fall könnten ein sehr langes Intervall und eine große Anzahl von Wiederholungen akzeptabel sein, solange diese keine anderen Vorgänge blockieren, indem knappe Ressourcen zurückgehalten oder gesperrt werden.
-  * Überlegen Sie, ob eine Wiederholung des gleichen Vorgangs zu inkonsistenten Daten führen könnte. Wenn einige Teile eines aus mehreren Schritten bestehenden Prozesses wiederholt werden und die Vorgänge nicht idempotent sind, kann dies zu einer Inkonsistenz führen. Beispielsweise erzeugt ein Vorgang, der bei Wiederholung einen Wert inkrementiert, ein ungültiges Ergebnis. Einen Vorgang zu wiederholen, der eine Nachricht an eine Warteschlange sendet, kann eine Inkonsistenz im Nachrichtenconsumer verursachen, wenn er doppelte Nachrichten nicht ermitteln kann. Um dies zu vermeiden, stellen Sie sicher, dass Sie jeden Schritt als idempotenten Vorgang entwerfen. Weitere Informationen zu Idempotenz finden Sie unter [Idempotenz-Muster](http://blog.jonathanoliver.com/2010/04/idempotency-patterns/).
+  * Überlegen Sie, ob eine Wiederholung des gleichen Vorgangs zu inkonsistenten Daten führen könnte. Wenn einige Teile eines aus mehreren Schritten bestehenden Prozesses wiederholt werden und die Vorgänge nicht idempotent sind, kann dies zu einer Inkonsistenz führen. Beispielsweise erzeugt ein Vorgang, der bei Wiederholung einen Wert inkrementiert, ein ungültiges Ergebnis. Einen Vorgang zu wiederholen, der eine Nachricht an eine Warteschlange sendet, kann eine Inkonsistenz im Nachrichtenconsumer verursachen, wenn er doppelte Nachrichten nicht ermitteln kann. Um dies zu vermeiden, stellen Sie sicher, dass Sie jeden Schritt als idempotenten Vorgang entwerfen. Weitere Informationen zu Idempotenz finden Sie unter [Idempotenz-Muster][idempotency-patterns].
   * Berücksichtigen Sie den Bereich der Vorgänge, die wiederholt werden. Beispielsweise ist es möglicherweise einfacher, einen Wiederholungscode auf einer Ebene zu implementieren, die mehrere Vorgänge umfasst, und sie alle zu wiederholen, wenn einer fehlschlägt. Allerdings kann dies zu Idempotenz-Problemen oder unnötigen Rollback-Operationen führen.
   * Wenn Sie einen Wiederholungsbereich auswählen, der mehrere Vorgänge umfasst, berücksichtigen Sie die gesamte Latenz beim Bestimmen der Wiederholungsintervalle, beim Überwachen des Zeitaufwands und vor dem Auslösen von Warnungen vor Fehlern.
   * Beachten Sie, wie Ihre Wiederholungsstrategie Nachbarn und andere Mandanten in einer freigegebenen Anwendung beeinflussen kann, oder bei Verwendung von freigegebenen Ressourcen und Diensten. Aggressive Wiederholungsrichtlinien können für diese anderen Benutzer und für Anwendungen, die Ressourcen und Dienste teilen, vermehrt zu vorübergehenden Fehlern führen. Ebenso kann Ihre Anwendung von den Wiederholungsrichtlinien, die von anderen Benutzern der Ressourcen und Dienste implementiert wurden, beeinträchtigt werden. Möglicherweise entscheiden Sie sich für erfolgskritische Anwendungen zur Verwendung von Premiumdiensten, die nicht gemeinsam genutzt werden. Dadurch erhalten Sie wesentlich mehr Kontrolle über das Laden und die sich daraus ergebende Drosselung dieser Ressourcen und Dienste, was Ihnen helfen kann, die zusätzlichen Kosten zu rechtfertigen.
@@ -102,6 +102,8 @@ Die folgenden Richtlinien werden Ihnen helfen, für Ihre Anwendungen einen geeig
 * [Dienstspezifische Azure Wiederholungsrichtlinien](./retry-service-specific.md)
 * [Anwendungsblock zum Behandeln vorübergehender Fehler](http://msdn.microsoft.com/library/hh680934.aspx)
 * [Trennschalter-Muster](http://msdn.microsoft.com/library/dn589784.aspx)
-* [Kompensieren eines Transaktionsmusters](http://msdn.microsoft.com/library/dn589804.aspx)
-* [Idempotenz-Muster](http://blog.jonathanoliver.com/2010/04/idempotency-patterns/)
+* [Muster für eine ausgleichende Transaktion](http://msdn.microsoft.com/library/dn589804.aspx)
+* [Idempotenz-Muster][idempotency-patterns]
+
+[idempotency-patterns]: http://blog.jonathanoliver.com/idempotency-patterns/
 
