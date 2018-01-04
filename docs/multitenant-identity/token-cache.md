@@ -6,11 +6,11 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: web-api
 pnp.series.next: adfs
-ms.openlocfilehash: ed0def244f3229bbd3fdd0976574d13a345f9aee
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: cffc15686ef9d77fafb40982efdbcd4a79f5aaf2
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="cache-access-tokens"></a>Zwischenspeichern von Zugriffstoken
 
@@ -18,7 +18,7 @@ ms.lasthandoff: 11/14/2017
 
 Es ist relativ aufwendig, ein OAuth-Zugriffstokens abzurufen, da dafür eine HTTP-Anforderung an den Tokenendpunkt erforderlich ist. Daher ist es ratsam, Token nach Möglichkeit in einem Cache zwischenzuspeichern. In der [Azure AD Authentication Library][ADAL] (ADAL) werden aus Azure AD abgerufene Token, einschließlich Aktualisierungstoken, automatisch zwischengespeichert.
 
-Die ADAL bietet eine Standardimplementierung eines Tokencaches. Doch dieser Tokencache ist für native Client-Apps vorgesehen und für Web-Apps *nicht* geeignet:
+Die ADAL bietet eine Standardimplementierung eines Tokencaches. Doch dieser Tokencache ist für native Client-Apps vorgesehen und für Web-Apps **nicht** geeignet:
 
 * Es handelt sich um eine statische Instanz, die nicht threadsicher ist.
 * Eine Skalierung auf eine große Anzahl von Benutzern ist nicht möglich, da Token aller Benutzer in dasselbe Verzeichnis übertragen werden.

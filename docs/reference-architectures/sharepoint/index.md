@@ -3,21 +3,21 @@ title: "Ausführen einer SharePoint Server 2016-Hochverfügbarkeitsfarm in Azure
 description: "Enthält eine Beschreibung der bewährten Methoden zum Einrichten einer SharePoint Server 2016-Hochverfügbarkeitsfarm in Azure."
 author: njray
 ms.date: 08/01/2017
-ms.openlocfilehash: a3d47eea15f1e7e8cecf2bf1be55d8c3a9bb9bdc
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 0c0e9a7b2ae12a2d12919548f91304e6cbd2d8a6
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="run-a-high-availability-sharepoint-server-2016-farm-in-azure"></a>Ausführen einer SharePoint Server 2016-Hochverfügbarkeitsfarm in Azure
 
-In dieser Referenzarchitektur wird eine Reihe von bewährten Methoden zum Einrichten einer SharePoint Server 2016-Hochverfügbarkeitsfarm in Azure veranschaulicht, indem die MinRole-Topologie und SQL Server Always On-Verfügbarkeitsgruppen verwendet werden. Die SharePoint-Farm wird in einem geschützten virtuellen Netzwerk ohne Internetendpunkt bzw. -präsenz bereitgestellt. [**Stellen Sie diese Lösung bereit**.](#deploy-the-solution) 
+In dieser Referenzarchitektur wird eine Reihe von bewährten Methoden zum Einrichten einer SharePoint Server 2016-Hochverfügbarkeitsfarm in Azure veranschaulicht, indem die MinRole-Topologie und SQL Server Always On-Verfügbarkeitsgruppen verwendet werden. Die SharePoint-Farm wird in einem geschützten virtuellen Netzwerk ohne Internetendpunkt bzw. -präsenz bereitgestellt. [**So stellen Sie diese Lösung bereit**.](#deploy-the-solution) 
 
 ![](./images/sharepoint-ha.png)
 
 *Laden Sie eine [Visio-Datei][visio-download] mit dieser Architektur herunter.*
 
-## <a name="architecture"></a>Architektur
+## <a name="architecture"></a>Architecture
 
 Diese Architektur baut auf der Architektur auf, die unter [Run Windows VMs for an N-tier application][windows-n-tier] (Ausführen von Windows-VMs für eine n-schichtige Anwendung) dargestellt ist. Eine SharePoint Server 2016-Hochverfügbarkeitsfarm wird in einem virtuellen Azure-Netzwerk (VNet) bereitgestellt. Diese Architektur ist für eine Test- oder Produktionsumgebung, eine SharePoint-Hybridinfrastruktur mit Office 365 oder als Basis für ein Szenario für die Notfallwiederherstellung geeignet.
 
@@ -25,13 +25,13 @@ Die Architektur umfasst die folgenden Komponenten:
 
 - **Ressourcengruppen**: Eine [Ressourcengruppe][resource-group] ist ein Container, der verwandte Azure-Ressourcen enthält. Eine Ressourcengruppe wird für die SharePoint-Server verwendet, und eine andere Ressourcengruppe wird für Infrastrukturkomponenten genutzt, die unabhängig von VMs sind, z.B. das virtuelle Netzwerk und Lastenausgleichsmodule.
 
-- **Virtuelles Netzwerk (VNET)**: Die VMs werden in einem VNet mit einem eindeutigen Intranetadressraum bereitgestellt. Das VNet ist in Subnetze unterteilt. 
+- **Virtuelles Netzwerk (VNET)**. Die VMs werden in einem VNet mit einem eindeutigen Intranetadressraum bereitgestellt. Das VNet ist in Subnetze unterteilt. 
 
 - **Virtuelle Computer (Virtual Machines, VMs)**: Die VMs werden im VNet bereitgestellt, und private statische IP-Adressen werden allen VMs zugewiesen. Statische IP-Adressen sind für die VMs zu empfehlen, auf denen SQL Server und SharePoint Server 2016 ausgeführt werden, um Probleme mit der Zwischenspeicherung von IP-Adressen und Adressänderungen nach einem Neustart zu vermeiden.
 
 - **Verfügbarkeitsgruppen**: Ordnen Sie die VMs für jede SharePoint-Rolle in separaten [Verfügbarkeitsgruppen][availability-set] an, und stellen Sie mindestens zwei virtuelle Computer (VMs) für jede Rolle bereit. Auf diese Weise können die VMs für eine höhere Vereinbarung zum Servicelevel (SLA) genutzt werden. 
 
-- **Interner Load Balancer**: Über den [Lastenausgleich][load-balancer] wird Datenverkehr in Form von SharePoint-Anforderungen aus dem lokalen Netzwerk auf die Front-End-Webserver der SharePoint-Farm verteilt. 
+- **Interner Load Balancer**. Über den [Lastenausgleich][load-balancer] wird Datenverkehr in Form von SharePoint-Anforderungen aus dem lokalen Netzwerk auf die Front-End-Webserver der SharePoint-Farm verteilt. 
 
 - **Netzwerksicherheitsgruppen (NSGs)**: Für jedes Subnetz, das virtuelle Computer enthält, wird eine [Netzwerksicherheitsgruppe][nsg] erstellt. Verwenden Sie NSGs zum Beschränken von Netzwerkdatenverkehr im VNet, um Subnetze zu isolieren. 
 
@@ -49,7 +49,7 @@ Die Architektur umfasst die folgenden Komponenten:
 
 ## <a name="recommendations"></a>Empfehlungen
 
-Ihre Anforderungen können von der hier beschriebenen Architektur abweichen. Verwenden Sie diese Empfehlungen als Ausgangspunkt.
+Ihre Anforderungen können von der hier beschriebenen Architektur abweichen. Verwenden Sie diese Empfehlungen als Startpunkt.
 
 ### <a name="resource-group-recommendations"></a>Empfehlungen für Ressourcengruppen
 
@@ -180,7 +180,7 @@ Sie können diese Architektur inkrementell oder auf einmal bereitstellen. Für d
 | createvpn      | Stellt ein virtuelles Netzwerkgateway für das SharePoint-Netzwerk und das lokale Netzwerk bereit und stellt dafür eine Verbindung her. Führen Sie diesen Schritt nur aus, wenn Sie zuvor den Schritt `onprem` ausgeführt haben.                |
 | workload       | Stellt die SharePoint-Server im SharePoint-Netzwerk bereit.                                                               |
 | security       | Stellt die Netzwerksicherheitsgruppe im SharePoint-Netzwerk bereit.                                                           |
-| all            | Stellt alle vorherigen Bereitstellungen bereit.                            
+| alle            | Stellt alle vorherigen Bereitstellungen bereit.                            
 
 
 Führen Sie die folgenden Schritte in der unten angegebenen Reihenfolge aus, um die Architektur inkrementell mit einer simulierten lokalen Netzwerkumgebung bereitzustellen:

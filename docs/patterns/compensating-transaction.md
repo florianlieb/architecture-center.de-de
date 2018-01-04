@@ -1,16 +1,16 @@
 ---
 title: Kompensierende Transaktion
-description: "Machen Sie die Aufgaben rückgängig, die durch eine Reihe von Schritten (die zusammen einen letztlich konsistenten Vorgang definieren) ausgeführt werden."
+description: "Machen Sie durch eine Reihe von Schritten ausgeführte Arbeit rückgängig, die zusammen einen letztlich konsistenten Vorgang definieren."
 keywords: Entwurfsmuster
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories: resiliency
-ms.openlocfilehash: f8337717c4afd6b558f0da8e1ded3a8071340db7
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: a822de990d6ce933024207073b110e98f8da40bf
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="compensating-transaction-pattern"></a>Muster „Kompensierende Transaktion“
 
@@ -38,7 +38,7 @@ Eine übliche Vorgehensweise besteht darin, einen Workflow einzusetzen, um einen
 
 > Diese Vorgehensweise ähnelt der Sagas-Strategie, die im [Blog von Clemens Vasters](http://vasters.com/clemensv/2012/09/01/Sagas.aspx) diskutiert wird.
 
-Eine kompensierende Transaktion ist auch ein letztlich konsistenter Vorgang und kann auch Fehler verursachen. Das System sollte in der Lage sein, die kompensierende Transaktion an der Stelle, an der der Fehler aufgetreten ist, wieder aufzunehmen und fortzusetzen. Da ein fehlerhafter Schritt eventuell wiederholt werden muss, sollten die Schritte in einer kompensierenden Transaktion als idempotente Befehle definiert werden. Weitere Informationen finden Sie unter [Idempotenzmuster](http://blog.jonathanoliver.com/2010/04/idempotency-patterns/) im Blog von Jonathan Oliver.
+Eine kompensierende Transaktion ist auch ein letztlich konsistenter Vorgang und kann auch Fehler verursachen. Das System sollte in der Lage sein, die kompensierende Transaktion an der Stelle, an der der Fehler aufgetreten ist, wieder aufzunehmen und fortzusetzen. Da ein fehlerhafter Schritt eventuell wiederholt werden muss, sollten die Schritte in einer kompensierenden Transaktion als idempotente Befehle definiert werden. Weitere Informationen finden Sie unter [Idempotenzmuster](http://blog.jonathanoliver.com/idempotency-patterns/) im Blog von Jonathan Oliver.
 
 In einigen Fällen kann eine Wiederherstellung nach einem fehlerhaften Schritt nur durch manuelles Eingreifen durchgeführt werden. In diesen Situationen sollte das System eine Warnung auslösen und so viele Informationen wie möglich über die Ursache des Fehlers bereitstellen.
 
@@ -91,7 +91,7 @@ In vielen Unternehmenslösungen ist beim Auftreten eines Fehlers bei einem einze
 
 ## <a name="related-patterns-and-guidance"></a>Zugehörige Muster und Anleitungen
 
-Die folgenden Muster und Anweisungen können ebenfalls für die Implementierung dieses Musters relevant sein:
+Die folgenden Muster und Anweisungen können für die Implementierung dieses Musters ebenfalls relevant sein:
 
 - [Datenkonsistenzprimer](https://msdn.microsoft.com/library/dn589800.aspx): Das Muster „Kompensierende Transaktion“ wird häufig verwendet, um Vorgänge rückgängig zu machen, die das Modell der letztlichen Konsistenz implementieren. Dieser Primer liefert Informationen über die Vor- und Nachteile von letztlicher Konsistenz.
 
