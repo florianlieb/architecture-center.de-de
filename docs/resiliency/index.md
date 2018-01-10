@@ -5,11 +5,11 @@ author: MikeWasson
 ms.date: 05/26/2017
 ms.custom: resiliency
 pnp.series.title: Design for Resiliency
-ms.openlocfilehash: 31a685e46da02fb59d93a210e6f14da5c68331de
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 0cbcf0a8af1a8e20f2a1c024f5146a37176c5d1e
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Entwerfen robuster Anwendungen für Azure
 
@@ -25,13 +25,17 @@ Bei der **Resilienz** (Robustheit) geht es um die Möglichkeit, nach Ausfällen 
 Zwei wichtige Aspekte der Resilienz sind Hochverfügbarkeit und Notfallwiederherstellung.
 
 * **Hochverfügbarkeit** ist die Möglichkeit, die Anwendung ohne signifikante Ausfallzeit in einem fehlerfreien Zustand weiterzubetreiben. Mit „fehlerfreier Zustand“ ist gemeint, dass die Anwendung reagiert und Benutzer eine Verbindung mit der Anwendung herstellen und damit interagieren können.  
-* Die **Notfallwiederherstellung** (Disaster Recovery, DR) ist die Möglichkeit, nach seltenen, schwerwiegenderen Vorfällen (dauerhafte Ausfälle größeren Ausmaßes, z.B. eine Dienstunterbrechung in einer gesamten Region) eine Wiederherstellung durchzuführen. Die Notfallwiederherstellung umfasst die Datensicherung und -archivierung und kann auch einen manuellen Eingriff beinhalten, z.B. das Wiederherstellen einer Datenbank aus einer Sicherung. 
+* Die **Notfallwiederherstellung** (Disaster Recovery, DR) ist die Möglichkeit, nach seltenen, schwerwiegenderen Vorfällen (dauerhafte Ausfälle größeren Ausmaßes, z.B. eine Dienstunterbrechung in einer gesamten Region) eine Wiederherstellung durchzuführen. Die Notfallwiederherstellung umfasst die Datensicherung und -archivierung und kann auch einen manuellen Eingriff beinhalten, z.B. das Wiederherstellen einer Datenbank aus einer Sicherung.
 
-Sie können sich die Hochverfügbarkeit und Notfallwiederherstellung beispielsweise wie folgt vorstellen: Die Notfallwiederherstellung beginnt, wenn ein Fehler so große Auswirkungen hat, dass diese von der Einrichtung für Hochverfügbarkeit nicht mehr bewältigt werden können. Wenn Sie mehrere VMs beispielsweise hinter einem Lastenausgleich anordnen, ist die Verfügbarkeit sichergestellt, falls eine VM ausfällt – aber nicht bei einem Ausfall aller VMs zur gleichen Zeit. 
+Sie können sich die Hochverfügbarkeit und Notfallwiederherstellung beispielsweise wie folgt vorstellen: Die Notfallwiederherstellung beginnt, wenn ein Fehler so große Auswirkungen hat, dass diese von der Einrichtung für Hochverfügbarkeit nicht mehr bewältigt werden können.  
 
-Wenn Sie eine robuste Anwendung entwerfen möchten, müssen Sie sich über Ihre Verfügbarkeitsanforderungen im Klaren sein. Wie viel Ausfallzeit ist akzeptabel? Dies ist teilweise eine Kostenfunktion. Welche Kosten fallen bei potenziellen Ausfallzeiten für Ihr Unternehmen an? Wie viel Geld sollten Sie investieren, um für die Anwendung die Hochverfügbarkeit sicherzustellen? Außerdem müssen Sie definieren, was die Verfügbarkeit der Anwendung bedeutet. Gilt die Anwendung beispielsweise als „ausgefallen“, wenn ein Kunde eine Bestellung senden kann, diese aber vom System nicht innerhalb des normalen Zeitrahmens verarbeitet werden kann? Berücksichtigen Sie außerdem die Wahrscheinlichkeit eines bestimmten Ausfalltyps und die Kosteneffektivität einer Lösungsstrategie.
+Beim Ausführen der Entwurfsschritte für die Resilienz müssen Sie sich über Ihre Anforderungen an die Verfügbarkeit im Klaren sein. Wie viel Ausfallzeit ist akzeptabel? Dies ist teilweise eine Kostenfunktion. Welche Kosten fallen bei potenziellen Ausfallzeiten für Ihr Unternehmen an? Wie viel Geld sollten Sie investieren, um für die Anwendung die Hochverfügbarkeit sicherzustellen? Außerdem müssen Sie definieren, was die Verfügbarkeit der Anwendung bedeutet. Gilt die Anwendung beispielsweise als „ausgefallen“, wenn ein Kunde eine Bestellung senden kann, diese aber vom System nicht innerhalb des normalen Zeitrahmens verarbeitet werden kann? Berücksichtigen Sie außerdem die Wahrscheinlichkeit eines bestimmten Ausfalltyps und die Kosteneffektivität einer Lösungsstrategie.
 
-Ein weiterer häufig verwendeter Begriff ist **Geschäftskontinuität** (Business Continuity, BC). Hierbei geht es um die Möglichkeit, auch bei bzw. nach widrigen Umständen, z.B. einer Naturkatastrophe oder einem Dienstausfall, wichtige Geschäftsfunktionen aufrechterhalten zu können. Die Geschäftskontinuität erstreckt sich auf den gesamten Betrieb des Unternehmens, z.B. physische Einrichtungen, Personal, Kommunikation, Transport und IT. In diesem Artikel geht es um Cloudanwendungen, aber die Resilienzplanung muss in Bezug auf alle Anforderungen der Geschäftskontinuität durchgeführt werden. Weitere Informationen finden Sie im [Leitfaden zur Notfallplanung][capacity-planning-guide] des National Institute of Science and Technology (NIST).
+Ein weiterer häufig verwendeter Begriff ist **Geschäftskontinuität** (Business Continuity, BC). Hierbei geht es um die Möglichkeit, auch bei bzw. nach widrigen Umständen, z.B. einer Naturkatastrophe oder einem Dienstausfall, wichtige Geschäftsfunktionen aufrechterhalten zu können. Die Geschäftskontinuität erstreckt sich auf den gesamten Betrieb des Unternehmens, z.B. physische Einrichtungen, Personal, Kommunikation, Transport und IT. In diesem Artikel geht es um Cloudanwendungen, aber die Resilienzplanung muss in Bezug auf alle Anforderungen der Geschäftskontinuität durchgeführt werden. 
+
+**Datensicherung** ist ein wichtiger Teil der Notfallwiederherstellung. Wenn für die zustandslosen Komponenten einer Anwendung ein Fehler auftritt, können Sie sie immer wieder neu bereitstellen. Falls aber Daten verloren gehen, kann für das System kein stabiler Zustand mehr hergestellt werden. Daten müssen gesichert werden, und zwar idealerweise in einer anderen Region, falls ein Katastrophenfall eine gesamte Region betrifft. 
+
+Die Sicherung unterscheidet sich von der **Datenreplikation**. Die Datenreplikation umfasst das Kopieren von Daten nahezu in Echtzeit, sodass das System schnell ein Failover zu einem Replikat durchführen kann. Viele Datenbankensysteme unterstützen die Replikation. Beispielsweise verfügt SQL Server über Unterstützung für SQL Server Always On-Verfügbarkeitsgruppen. Mit der Datenreplikation kann reduziert werden, wie lange die Wiederherstellung nach einem Ausfall dauert, indem sichergestellt wird, dass immer ein Replikat der Daten verfügbar ist. Die Datenreplikation bietet aber keinen Schutz vor menschlichen Fehlern. Falls Daten aufgrund eines menschlichen Fehlers beschädigt werden, werden sie einfach auf die Replikate kopiert. Aus diesem Grund benötigen Sie für Ihre Strategie für die Notfallwiederherstellung eine langfristige Sicherungslösung. 
 
 ## <a name="process-to-achieve-resiliency"></a>Prozess zur Erreichung von Resilienz
 Resilienz ist kein Add-On. Sie muss in das System integriert und im Betrieb umgesetzt werden. Dieses allgemeine Modell dient hierbei als Grundlage:
@@ -64,6 +68,7 @@ Berücksichtigen Sie außerdem die Nutzungsmuster. Gibt es bestimmte kritische Z
 Zwei wichtige Metriken, die berücksichtigt werden sollten, sind Recovery Time Objective (RTO) und Recovery Point Objective (RPO).
 
 * **Recovery Time Objective** (RTO) ist der maximal zulässige Zeitraum, in dem eine Anwendung nach einem Vorfall nicht verfügbar sein darf. Wenn RTO bei Ihnen 90 Minuten beträgt, müssen Sie dazu in der Lage sein, die Anwendung innerhalb von 90 Minuten nach Beginn eines Notfalls wieder in den Ausführungszustand zu versetzen. Falls für RTO ein sehr niedriger Wert angesetzt ist, führen Sie ggf. eine zweite Bereitstellung ständig im Standby aus, um vor einem regionalen Ausfall geschützt zu sein.
+
 * **Recovery Point Objective** (RPO) ist die maximale Dauer eines Datenverlusts, die während eines Notfalls zulässig ist. Wenn Sie Daten beispielsweise in einer einzelnen Datenbank ohne Replikation in anderen Datenbanken speichern und stündliche Sicherungen durchführen, können Daten für bis zu eine Stunde verloren gehen. 
 
 RTO und RPO sind geschäftliche Anforderungen. Die Durchführung einer Risikobewertung kann hilfreich sein, um RTO und RPO für die Anwendung zu definieren. Eine weitere häufig genutzte Metrik ist die **mittlere Zeit bis zur Wiederherstellung** (Mean Time To Recover, MTTR). Dies ist die durchschnittliche Dauer der Wiederherstellung einer Anwendung nach einem Ausfall. MTTR ist ein empirischer Fakt eines Systems. Wenn der MTTR-Wert größer als der RTO-Wert ist, führt ein Ausfall des Systems zu einer nicht akzeptablen geschäftlichen Störung, weil es nicht möglich ist, das System innerhalb des definierten RTO-Zeitraums wiederherzustellen. 
@@ -82,10 +87,10 @@ In der folgenden Tabelle sind die potenziellen kumulativen Ausfallzeiten für ve
 
 | SLA | Ausfallzeit pro Woche | Ausfallzeit pro Monat | Ausfallzeit pro Jahr |
 | --- | --- | --- | --- |
-| 99% |1,68 Stunden |7,2 Stunden |3,65 Tage |
-| 99,9% |10,1 Minuten |43,2 Minuten |8,76 Stunden |
-| 99,95% |5 Minuten |21,6 Minuten |4,38 Stunden |
-| 99,99% |1,01 Minuten |4,32 Minuten |52,56 Minuten |
+| 99 % |1,68 Stunden |7,2 Stunden |3,65 Tage |
+| 99,9 % |10,1 Minuten |43,2 Minuten |8,76 Stunden |
+| 99,95 % |5 Minuten |21,6 Minuten |4,38 Stunden |
+| 99,99 % |1,01 Minuten |4,32 Minuten |52,56 Minuten |
 | 99,999% |6 Sekunden |25,9 Sekunden |5,26 Minuten |
 
 Sofern alle anderen Faktoren identisch sind, ist eine höhere Verfügbarkeit natürlich immer vorzuziehen. Aber wenn eine noch höhere Verfügbarkeit angestrebt wird, erhöhen sich auch die Kosten und die Komplexität, um dies zu erreichen. Eine Betriebszeit von 99,99% entspricht einer Gesamtausfallzeit von ca. 5 Minuten pro Monat. Rechtfertigt die Erreichung von 99,999% die zusätzliche Komplexität und die höheren Kosten? Die Antwort hängt von Ihren geschäftlichen Anforderungen ab. 
@@ -134,6 +139,33 @@ Außerdem wird das Failover nicht sofort durchgeführt, und während eines Failo
 
 Der berechnete SLA-Wert ist ein nützlicher Anhaltspunkt, aber er hat in Bezug auf die Verfügbarkeit keine umfassende Aussagekraft. Häufig kann eine Anwendung korrekt herabgestuft werden, wenn ein nicht kritischer Pfad ausfällt. Stellen Sie sich eine Anwendung vor, in der ein Katalog mit Büchern angezeigt wird. Wenn die Anwendung das Miniaturbild für den Buchdeckel nicht abrufen kann, wird ggf. ein Platzhalterbild angezeigt. In diesem Fall wird die Betriebszeit der Anwendung durch das fehlende Abrufen des Bilds nicht reduziert, obwohl für Benutzer eine Beeinträchtigung besteht.  
 
+## <a name="redundancy-and-designing-for-failure"></a>Redundanz und Ausrichten des Entwurfs auf Fehler
+
+Fehler und Ausfälle können mit unterschiedlichen Auswirkungen verbunden sein. Einige Hardwarefehler, z.B. ein ausgefallener Datenträger, wirken sich ggf. nur auf einen einzelnen Hostcomputer aus. Ein fehlerhafter Netzwerkswitch kann sich auf ein gesamtes Serverrack auswirken. Weniger häufig treten Fehler auf, die zu Störungen für ein gesamtes Rechenzentrum führen, z.B. zu einem Stromausfall im Rechenzentrum. In selten Fällen kann es vorkommen, dass eine gesamte Region nicht mehr verfügbar ist.
+
+Eines der wichtigsten Verfahren, mit dem für eine Anwendung die Resilienz sichergestellt werden kann, ist die Redundanz. Sie müssen diese Redundanz aber beim Entwerfen der Anwendung einplanen. Außerdem richtet sich der jeweils benötigte Redundanzgrad nach Ihren Geschäftsanforderungen – nicht für jede Anwendung ist eine regionsübergreifende Redundanz als Schutz vor einem regionalen Ausfall erforderlich. In der Regel muss ein Kompromiss zwischen höherer Redundanz und Zuverlässigkeit und einer höheren Kostensumme und Komplexität gefunden werden.  
+
+Azure verfügt über eine Reihe von Features, mit denen für eine Anwendung für alle Fehlerebenen Redundanz erzielt werden kann – von einer einzelnen VM bis hin zu einer gesamten Region. 
+
+![](./images/redundancy.svg)
+
+**Einzelne VM**: Azure enthält eine Betriebszeit-SLA für einzelne VMs. Sie können zwar einen höheren SLA-Grad erzielen, indem Sie zwei oder mehr VMs ausführen, aber für einige Workloads kann eine einzelne VM zuverlässig genug sein. Für Produktionsworkloads empfehlen wir aus Redundanzgründen die Verwendung von zwei oder mehr VMs. 
+
+**Verfügbarkeitsgruppen**: Stellen Sie als Schutz vor lokalen Hardwarefehlern, z.B. ein Ausfall eines Datenträgers oder Netzwerkswitchs, in einer Verfügbarkeitsgruppe zwei oder mehr VMs bereit. Eine Verfügbarkeitsgruppe besteht aus mindestens zwei *Fehlerdomänen*, die eine Stromquelle und einen Netzwerkswitch gemeinsam nutzen. VMs in einer Verfügbarkeitsgruppe sind auf die Fehlerdomänen verteilt. Wenn ein Hardwarefehler eine Fehlerdomäne betrifft, kann der Netzwerkdatenverkehr so weiterhin an die VMs in den anderen Fehlerdomänen weitergeleitet werden. Weitere Informationen zu Verfügbarkeitsgruppen finden Sie unter [Verwalten der Verfügbarkeit virtueller Windows-Computer in Azure](/azure/virtual-machines/windows/manage-availability).
+
+**Verfügbarkeitszonen (Vorschau)**.  Eine Verfügbarkeitszone ist eine physisch getrennte Zone in einer Azure-Region. Jede Verfügbarkeitszone verfügt über eine eigene Stromquelle, ein Netzwerk und eine Kühlung. Die Bereitstellung von VMs über Verfügbarkeitszonen hinweg dient dem Schutz einer Anwendung vor Ausfällen, die ein gesamtes Rechenzentrum betreffen. 
+
+**Regionspaare**: Um eine Anwendung vor einem regionalen Ausfall zu schützen, können Sie sie in mehreren Regionen bereitstellen, indem Sie Azure Traffic Manager zum Verteilen von Internetdatenverkehr auf die verschiedenen Regionen verwenden. Jede Azure-Region ist mit einer anderen Region gekoppelt. Zusammen bilden sie ein [Regionspaar](/azure/best-practices-availability-paired-regions). Mit Ausnahme von „Brasilien, Süden“ befinden sich die Regionen der Regionspaare immer innerhalb des gleichen geografischen Gebiets, um steuerliche und rechtliche Anforderungen an den Speicherort von Daten zu erfüllen.
+
+Berücksichtigen Sie beim Entwerfen einer Anwendung für mehrere Regionen, dass die Netzwerklatenz für mehrere Regionen höher als innerhalb einer Region ist. Wenn Sie beispielsweise eine Datenbank replizieren, um das Failover zu ermöglichen, sollten Sie die synchrone Datenreplikation innerhalb einer Region und die asynchrone Datenreplikation für mehrere Regionen verwenden.
+
+| &nbsp; | Verfügbarkeitsgruppe | Verfügbarkeitszone | Regionspaar |
+|--------|------------------|-------------------|---------------|
+| Fehlerumfang | Rack | Datacenter | Region |
+| Routinganforderung | Lastenausgleichsmodul | Zonenübergreifender Lastenausgleich | Traffic Manager |
+| Netzwerklatenz | Sehr niedrig | Niedrig | Mittel bis hoch |
+| Virtuelles Netzwerk  | VNet | VNet | Regionsübergreifendes VNet-Peering (Vorschau) |
+
 ## <a name="designing-for-resiliency"></a>Entwerfen mit Blick auf Resilienz
 In der Entwurfsphase ist es ratsam, eine Fehlermodusanalyse (Failure Mode Analysis, FMA) durchzuführen. Das Ziel einer FMA ist die Identifizierung von möglichen Fehlerpunkten, und es wird definiert, wie die Anwendung auf diese Fehler reagiert.
 
@@ -168,12 +200,11 @@ Weitere Informationen finden Sie unter [Retry Pattern][retry-pattern] (Wiederhol
 ### <a name="load-balance-across-instances"></a>Übergreifender Lastenausgleich für Instanzen
 Aus Gründen der Skalierbarkeit sollte eine Cloudanwendung horizontal hochskaliert werden können, indem mehr Instanzen hinzugefügt werden. Mit diesem Ansatz wird auch die Resilienz verbessert, da fehlerhafte Instanzen aus der Rotation herausgenommen werden können.  
 
-Beispiel:
+Beispiel: 
 
 * Ordnen Sie mindestens zwei VMs hinter einem Lastenausgleich an. Mit dem Lastenausgleichsmodul wird Datenverkehr auf alle VMs verteilt. Informationen hierzu finden Sie unter [Run load-balanced VMs for scalability and availability][ra-multi-vm] (Ausführen von VMs mit Lastenausgleich, um Skalierbarkeit und Verfügbarkeit zu erzielen).
 * Führen Sie für eine Azure App Service-App das zentrale Hochskalieren auf mehrere Instanzen durch. App Service verteilt die Last automatisch auf die Instanzen. Informationen hierzu finden Sie unter [Basic web application][ra-basic-web] (Einfache Webanwendung).
 * Verwenden Sie [Azure Traffic Manager][tm], um Datenverkehr auf eine Gruppe von Endpunkten zu verteilen.
-
 
 ### <a name="replicate-data"></a>Replizieren von Daten
 Das Replizieren von Daten ist eine allgemeine Strategie zum Verarbeiten von nicht vorübergehenden Fehlern in einem Datenspeicher. Viele Speichertechnologien verfügen über eine integrierte Replikation, z.B. Azure SQL-Datenbank, Cosmos DB und Apache Cassandra.  
@@ -183,7 +214,7 @@ Es ist wichtig, dass sowohl der Lese- als auch der Schreibpfad berücksichtigt w
 Zur Maximierung der Verfügbarkeit können Replikate in mehreren Regionen angeordnet werden. Hiermit wird aber die Wartezeit beim Replizieren der Daten erhöht. Normalerweise wird das regionsübergreifende Replizieren asynchron durchgeführt. Dies ist mit einem Modell der letztlichen Konsistenz und potenziellem Datenverlust bei einem Ausfall eines Replikats verbunden. 
 
 ### <a name="degrade-gracefully"></a>Korrektes Herabstufen
-Wenn ein Dienst ausfällt und kein Failoverpfad vorhanden ist, kann die Anwendung unter Umständen korrekt herabgestuft werden und trotzdem noch eine akzeptable Benutzerfreundlichkeit bieten. Beispiel:
+Wenn ein Dienst ausfällt und kein Failoverpfad vorhanden ist, kann die Anwendung unter Umständen korrekt herabgestuft werden und trotzdem noch eine akzeptable Benutzerfreundlichkeit bieten. Beispiel: 
 
 * Reihen Sie ein Arbeitselement zur späteren Verarbeitung in eine Warteschlange ein. 
 * Geben Sie einen geschätzten Wert zurück.
@@ -312,7 +343,7 @@ Weitere Informationen zur Überwachung und Diagnose finden Sie unter [Anleitung 
 ## <a name="manual-failure-responses"></a>Manuelle Reaktionen auf Fehler
 In den vorherigen Abschnitten wurden Strategien für die automatisierte Wiederherstellung beschrieben, die für die Hochverfügbarkeit wichtig sind. Aber in einigen Fällen sind manuelle Eingriffe erforderlich.
 
-* **Warnungen**: Überwachen Sie Ihre Anwendung auf Warnsignale, die proaktive Eingriffe nötig machen. Wenn Sie beispielsweise sehen, dass Ihre Anwendung von SQL-Datenbank oder Cosmos DB ständig gedrosselt wird, müssen Sie ggf. Ihre Datenbankkapazität erhöhen oder Ihre Abfragen optimieren. In diesem Beispiel sollte Ihre Telemetrie auch dann eine Warnung auslösen, wenn die Anwendung Drosselungsfehler transparent behandelt, damit Sie Maßnahmen treffen können.  
+* **Warnungen**. Überwachen Sie Ihre Anwendung auf Warnsignale, die proaktive Eingriffe nötig machen. Wenn Sie beispielsweise sehen, dass Ihre Anwendung von SQL-Datenbank oder Cosmos DB ständig gedrosselt wird, müssen Sie ggf. Ihre Datenbankkapazität erhöhen oder Ihre Abfragen optimieren. In diesem Beispiel sollte Ihre Telemetrie auch dann eine Warnung auslösen, wenn die Anwendung Drosselungsfehler transparent behandelt, damit Sie Maßnahmen treffen können.  
 * **Durchführen eines manuellen Failovers**: Für einige Systeme kann ein Failover nicht automatisch durchgeführt werden, sodass ein manuelles Failover erforderlich ist. 
 * **Testen der Betriebsbereitschaft**: Wenn für Ihre Anwendung ein Failover in eine sekundäre Region durchgeführt wird, sollten Sie die Betriebsbereitschaft testen, bevor das Failback in die primäre Region erfolgt. Bei diesem Test sollte sichergestellt werden, dass die primäre Region betriebsbereit und fehlerfrei ist und wieder für den Empfang von Datenverkehr bereit ist.
 * **Prüfen der Datenkonsistenz**: Wenn in einem Datenspeicher ein Fehler auftritt, kann es zu Inkonsistenzen bei den Daten kommen, sobald der Speicher wieder verfügbar ist. Dies gilt besonders, wenn die Daten repliziert wurden. 

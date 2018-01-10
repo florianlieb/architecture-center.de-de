@@ -7,15 +7,15 @@ pnp.series.title: Identity management
 pnp.series.prev: adds-extend-domain
 pnp.series.next: adfs
 cardTitle: Create an AD DS forest in Azure
-ms.openlocfilehash: bb7e57af2afacf1faa7679c854bf49217918eba8
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: b946afa91e8bd303c51f97e18be170c4105cc8c5
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="create-an-active-directory-domain-services-ad-ds-resource-forest-in-azure"></a>Erstellen einer Active Directory Domain Services (AD DS)-Ressourcengesamtstruktur in Azure
 
-Diese Referenzarchitektur zeigt, wie eine separate Active Directory-Domäne in Azure erstellt wird, der Domänen in der lokalen Active Directory-Gesamtstruktur vertrauen. [**Stellen Sie diese Lösung bereit**.](#deploy-the-solution)
+Diese Referenzarchitektur zeigt, wie eine separate Active Directory-Domäne in Azure erstellt wird, der Domänen in der lokalen Active Directory-Gesamtstruktur vertrauen. [**So stellen Sie diese Lösung bereit**.](#deploy-the-solution)
 
 [![0]][0] 
 
@@ -27,7 +27,7 @@ Zu den typischen Verwendungsmöglichkeiten dieser Architektur zählen die Verwal
 
 Weitere Überlegungen finden Sie unter [Auswählen einer Lösung für die Integration einer lokalen Active Directory-Instanz in Azure][considerations]. 
 
-## <a name="architecture"></a>Architektur
+## <a name="architecture"></a>Architecture
 
 Diese Architektur besteht aus den folgenden Komponenten.
 
@@ -87,7 +87,7 @@ Spezifische Überlegungen zur Sicherheit für Active Directory finden Sie im Abs
 
 ## <a name="deploy-the-solution"></a>Bereitstellen der Lösung
 
-Eine Projektmappe zur Bereitstellung für diese Referenzarchitektur ist auf [GitHub][github] verfügbar. Sie benötigen die neueste Version der Azure-Befehlszeilenschnittstelle, um das PowerShell-Skript auszuführen, mit dem die Lösung bereitgestellt wird. Um die Referenzarchitektur bereitzustellen, gehen Sie folgendermaßen vor:
+Eine Lösung zur Bereitstellung für diese Referenzarchitektur ist auf [GitHub][github] verfügbar. Sie benötigen die neueste Version der Azure-Befehlszeilenschnittstelle, um das PowerShell-Skript auszuführen, mit dem die Lösung bereitgestellt wird. Um die Referenzarchitektur bereitzustellen, gehen Sie folgendermaßen vor:
 
 1. Laden Sie den Projektmappenordner von [GitHub][github] auf Ihren lokalen Computer herunter, oder klonen Sie ihn.
 
@@ -101,12 +101,12 @@ Eine Projektmappe zur Bereitstellung für diese Referenzarchitektur ist auf [Git
    
     Ersetzen Sie `<subscription id>` durch Ihre Azure-Abonnement-ID.
    
-    Geben Sie für `<location>` eine Azure-Region an, z. B. `eastus` oder `westus`.
+    Geben Sie für `<location>` eine Azure-Region an, z.B. `eastus` oder `westus`.
    
     Der `<mode>`-Parameter steuert die Granularität der Bereitstellung. Er kann einen der folgenden Werte annehmen:
    
-   * `Onpremise`: stellt die simulierte lokale Umgebung bereit.
-   * `Infrastructure`: stellt die VNet-Infrastruktur und die Jumpbox in Azure bereit.
+   * `Onpremise`: stellt die simulierte lokale Umgebung bereit
+   * `Infrastructure`: stellt die VNET-Infrastruktur und die Jumpbox in Azure bereit
    * `CreateVpn`: stellt das Gateway des virtuellen Azure-Netzwerks bereit und verbindet es mit dem simulierten lokalen Netzwerk.
    * `AzureADDS`: stellt die virtuellen Computer, die als Active Directory DS-Server fungieren, auf diesen virtuellen Computern Active Directory und dann die Domäne in Azure bereit.
    * `WebTier`: stellt die virtuellen Computer der Webebene und den Lastenausgleich bereit.

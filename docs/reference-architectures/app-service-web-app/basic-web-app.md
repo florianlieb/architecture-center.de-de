@@ -2,24 +2,24 @@
 title: Einfache Webanwendung
 description: "Empfohlene Architektur für eine einfache Webanwendung, die in Microsoft Azure ausgeführt wird."
 author: MikeWasson
-ms.date: 11/23/2016
+ms.date: 12/12/2017
 cardTitle: Basic web application
-ms.openlocfilehash: b7475c4087a184bb7608d0c45ffecee912c920d7
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 598eb547f0e96ae334af391183a792637caa8631
+ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/02/2018
 ---
 # <a name="basic-web-application"></a>Einfache Webanwendung
 [!INCLUDE [header](../../_includes/header.md)]
 
-Diese Referenzarchitektur demonstriert eine Reihe bewährter Verfahren für eine Webanwendung, die [Azure App Service][app-service] und [Azure SQL-Datenbank][sql-db] verwendet. [**Stellen Sie diese Lösung bereit**.](#deploy-the-solution)
+Diese Referenzarchitektur demonstriert eine Reihe bewährter Verfahren für eine Webanwendung, die [Azure App Service][app-service] und [Azure SQL-Datenbank][sql-db] verwendet. [**Stellen Sie diese Lösung bereit.**](#deploy-the-solution)
 
 ![[0]][0]
 
 *Laden Sie eine [Visio-Datei][visio-download] mit dieser Architektur herunter.*
 
-## <a name="architecture"></a>Architektur 
+## <a name="architecture"></a>Architecture 
 
 > [!NOTE]
 > Der Schwerpunkt liegt bei dieser Architektur nicht auf der Anwendungsentwicklung, und es wird nicht von einem bestimmten Anwendungsframework ausgegangen. Das Ziel besteht darin, zu verstehen, wie verschiedene Azure-Dienste ineinandergreifen.
@@ -29,15 +29,23 @@ Diese Referenzarchitektur demonstriert eine Reihe bewährter Verfahren für eine
 Die Architektur besteht aus den folgenden Komponenten:
 
 * **Ressourcengruppe**. Eine [Ressourcengruppe](/azure/azure-resource-manager/resource-group-overview) ist ein logischer Container für Azure-Ressourcen.
+
 * **App Service-App**. [Azure App Service][app-service] ist eine umfassend verwaltete Plattform zum Erstellen und Bereitstellen von Cloudanwendungen.     
+
 * **App Service-Plan**. Ein [App Service-Plan][app-service-plans] dient zur Bereitstellung der verwalteten virtuellen Computer (VMs), auf denen Ihre App gehostet wird. Alle einem Plan zugeordneten Apps werden auf den gleichen VM-Instanzen ausgeführt.
 
 * **Bereitstellungsslots**.  Ein [Bereitstellungsslot][deployment-slots] ermöglicht Ihnen das Staging einer Bereitstellung und ihren Austausch gegen die Produktionsbereitstellung. Auf diese Weise vermeiden Sie die direkte Bereitstellung in der Produktionsumgebung. Im Abschnitt [Verwaltbarkeit](#manageability-considerations) finden Sie spezifische Empfehlungen.
 
-* **IP-Adresse**. Die App Service-App verfügt über eine öffentliche IP-Adresse und einen Domänennamen. Der Domänenname ist eine Unterdomäne von `azurewebsites.net`, z.B. `contoso.azurewebsites.net`. Um einen benutzerdefinierten Domänennamen zu verwenden, z.B. `contoso.com`, erstellen Sie DNS-Einträge (Domain Name Service), die der IP-Adresse den benutzerdefinierten Domänennamen zuordnen. Weitere Informationen finden Sie unter [Konfigurieren eines benutzerdefinierten Domänennamens in Azure App Service][custom-domain-name].
+* **IP-Adresse**. Die App Service-App verfügt über eine öffentliche IP-Adresse und einen Domänennamen. Der Domänenname ist eine Unterdomäne von `azurewebsites.net`, z.B. `contoso.azurewebsites.net`.  
+
+* **Azure DNS:** [Azure DNS][azure-dns] ist ein Hostingdienst für DNS-Domänen, der die Namensauflösung unter Verwendung der Microsoft Azure-Infrastruktur durchführt. Durch das Hosten Ihrer Domänen in Azure können Sie Ihre DNS-Einträge mithilfe der gleichen Anmeldeinformationen, APIs, Tools und Abrechnung wie für die anderen Azure-Dienste verwalten. Erstellen Sie zur Verwendung eines benutzerdefinierten Domänennamens (etwa `contoso.com`) DNS-Einträge, die der IP-Adresse den benutzerdefinierten Domänennamen zuordnen. Weitere Informationen finden Sie unter [Konfigurieren eines benutzerdefinierten Domänennamens in Azure App Service][custom-domain-name].  
+
 * **Azure SQL-Datenbank**. [SQL-Datenbank][sql-db] ist eine relationale Datenbank-as-a-Service in der Cloud.
+
 * **Logischer Server**. In Azure SQL-Datenbank werden Ihre Datenbanken auf einem logischen Server gehostet. Sie können pro logischem Server mehrere Datenbanken erstellen.
+
 * **Azure Storage**. Erstellen Sie ein Azure-Speicherkonto mit einem Blob-Container zum Speichern von Diagnoseprotokollen.
+
 * **Azure Active Directory** (Azure AD). Verwenden Sie Azure AD oder einen anderen Identitätsanbieter für die Authentifizierung.
 
 ## <a name="recommendations"></a>Empfehlungen
@@ -215,6 +223,7 @@ Weitere Informationen finden Sie unter [Bereitstellen von Ressourcen mit Azure R
 [app-service-security]: /azure/app-service-web/web-sites-security
 [app-settings]: /azure/app-service-web/web-sites-configure
 [arm-template]: /azure/azure-resource-manager/resource-group-overview#resource-groups
+[azure-dns]: /azure/dns/dns-overview
 [custom-domain-name]: /azure/app-service-web/web-sites-custom-domain-name
 [deploy]: /azure/app-service-web/web-sites-deploy
 [deploy-arm-template]: /azure/resource-group-template-deploy
@@ -223,7 +232,7 @@ Weitere Informationen finden Sie unter [Bereitstellen von Ressourcen mit Azure R
 [kudu]: https://azure.microsoft.com/blog/windows-azure-websites-online-tools-you-should-know-about/
 [monitoring-guidance]: ../../best-practices/monitoring.md
 [new-relic]: http://newrelic.com/
-[paas-basic-arm-template]: https://github.com/mspnp/reference-architectures/tree/master/app-service-web-app/basic-web-app/Paas-Basic/Templates
+[paas-basic-arm-template]: https://github.com/mspnp/reference-architectures/tree/master/managed-web-app/basic-web-app/Paas-Basic/Templates
 [perf-analysis]: https://github.com/mspnp/performance-optimization/blob/master/Performance-Analysis-Primer.md
 [rbac]: /azure/active-directory/role-based-access-control-what-is
 [resource-group]: /azure/azure-resource-manager/resource-group-overview

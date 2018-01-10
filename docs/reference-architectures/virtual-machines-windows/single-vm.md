@@ -2,15 +2,15 @@
 title: "Ausführen eines virtuellen Windows-Computers in Azure"
 description: "Erfahren Sie, wie Sie einen virtuellen Windows-Computer unter Azure ausführen und dabei die Skalierbarkeit, Resilienz, Verwaltbarkeit und Sicherheit im Blick behalten."
 author: telmosampaio
-ms.date: 11/16/2017
+ms.date: 12/12/2017
 pnp.series.title: Windows VM workloads
 pnp.series.next: multi-vm
 pnp.series.prev: ./index
-ms.openlocfilehash: b519cb96c124a91d95fb5965f34b86026c95805c
-ms.sourcegitcommit: 115db7ee008a0b1f2b0be50a26471050742ddb04
+ms.openlocfilehash: 71eeebae1f557ecbb6f33c4a7e37a278204f3dcd
+ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/17/2017
+ms.lasthandoff: 01/02/2018
 ---
 # <a name="run-a-windows-vm-on-azure"></a>Ausführen eines virtuellen Windows-Computers in Azure
 
@@ -20,22 +20,23 @@ Anhand dieser Referenzarchitektur werden einige bewährte Methoden für die Ausf
 
 *Laden Sie eine [Visio-Datei][visio-download] herunter, die dieses Architekturdiagramm enthält.*
 
-## <a name="architecture"></a>Architektur
+## <a name="architecture"></a>Architecture
 
 Für die Bereitstellung eines virtuellen Azure-Computers sind zusätzliche Komponenten wie Compute-, Netzwerk- und Speicherressourcen erforderlich.
 
-* **Ressourcengruppe:** Eine [*Ressourcengruppe*][resource-manager-overview] ist ein Container, der verwandte Ressourcen enthält. Im Allgemeinen sollten Sie Ressourcen in einer Lösung gruppieren, die auf deren Lebensdauer und der Person basiert, von der diese Ressourcen verwaltet werden. Bei einer einzelnen VM-Workload können Sie eine einzige Ressourcengruppe für alle Ressourcen erstellen.
+* **Ressourcengruppe:** Eine [Ressourcengruppe][resource-manager-overview] ist ein Container, der verwandte Ressourcen enthält. Im Allgemeinen sollten Sie Ressourcen in einer Lösung gruppieren, die auf deren Lebensdauer und der Person basiert, von der diese Ressourcen verwaltet werden. Bei einer einzelnen VM-Workload können Sie eine einzige Ressourcengruppe für alle Ressourcen erstellen.
 * **VM**. Sie können eine VM über eine Liste mit veröffentlichten Images oder über ein benutzerdefiniertes verwaltetes Image oder eine virtuelle Festplattendatei (VHD) bereitstellen, die in Azure Blob Storage hochgeladen wurde.
 * **Betriebssystem-Datenträger:** Der Datenträger für das Betriebssystem ist eine in [Azure Storage][azure-storage] gespeicherte virtuelle Festplatte, sodass diese weiterhin bestehen bleibt, auch wenn der Hostcomputer ausgefallen ist.
-* **Temporärer Datenträger** Die VM wird mit einem temporären Datenträger erstellt (Laufwerk `D:` unter Windows). Dieser Datenträger wird auf dem Hostcomputer auf einem physischen Laufwerk gespeichert. Er wird *nicht* in Azure Storage gespeichert und kann bei Neustarts und anderen Ereignissen während des VM-Lebenszyklus gelöscht werden. Verwenden Sie diesen Datenträger nur für temporäre Daten, z. B. Auslagerungsdateien.
+* **Temporärer Datenträger** Die VM wird mit einem temporären Datenträger erstellt (Laufwerk `D:` unter Windows). Dieser Datenträger wird auf dem Hostcomputer auf einem physischen Laufwerk gespeichert. Er wird **nicht** in Azure Storage gespeichert und kann bei Neustarts und anderen Ereignissen während des VM-Lebenszyklus gelöscht werden. Verwenden Sie diesen Datenträger nur für temporäre Daten, z. B. Auslagerungsdateien.
 * **Datenträger** Bei einem [Datenträger für Daten][data-disk] handelt es sich um eine persistente VHD, die für Anwendungsdaten verwendet wird. Datenträger werden in Azure Storage gespeichert, z.B. auf dem Betriebssystem-Datenträger.
-* **Virtuelles Netzwerk (VNet) und Subnetz_** Jeder virtuelle Azure-Computer wird in einem virtuellen Netzwerk (VNet) bereitgestellt, das in mehrere Subnetze segmentiert werden kann.
-* **Öffentliche IP-Adresse** Eine öffentliche IP-Adresse wird für die Kommunikation mit der VM &mdash; benötigt, z. B. per Remotedesktop (RDP).
-* **Netzwerkschnittstelle (NIC)** Eine zugewiesene NIC ermöglicht der VM die Kommunikation mit dem virtuellen Netzwerk.
-* **Netzwerksicherheitsgruppen (NSG)** [Netzwerksicherheitsgruppen][nsg] werden dazu verwendet, um den Netzwerkdatenverkehr zu einer Netzwerkressource zuzulassen oder zu verweigern. Sie können eine NSG einer einzelnen NIC oder einem Subnetz zuordnen. Wenn Sie sie einem Subnetz zuordnen, gelten die NSG-Regeln für alle VMs in diesem Subnetz.
+* **Virtuelles Netzwerk (VNet) und Subnetz:** Jeder virtuelle Azure-Computer wird in einem virtuellen Netzwerk (VNet) bereitgestellt, das in mehrere Subnetze segmentiert werden kann.
+* **Öffentliche IP-Adresse** Eine öffentliche IP-Adresse wird für die Kommunikation mit der VM &mdash; benötigt, z. B. per Remotedesktop (RDP).  
+* **Azure DNS:** [Azure DNS][azure-dns] ist ein Hostingdienst für DNS-Domänen, der die Namensauflösung unter Verwendung der Microsoft Azure-Infrastruktur durchführt. Durch das Hosten Ihrer Domänen in Azure können Sie Ihre DNS-Einträge mithilfe der gleichen Anmeldeinformationen, APIs, Tools und Abrechnung wie für die anderen Azure-Dienste verwalten.  
+* **Netzwerkschnittstelle (NIC)** Eine zugewiesene NIC ermöglicht der VM die Kommunikation mit dem virtuellen Netzwerk.  
+* **Netzwerksicherheitsgruppen (NSG)** [Netzwerksicherheitsgruppen][nsg] dienen zum Zulassen oder Verweigern von Netzwerkdatenverkehr für eine Netzwerkressource. Sie können eine NSG einer einzelnen NIC oder einem Subnetz zuordnen. Wenn Sie sie einem Subnetz zuordnen, gelten die NSG-Regeln für alle VMs in diesem Subnetz.
 * **Diagnose:** Diagnoseprotokolle sind für die Verwaltung und Problembehandlung des virtuellen Computers von entscheidender Bedeutung.
 
-## <a name="recommendations"></a>Recommendations
+## <a name="recommendations"></a>Empfehlungen
 
 Diese Architektur veranschaulicht grundlegende Empfehlungen für die Ausführung einer Windows-VM in Azure. Wir raten jedoch davon ab, für unternehmenskritische Workloads nur eine VM zu verwenden, da so eine einzelne Fehlerquelle („Single Point of Failure“) entsteht. Stellen Sie mehrere VMs in einer [Verfügbarkeitsgruppe][availability-set] bereit, um eine höhere Verfügbarkeit zu erzielen. Weitere Informationen finden Sie unter [Ausführen mehrerer VMs in Azure][multi-vm]. 
 
@@ -86,7 +87,7 @@ Sie können eine VM zentral hoch- oder herunterskalieren, indem Sie die [VM-Grö
 
 ## <a name="availability-considerations"></a>Überlegungen zur Verfügbarkeit
 
-Stellen Sie mehrere VMs in einer Verfügbarkeitsgruppe bereit, um eine höhere Verfügbarkeit zu erzielen. Dies führt auch zu einer Erhöhung der [Vereinbarung zum Servicelevel][vm-sla](SLA).
+Stellen Sie mehrere VMs in einer Verfügbarkeitsgruppe bereit, um eine höhere Verfügbarkeit zu erzielen. Dies führt auch zu einer höheren [Vereinbarung zum Servicelevel (Service Level Agreement, SLA)][vm-sla].
 
 Ihr virtueller Computer kann von einer [geplanten Wartung][planned-maintenance] oder [ungeplanten Wartung][manage-vm-availability] betroffen sein. Sie können [VM-Neustartprotokolle][reboot-logs] verwenden, um zu ermitteln, ob ein VM-Neustart durch einen geplanten Wartungsvorgang verursacht wurde.
 
@@ -100,7 +101,7 @@ Als Schutz vor versehentlichen Datenverlusten während des normalen Betriebs (z.
 
 **Beenden einer VM.** Unter Azure wird zwischen den Zuständen „Stopped“ (Beendet) und „Deallocated“ (Zuordnung aufgehoben) unterschieden. Ihnen werden nur Gebühren berechnet, wenn der VM-Status angehalten wird, aber nicht, wenn die Zuordnung für den virtuellen Computer aufgehoben wurde.
 
-Sie können die Zuordnung des virtuellen Computers auch mit der Schaltfläche **Beenden** im Azure-Portal aufheben. Wenn das Herunterfahren über das Betriebssystem erfolgt, während Sie angemeldet sind, wird der virtuelle Computer zwar beendet, aber die Zuordnung wird *nicht* aufgehoben. Es fallen also weiter Kosten an.
+Sie können die Zuordnung des virtuellen Computers auch mit der Schaltfläche **Beenden** im Azure-Portal aufheben. Wenn das Herunterfahren über das Betriebssystem erfolgt, während Sie angemeldet sind, wird der virtuelle Computer zwar beendet, aber die Zuordnung wird **nicht** aufgehoben. Es fallen also weiter Kosten an.
 
 **Löschen einer VM.** Wenn Sie eine VM löschen, werden die VHDs nicht gelöscht. Dies bedeutet, dass Sie die VM problemlos löschen können, ohne dass Daten verloren gehen. Allerdings wird Ihnen der Speicherplatz weiter in Rechnung gestellt. Um die VHD zu löschen, löschen Sie die Datei aus dem [Blobspeicher][blob-storage].
 
@@ -150,7 +151,7 @@ Bevor Sie die Referenzarchitektur in Ihrem eigenen Abonnement bereitstellen kön
 
 ### <a name="deploy-the-solution-using-azbb"></a>Bereitstellen der Lösung mit azbb
 
-Zum Bereitstellen der einzelnen VM-Beispielworkload gehen Sie folgendermaßen vor:
+Gehen Sie zum Bereitstellen der einzelnen VM-Beispielworkloads folgendermaßen vor:
 
 1. Navigieren Sie zum Ordner `virtual-machines\single-vm\parameters\windows` für das Repository, das Sie im vorherigen Schritt „Voraussetzungen“ heruntergeladen haben.
 
@@ -180,6 +181,7 @@ Weitere Informationen zum Bereitstellen dieser Beispielreferenzarchitektur finde
 [azbb]: https://github.com/mspnp/template-building-blocks/wiki/Install-Azure-Building-Blocks
 [azbbv2]: https://github.com/mspnp/template-building-blocks
 [azure-cli-2]: /cli/azure/install-azure-cli?view=azure-cli-latest
+[azure-dns]: /azure/dns/dns-overview
 [azure-storage]: /azure/storage/storage-introduction
 [blob-snapshot]: /azure/storage/storage-blob-snapshots
 [blob-storage]: /azure/storage/storage-introduction

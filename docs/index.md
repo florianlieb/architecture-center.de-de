@@ -2,11 +2,11 @@
 title: Azure Architecture Center
 description: "Das Azure Architecture Center ist die offizielle zentrale Plattform, über die Sie Anleitungen, Blaupausen, Muster und bewährte Methoden für die Erstellung von Lösungen mit Microsoft Azure erhalten. Es wird von dem Microsoft-Team, das für Muster und Best Practices zuständig ist, zusammengestellt."
 layout: LandingPage
-ms.openlocfilehash: 3afe907b8ea1fe59d6c2eb9505ddb34775fdcd62
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: d48861a1001c9bef8cad152a3664077f2ad915c6
+ms.sourcegitcommit: a8453c4bc7c870fa1a12bb3c02e3b310db87530c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/29/2017
 ---
 # <a name="azure-architecture-center"></a>Azure Architecture Center
 
@@ -84,20 +84,20 @@ ms.lasthandoff: 11/14/2017
             </div>
         </a>
     </li>
-    <!-- Performance anti-practices -->
+    <!-- Microservices -->
     <li>
-        <a href="/azure/architecture/antipatterns">
+        <a href="/azure/architecture/microservices">
             <div class="cardSize">
                 <div class="cardPadding">
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="_images/performance.svg" alt="Performance antipatterns" />
+                                <img src="_images/new-content.svg" alt="Designing, building, and operating microservices on Azure" />
                             </div>
                         </div>
                         <div class="cardText">
-                            <h3>Leistungsbezogene Antimuster</h3>
-                            <p>Informationen zur Erkennung und Behebung häufiger Ursachen für Leistungs- und Skalierbarkeitsprobleme in Cloudanwendungen</p>
+                            <h3>Erstellen von Microservices in Azure</h3>
+                            <p>In dieser mehrteiligen Reihe erfahren Sie, wie Sie in Azure eine Microservices-Architektur entwerfen und erstellen. Außerdem finden Sie hier eine Referenzimplementierung.</p>
                         </div>
                     </div>
                 </div>
@@ -124,7 +124,27 @@ ms.lasthandoff: 11/14/2017
             </div>
         </a>
     </li>
-    <!-- Azure for AWS Professionals -->
+    <!-- Azure Virtual Datacenter -->
+    <li>
+        <a href="https://aka.ms/vdc">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="_images/virtual-datacenter.svg" alt="Azure Virtual Datacenter e-book" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3>E-Book: Azure Virtual Datacenter</h3>
+                            <p>In diesem E-Book erfahren Sie, wie Sie Unternehmensworkloads unter Berücksichtigung Ihrer bereits vorhandenen Sicherheits- und Netzwerkrichtlinien für die Azure-Cloudplattform bereitstellen.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+        <!-- Azure for AWS Professionals -->
     <li>
         <a href="/azure/architecture/aws-professional">
             <div class="cardSize">
@@ -178,6 +198,26 @@ ms.lasthandoff: 11/14/2017
                         <div class="cardText">
                             <h3>Azure-Bausteine</h3>
                             <p>Vereinfachen der Bereitstellung von Azure-Ressourcen und Bereitstellen komplexer Architekturen in Azure mit einer einzigen Einstellungsdatei</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- Performance anti-practices -->
+    <li>
+        <a href="/azure/architecture/antipatterns">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="_images/performance.svg" alt="Performance antipatterns" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3>Leistungsbezogene Antimuster</h3>
+                            <p>Informationen zur Erkennung und Behebung häufiger Ursachen für Leistungs- und Skalierbarkeitsprobleme in Cloudanwendungen</p>
                         </div>
                     </div>
                 </div>
@@ -238,26 +278,6 @@ ms.lasthandoff: 11/14/2017
                         <div class="cardText">
                             <h3>Identitätsverwaltung für mehrinstanzenfähige Anwendungen</h3>
                             <p>Überblick über bewährte Methoden für Mehrinstanzenfähigkeit bei der Identitätsverwaltung mit Azure AD</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
-    <!-- ElasticSearch -->
-    <li>
-        <a href="/azure/architecture/elasticsearch">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="_images/elasticsearch.svg" alt="Run Elasticsearch on Azure" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>Ausführen von Elasticsearch in Azure</h3>
-                            <p>Informationen zum Bereitstellen, Verwalten und Anpassen eines Elasticsearch-Clusters in Azure</p>
                         </div>
                     </div>
                 </div>

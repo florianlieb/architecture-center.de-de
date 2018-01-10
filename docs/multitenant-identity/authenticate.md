@@ -6,11 +6,11 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: tailspin
 pnp.series.next: claims
-ms.openlocfilehash: 74f4e85e282799b7eee92caf2da083fb264f8733
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: e85817626675cec4d126921c19a31a0983ecd62d
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="authenticate-using-azure-ad-and-openid-connect"></a>Authentifizieren mithilfe von Azure AD und OpenID Connect
 
@@ -82,7 +82,7 @@ app.UseCookieAuthentication(new CookieAuthenticationOptions {
 ```
 
 ## <a name="initiate-the-authentication-flow"></a>Initiieren des Authentifizierungsflusses
-Zum Starten des Authentifizierungsflusses in ASP.NET MVC geben Sie ein **ChallengeResult** aus dem Controller zurück:
+Zum Starten des Authentifizierungsablaufs in ASP.NET MVC geben Sie ein **ChallengeResult** aus dem Controller zurück:
 
 ```csharp
 [AllowAnonymous]
@@ -131,7 +131,7 @@ So verläuft der Authentifizierungsprozess:
 Wenn die Authentifizierung erfolgreich ist, erstellt die OIDC-Middleware ein Authentifizierungsticket mit einem Anspruchsprinzipal, der die Ansprüche des Benutzers enthält. Sie können im **AuthenticationValidated**- oder **TicketReceived**-Ereignis auf das Ticket zugreifen.
 
 > [!NOTE]
-> Bis der Authentifizierungsfluss vollständig abgeschlossen ist, enthält `HttpContext.User` weiterhin einen anonymen Prinzipal, *nicht* den authentifizierten Benutzer. Der anonyme Prinzipal hat eine leere Auflistung von Ansprüchen. Wenn die Authentifizierung abgeschlossen ist, und die App weiterleitet, deserialisiert die Cookie-Middleware das Authentifizierungscookie und legt `HttpContext.User` auf einen Anspruchsprinzipal fest, der den authentifizierten Benutzer darstellt.
+> Bis zum vollständigen Abschluss des Authentifizierungsflusses enthält `HttpContext.User` weiterhin einen anonymen Prinzipal (**nicht** den authentifizierten Benutzer). Der anonyme Prinzipal hat eine leere Auflistung von Ansprüchen. Wenn die Authentifizierung abgeschlossen ist, und die App weiterleitet, deserialisiert die Cookie-Middleware das Authentifizierungscookie und legt `HttpContext.User` auf einen Anspruchsprinzipal fest, der den authentifizierten Benutzer darstellt.
 > 
 > 
 
@@ -158,7 +158,7 @@ Azure AD unterstützt [OpenID Connect Discovery](https://openid.net/specs/openid
 Die OIDC-Middleware weiß automatisch, wie diese Metadaten abzurufen sind. Richten Sie die Option **Authority** in der Middleware ein, und die Middleware erstellt die URL für die Metadaten. (Sie können die Metadaten-URL überschreiben, indem Sie die Option **MetadataAddress** einrichten.)
 
 ### <a name="openid-connect-flows"></a>OpenID Connect-Abläufe
-Standardmäßig verwendet die OIDC-Middleware einen hybriden Flow mit Formularbereitstellungs-Antwortmodus.
+Standardmäßig verwendet die OIDC-Middleware Hybrid flow mit POST-Formular-Antwortmodus.
 
 * *Hybrider Flow* bedeutet, dass der Client ein ID-Token und einen Autorisierungscode im gleichen Roundtrip an den Autorisierungsserver übermitteln kann.
 * *Formularbereitstellungs-Antwortmodus* bedeutet, dass der Autorisierungsserver eine HTTP POST-Anforderung verwendet, um das ID-Token und den Autorisierungscode an die App zu senden. Die Werte sind Formular-URL-codiert (content type = „application/X-www-form-urlencoded“).
@@ -170,7 +170,7 @@ Wenn die OIDC-Middleware an den Autorisierungsendpunkt umleitet, enthält die Um
 * response_type = „code id_token“. Dies gibt den Hybridflow an.
 * response_mode = „form_post“. Dies gibt die Formularbereitstellungsantwort an.
 
-Um einen anderen Datenfluss anzugeben, bestimmen Sie die Eigenschaft **ResponseType** in den Optionen. Beispiel:
+Um einen anderen Datenfluss anzugeben, bestimmen Sie die Eigenschaft **ResponseType** in den Optionen. Beispiel: 
 
 ```csharp
 app.UseOpenIdConnectAuthentication(options =>

@@ -9,15 +9,15 @@ ms.date: 11/28/2016
 pnp.series.title: Identity management
 pnp.series.prev: azure-ad
 pnp.series.next: adds-forest
-ms.openlocfilehash: 7f771f77c7fa7f266dcce9f5b45e5be658213b8d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 216c59a0a5912d0fe90011e49ad20eb017ada6be
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="extend-active-directory-domain-services-ad-ds-to-azure"></a>Erweitern von Active Directory Domain Services (AD DS) auf Azure
 
-Diese Referenzarchitektur zeigt, wie Sie Ihre Active Directory-Umgebung nach Azure erweitern, um verteilte Authentifizierungsdienste mit [Active Directory Domain Services (AD DS)][active-directory-domain-services] bereitzustellen.  [**Stellen Sie diese Lösung bereit**.](#deploy-the-solution)
+Diese Referenzarchitektur zeigt, wie Sie Ihre Active Directory-Umgebung nach Azure erweitern, um verteilte Authentifizierungsdienste mit [Active Directory Domain Services (AD DS)][active-directory-domain-services] bereitzustellen.  [**So stellen Sie diese Lösung bereit**.](#deploy-the-solution)
 
 [![0]][0] 
 
@@ -29,7 +29,7 @@ Diese Architektur wird häufig verwendet, wenn das lokale Netzwerk und das virtu
 
 Weitere Überlegungen finden Sie unter [Auswählen einer Lösung für die Integration einer lokalen Active Directory-Instanz in Azure][considerations]. 
 
-## <a name="architecture"></a>Architektur 
+## <a name="architecture"></a>Architecture 
 
 Diese Architektur erweitert die in [DMZ zwischen Azure und dem Internet][implementing-a-secure-hybrid-network-architecture-with-internet-access] gezeigte Architektur. Sie enthält die folgenden Komponenten.
 
@@ -40,7 +40,7 @@ Diese Architektur erweitert die in [DMZ zwischen Azure und dem Internet][impleme
 
 Weitere Informationen zum Konfigurieren von UDRs und NVAs finden Sie unter [Implementieren einer sicheren Hybrid-Netzwerkarchitektur in Azure][implementing-a-secure-hybrid-network-architecture]. 
 
-## <a name="recommendations"></a>Recommendations
+## <a name="recommendations"></a>Empfehlungen
 
 Die folgenden Empfehlungen gelten für die meisten Szenarios. Sofern Sie keine besonderen Anforderungen haben, die Vorrang haben, sollten Sie diese Empfehlungen befolgen. 
 
@@ -91,7 +91,7 @@ Stellen Sie die virtuellen Computer mit AD DS in einer [Verfügbarkeitsgruppe][a
 
 Führen Sie regelmäßige Sicherungen von AD DS durch. Kopieren Sie nicht einfach die VHD-Dateien der Domänencontroller, anstatt regelmäßige Sicherungen auszuführen, da die AD DS-Datenbankdatei auf der VHD möglicherweise beim Kopieren nicht konsistent ist. Dies könnte dazu führen, dass die Datenbank nicht mehr neu gestartet werden kann.
 
-Fahren Sie Domänencontroller-VMs nicht über das Azure-Portal herunter. Führen Sie die Vorgänge zum Herunterfahren und Neustarten stattdessen im Gastbetriebssystem durch. Beim Herunterfahren über das Portal wird die Zuordnung des virtuellen Computers aufgehoben, und dadurch wird sowohl die `VM-GenerationID` als auch die `invocationID` des Active Directory-Repositorys zurückgesetzt. Damit werden der RID-Pool (relative ID) von AD DS verworfen und SYSVOL als nicht autorisierend markiert. Als Folge müsste der Domänencontroller neu konfiguriert werden.
+Fahren Sie Domänencontroller-VMs nicht über das Azure-Portal herunter. Führen Sie die Vorgänge zum Herunterfahren und Neustarten stattdessen im Gastbetriebssystem durch. Beim Herunterfahren über das Portal wird die Zuordnung des virtuellen Computers aufgehoben und dadurch sowohl die `VM-GenerationID` als auch die `invocationID` des Active Directory-Repositorys zurückgesetzt. Damit werden der RID-Pool (relative ID) von AD DS verworfen und SYSVOL als nicht autorisierend markiert. Als Folge müsste der Domänencontroller neu konfiguriert werden.
 
 ## <a name="security-considerations"></a>Sicherheitshinweise
 
@@ -121,7 +121,7 @@ Eine Lösung zur Bereitstellung für diese Referenzarchitektur ist auf [GitHub][
     * `CreateVpn`: stellt das Gateway des virtuellen Azure-Netzwerks bereit und verbindet es mit dem simulierten lokalen Netzwerk
     * `AzureADDS`: stellt die virtuellen Computer, die als AD DS-Server fungieren bereit, dann auf diesen virtuellen Computern Active Directory und schließlich die Domäne in Azure
     * `Workload`: stellt die öffentlichen und privaten DMZs und die Workloadebene bereit
-    * `All`: stellt alle vorherigen Bereitstellungen bereit. **Dies ist die empfohlene Option, wenn Sie nicht über ein lokales Netzwerk verfügen, aber die vollständige oben beschriebene Referenzarchitektur für Tests oder Prüfverfahren bereitstellen möchten.**
+    * `All`: Stellt alle vorherigen Bereitstellungen bereit. **Dies ist die empfohlene Option, wenn Sie nicht über ein lokales Netzwerk verfügen, aber die vollständige oben beschriebene Referenzarchitektur für Tests oder Prüfverfahren bereitstellen möchten.**
 
 4. Warten Sie, bis die Bereitstellung abgeschlossen ist. Das Bereitstellen der Bereitstellung `All` dauert mehrere Stunden.
 

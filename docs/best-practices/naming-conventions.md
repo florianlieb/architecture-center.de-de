@@ -4,22 +4,22 @@ description: "Enthält die Namenskonventionen für Azure-Ressourcen. Benennen vo
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 5084fc2ba5a18707de1213276111c53203b6cdd7
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 20f090c4cc39f96887cd58ffd2a9c7736e77de57
+ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/02/2018
 ---
-# <a name="naming-conventions"></a>Namenskonventionen
+# <a name="naming-conventions"></a>Benennungskonventionen
 
 [!INCLUDE [header](../_includes/header.md)]
 
 Dieser Artikel enthält eine Zusammenfassung der Benennungsregeln und -einschränkungen für Azure-Ressourcen und eine Reihe von grundsätzlichen Empfehlungen für Namenskonventionen.  Sie können diese Empfehlungen als Ausgangspunkt für Ihre eigenen, Ihren Bedürfnissen angepassten Konventionen verwenden.
 
-Die Auswahl eines Namens für eine Ressource in Microsoft Azure ist auf folgenden Gründen wichtig:
+Die Auswahl eines Namens für eine Ressource in Microsoft Azure ist wichtig, da:
 
 * Es ist schwierig, einen Namen zu einem späteren Zeitpunkt zu ändern.
-* Namen müssen die Anforderungen ihres bestimmten Ressourcentyps erfüllen.
+* Namen die Anforderungen ihres bestimmten Ressourcentyps erfüllen müssen.
 
 Durch konsistente Namenskonventionen lassen sich Ressourcen einfacher finden. Außerdem kann damit die Rolle einer Ressource in einer Lösung angegeben werden.
 
@@ -57,10 +57,10 @@ Hier sind zwei mögliche Namen für einen Dienst angegeben, der ein Berechnungsm
 
 Affixe können auf verschiedene Aspekte verweisen, die die entsprechenden Ressourcen beschreiben. Die folgende Tabelle zeigt einige üblicherweise verwendete Beispiele.
 
-| Aspekt | Beispiel | Hinweise |
+| Aspekt | Beispiel | Notizen |
 | --- | --- | --- |
 | Environment |dev, prod, QA |identifiziert die Umgebung für die Ressource |
-| Standort |uw (USA, Westen), ue (USA, Osten) |identifiziert die Region, in welcher die Ressource bereitgestellt wird |
+| Speicherort |uw (USA, Westen), ue (USA, Osten) |identifiziert die Region, in welcher die Ressource bereitgestellt wird |
 | Instanz |01, 02 |für Ressourcen, die mehr als eine benannte Instanz besitzen (Webdienste usw.) |
 | Produkt oder Dienst |service |identifiziert das Element (Produkt, Anwendung oder Dienst), das von der Ressource unterstützt wird |
 | Rolle |sql, web, messaging |identifiziert die Rolle der zugeordneten Ressource |
@@ -73,38 +73,53 @@ Mit jedem Ressourcen- oder Diensttyp in Azure wird eine Reihe von Benennungseins
 
 Vermeiden Sie es, Sonderzeichen (`-` oder `_`) als erstes oder letztes Zeichen eines Namens zu verwenden. Diese Zeichen führen bei den meisten Validierungsregeln zu einem Fehler.
 
-| Category (Kategorie) | Dienst oder Entität | Scope | Länge | Schreibweise | Gültige Zeichen | Vorgeschlagenes Muster | Beispiel |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Ressourcengruppe |Ressourcengruppe |Global |1-64 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Unterstrich, Klammern, Bindestrich, Punkt (außer am Ende) |`<service short name>-<environment>-rg` |`profx-prod-rg` |
-| Ressourcengruppe |Verfügbarkeitsgruppe |Ressourcengruppe |1-80 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Unterstrich und Bindestrich |`<service-short-name>-<context>-as` |`profx-sql-as` |
-| Allgemein |Tag |Zugeordnete Entität |512 (Name), 256 (Wert) |Groß-/Kleinschreibung nicht beachten |Alphanumerisch |`"key" : "value"` |`"department" : "Central IT"` |
-| Compute |Virtual Machine |Ressourcengruppe |1 - 15 (Windows), 1 - 64 (Linux) |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Unterstrich und Bindestrich |`<name>-<role>-vm<number>` |`profx-sql-vm1` |
-| Compute |Funktionen-App | Global |1 - 60 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch und Bindestrich |`<name>-func` |`calcprofit-func` |
-| Speicher |Speicherkontoname (Daten) |Global |3-24 |Kleinbuchstaben |Alphanumerisch |`<globally unique name><number>` (Funktion verwenden, um eine eindeutige GUID für die Benennung von Speicherkonten zu berechnen) |`profxdata001` |
-| Speicher |Speicherkontoname (Datenträger) |Global |3-24 |Kleinbuchstaben |Alphanumerisch |`<vm name without dashes>st<number>` |`profxsql001st0` |
-| Speicher | Containername |Speicherkonto |3-63 |Kleinbuchstaben |Alphanumerisch und Bindestrich |`<context>` |`logs` |
-| Speicher |Blobname | Container |1-1024 |Groß-/Kleinschreibung beachten |Jedes URL-Zeichen |`<variable based on blob usage>` |`<variable based on blob usage>` |
-| Speicher |Warteschlangenname |Speicherkonto |3-63 |Kleinbuchstaben |Alphanumerisch und Bindestrich |`<service short name>-<context>-<num>` |`awesomeservice-messages-001` |
-| Speicher |Tabellenname | Speicherkonto |3-63 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch |`<service short name><context>` |`awesomeservicelogs` |
-| Speicher |Dateiname | Speicherkonto |3-63 |Kleinbuchstaben | Alphanumerisch |`<variable based on blob usage>` |`<variable based on blob usage>` |
-| Speicher |Data Lake-Speicher | Global |3-24 |Kleinbuchstaben | Alphanumerisch |`<name>-dtl` |`telemetry-dtl` |
-| Netzwerk |Virtual Network (VNet) |Ressourcengruppe |2 - 64 |Groß-/Kleinschreibung muss nicht beachtet werden. |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<service short name>-vnet` |`profx-vnet` |
-| Netzwerk |Subnetz |Übergeordnetes VNet |2-80 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Unterstrich, Bindestrich und Punkt |`<descriptive context>` |`web` |
-| Netzwerk |Netzwerkschnittstelle |Ressourcengruppe |1-80 |Groß-/Kleinschreibung muss nicht beachtet werden. |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<vmname>-nic<num>` |`profx-sql1-nic1` |
-| Netzwerk |Netzwerksicherheitsgruppen (NSG) |Ressourcengruppe |1-80 |Groß-/Kleinschreibung muss nicht beachtet werden. |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<service short name>-<context>-nsg` |`profx-app-nsg` |
-| Netzwerk |Netzwerksicherheitsgruppen-Regel |Ressourcengruppe |1-80 |Groß-/Kleinschreibung muss nicht beachtet werden. |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<descriptive context>` |`sql-allow` |
-| Netzwerk |Öffentliche IP-Adresse |Ressourcengruppe |1-80 |Groß-/Kleinschreibung muss nicht beachtet werden. |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<vm or service name>-pip` |`profx-sql1-pip` |
-| Netzwerk |Lastenausgleichsmodul |Ressourcengruppe |1-80 |Groß-/Kleinschreibung muss nicht beachtet werden. |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<service or role>-lb` |`profx-lb` |
-| Netzwerk |Konfiguration der Regeln für die Lastenverteilung |Lastenausgleichsmodul |1-80 |Groß-/Kleinschreibung muss nicht beachtet werden. |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<descriptive context>` |`http` |
-| Netzwerk |Azure Application Gateway |Ressourcengruppe |1-80 |Groß-/Kleinschreibung muss nicht beachtet werden. |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<service or role>-agw` |`profx-agw` |
-| Netzwerk |Traffic Manager-Profil |Ressourcengruppe |1 - 63 |Groß-/Kleinschreibung muss nicht beachtet werden. |Alphanumerisch, Bindestrich und Punkt |`<descriptive context>` |`app1` |
+### <a name="general"></a>Allgemein
+
+| Entität | Umfang | Länge | Schreibweise | Gültige Zeichen | Vorgeschlagenes Muster | Beispiel |
+| --- | --- | --- | --- | --- | --- | --- |
+|Ressourcengruppe |Abonnement |1-90 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Unterstrich, Klammern, Bindestrich und Punkt (außer am Ende) |`<service short name>-<environment>-rg` |`profx-prod-rg` |
+|Verfügbarkeitsgruppe |Ressourcengruppe |1-80 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Unterstrich und Bindestrich |`<service-short-name>-<context>-as` |`profx-sql-as` |
+|Tag |Zugeordnete Entität |512 (Name), 256 (Wert) |Groß-/Kleinschreibung nicht beachten |Alphanumerisch |`"key" : "value"` |`"department" : "Central IT"` |
+
+### <a name="compute"></a>Compute
+
+| Entität | Umfang | Länge | Schreibweise | Gültige Zeichen | Vorgeschlagenes Muster | Beispiel |
+| --- | --- | --- | --- | --- | --- | --- |
+|Virtual Machine |Ressourcengruppe |1 - 15 (Windows), 1 - 64 (Linux) |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Unterstrich und Bindestrich |`<name>-<role>-vm<number>` |`profx-sql-vm1` |
+|Funktionen-App | Global |1 - 60 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch und Bindestrich |`<name>-func` |`calcprofit-func` |
 
 > [!NOTE]
 > Virtuelle Computer in Azure haben zwei getrennte Namen: VM-Name und Hostname. Wenn Sie im Portal eine VM erstellen, wird der gleiche Name sowohl für den Hostnamen als auch für den Namen der VM-Ressource verwendet. Die obigen Einschränkungen gelten für den Hostnamen. Der eigentliche Ressourcenname kann bis zu 64 Zeichen lang sein.
 
-Microsoft fügt Azure häufig neue Dienste hinzu. Die obige Tabelle enthält die am häufigsten verwendeten Dienste für die Bereiche Netzwerk, Compute und Speicher. Erwägen Sie für andere Dienste die Verwendung eines Suffixes mit drei Buchstaben.
+### <a name="storage"></a>Speicher
 
-## <a name="organizing-resources-with-tags"></a>Organisieren von Ressourcen mit Tags
+| Entität | Umfang | Länge | Schreibweise | Gültige Zeichen | Vorgeschlagenes Muster | Beispiel |
+| --- | --- | --- | --- | --- | --- | --- |
+|Speicherkontoname (Daten) |Global |3-24 |Kleinbuchstaben |Alphanumerisch |`<globally unique name><number>` (Funktion verwenden, um eine eindeutige GUID für die Benennung von Speicherkonten zu berechnen) |`profxdata001` |
+|Speicherkontoname (Datenträger) |Global |3-24 |Kleinbuchstaben |Alphanumerisch |`<vm name without dashes>st<number>` |`profxsql001st0` |
+| Containername |Speicherkonto |3-63 |Kleinbuchstaben |Alphanumerisch und Bindestrich |`<context>` |`logs` |
+|Blobname | Container |1-1024 |Groß-/Kleinschreibung beachten |Beliebige URL-Zeichen |`<variable based on blob usage>` |`<variable based on blob usage>` |
+|Warteschlangenname |Speicherkonto |3-63 |Kleinbuchstaben |Alphanumerisch und Bindestrich |`<service short name>-<context>-<num>` |`awesomeservice-messages-001` |
+|Tabellenname | Speicherkonto |3-63 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch |`<service short name><context>` |`awesomeservicelogs` |
+|Dateiname | Speicherkonto |3-63 |Kleinbuchstaben | Alphanumerisch |`<variable based on blob usage>` |`<variable based on blob usage>` |
+|Data Lake-Speicher | Global |3-24 |Kleinbuchstaben | Alphanumerisch |`<name>-dls` |`telemetry-dls` |
+
+### <a name="networking"></a>Netzwerk
+
+| Entität | Umfang | Länge | Schreibweise | Gültige Zeichen | Vorgeschlagenes Muster | Beispiel |
+| --- | --- | --- | --- | --- | --- | --- |
+|Virtual Network (VNet) |Ressourcengruppe |2 - 64 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<service short name>-vnet` |`profx-vnet` |
+|Subnetz |Übergeordnetes VNet |2-80 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Unterstrich, Bindestrich und Punkt |`<descriptive context>` |`web` |
+|Netzwerkschnittstelle |Ressourcengruppe |1-80 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<vmname>-nic<num>` |`profx-sql1-nic1` |
+|Netzwerksicherheitsgruppen (NSG) |Ressourcengruppe |1-80 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<service short name>-<context>-nsg` |`profx-app-nsg` |
+|Netzwerksicherheitsgruppen-Regel |Ressourcengruppe |1-80 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<descriptive context>` |`sql-allow` |
+|Öffentliche IP-Adresse |Ressourcengruppe |1-80 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<vm or service name>-pip` |`profx-sql1-pip` |
+|Lastenausgleichsmodul |Ressourcengruppe |1-80 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<service or role>-lb` |`profx-lb` |
+|Konfiguration der Regeln für die Lastenverteilung |Lastenausgleichsmodul |1-80 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<descriptive context>` |`http` |
+|Azure Application Gateway |Ressourcengruppe |1-80 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<service or role>-agw` |`profx-agw` |
+|Traffic Manager-Profil |Ressourcengruppe |1 - 63 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Bindestrich und Punkt |`<descriptive context>` |`app1` |
+
+## <a name="organize-resources-with-tags"></a>Organisieren von Ressourcen mit Tags
 
 Azure Resource Manager unterstützt das Kennzeichnen von Entitäten mit beliebigen Textzeichenfolgen, um den Kontext zu identifizieren und die Automatisierung zu optimieren.  Mit dem Tag `"sqlVersion: "sql2014ee"` können beispielsweise VMs in einer Bereitstellung mit SQL Server 2014 Enterprise Edition für die Ausführung eines automatisierten Skripts identifiziert werden.  Tags sollten zusätzlich zu den gewählten Namenskonventionen zum Verbessern und Erweitern des Kontexts verwendet werden.
 
@@ -126,12 +141,12 @@ Einige der üblichen Anwendungsfälle für die Verwendung von Tags sind:
 
 Ein Beispiel für einige übliche Ansätze zum Verwenden von Tags:
 
-| Tag-Name | Schlüssel | Beispiel | Kommentar |
+| Tag-Name | Schlüssel | Beispiel | Comment |
 | --- | --- | --- | --- |
 | Rechnung an / ID für interne verbrauchsbasierte Kostenzuteilung |billTo |`IT-Chargeback-1234` |Ein interner E/A- oder Abrechnungscode |
 | zuständige Person (DRI, Directly Responsible Individual) |managedBy |`joe@contoso.com` |Alias oder E-Mail-Adresse |
-| Projektname |project-name |`myproject` |Name des Projekts oder der Produktlinie |
-| Projektversion |project-version |`3.4` |Version des Projekts oder der Produktlinie |
+| Projektname |projectName |`myproject` |Name des Projekts oder der Produktlinie |
+| Projektversion |projectVersion |`3.4` |Version des Projekts oder der Produktlinie |
 | Environment |Environment |`<Production, Staging, QA >` |Umgebungsbezeichner |
 | Ebene |Ebene |`Front End, Back End, Data` |Ebenen- oder Rollen-/Kontextidentifikation |
 | Datenprofil |dataProfile |`Public, Confidential, Restricted, Internal` |Vertraulichkeit der in der Ressource gespeicherten Daten |
@@ -168,7 +183,7 @@ Ein Blobname kann jede Kombination von Zeichen enthalten, jedoch müssen reservi
 Es ist nicht möglich, den Namen eines Speicherkontos oder -containers nach dem Erstellen zu ändern. Wenn Sie einen neuen Namen verwenden möchten, müssen Sie die Komponente löschen und neu erstellen.
 
 > [!TIP]
-> Es wird empfohlen, dass Sie vor der Entwicklung eines neuen Diensts oder einer neuen Anwendung eine Namenskonvention für alle Speicherkonten und -typen einrichten.
+> Es wird empfohlen, dass Sie vor der Entwicklung eines neuen Diensts oder einer neuen Anwendung eine Benennungskonvention für alle Speicherkonten und -typen einrichten.
 
 <!-- links -->
 

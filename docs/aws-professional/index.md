@@ -5,11 +5,11 @@ keywords: AWS experts, Azure comparison, AWS comparison, difference between azur
 author: lbrader
 ms.date: 03/24/2017
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: 75fda82ee5ca7ca3665501fe428d1d01995e7422
-ms.sourcegitcommit: c53adf50d3a787956fc4ebc951b163a10eeb5d20
+ms.openlocfilehash: b576b11bc152ef721f56e79609cb7a03f2d31dd3
+ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/23/2017
+ms.lasthandoff: 01/02/2018
 ---
 # <a name="azure-for-aws-professionals"></a>Azure für AWS-Spezialisten
 
@@ -113,14 +113,14 @@ Wenn Sie Ihre Anwendungsserver in separaten Verfügbarkeitszonen bereitstellen, 
 In Azure definiert eine [Fehlerdomäne](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-manage-availability/) eine Gruppe von VMs, die gemeinsam eine physische Stromversorgungsquelle und einen Netzwerkswitch verwenden.
 Durch [Verfügbarkeitsgruppen](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-manage-availability/) können Sie VMs auf mehrere Fehlerdomänen aufteilen. Wenn Instanzen derselben Verfügbarkeitsgruppe zugewiesen sind, teilt Azure diese gleichmäßig auf mehrere Fehlerdomänen auf. Wenn in einer Fehlerdomäne ein Strom- oder ein Netzwerkausfall auftritt, ist zumindest ein Teil der VMs in einer Gruppe nicht vom Ausfall betroffen, da sich dieser in einer anderen Fehlerdomäne befindet.
 
-![Vergleich von AWS-Verfügbarkeitszonen mit Azure-Fehlerdomänen und -Verfügbarkeitsgruppen](./images/zone-fault-domains.png "AWS Availability Zones compared with Azure fault domains and availability sets")
+![Vergleich von AWS-Verfügbarkeitszonen mit Azure-Fehlerdomänen und -Verfügbarkeitsgruppen](./images/zone-fault-domains.png "Vergleich von AWS-Verfügbarkeitszonen mit Azure-Fehlerdomänen und -Verfügbarkeitsgruppen")
 <br/>*Vergleich von AWS-Verfügbarkeitszonen mit Azure-Fehlerdomänen und -Verfügbarkeitsgruppen*
 <br/><br/>
 
 Verfügbarkeitsgruppen sollten nach der Rolle der Instanz in Ihrer Anwendung organisiert werden, um sicherzustellen, dass eine Instanz in jeder Rolle betriebsbereit ist. In einer Standardwebanwendung mit drei Ebenen empfiehlt es sich beispielsweise, eine separate Verfügbarkeitsgruppe für Front-End-, Anwendungs- und Dateninstanzen zu erstellen.
 
-![Azure-Verfügbarkeitsgruppen für jede Anwendungsrolle](./images/three-tier-example.png "Availability sets for each application role")
-<br/>*Azure-Verfügbarkeitsgruppen für jede Anwendungsrolle*
+![Azure-Verfügbarkeitsgruppen für die einzelnen Anwendungsrollen](./images/three-tier-example.png "Verfügbarkeitsgruppen für die einzelnen Anwendungsrollen")
+<br/>*Azure-Verfügbarkeitsgruppen für die einzelnen Anwendungsrollen*
 <br/><br/>
 
 Wenn VM-Instanzen zu Verfügbarkeitsgruppen hinzugefügt werden, wird ihnen auch eine [Updatedomäne](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-manage-availability/) zugewiesen.
@@ -138,7 +138,7 @@ Im Gegensatz zu AWS-Verfügbarkeitszonen, bei denen es sich um physisch getrennt
 
 -   [Regionen und Verfügbarkeit für virtuelle Computer in Azure](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-regions-and-availability/)
 
--   [Hohe Verfügbarkeit für Azure-Anwendungen](../resiliency/high-availability-azure-applications.md)
+-   [Hochverfügbarkeit für Azure-Anwendungen](../resiliency/high-availability-azure-applications.md)
 
 -   [Notfallwiederherstellung für Azure-Anwendungen](../resiliency/disaster-recovery-azure-applications.md)
 
@@ -237,14 +237,12 @@ In Azure Storage können mit an Abonnements gebundene [Speicherkonten](https://a
 -   [Queue Storage](https://azure.microsoft.com/documentation/articles/storage-nodejs-how-to-use-queues/): Bietet Messaging für die Workflowverarbeitung und die Kommunikation zwischen Komponenten von Clouddiensten.
 
 -   [File Storage](https://azure.microsoft.com/documentation/articles/storage-java-how-to-use-file-storage/): Bietet einen gemeinsam genutzten Speicher für Legacyanwendungen mit dem SMB-Standardprotokoll (Server Message Block). File Storage wird ähnlich wie EFS in der AWS-Plattform verwendet.
-
-
-
-
  
 #### <a name="glacier-and-azure-storage"></a>Glacier und Azure Storage 
-Im [Azure Storage-Archiv (Standard)](/azure/storage/blobs/storage-blob-storage-tiers) gibt es kein direktes Pendant zum Langzeit-Archivierungsspeicher Glacier von AWS. Für die Daten mit langer Aufbewahrungsdauer, auf die selten zugegriffen wird, bietet Azure die [kalte Azure-Blobspeicherebene](/azure/storage/blobs/storage-blob-storage-tiers).
-Kalte Speicher stellen im Vergleich zu standardmäßigen Blob Storages günstigere Speicher mit geringerer Leistung dar und sind mit der Klasse „AWS S3 – Infrequent Access“ vergleichbar.
+
+[Azure Archive Blob Storage](/azure/storage/blobs/storage-blob-storage-tiers#archive-access-tier) ist vergleichbar mit dem Glacier-Speicherdienst von AWS. Es ist für selten verwendete Daten konzipiert, die für mindestens 180 Tage gespeichert werden und bei denen eine Abrufwartezeit von mehreren Stunden akzeptabel ist. 
+
+Für Daten, die zwar selten verwendet werden, beim Zugriff aber umgehend verfügbar sein müssen, stellt [Azure Cool Blob Storage](/azure/storage/blobs/storage-blob-storage-tiers#cool-access-tier) im Vergleich zum Standard-Blobspeicher eine kostengünstigere Speicheroption dar. Diese Speicherebene ist vergleichbar mit AWS S3 (Speicherdienst für selten verwendete Daten).
 
 #### <a name="see-also"></a>Weitere Informationen
 

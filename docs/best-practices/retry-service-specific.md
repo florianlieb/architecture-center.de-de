@@ -4,11 +4,11 @@ description: "Spezifische Dienstanleitung für die Festlegung des Wiederholungsm
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 6aba60dc3a60e96e59e2034d4a1e380e0f1c996a
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 0a416bc6297c7406de92fbc695b62c39c637de8f
+ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/02/2018
 ---
 # <a name="retry-guidance-for-specific-services"></a>Wiederholungsanleitung für bestimmte Dienste
 
@@ -25,12 +25,12 @@ In der folgende Tabelle werden die Wiederholungsfunktionen für die in dieser An
 | **[SQL-Datenbank mit Entity Framework Core](#sql-database-using-entity-framework-core-retry-guidelines)** |Systemeigen in Client |Programmgesteuert |Global pro AppDomain |Keine |
 | **[SQL-Datenbank mit ADO.NET](#sql-database-using-adonet-retry-guidelines)** |[Polly](#transient-fault-handling-with-polly) |Deklarativ und programmatisch |Einzelne Anweisungen oder Codeblöcke |Benutzerdefiniert |
 | **[Service Bus](#service-bus-retry-guidelines)** |Systemeigen in Client |Programmgesteuert |Namespace-Manager, Messaging Factory und Client |ETW |
-| **[Azure Redis Cache](#azure-redis-cache-retry-guidelines)** |Systemeigen in Client |Programmgesteuert |Client- |TextWriter |
+| **[Azure Redis Cache](#azure-redis-cache-retry-guidelines)** |Systemeigen in Client |Programmgesteuert |Client |TextWriter |
 | **[DocumentDB-API](#documentdb-api-retry-guidelines)** |Systemeigen im Dienst |Nicht konfigurierbar |Global |TraceSource |
-| **[Azure Search](#azure-storage-retry-guidelines)** |Systemeigen in Client |Programmgesteuert |Client- |ETW oder benutzerdefiniert |
+| **[Azure Search](#azure-storage-retry-guidelines)** |Systemeigen in Client |Programmgesteuert |Client |ETW oder benutzerdefiniert |
 | **[Azure Active Directory](#azure-active-directory-retry-guidelines)** |Nativ in ADAL-Bibliothek |Eingebettet in ADAL-Bibliothek |Intern |Keine |
-| **[Service Fabric](#service-fabric-retry-guidelines)** |Systemeigen in Client |Programmgesteuert |Client- |Keine | 
-| **[Azure Event Hubs](#azure-event-hubs-retry-guidelines)** |Systemeigen in Client |Programmgesteuert |Client- |Keine |
+| **[Service Fabric](#service-fabric-retry-guidelines)** |Systemeigen in Client |Programmgesteuert |Client |Keine | 
+| **[Azure Event Hubs](#azure-event-hubs-retry-guidelines)** |Systemeigen in Client |Programmgesteuert |Client |Keine |
 
 > [!NOTE]
 > Für die meisten der integrierten Azure Mechanismen gibt es derzeit keine Möglichkeit, unterschiedliche Wiederholungsrichtlinien für verschiedene Typen von Fehler oder Ausnahmen anzuwenden, die über die in der Wiederholungsrichtlinie integrierte Funktionalität hinausgeht. Daher ist die beste gegenwärtige Anweisung zum Redaktionszeitpunkt eine Richtlinie zu konfigurieren, die die optimale durchschnittliche Leistung und Verfügbarkeit bietet. Eine Möglichkeit zur Optimierung der Richtlinie ist die Analyse von Protokolldateien, um den Typ der vorübergehenden Fehler zu bestimmen, die auftreten. Wenn z. B. die meisten Fehler mit der Netzwerkkonnektivität verknüpft sind, können Sie eine sofortige Wiederholung versuchen, anstatt langer für die erste Wiederholung zu warten.
@@ -59,7 +59,7 @@ TableRequestOptions interactiveRequestOption = new TableRequestOptions()
   // For Read-access geo-redundant storage, use PrimaryThenSecondary.
   // Otherwise set this to PrimaryOnly.
   LocationMode = LocationMode.PrimaryThenSecondary,
-  // Maximum execution time based on the business use case. Maximum value up to 10 seconds.
+  // Maximum execution time based on the business use case. 
   MaximumExecutionTime = TimeSpan.FromSeconds(2)
 };
 ```
@@ -94,13 +94,32 @@ Sie verwenden eine **OperationContext** -Instanz, um den auszuführenden Code an
 
 Zusätzlich zur Angabe, ob ein Fehler für die Wiederholung geeignet ist, geben die erweiterten Wiederholungsrichtlinien ein **RetryContext** -Objekt zurück, das folgendes angibt: die Anzahl der Wiederholungen, die Ergebnisse der letzten Anforderung, ob die nächste Wiederholung im primären oder sekundären Standort ausgeführt werden (siehe Tabelle unten). Die Eigenschaften des **RetryContext** Objekts können verwendet werden, um zu entscheiden, ob und wann eine Wiederholung versucht wird. Weitere Informationen finden Sie unter [IExtendedRetryPolicy.Evaluate-Methode](http://msdn.microsoft.com/library/microsoft.windowsazure.storage.retrypolicies.iextendedretrypolicy.evaluate.aspx).
 
-Die folgende Tabelle zeigt die Standardeinstellungen für die integrierten Wiederholungsrichtlinien.
+Die folgenden Tabellen enthalten die Standardeinstellungen für die integrierten Wiederholungsrichtlinien.
 
-| **Context** | **Einstellung** | **Standardwert** | **Bedeutung** |
-| --- | --- | --- | --- |
-| Tabelle / Blob / Datei<br />QueueRequestOptions |MaximumExecutionTime<br /><br />ServerTimeout<br /><br /><br /><br /><br />LocationMode<br /><br /><br /><br /><br /><br /><br />RetryPolicy |120 Sekunden<br /><br />Keine<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />ExponentialPolicy |Maximale Ausführungszeit für die Anforderung, einschließlich aller möglichen Wiederholungsversuche.<br />Server-Timeout-Intervall für die Anforderung (der Wert wird in Sekunden gerundet). Wenn nicht angegeben, wird der Standardwert für alle Anforderungen an den Server verwendet. In der Regel ist die beste Option, diese Einstellung auszulassen, sodass die Standardeinstellung des Servers verwendet wird.<br />Wenn das Speicherkonto mit der Replikationsoption des Lesezugriffs auf georedundanten Speicher (RA-GRS) erstellt wird, können Sie mit dem Speicherortmodus bestimmen, welche Stelle die Anforderung erhalten soll. Wenn zum Beispiel **PrimaryThenSecondary** angegeben ist, werden Anforderungen immer zuerst an den primären Standort gesendet. Wenn eine Anforderung fehlschlägt, wird sie an den sekundären Standort gesendet.<br />Details zu jeder Option finden Sie weiter unten. |
-| Exponentielle Richtlinie |maxAttempt<br />deltaBackoff<br /><br /><br />MinBackoff<br /><br />MaxBackoff |3<br />4 Sekunden<br /><br /><br />3 Sekunden<br /><br />120 Sekunden |Anzahl der Wiederholungsversuche.<br />Backoff-Intervall zwischen den Wiederholungen. Vielfache dieser Zeitspanne, einschließlich eines Zufallselements, werden für weitere Wiederholungsversuche verwendet.<br />Wird zu allen Wiederholungsintervallen, die aus deltaBackoff berechnet werden, hinzugefügt. Dieser Wert kann nicht geändert werden.<br />MaxBackoff wird verwendet, wenn das berechnete Wiederholungsintervall größer als MaxBackoff ist. Dieser Wert kann nicht geändert werden. |
-| Lineare Richtlinie |maxAttempt<br />deltaBackoff |3<br />30 Sekunden |Anzahl der Wiederholungsversuche.<br />Backoff-Intervall zwischen den Wiederholungen. |
+**Anforderungsoptionen**
+
+| **Einstellung** | **Standardwert** | **Bedeutung** |
+| --- | --- | --- |
+| MaximumExecutionTime | 120 Sekunden | Maximale Ausführungszeit für die Anforderung, einschließlich aller möglichen Wiederholungsversuche. |
+| ServerTimeout | Keine | Server-Timeout-Intervall für die Anforderung (der Wert wird in Sekunden gerundet). Wenn nicht angegeben, wird der Standardwert für alle Anforderungen an den Server verwendet. In der Regel ist die beste Option, diese Einstellung auszulassen, sodass die Standardeinstellung des Servers verwendet wird. | 
+| LocationMode | Keine | Wenn das Speicherkonto mit der Replikationsoption des Lesezugriffs auf georedundanten Speicher (RA-GRS) erstellt wird, können Sie mit dem Speicherortmodus bestimmen, welche Stelle die Anforderung erhalten soll. Wenn zum Beispiel **PrimaryThenSecondary** angegeben ist, werden Anforderungen immer zuerst an den primären Standort gesendet. Wenn eine Anforderung fehlschlägt, wird sie an den sekundären Standort gesendet. |
+| RetryPolicy | ExponentialPolicy | Details zu jeder Option finden Sie weiter unten. |
+
+**Exponentielle Richtlinie** 
+
+| **Einstellung** | **Standardwert** | **Bedeutung** |
+| --- | --- | --- |
+| maxAttempt | 3 | Anzahl der Wiederholungsversuche. |
+| deltaBackoff | 4 Sekunden | Backoff-Intervall zwischen den Wiederholungen. Vielfache dieser Zeitspanne, einschließlich eines Zufallselements, werden für weitere Wiederholungsversuche verwendet. |
+| MinBackoff | 3 Sekunden | Wird zu allen Wiederholungsintervallen, die aus deltaBackoff berechnet werden, hinzugefügt. Dieser Wert kann nicht geändert werden.
+| MaxBackoff | 120 Sekunden | MaxBackoff wird verwendet, wenn das berechnete Wiederholungsintervall größer als MaxBackoff ist. Dieser Wert kann nicht geändert werden. |
+
+**Lineare Richtlinie**
+
+| **Einstellung** | **Standardwert** | **Bedeutung** |
+| --- | --- | --- |
+| maxAttempt | 3 | Anzahl der Wiederholungsversuche. |
+| deltaBackoff | 30 Sekunden | Backoff-Intervall zwischen den Wiederholungen. |
 
 ### <a name="retry-usage-guidance"></a>Gebrauchsanleitung Wiederholungen
 Beachten Sie die folgenden Richtlinien beim Zugriff auf Azure-Speicherdienste mit der Speicherclient-API:
@@ -149,7 +168,7 @@ namespace RetryCodeSamples
                 // For Read-access geo-redundant storage, use PrimaryThenSecondary.
                 // Otherwise set this to PrimaryOnly.
                 LocationMode = LocationMode.PrimaryThenSecondary,
-                // Maximum execution time based on the business use case. Maximum value up to 10 seconds.
+                // Maximum execution time based on the business use case. 
                 MaximumExecutionTime = TimeSpan.FromSeconds(2)
             };
 
@@ -270,7 +289,14 @@ Weitere Informationen finden Sie unter [Codebasierte Konfiguration (EF6 oder hö
 
 Die folgende Tabelle zeigt die Standardeinstellungen für die integrierte Wiederholungsrichtlinie bei Verwendung von EF6.
 
-![Tabelle mit Informationen zur Wiederholung](./images/retry-service-specific/RetryServiceSpecificGuidanceTable4.png)
+| Einstellung | Standardwert | Bedeutung |
+|---------|---------------|---------|
+| Richtlinie | Exponentiell | Exponentielles Backoff. |
+| MaxRetryCount | 5 | Die maximale Anzahl von Warnungen. |
+| MaxDelay | 30 Sekunden | Die maximale Verzögerung zwischen Wiederholungsversuchen. Dieser Wert hat keine Auswirkung auf die Berechnung der Verzögerungsreihen. Er definiert lediglich eine Obergrenze. |
+| DefaultCoefficient | 1 Sekunde | Der Koeffizient für die Berechnung des exponentiellen Backoffs. Dieser Wert kann nicht geändert werden. |
+| DefaultRandomFactor | 1.1 | Der Multiplikator zum Hinzufügen einer beliebigen Verzögerung für die einzelnen Einträge. Dieser Wert kann nicht geändert werden. |
+| DefaultExponentialBase | 2 | Der Multiplikator für die Berechnung der nächsten Verzögerung. Dieser Wert kann nicht geändert werden. |
 
 ### <a name="retry-usage-guidance"></a>Gebrauchsanleitung Wiederholungen
 Beachten Sie den Zugriff auf SQL-Datenbank mit EF6 die folgenden Richtlinien:
@@ -284,7 +310,7 @@ Erwägen Sie, mit den folgenden Einstellungen für Wiederholungsvorgänge zu beg
 
 | **Context** | **Beispiel-Ziel E2E<br />Maximale Wartezeit** | **Wiederholungsrichtlinie** | **Einstellungen** | **Werte** | **So funktioniert's** |
 | --- | --- | --- | --- | --- | --- |
-| Interaktiv, Benutzeroberfläche<br />oder Vordergrund |2 Sekunden |Exponentiell |MaxRetryCount<br />MaxDelay |3<br />750 ms |Versuch 1 - Verzögerung 0 Sek<br />Versuch 2 – Verzögerung 750 ms<br />Versuch 3 - Verzögerung 750 ms |
+| Interaktiv, Benutzeroberfläche<br />oder Vordergrund |2 Sekunden |Exponentiell |MaxRetryCount<br />MaxDelay |3<br />750 ms |Versuch 1 – Verzögerung 0 Sek.<br />Versuch 2 – Verzögerung 750 ms<br />Versuch 3 - Verzögerung 750 ms |
 | Hintergrund<br /> oder Batch |30 Sekunden |Exponentiell |MaxRetryCount<br />MaxDelay |5<br />12 Sekunden |Versuch 1 – Verzögerung 0 Sek.<br />Versuch 2 – Verzögerung ca. 1 Sek.<br />Versuch 3 – Verzögerung ca. 3 Sek.<br />Versuch 4 – Verzögerung ca. 7 Sek.<br />Versuch 5 – Verzögerung ca. 12 Sek. |
 
 > [!NOTE]
@@ -510,17 +536,30 @@ client.RetryPolicy = new RetryExponential(minBackoff: TimeSpan.FromSeconds(0.1),
 Die Wiederholungsrichtlinie kann auf der individuellen Vorgangsebene festgelegt werden. Sie gilt für alle Vorgänge des Messagin-Client.
 Die folgende Tabelle zeigt die Standardeinstellungen für die integrierte Wiederholungsrichtlinie.
 
-![Tabelle mit Informationen zur Wiederholung](./images/retry-service-specific/RetryServiceSpecificGuidanceTable7.png)
+| Einstellung | Standardwert | Bedeutung |
+|---------|---------------|---------|
+| Richtlinie | Exponentiell | Exponentielles Backoff. |
+| MinimalBackoff | 0 | Das minimale Backoff-Intervall. Dieser Wert wird zum Wiederholungsintervall addiert, das auf der Grundlage von „deltaBackoff“ berechnet wurde. |
+| MaximumBackoff | 30 Sekunden | Das maximale Backoff-Intervall. „MaximumBackoff“ wird verwendet, wenn das berechnete Wiederholungsintervall größer als „MaxBackoff“ ist. |
+| DeltaBackoff | 3 Sekunden | Backoff-Intervall zwischen den Wiederholungen. Ein Vielfaches dieser Zeitspanne wird für nachfolgende Wiederholungen verwendet. |
+| TimeBuffer | 5 Sekunden | Der Beendigungszeitpuffer für die Wiederholung. Wiederholungsversuche werden abgebrochen, wenn die verbleibende Zeit kleiner als „TimeBuffer“ ist. |
+| MaxRetryCount | 10 | Die maximale Anzahl von Warnungen. |
+| ServerBusyBaseSleepTime | 10 Sekunden | Wenn es sich bei der zuletzt aufgetretenen Ausnahme um **ServerBusyException** handelt, wird dieser Wert zum berechneten Wiederholungsintervall addiert. Dieser Wert kann nicht geändert werden. |
 
 ### <a name="retry-usage-guidance"></a>Gebrauchsanleitung Wiederholungen
 Berücksichtigen Sie bei Verwendung von Service Bus die folgenden Richtlinien:
 
 * Implementieren Sie bei Verwendung der integrierten **RetryExponential** -Implementierung keinen Fallbackvorgang, da die Richtlinie auf Server Busy-Ausnahmen reagiert und automatisch in einen entsprechenden Wiederholungsmodus wechselt.
-* Service Bus unterstützt eine Funktion namens Paired Namespace, mit der automatisches Failover zu einer Backup-Warteschlange in einem separaten Namespace implementiert wird, falls die Warteschlange im primären Namespace fehlschlägt. Nachrichten aus der sekundären Warteschlange können an die primäre Warteschlange gesendet werden, wenn diese wiederhergestellt wird. Mit dieser Funktion können vorübergehender Fehler behandelt werden. Weitere Informationen finden Sie unter [Asynchronen Nachrichtenmuster und hohe Verfügbarkeit](http://msdn.microsoft.com/library/azure/dn292562.aspx).
+* Service Bus unterstützt eine Funktion namens Paired Namespace, mit der automatisches Failover zu einer Backup-Warteschlange in einem separaten Namespace implementiert wird, falls die Warteschlange im primären Namespace fehlschlägt. Nachrichten aus der sekundären Warteschlange können an die primäre Warteschlange gesendet werden, wenn diese wiederhergestellt wird. Mit dieser Funktion können vorübergehender Fehler behandelt werden. Weitere Informationen finden Sie unter [Asynchrone Nachrichtenmuster und Hochverfügbarkeit](http://msdn.microsoft.com/library/azure/dn292562.aspx).
 
 Erwägen Sie, mit den folgenden Einstellungen für Wiederholungsvorgänge zu beginnen. Hierbei handelt es sich um allgemeine Einstellungen und Sie sollten die Vorgänge überwachen und die Werte entsprechend Ihrem Szenario optimieren.
 
-![Tabelle mit Informationen zur Wiederholung](./images/retry-service-specific/RetryServiceSpecificGuidanceTable8.png)
+| Kontext | Beispiel für maximale Wartezeit | Wiederholungsrichtlinie | Einstellungen | So funktioniert's |
+|---------|---------|---------|---------|---------|
+| Interaktiv, Benutzeroberfläche oder Vordergrund | 2 Sekunden*  | Exponentiell | MinimumBackoff = 0 <br/> MaximumBackoff = 30 s <br/> DeltaBackoff = 300 ms <br/> TimeBuffer = 300 ms <br/> MaxRetryCount = 2 | 1. Versuch: Verzögerung von 0 s <br/> 2. Versuch: Verzögerung von ~300 ms <br/> 3. Versuch: Verzögerung von ~900 ms |
+| Hintergrund oder Batch | 30 Sekunden | Exponentiell | MinimumBackoff = 1 <br/> MaximumBackoff = 30 s <br/> DeltaBackoff = 1,75 s <br/> TimeBuffer = 5 s <br/> MaxRetryCount = 3 | 1. Versuch: Verzögerung von ~1 s <br/> 2. Versuch: Verzögerung von ~3 s <br/> 3. Versuch: Verzögerung von ~6 ms <br/> 4. Versuch: Verzögerung von ~13 ms |
+
+\*Ohne Berücksichtigung der Verzögerung, die hinzukommt, wenn eine Antwort vom Typ „Server ausgelastet“ empfangen wird.
 
 ### <a name="telemetry"></a>Telemetrie
 Service Bus protokollieren Wiederholungen als ETW-Ereignisse mit einer **EventSource**. Sie müssen einen **EventListener** an die Ereignisquelle anfügen, um die Ereignisse zu erfassen und in Performance-Viewer anzuzeigen oder diese in ein geeignetes Ziel-Protokoll schreiben. Dazu können Sie den [Anwendungsblock Semantic Logging](http://msdn.microsoft.com/library/dn775006.aspx) verwenden. Die Wiederholungsereignisse sind im folgenden Format:
@@ -632,7 +671,7 @@ namespace RetryCodeSamples
 ```
 
 ### <a name="more-information"></a>Weitere Informationen
-* [Asynchronen Nachrichtenmuster und hohe Verfügbarkeit](http://msdn.microsoft.com/library/azure/dn292562.aspx)
+* [Asynchrone Nachrichtenmuster und Hochverfügbarkeit](http://msdn.microsoft.com/library/azure/dn292562.aspx)
 
 ## <a name="azure-redis-cache-retry-guidelines"></a>Azure Redis Cache-Wiederholungsrichtlinien
 Azure Redis Cache ist ein schneller Datenzugriff und ein Cache Service mit niedriger Latenz, der auf dem beliebten Open Source-Redis Cache basiert. Er ist sicher, von Microsoft verwaltet und ist von jeder Anwendung in Azure zugänglich.
@@ -826,12 +865,12 @@ Cosmos DB ist eine vollständig verwaltete Datenbank mit Unterstützung mehrerer
 ### <a name="retry-mechanism"></a>Wiederholungsmechanismus
 Die `DocumentClient`-Klasse führt bei Fehlversuchen automatisch Wiederholungsversuche durch. Konfigurieren Sie zum Festlegen der Anzahl von Wiederholungsversuchen und der maximalen Wartezeit [ConnectionPolicy.RetryOptions]. Ausnahmen, die vom Client ausgelöst werden, unterliegen entweder nicht der Wiederholungsrichtlinie oder sind keine vorübergehenden Fehler.
 
-Wenn Cosmos DB den Client drosselt, wird ein HTTP 429-Fehler zurückgegeben. Überprüfen Sie den Statuscode unter `DocumentClientException`.
+Wenn Cosmos DB den Client einschränkt, wird ein HTTP 429-Fehler zurückgegeben. Überprüfen Sie den Statuscode unter `DocumentClientException`.
 
 ### <a name="policy-configuration"></a>Richtlinienkonfiguration
 Die folgende Tabelle enthält die Standardeinstellungen für die `RetryOptions`-Klasse.
 
-| Einstellung | Standardwert | Beschreibung |
+| Einstellung | Standardwert | BESCHREIBUNG |
 | --- | --- | --- |
 | MaxRetryAttemptsOnThrottledRequests |9 |Die maximale Anzahl von Wiederholungsversuchen bei einem Fehlschlagen der Anforderung, weil Cosmos DB die Rateneinschränkung auf den Client angewendet hat. |
 | MaxRetryWaitTimeInSeconds |30 |Die maximale Wiederholungszeit in Sekunden. |
@@ -880,7 +919,7 @@ Nachverfolgung mit ETW oder per Registrierung eines benutzerdefinierten Ablaufve
 Azure Active Directory (Azure AD) ist eine umfassende Cloud-Lösung für die Identitäts- und Zugriffsverwaltung, die zentrale Verzeichnisdienste, eine erweiterte Identitätsgovernance, Sicherheit und Zugriffsverwaltung von Anwendungen kombiniert. Azure AD bietet Entwicklern auf der Grundlage von zentralen Richtlinien und Regeln auch eine Plattform für die Identitätsverwaltung zur Bereitstellung einer Zugriffssteuerung für deren Anwendungen.
 
 ### <a name="retry-mechanism"></a>Wiederholungsmechanismus
-In der Active Directory-Authentifizierungsbibliothek (ADAL) ist ein integrierter Wiederholungsmechanismus für Azure Active Directory enthalten. Zur Vermeidung von unerwarteten Sperrungen empfehlen wir, für Drittanbieterbibliotheken und -anwendungscode *keine* Wiederholungsversuche zum Herstellen von fehlgeschlagenen Verbindungen durchzuführen, sondern die Verarbeitung von Wiederholungsversuchen ADAL zu überlassen. 
+In der Active Directory-Authentifizierungsbibliothek (ADAL) ist ein integrierter Wiederholungsmechanismus für Azure Active Directory enthalten. Zur Vermeidung von unerwarteten Sperrungen empfehlen wir, für Drittanbieterbibliotheken und -anwendungscode **keine** Wiederholungsversuche zum Herstellen von fehlgeschlagenen Verbindungen durchzuführen, sondern die Verarbeitung von Wiederholungsversuchen ADAL zu überlassen. 
 
 ### <a name="retry-usage-guidance"></a>Gebrauchsanleitung Wiederholungen
 Berücksichtigen Sie Bei Verwendung von Azure Active Directory die folgenden Richtlinien:
@@ -967,7 +1006,7 @@ Berücksichtigen Sie beim Zugriff auf die Dienste von Azure oder von Drittanbiet
 ### <a name="retry-strategies"></a>Wiederholungsstrategien
 Im Folgenden sind die typischen Arten von Wiederholungsstrategie-Intervallen dargestellt:
 
-* **Exponentiell**: eine Wiederholungsrichtlinie, mit der eine angegebene Anzahl von Wiederholungsversuchen durchgeführt wird, bei der ein zufälliger exponentieller Backoff-Ansatz zur Ermittlung des Intervalls zwischen den Wiederholungsversuchen verwendet wird. Beispiel:
+* **Exponentiell**: eine Wiederholungsrichtlinie, mit der eine angegebene Anzahl von Wiederholungsversuchen durchgeführt wird, bei der ein zufälliger exponentieller Backoff-Ansatz zur Ermittlung des Intervalls zwischen den Wiederholungsversuchen verwendet wird. Beispiel: 
 
         var random = new Random();
 
@@ -977,11 +1016,11 @@ Im Folgenden sind die typischen Arten von Wiederholungsstrategie-Intervallen dar
         var interval = (int)Math.Min(checked(this.minBackoff.TotalMilliseconds + delta),
                        this.maxBackoff.TotalMilliseconds);
         retryInterval = TimeSpan.FromMilliseconds(interval);
-* **Inkrementell**: eine Wiederholungsstrategie mit einer angegebenen Anzahl von Wiederholungsversuchen und ein inkrementelles Zeitintervall zwischen den Wiederholungen. Beispiel:
+* **Inkrementell**: eine Wiederholungsstrategie mit einer angegebenen Anzahl von Wiederholungsversuchen und ein inkrementelles Zeitintervall zwischen den Wiederholungen. Beispiel: 
 
         retryInterval = TimeSpan.FromMilliseconds(this.initialInterval.TotalMilliseconds +
                        (this.increment.TotalMilliseconds * currentRetryCount));
-* **LinearRetry**Eine Wiederholungsstrategie, bei der eine angegebene Anzahl von Wiederholungen durchgeführt wird, mit einem angegebenen festen Zeitintervall zwischen den Wiederholungen. Beispiel:
+* **LinearRetry**Eine Wiederholungsstrategie, bei der eine angegebene Anzahl von Wiederholungen durchgeführt wird, mit einem angegebenen festen Zeitintervall zwischen den Wiederholungen. Beispiel: 
 
         retryInterval = this.deltaBackoff;
 

@@ -1,0 +1,24 @@
+- name: Azure Architecture Center
+  href: ../index.md
+- name: Entwerfen von Microservices in Azure
+  items:
+    - name: Einführung
+      href: index.md
+    - name: Domänenanalyse
+      href: domain-analysis.md
+    - name: Identifizieren von Microservice-Grenzen
+      href: microservice-boundaries.md
+    - name: Überlegungen zu Daten
+      href: data-considerations.md
+    - name: Kommunikation zwischen Diensten
+      href: interservice-communication.md
+    - name: API-Design
+      href: api-design.md
+    - name: Erfassung und Workflow
+      href: ingestion-workflow.md
+    - name: API-Gateways
+      href: gateway.md
+    - name: Protokollierung und Überwachung
+      href: logging-monitoring.md
+    - name: CI/CD
+      href: ci-cd.md

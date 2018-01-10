@@ -4,11 +4,11 @@ description: "Anleitungen für Hintergrundaufgaben, die unabhängig von der Benu
 author: dragon119
 ms.date: 05/24/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 62266b822a238ee53b62e74e91d753dc5da308b4
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: d8c1d4dfe12208b72fd6991def805f90a830b5f0
+ms.sourcegitcommit: a8453c4bc7c870fa1a12bb3c02e3b310db87530c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/29/2017
 ---
 # <a name="background-jobs"></a>Hintergrundaufträge
 [!INCLUDE [header](../_includes/header.md)]
@@ -100,7 +100,7 @@ Azure WebJobs weisen folgende Merkmale auf:
 * **Protokollierung**: Console.Out wird als INFO behandelt (markiert). Console.Error wird als ERROR behandelt. Sie können mit dem Azure-Portal auf Informationen zur Überwachung und Diagnose zugreifen. Sie können Protokolldateien direkt von der Website herunterladen. Sie werden an den folgenden Speicherorten gespeichert:
   * Für die ausgelöste Ausführung: Vfs/data/jobs/triggered/jobName
   * Für die fortwährende Ausführung: Vfs/data/jobs/continuous/jobName
-* **Konfiguration**: Sie können WebJobs mit dem Portal, der REST-API und PowerShell konfigurieren. Sie können Konfigurationsinformationen für einen Auftrag in einer Konfigurationsdatei namens „settings.job“, die sich im gleichen Stammverzeichnis wie das Auftragsskript befinden muss, bereitstellen. Beispiel:
+* **Konfiguration**: Sie können WebJobs mit dem Portal, der REST-API und PowerShell konfigurieren. Sie können Konfigurationsinformationen für einen Auftrag in einer Konfigurationsdatei namens „settings.job“, die sich im gleichen Stammverzeichnis wie das Auftragsskript befinden muss, bereitstellen. Beispiel: 
   * { "stopping_wait_time": 60 }
   * { "is_singleton": true }
 
@@ -129,7 +129,7 @@ Weitere Informationen zum Initiieren von Hintergrundaufgaben finden Sie weiter o
 Berücksichtigen Sie die folgenden Punkte, wenn Sie entscheiden, ob Hintergrundaufgaben auf einem virtuellen Azure-Computer bereitgestellt werden sollen:
 
 * Das Hosten von Hintergrundaufgaben in einem separaten virtuellen Azure-Computer ermöglicht Flexibilität und eine präzise Steuerung der Initiierung, Ausführung, Planung und Ressourcenzuweisung. Allerdings werden die Laufzeitkosten höher, wenn ein virtueller Computer eigens zur Ausführung von Hintergrundaufgaben bereitgestellt werden muss.
-* Es ist keine Funktion zum Überwachen der Aufgaben im Azure-Portal verfügbar, und es gibt auch keine Funktion zum automatischen Neustarten fehlgeschlagener Aufgaben. Sie können allerdings den grundlegenden Status des virtuellen Computers mithilfe der [Azure Resource Manager-Cmdlets](https://msdn.microsoft.com/en-us/library/mt125356.aspx) überwachen und verwalten. Es gibt jedoch keine Möglichkeit, die Prozesse und Threads in Serverknoten zu steuern. In der Regel erfordert die Verwendung eines virtuellen Computers zusätzlichen Aufwand zur Implementierung eines Mechanismus, um Daten von der Instrumentierung der Aufgabe und vom Betriebssystem des virtuellen Computers zu sammeln. Eine möglicherweise geeignete Lösung besteht darin, das [System Center Management Pack für Azure](https://www.microsoft.com/en-us/download/details.aspx?id=50013) zu verwenden.
+* Es ist keine Funktion zum Überwachen der Aufgaben im Azure-Portal verfügbar, und es gibt auch keine Funktion zum automatischen Neustarten fehlgeschlagener Aufgaben. Sie können allerdings den grundlegenden Status des virtuellen Computers mithilfe der [Azure Resource Manager-Cmdlets](https://msdn.microsoft.com/library/mt125356.aspx) überwachen und verwalten. Es gibt jedoch keine Möglichkeit, die Prozesse und Threads in Serverknoten zu steuern. In der Regel erfordert die Verwendung eines virtuellen Computers zusätzlichen Aufwand zur Implementierung eines Mechanismus, um Daten von der Instrumentierung der Aufgabe und vom Betriebssystem des virtuellen Computers zu sammeln. Eine möglicherweise geeignete Lösung besteht darin, das [System Center Management Pack für Azure](https://www.microsoft.com/download/details.aspx?id=50013) zu verwenden.
 * Sie sollten die Erstellung von Überwachungsprüfmodulen, die über HTTP-Endpunkte verfügbar gemacht werden, in Betracht ziehen. Der Code für diese Tests könnte Integritätsprüfungen durchführen, operative Informationen und Statistiken sammeln oder Fehlerinformationen sortieren und diese Daten an die Verwaltungsanwendung zurückgeben. Weitere Informationen finden Sie unter [Überwachungsmuster für den Integritätsendpunkt](http://msdn.microsoft.com/library/dn589789.aspx).
 
 #### <a name="more-information"></a>Weitere Informationen
@@ -180,7 +180,7 @@ Sie können Hintergrundaufgaben in einer Webrolle oder in einer separaten Worker
 
 Hintergrundaufgaben können auf verschiedene Weise in einer Cloud Services-Rolle implementiert werden.
 
-* Erstellen Sie eine Implementierung der **RoleEntryPoint** -Klasse in der Rolle, und verwenden Sie deren Methoden zum Ausführen der Hintergrundaufgaben. Die Aufgaben werden im Kontext von „WaIISHost.exe“ ausgeführt. Sie können die **GetSetting**-Methode der **CloudConfigurationManager**-Klasse zum Laden der Konfigurationseinstellungen verwenden. Weitere Informationen finden Sie unter [Lebenszyklus (Cloud Services)](#lifecycle-cloud-services).
+* Erstellen Sie eine Implementierung der **RoleEntryPoint** -Klasse in der Rolle, und verwenden Sie deren Methoden zum Ausführen der Hintergrundaufgaben. Die Aufgaben werden im Kontext von „WaIISHost.exe“ ausgeführt. Sie können die **GetSetting**-Methode der **CloudConfigurationManager**-Klasse zum Laden der Konfigurationseinstellungen verwenden. Weitere Informationen finden Sie unter [Lebenszyklus](#lifecycle).
 * Verwenden Sie Startaufgaben, um Hintergrundaufgaben beim Starten der Anwendung auszuführen. Um die weitere Ausführung der Aufgaben im Hintergrund zu erzwingen, legen Sie die **taskType**-Eigenschaft auf **background** fest (falls Sie dies nicht tun, wird der Startprozess der Anwendung angehalten und wartet, bis die Aufgabe abgeschlossen ist). Weitere Informationen finden Sie unter [Ausführen von Startaufgaben in Azure](/azure/cloud-services/cloud-services-startup-tasks).
 * Verwenden Sie das WebJobs SDK, um Hintergrundaufgaben wie WebJobs zu implementieren, die als Startaufgabe initiiert werden. Weitere Informationen finden Sie unter [Create a .NET WebJob in Azure App Service](/azure/app-service-web/websites-dotnet-webjobs-sdk-get-started) (Erstellen eines .NET-Webauftrags in Azure App Service).
 * Verwenden Sie eine Startaufgabe, um einen Windows-Dienst zu installieren, der eine oder mehrere Hintergrundaufgaben ausführt. Sie müssen die **taskType**-Eigenschaft auf **background** festlegen, damit der Dienst im Hintergrund ausgeführt wird. Weitere Informationen finden Sie unter [Ausführen von Startaufgaben in Azure](/azure/cloud-services/cloud-services-startup-tasks).
@@ -321,9 +321,8 @@ Hintergrundaufgaben müssen ausreichend Leistung bieten, damit sichergestellt is
 * [Ausführen von Hintergrundaufgaben](http://msdn.microsoft.com/library/ff803365.aspx)
 * [Azure Role Startup Life Cycle](http://blog.syntaxc4.net/post/2011/04/13/windows-azure-role-startup-life-cycle.aspx) (Lebenszyklus eines Azure-Rollenstarts, Blogbeitrag)
 * [Lebenszyklus von Azure Cloud Services-Rollen](http://channel9.msdn.com/Series/Windows-Azure-Cloud-Services-Tutorials/Windows-Azure-Cloud-Services-Role-Lifecycle) (Video)
-* [Was ist das Azure WebJobs SDK?](https://docs.microsoft.com/en-us/azure/app-service-web/websites-dotnet-webjobs-sdk)
-* [Erstellen eines .NET-WebJobs in Azure App Service](https://docs.microsoft.com/en-us/azure/app-service-web/websites-dotnet-webjobs-sdk-get-started)
-* [Ausführen von Hintergrundaufgaben mit WebJobs](https://docs.microsoft.com/en-us/azure/app-service-web/web-sites-create-web-jobs)
-* [Azure-Warteschlangen und Service Bus-Warteschlangen – Vergleich und Gegenüberstellung](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-azure-and-service-bus-queues-compared-contrasted)
-* [Aktivieren der Diagnose in einem Clouddienst](https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-dotnet-diagnostics)
+* [Was ist das Azure WebJobs SDK?](https://docs.microsoft.com/azure/app-service-web/websites-dotnet-webjobs-sdk)
+* [Ausführen von Hintergrundaufgaben mit WebJobs](https://docs.microsoft.com/azure/app-service-web/web-sites-create-web-jobs)
+* [Azure-Warteschlangen und Service Bus-Warteschlangen – Vergleich und Gegenüberstellung](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-azure-and-service-bus-queues-compared-contrasted)
+* [Aktivieren der Diagnose in einem Clouddienst](https://docs.microsoft.com/azure/cloud-services/cloud-services-dotnet-diagnostics)
 

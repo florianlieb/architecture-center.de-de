@@ -1,6 +1,6 @@
 ---
 title: Warteschlangenbasierter Lastenausgleich
-description: "Verwenden Sie eine Warteschlange, die als Puffer zwischen einem Task und einem von ihm aufgerufenen Dienst fungiert, um unregelmäßig auftretende hohe Lasten aufzufangen."
+description: "Verwenden Sie eine Warteschlange, die als Puffer zwischen einem Task und einem von diesem aufgerufenen Dienst fungiert, um unregelmäßig auftretende hohe Lasten aufzufangen."
 keywords: Entwurfsmuster
 author: dragon119
 ms.date: 06/23/2017
@@ -10,11 +10,11 @@ pnp.pattern.categories:
 - availability
 - performance-scalability
 - resiliency
-ms.openlocfilehash: d8b010648d4ec0edcfbb24f9b03243a79a34a40b
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 99b226511fe14bffdab3cdcf65d4e6cffe89bba6
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="queue-based-load-leveling-pattern"></a>Warteschlangenbasiertes Lastenausgleichsmuster
 
@@ -73,7 +73,7 @@ Zum Beheben dieses Problems können Sie eine Warteschlange für den Lastenausgle
 
 ## <a name="related-patterns-and-guidance"></a>Zugehörige Muster und Anleitungen
 
-Die folgenden Muster und Anleitungen können ebenfalls relevant sein, wenn dieses Muster implementiert wird:
+Die folgenden Muster und Anweisungen können für die Implementierung dieses Musters ebenfalls relevant sein:
 
 - [Einführung in asynchrone Nachrichten](https://msdn.microsoft.com/library/dn589781.aspx). Nachrichtenwarteschlangen sind grundsätzlich asynchron. Möglicherweise muss die Anwendungslogik in einem Task neu entworfen werden, wenn dieser nicht mehr direkt mit einem Dienst kommuniziert, sondern eine Nachrichtenwarteschlange verwendet. Ebenso kann es erforderlich sein, einen Dienst umzugestalten, damit er Anforderungen aus einer Nachrichtenwarteschlange akzeptiert. Alternativ kann möglicherweise ein Proxydienst implementiert werden, wie im Beispiel beschrieben.
 - [Muster „Konkurrierende Consumer“](competing-consumers.md). Möglicherweise können mehrere Instanzen eines Diensts ausgeführt werden, von denen jede als Consumer von Nachrichten aus der Warteschlange für den Lastenausgleich fungiert. Sie können diesen Ansatz verwenden, um die Rate anzupassen, mit der Nachrichten empfangen und an einen Dienst übergeben werden.

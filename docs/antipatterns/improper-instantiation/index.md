@@ -3,11 +3,11 @@ title: "Antimuster für ungeeignete Instanziierung"
 description: "Vermeiden Sie es, ständig neue Instanzen eines Objekts zu erstellen, das einmal erstellt und dann freigegeben werden soll."
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: 3387eca45119b105b68cd60ab842d033df84727c
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: d6ea27b0ea88ad7527353d263d900626c0aff720
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="improper-instantiation-antipattern"></a>Antimuster für ungeeignete Instanziierung
 
@@ -17,10 +17,10 @@ Es kann für die Leistung nachteilhaft sein, immer wieder neue Instanzen eines O
 
 Viele Bibliotheken stellen Abstraktionen von externen Ressourcen bereit. Intern verwalten diese Klassen in der Regel ihre eigenen Verbindungen mit der Ressource. Dabei fungieren sie als Broker, mit denen Clients auf die Ressource zugreifen können. Im Folgenden werden einige Beispiele für Brokerklassen aufgeführt, die für Azure-Anwendungen relevant sind:
 
-- `System.Net.Http.HttpClient`. Kommuniziert über HTTP mit einem Webdienst.
-- `Microsoft.ServiceBus.Messaging.QueueClient`. Stellt Nachrichten für eine Service Bus-Warteschlange bereit, und empfängt diese. 
-- `Microsoft.Azure.Documents.Client.DocumentClient`. Stellt eine Verbindung mit einer Cosmos DB-Instanz her.
-- `StackExchange.Redis.ConnectionMultiplexer`. Stellt eine Verbindung mit Redis, einschließlich Azure Redis Cache, her.
+- `System.Net.Http.HttpClient`(Fixierte Verbindung) festgelegt ist(Fixierte Verbindung) festgelegt ist. Kommuniziert über HTTP mit einem Webdienst.
+- `Microsoft.ServiceBus.Messaging.QueueClient`(Fixierte Verbindung) festgelegt ist(Fixierte Verbindung) festgelegt ist. Stellt Nachrichten für eine Service Bus-Warteschlange bereit, und empfängt diese. 
+- `Microsoft.Azure.Documents.Client.DocumentClient`(Fixierte Verbindung) festgelegt ist(Fixierte Verbindung) festgelegt ist. Stellt eine Verbindung mit einer Cosmos DB-Instanz her.
+- `StackExchange.Redis.ConnectionMultiplexer`(Fixierte Verbindung) festgelegt ist(Fixierte Verbindung) festgelegt ist. Stellt eine Verbindung mit Redis, einschließlich Azure Redis Cache, her.
 
 Diese Klassen sind dafür gedacht, einmal instanziiert und über die gesamte Lebensdauer einer Anwendung hinweg wiederverwendet zu werden. Es ist jedoch ein weit verbreiteter Irrtum, dass diese Klassen nur bei Bedarf erworben und schnell freigegeben werden sollen. (Die hier aufgelisteten Klassen beziehen sich zufälligerweise auf .NET-Bibliotheken, aber das Muster ist nicht eindeutig für .NET.)
 
@@ -128,7 +128,7 @@ In den folgenden Abschnitten werden diese Schritte auf die zuvor beschriebene Be
 
 ### <a name="identify-points-of-slow-down-or-failure"></a>Identifizieren der Punkte der Verlangsamung oder des Ausfalls
 
-Die folgende Abbildung zeigt mit [New Relic APM][new-relic] erzeugte Ergebnisse, die Vorgänge mit einer schlechten Antwortzeit zeigen. In diesem Fall lohnt es sich, sich mit der `GetProductAsync`-Methode im `NewHttpClientInstancePerRequest`-Controller näher auseinanderzusetzen. Beachten Sie, dass mit der Fehlerrate auch die Anzahl der ausgeführten Vorgänge steigt. 
+Die folgende Abbildung zeigt mit [New Relic APM][new-relic] erzeugte Ergebnisse, die Vorgänge mit einer schlechten Antwortzeit zeigen. In diesem Fall lohnt es sich, sich mit der `GetProductAsync`-Methode im `NewHttpClientInstancePerRequest`-Controller näher auseinanderzusetzen. Beachten Sie, dass sich auch die Fehlerrate erhöht, wenn diese Vorgänge ausgeführt werden. 
 
 ![New Relic-Überwachungsdashboard mit der Beispielanwendung für die Erstellung einer neuen HttpClient-Objektinstanz für die einzelnen Anforderungen][dashboard-new-HTTPClient-instance]
 
