@@ -5,11 +5,11 @@ keywords: AWS experts, Azure comparison, AWS comparison, difference between azur
 author: lbrader
 ms.date: 03/24/2017
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: b576b11bc152ef721f56e79609cb7a03f2d31dd3
-ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
+ms.openlocfilehash: ac96110e3fe69b4bb69714e18fd0f193208bc244
+ms.sourcegitcommit: 744ad1381e01bbda6a1a7eff4b25e1a337385553
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/02/2018
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="azure-for-aws-professionals"></a>Azure für AWS-Spezialisten
 
@@ -103,36 +103,45 @@ Die Syntax und Struktur dieser Schnittstellen unterscheiden sich von ihren Penda
 
 ## <a name="regions-and-zones-high-availability"></a>Regionen und Zonen (Hochverfügbarkeit)
 
-Bei AWS wird Verfügbarkeit hauptsächlich über Verfügbarkeitszonen bereitgestellt. Bei Azure kommen bei der Erstellung von hochverfügbaren Lösungen Fehlerdomänen und Verfügbarkeitsgruppen zum Einsatz. Regionspaare bieten zusätzliche Notfallwiederherstellungsfunktionen.
+Fehler und Ausfälle können mit unterschiedlichen Auswirkungen verbunden sein. Einige Hardwarefehler, z.B. ein ausgefallener Datenträger, wirken sich ggf. nur auf einen einzelnen Hostcomputer aus. Ein fehlerhafter Netzwerkswitch kann sich auf ein gesamtes Serverrack auswirken. Weniger häufig treten Fehler auf, die zu Störungen für ein gesamtes Rechenzentrum führen, z.B. zu einem Stromausfall im Rechenzentrum. In selten Fällen kann es vorkommen, dass eine gesamte Region nicht mehr verfügbar ist.
 
-### <a name="availability-zones-azure-fault-domains-and-availability-sets"></a>Verfügbarkeitszonen, Azure-Fehlerdomänen und Verfügbarkeitsgruppen
+Eines der wichtigsten Verfahren, mit dem für eine Anwendung die Resilienz sichergestellt werden kann, ist die Redundanz. Sie müssen diese Redundanz aber beim Entwerfen der Anwendung einplanen. Außerdem richtet sich der jeweils benötigte Redundanzgrad nach Ihren Geschäftsanforderungen – nicht für jede Anwendung ist eine regionsübergreifende Redundanz als Schutz vor einem regionalen Ausfall erforderlich. In der Regel muss ein Kompromiss zwischen höherer Redundanz und Zuverlässigkeit und einer höheren Kostensumme und Komplexität gefunden werden.  
 
-Bei AWS ist eine Region in mindestens zwei Verfügbarkeitszonen unterteilt. Eine Verfügbarkeitszone entspricht einem physisch isolierten Rechenzentrum in einer geografischen Region.
-Wenn Sie Ihre Anwendungsserver in separaten Verfügbarkeitszonen bereitstellen, hat ein Hardware- oder Konnektivitätsausfall in einer Zone keine Auswirkungen auf Server, die in anderen Zonen gehostet werden.
+Bei AWS ist eine Region in mindestens zwei Verfügbarkeitszonen unterteilt. Eine Verfügbarkeitszone entspricht einem physisch isolierten Rechenzentrum in einer geografischen Region. Azure verfügt über eine Reihe von Features (u.a. **Verfügbarkeitsgruppen**, **Verfügbarkeitszonen** und **Regionspaare**), mit denen für eine Anwendung für alle Fehlerebenen Redundanz erzielt werden kann. 
 
-In Azure definiert eine [Fehlerdomäne](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-manage-availability/) eine Gruppe von VMs, die gemeinsam eine physische Stromversorgungsquelle und einen Netzwerkswitch verwenden.
-Durch [Verfügbarkeitsgruppen](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-manage-availability/) können Sie VMs auf mehrere Fehlerdomänen aufteilen. Wenn Instanzen derselben Verfügbarkeitsgruppe zugewiesen sind, teilt Azure diese gleichmäßig auf mehrere Fehlerdomänen auf. Wenn in einer Fehlerdomäne ein Strom- oder ein Netzwerkausfall auftritt, ist zumindest ein Teil der VMs in einer Gruppe nicht vom Ausfall betroffen, da sich dieser in einer anderen Fehlerdomäne befindet.
+![](../resiliency/images/redundancy.svg)
 
-![Vergleich von AWS-Verfügbarkeitszonen mit Azure-Fehlerdomänen und -Verfügbarkeitsgruppen](./images/zone-fault-domains.png "Vergleich von AWS-Verfügbarkeitszonen mit Azure-Fehlerdomänen und -Verfügbarkeitsgruppen")
-<br/>*Vergleich von AWS-Verfügbarkeitszonen mit Azure-Fehlerdomänen und -Verfügbarkeitsgruppen*
-<br/><br/>
+Die einzelnen Optionen sind in der folgenden Tabelle zusammengefasst:
 
-Verfügbarkeitsgruppen sollten nach der Rolle der Instanz in Ihrer Anwendung organisiert werden, um sicherzustellen, dass eine Instanz in jeder Rolle betriebsbereit ist. In einer Standardwebanwendung mit drei Ebenen empfiehlt es sich beispielsweise, eine separate Verfügbarkeitsgruppe für Front-End-, Anwendungs- und Dateninstanzen zu erstellen.
+| &nbsp; | Verfügbarkeitsgruppe | Verfügbarkeitszone | Regionspaar |
+|--------|------------------|-------------------|---------------|
+| Fehlerumfang | Rack | Datacenter | Region |
+| Routinganforderung | Lastenausgleichsmodul | Zonenübergreifender Lastenausgleich | Traffic Manager |
+| Netzwerklatenz | Sehr niedrig | Niedrig | Mittel bis hoch |
+| Virtuelle Netzwerke  | VNet | VNet | Regionsübergreifendes VNet-Peering (Vorschau) |
+
+### <a name="availability-sets"></a>Verfügbarkeitsgruppen 
+
+Stellen Sie als Schutz vor lokalen Hardwarefehlern, z.B. ein Ausfall eines Datenträgers oder Netzwerkswitchs, in einer Verfügbarkeitsgruppe zwei oder mehr VMs bereit. Eine Verfügbarkeitsgruppe besteht aus mindestens zwei *Fehlerdomänen*, die eine Stromquelle und einen Netzwerkswitch gemeinsam nutzen. VMs in einer Verfügbarkeitsgruppe sind auf die Fehlerdomänen verteilt. Wenn ein Hardwarefehler eine Fehlerdomäne betrifft, kann der Netzwerkdatenverkehr so weiterhin an die VMs in den anderen Fehlerdomänen weitergeleitet werden. Weitere Informationen zu Verfügbarkeitsgruppen finden Sie unter [Verwalten der Verfügbarkeit virtueller Windows-Computer in Azure](/azure/virtual-machines/windows/manage-availability).
+
+Wenn VM-Instanzen zu Verfügbarkeitsgruppen hinzugefügt werden, wird ihnen auch eine [Updatedomäne](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-manage-availability/) zugewiesen. Eine Updatedomäne ist eine Gruppe von VMs, die gleichzeitig für geplante Wartungsereignisse festgelegt sind. Durch die Verteilung von VMs auf mehrere Updatedomänen wird sichergestellt, dass geplante Update- und Patchingereignisse jeweils nur eine Teilmenge dieser VMs betreffen.
+
+Verfügbarkeitsgruppen sollten nach der Rolle der Instanz in Ihrer Anwendung organisiert werden, um sicherzustellen, dass eine Instanz in jeder Rolle betriebsbereit ist. Erstellen Sie beispielsweise in einer Webanwendung mit drei Ebenen separate Verfügbarkeitsgruppen für die Front-End-, die Anwendungs- und die Datenebene.
 
 ![Azure-Verfügbarkeitsgruppen für die einzelnen Anwendungsrollen](./images/three-tier-example.png "Verfügbarkeitsgruppen für die einzelnen Anwendungsrollen")
-<br/>*Azure-Verfügbarkeitsgruppen für die einzelnen Anwendungsrollen*
-<br/><br/>
 
-Wenn VM-Instanzen zu Verfügbarkeitsgruppen hinzugefügt werden, wird ihnen auch eine [Updatedomäne](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-manage-availability/) zugewiesen.
-Eine Updatedomäne ist eine Gruppe von VMs, die gleichzeitig für geplante Wartungsereignisse festgelegt sind. Durch die Verteilung von VMs auf mehrere Updatedomänen wird sichergestellt, dass geplante Update- und Patchingereignisse jeweils nur eine Teilmenge dieser VMs betreffen.
+### <a name="availability-zones-preview"></a>Verfügbarkeitszonen (Vorschauversion)
+
+Eine [Verfügbarkeitszone](/azure/availability-zones/az-overview) ist eine physisch getrennte Zone in einer Azure-Region. Jede Verfügbarkeitszone verfügt über eine eigene Stromquelle, ein Netzwerk und eine Kühlung. Die Bereitstellung von VMs über Verfügbarkeitszonen hinweg dient dem Schutz einer Anwendung vor Ausfällen, die ein gesamtes Rechenzentrum betreffen. 
 
 ### <a name="paired-regions"></a>Regionspaare
 
-In Azure wird durch den Einsatz von [Regionspaaren](https://azure.microsoft.com/documentation/articles/best-practices-availability-paired-regions/) Unterstützung für Redundanz zwischen zwei vordefinierten geographischen Regionen geboten. So wird sichergestellt, dass Ihre Lösung auch dann verfügbar ist, wenn ein Ausfall eine ganze Azure-Region betrifft.
+Um eine Anwendung vor einem regionalen Ausfall zu schützen, können Sie sie in mehreren Regionen bereitstellen, indem Sie [Azure Traffic Manager][traffic-manager] zum Verteilen von Internetdatenverkehr auf die verschiedenen Regionen verwenden. Jede Azure-Region ist mit einer anderen Region gekoppelt. Zusammen bilden sie ein [Regionspaar][paired-regions]. Mit Ausnahme von „Brasilien, Süden“ befinden sich die Regionen der Regionspaare immer innerhalb des gleichen geografischen Gebiets, um steuerliche und rechtliche Anforderungen an den Speicherort von Daten zu erfüllen.
 
-Im Gegensatz zu AWS-Verfügbarkeitszonen, bei denen es sich um physisch getrennte Rechenzentren handelt, die sich jedoch in relativ nahe gelegenen geografischen Gebieten befinden können, liegen Regionspaare in der Regel mindestens 480 km voneinander entfernt. Denn damit soll sichergestellt werden, dass sich größere Katastrophen nur auf eine der Regionen eines Paars auswirken. Bei benachbarten Paaren können Datenbank- und Speicherdienstdaten synchronisiert werden, und sie sind so konfiguriert, dass Plattformupdates jeweils nur in einer Region eines Paares ausgeführt werden.
+Im Gegensatz zu Verfügbarkeitszonen, bei denen es sich um physisch getrennte Rechenzentren handelt, die sich jedoch in relativ nahe gelegenen geografischen Gebieten befinden können, liegen Regionspaare in der Regel mindestens 480 km voneinander entfernt. Denn damit soll sichergestellt werden, dass sich größere Katastrophen nur auf eine der Regionen eines Paars auswirken. Bei benachbarten Paaren können Datenbank- und Speicherdienstdaten synchronisiert werden, und sie sind so konfiguriert, dass Plattformupdates jeweils nur in einer Region eines Paares ausgeführt werden.
 
 [Georedundanter Azure-Speicher](https://azure.microsoft.com/documentation/articles/storage-redundancy/#geo-redundant-storage) wird automatisch im entsprechenden Regionspaar gesichert. Bei allen anderen Ressourcen heißt die Erstellung einer vollständig redundanten Lösung mit Regionspaaren, dass in beiden Regionen eine vollständige Kopie Ihrer Lösung erstellt wird.
+
 
 ### <a name="see-also"></a>Weitere Informationen
 
@@ -266,9 +275,9 @@ Die Pendants zu den beiden Diensten für den elastischen Lastenausgleich in Azur
 
 In AWS bietet Route 53 Funktionen zur Verwaltung von DNS-Namen sowie Datenverkehrrouting und Failoverdienste auf DNS-Ebene. In Azure wird dies über zwei Dienste abgewickelt:
 
--   [Azure DNS](https://azure.microsoft.com/documentation/services/dns/): Bietet Domänen- und DNS-Verwaltung
+-   [Azure DNS](https://azure.microsoft.com/documentation/services/dns/) bietet Domänen- und DNS-Verwaltung.
 
--   [Traffic Manager](https://azure.microsoft.com/documentation/articles/traffic-manager-overview/): Bietet Datenverkehrrouting, Lastenausgleich und Failoverfunktionen auf DNS-Ebene
+-   [Traffic Manager][traffic-manager] bietet Datenverkehrsrouting, Lastenausgleich und Failoverfunktionen auf DNS-Ebene.
 
 #### <a name="direct-connect-and-azure-expressroute"></a>Direct Connect und Azure ExpressRoute
 
@@ -431,3 +440,9 @@ Notification Hubs unterstützt nicht das Senden von SMS oder E-Mail-Nachrichten.
 -   [Muster und Übungen: Anweisungen zu Azure](https://azure.microsoft.com/documentation/articles/guidance/)
 
 -   [Kostenloser Onlinekurs: Microsoft Azure for AWS Experts](http://aka.ms/azureforaws)
+
+
+<!-- links -->
+
+[paired-regions]: https://azure.microsoft.com/documentation/articles/best-practices-availability-paired-regions/
+[traffic-manager]: /azure/traffic-manager/

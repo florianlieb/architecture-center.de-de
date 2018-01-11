@@ -3,17 +3,17 @@ title: Entwerfen, Erstellen und Betreiben von Microservices in Azure mit Kuberne
 description: Entwerfen, Erstellen und Betreiben von Microservices in Azure
 author: MikeWasson
 ms.date: 12/08/2017
-ms.openlocfilehash: c279546552d731a01ed970e7942ad7d4a56157da
-ms.sourcegitcommit: 94c769abc3d37d4922135ec348b5da1f4bbcaa0a
+ms.openlocfilehash: 857e91a8eeefec18b459f2e66fde9a4f8bbe7b21
+ms.sourcegitcommit: 744ad1381e01bbda6a1a7eff4b25e1a337385553
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/13/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="designing-building-and-operating-microservices-on-azure"></a>Entwerfen, Erstellen und Betreiben von Microservices in Azure
 
 ![](./images/drone.svg)
 
-Microservices haben sich zu einem beliebten Architekturstil für die Erstellung robuster, hochgradig skalierbarer Cloudanwendungen entwickelt, die sich schnell weiterentwickeln lassen. Damit Microservices nicht nur ein Schlagwort bleiben, erfordern sie allerdings eine andere Herangehensweise an die Gestaltung und Erstellung von Anwendungen. 
+Microservices haben sich zu einem beliebten Architekturstil für die Erstellung robuster, hochgradig skalierbarer, unabhängig bereitstellbarer Cloudanwendungen entwickelt, die sich schnell weiterentwickeln lassen. Damit Microservices nicht nur ein Schlagwort bleiben, erfordern sie allerdings eine andere Herangehensweise an die Gestaltung und Erstellung von Anwendungen. 
 
 Diese Artikelreihe beschäftigt sich mit der Erstellung und dem Betrieb einer Microservices-Architektur in Azure. Dabei werden folgende Themen behandelt:
 
@@ -35,7 +35,7 @@ Zuerst sollten wir uns jedoch mit den Grundlagen beschäftigen. Was sind Microse
 In einer Microservices-Architektur setzt sich die Anwendung aus kompakten, unabhängigen Diensten zusammen. Im Anschluss finden Sie einige definierende Merkmale von Microservices:
 
 - Jeder Microservice implementiert eine einzelne Geschäftsfunktion.
-- Ein Microservice ist so kompakt, dass er von einem kleinen Entwicklerteam (üblicherweise fünf bis zehn Personen) geschrieben und verwaltet werden kann.
+- Ein Microservice ist so kompakt, dass er von einem kleinen Entwicklerteam geschrieben und verwaltet werden kann.
 - Microservices werden in getrennten Prozessen ausgeführt und kommunizieren über klar definierte APIs oder Nachrichtenmuster. 
 - Microservices teilen sich keine Datenspeicher oder Datenschemas. Jeder Microservice ist für die Verwaltung seiner eigenen Daten zuständig. 
 - Microservices verfügen über separate Codebasen und teilen sich keinen Quellcode. Sie können jedoch gemeinsame Hilfsprogrammbibliotheken verwenden.
@@ -51,7 +51,7 @@ Ordnungsgemäß implementierte Microservices bieten eine ganze Reihe von Vorteil
 
 - **Resilienz:** Der Ausfall eines einzelnen Microservice hat nicht den Ausfall der gesamten Anwendung zur Folge – vorausgesetzt, die Upstream-Microservices sind für eine korrekte Behandlung von Ausfällen konzipiert (beispielsweise durch Implementierung des Trennschalter-Musters).
 
-- **Skalierbarkeit:** In einer Microservices-Architektur kann jeder Microservice unabhängig skaliert werden. Dadurch lassen sich Subsysteme, die mehr Ressourcen benötigen, horizontal hochskalieren, ohne die gesamte Anwendung hochzuskalieren. Wenn Sie Dienste in Containern bereitstellen, können Sie Microservices zudem dichter auf einem einzelnen Host platzieren und Ressourcen effizienter nutzen.
+- **Skalierbarkeit**. In einer Microservices-Architektur kann jeder Microservice unabhängig skaliert werden. Dadurch lassen sich Subsysteme, die mehr Ressourcen benötigen, horizontal hochskalieren, ohne die gesamte Anwendung hochzuskalieren. Wenn Sie Dienste in Containern bereitstellen, können Sie Microservices zudem dichter auf einem einzelnen Host platzieren und Ressourcen effizienter nutzen.
 
 - **Datenisolation:** Schemaaktualisierungen sind wesentlich einfacher, da nur ein einzelner Microservice betroffen ist. Bei einer monolithischen Anwendung können sich Schemaaktualisierungen als echte Herausforderung erweisen, da verschiedene Teile der Anwendung unter Umständen die gleichen Daten nutzen, was jegliche Anpassung des Schemas zu einer riskanten Angelegenheit macht.
  
@@ -63,9 +63,9 @@ Diese Vorteile haben ihren Preis. In dieser Artikelreihe werden einige der Herau
 
 - **Datenkonsistenz und -integrität:** Ein Grundprinzip von Microservices ist die Verwaltung der jeweils eigenen Daten. Dieses Prinzip sorgt zwar für eine Entkopplung der Dienste, kann aber zu Herausforderungen bei der Datenintegrität oder Redundanz führen. Einige der Aspekte werden in den [Überlegungen zu Daten](./data-considerations.md) behandelt.
 
-- **Netzwerkkonflikte und -latenz:** Die Verwendung zahlreicher kompakter, differenzierter Dienste kann zu einem erhöhten Kommunikationsaufkommen zwischen Diensten sowie zu einer längeren End-to-End-Wartezeit führen. Das Kapitel [Kommunikation zwischen Diensten](./interservice-communication.md) enthält Informationen zum Messaging zwischen Diensten. In Microservices-Architekturen kann sowohl eine synchrone als auch eine asynchrone Kommunikation verwendet werden. Ein gutes [API-Design](./api-design.md) sorgt dafür, dass Dienste lose gekoppelt bleiben und unabhängig bereitgestellt und aktualisiert werden können.
+- **Netzwerkkonflikte und -latenz**. Die Verwendung zahlreicher kompakter, differenzierter Dienste kann zu einem erhöhten Kommunikationsaufkommen zwischen Diensten sowie zu einer längeren End-to-End-Wartezeit führen. Das Kapitel [Kommunikation zwischen Diensten](./interservice-communication.md) enthält Informationen zum Messaging zwischen Diensten. In Microservices-Architekturen kann sowohl eine synchrone als auch eine asynchrone Kommunikation verwendet werden. Ein gutes [API-Design](./api-design.md) sorgt dafür, dass Dienste lose gekoppelt bleiben und unabhängig bereitgestellt und aktualisiert werden können.
  
-- **Komplexität:** Eine Microservices-Anwendung weist eine höhere Komplexität auf. Die einzelnen Dienste können zwar einfach gestaltet sein, sie müssen aber als Ganzes zusammenarbeiten. Ein einzelner Benutzervorgang kann mehrere Dienste umfassen. Im Kapitel [Erfassung und Workflow](./ingestion-workflow.md) untersuchen wir einige der Aspekte in Verbindung mit der Erfassung von Anforderungen mit hohem Durchsatz, mit der Koordinierung eines Workflows sowie mit der Behandlung von Fehlern. 
+- **Komplexität**. Eine Microservices-Anwendung weist eine höhere Komplexität auf. Die einzelnen Dienste können zwar einfach gestaltet sein, sie müssen aber als Ganzes zusammenarbeiten. Ein einzelner Benutzervorgang kann mehrere Dienste umfassen. Im Kapitel [Erfassung und Workflow](./ingestion-workflow.md) untersuchen wir einige der Aspekte in Verbindung mit der Erfassung von Anforderungen mit hohem Durchsatz, mit der Koordinierung eines Workflows sowie mit der Behandlung von Fehlern. 
 
 - **Kommunikation zwischen Clients und Anwendung:**  Wie sollten Clients mit den Diensten kommunizieren, wenn Sie eine Anwendung in zahlreiche kompakte Dienste aufspalten? Soll ein Client jeden einzelnen Dienst direkt aufrufen oder Anforderungen über ein [API-Gateway](./gateway.md) weiterleiten?
 
