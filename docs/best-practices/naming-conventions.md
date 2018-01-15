@@ -4,11 +4,11 @@ description: "Enthält die Namenskonventionen für Azure-Ressourcen. Benennen vo
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 20f090c4cc39f96887cd58ffd2a9c7736e77de57
-ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
+ms.openlocfilehash: 364735dec9658b4d2a9d21330f38c57f6fa694bd
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/02/2018
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="naming-conventions"></a>Benennungskonventionen
 
@@ -37,7 +37,7 @@ Ein empfohlenes Muster für das Benennen von Abonnements:
 * Die Produktlinie bezeichnet den spezifischen Namen eines Produkts oder einer Funktion, die von der Abteilung aus ausgeführt wird. Dies ist für interne Dienste und Anwendungen normalerweise optional. Der Einsatz wird aber dringend für öffentliche Dienste empfohlen, für die eine einfache Trennung und Identifikation (z.B. zur eindeutigen Trennung für Abrechnungsdatensätze) erforderlich ist.
 * Die Umgebung ist der Name für den Bereitstellungszyklus der Anwendungen oder Dienste wie Entwicklung, QA oder Bereitstellung.
 
-| Unternehmen | Abteilung | Produktlinie oder Dienst | Environment | Vollständiger Name |
+| Unternehmen | Abteilung | Produktlinie oder Dienst | Umgebung | Vollständiger Name |
 | --- | --- | --- | --- | --- |
 | Contoso |SocialGaming |AwesomeService |Bereitstellung |Contoso SocialGaming AwesomeService Bereitstellung |
 | Contoso |SocialGaming |AwesomeService |Entwicklung |Contoso SocialGaming AwesomeService Entwicklung |
@@ -50,7 +50,7 @@ Weitere Informationen zur Organisation von Abonnements für größere Unternehme
 
 Beim Benennen von Ressourcen in Azure wird empfohlen, gängige Präfixe oder Suffixe zu verwenden, um den Typ und Kontext der Ressource zu identifizieren.  Während alle Informationen zum Typ, zu Metadaten und zum Kontext programmgesteuert verfügbar sind, vereinfacht das Anwenden gemeinsamer Affixe die visuelle Identifizierung.  Wenn Sie Affixe in Ihre Namenskonvention integrieren, ist es wichtig, eindeutig festzulegen, ob das Affix am Anfang (Präfix) oder am Ende (Suffix) des Namens steht.
 
-Hier sind zwei mögliche Namen für einen Dienst angegeben, der ein Berechnungsmodul hostet:
+Hier sind zwei mögliche Namen für einen Dienst angegeben, der eine Berechnungs-Engine hostet:
 
 * SvcCalculationEngine (Präfix)
 * CalculationEngineSvc (Suffix)
@@ -59,7 +59,7 @@ Affixe können auf verschiedene Aspekte verweisen, die die entsprechenden Ressou
 
 | Aspekt | Beispiel | Notizen |
 | --- | --- | --- |
-| Environment |dev, prod, QA |identifiziert die Umgebung für die Ressource |
+| Umgebung |dev, prod, QA |identifiziert die Umgebung für die Ressource |
 | Speicherort |uw (USA, Westen), ue (USA, Osten) |identifiziert die Region, in welcher die Ressource bereitgestellt wird |
 | Instanz |01, 02 |für Ressourcen, die mehr als eine benannte Instanz besitzen (Webdienste usw.) |
 | Produkt oder Dienst |service |identifiziert das Element (Produkt, Anwendung oder Dienst), das von der Ressource unterstützt wird |
@@ -75,15 +75,15 @@ Vermeiden Sie es, Sonderzeichen (`-` oder `_`) als erstes oder letztes Zeichen e
 
 ### <a name="general"></a>Allgemein
 
-| Entität | Umfang | Länge | Schreibweise | Gültige Zeichen | Vorgeschlagenes Muster | Beispiel |
+| Entität | Bereich | Länge | Schreibweise | Gültige Zeichen | Vorgeschlagenes Muster | Beispiel |
 | --- | --- | --- | --- | --- | --- | --- |
 |Ressourcengruppe |Abonnement |1-90 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Unterstrich, Klammern, Bindestrich und Punkt (außer am Ende) |`<service short name>-<environment>-rg` |`profx-prod-rg` |
 |Verfügbarkeitsgruppe |Ressourcengruppe |1-80 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Unterstrich und Bindestrich |`<service-short-name>-<context>-as` |`profx-sql-as` |
-|Tag |Zugeordnete Entität |512 (Name), 256 (Wert) |Groß-/Kleinschreibung nicht beachten |Alphanumerisch |`"key" : "value"` |`"department" : "Central IT"` |
+|Kategorie |Zugeordnete Entität |512 (Name), 256 (Wert) |Groß-/Kleinschreibung nicht beachten |Alphanumerisch |`"key" : "value"` |`"department" : "Central IT"` |
 
 ### <a name="compute"></a>Compute
 
-| Entität | Umfang | Länge | Schreibweise | Gültige Zeichen | Vorgeschlagenes Muster | Beispiel |
+| Entität | Bereich | Länge | Schreibweise | Gültige Zeichen | Vorgeschlagenes Muster | Beispiel |
 | --- | --- | --- | --- | --- | --- | --- |
 |Virtual Machine |Ressourcengruppe |1 - 15 (Windows), 1 - 64 (Linux) |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Unterstrich und Bindestrich |`<name>-<role>-vm<number>` |`profx-sql-vm1` |
 |Funktionen-App | Global |1 - 60 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch und Bindestrich |`<name>-func` |`calcprofit-func` |
@@ -93,7 +93,7 @@ Vermeiden Sie es, Sonderzeichen (`-` oder `_`) als erstes oder letztes Zeichen e
 
 ### <a name="storage"></a>Speicher
 
-| Entität | Umfang | Länge | Schreibweise | Gültige Zeichen | Vorgeschlagenes Muster | Beispiel |
+| Entität | Bereich | Länge | Schreibweise | Gültige Zeichen | Vorgeschlagenes Muster | Beispiel |
 | --- | --- | --- | --- | --- | --- | --- |
 |Speicherkontoname (Daten) |Global |3-24 |Kleinbuchstaben |Alphanumerisch |`<globally unique name><number>` (Funktion verwenden, um eine eindeutige GUID für die Benennung von Speicherkonten zu berechnen) |`profxdata001` |
 |Speicherkontoname (Datenträger) |Global |3-24 |Kleinbuchstaben |Alphanumerisch |`<vm name without dashes>st<number>` |`profxsql001st0` |
@@ -106,10 +106,10 @@ Vermeiden Sie es, Sonderzeichen (`-` oder `_`) als erstes oder letztes Zeichen e
 
 ### <a name="networking"></a>Netzwerk
 
-| Entität | Umfang | Länge | Schreibweise | Gültige Zeichen | Vorgeschlagenes Muster | Beispiel |
+| Entität | Bereich | Länge | Schreibweise | Gültige Zeichen | Vorgeschlagenes Muster | Beispiel |
 | --- | --- | --- | --- | --- | --- | --- |
 |Virtual Network (VNet) |Ressourcengruppe |2 - 64 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<service short name>-vnet` |`profx-vnet` |
-|Subnetz |Übergeordnetes VNet |2-80 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Unterstrich, Bindestrich und Punkt |`<descriptive context>` |`web` |
+|Subnetz |Übergeordnetes VNet |2-80 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<descriptive context>` |`web` |
 |Netzwerkschnittstelle |Ressourcengruppe |1-80 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<vmname>-nic<num>` |`profx-sql1-nic1` |
 |Netzwerksicherheitsgruppen (NSG) |Ressourcengruppe |1-80 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<service short name>-<context>-nsg` |`profx-app-nsg` |
 |Netzwerksicherheitsgruppen-Regel |Ressourcengruppe |1-80 |Groß-/Kleinschreibung nicht beachten |Alphanumerisch, Bindestrich, Unterstrich und Punkt |`<descriptive context>` |`sql-allow` |
@@ -147,7 +147,7 @@ Ein Beispiel für einige übliche Ansätze zum Verwenden von Tags:
 | zuständige Person (DRI, Directly Responsible Individual) |managedBy |`joe@contoso.com` |Alias oder E-Mail-Adresse |
 | Projektname |projectName |`myproject` |Name des Projekts oder der Produktlinie |
 | Projektversion |projectVersion |`3.4` |Version des Projekts oder der Produktlinie |
-| Environment |Environment |`<Production, Staging, QA >` |Umgebungsbezeichner |
+| Umgebung |Environment |`<Production, Staging, QA >` |Umgebungsbezeichner |
 | Ebene |Ebene |`Front End, Back End, Data` |Ebenen- oder Rollen-/Kontextidentifikation |
 | Datenprofil |dataProfile |`Public, Confidential, Restricted, Internal` |Vertraulichkeit der in der Ressource gespeicherten Daten |
 

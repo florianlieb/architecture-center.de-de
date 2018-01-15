@@ -5,28 +5,29 @@ author: MikeWasson
 ms.date: 11/22/2016
 pnp.series.title: Windows VM workloads
 pnp.series.prev: n-tier
-ms.openlocfilehash: b3f1fcf1403a5199191cb37dfed4fbe86695766d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 9c54959da96115e55ba8a5c9e0f3c358d29ce5dd
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="run-windows-vms-in-multiple-regions-for-high-availability"></a>Ausführen virtueller Windows-Computer in mehreren Regionen für hohe Verfügbarkeit
 
-Diese Referenzarchitektur zeigt eine Reihe bewährter Methoden zum Ausführen einer Anwendung mit n-Schichten in mehreren Azure-Regionen, um Verfügbarkeit und eine stabile Infrastruktur für die Notfallwiederherstellung zu erzielen. 
+Diese Referenzarchitektur zeigt eine Reihe bewährter Methoden zum Ausführen einer n-schichtigen Anwendung in mehreren Azure-Regionen, um Verfügbarkeit und eine stabile Infrastruktur für die Notfallwiederherstellung zu erzielen. 
 
 [![0]][0] 
 
 *Laden Sie eine [Visio-Datei][visio-download] mit dieser Architektur herunter.*
 
-## <a name="architecture"></a>Architektur 
+## <a name="architecture"></a>Architecture 
 
 Diese Architektur baut auf der Architektur auf, die unter [Ausführen virtueller Windows-Computer für eine Anwendung mit n-Schichten](n-tier.md) dargestellt ist. 
 
-* **Primäre und sekundäre Regionen**. Verwenden Sie zwei Regionen, um eine höhere Verfügbarkeit zu erreichen. Eine ist die primäre Region. Die andere Region ist für das Failover. 
+* **Primäre und sekundäre Regionen**. Verwenden Sie zwei Regionen, um eine höhere Verfügbarkeit zu erreichen. Eine ist die primäre Region. Die andere Region ist für das Failover.
+* **Azure DNS:** [Azure DNS][azure-dns] ist ein Hostingdienst für DNS-Domänen, der die Namensauflösung unter Verwendung der Microsoft Azure-Infrastruktur durchführt. Durch das Hosten Ihrer Domänen in Azure können Sie Ihre DNS-Einträge mithilfe der gleichen Anmeldeinformationen, APIs, Tools und Abrechnung wie für die anderen Azure-Dienste verwalten.
 * **Azure Traffic Manager**. [Traffic Manager][traffic-manager] leitet eingehende Anforderungen an eine der Regionen weiter. Während des normalen Betriebs werden Anforderungen an die primäre Region weitergeleitet. Wenn diese Region nicht mehr verfügbar ist, führt Traffic Manager ein Failover zur sekundären Region aus. Weitere Informationen finden Sie im Abschnitt [Traffic Manager-Konfiguration](#traffic-manager-configuration).
-* **Ressourcengruppen**. Erstellen Sie separate [Ressourcengruppen][resource groups] für die primäre Region, die sekundäre Region und für Traffic Manager. Dies bietet Ihnen die Flexibilität, jede Region als eine einzelne Ressourcensammlung zu verwalten. Sie können beispielsweise eine Region erneut bereitstellen, ohne die andere außer Betrieb zu nehmen. [Verknüpfen Sie die Ressourcengruppen][resource-group-links], damit Sie eine Abfrage zum Auflisten aller Ressourcen für die Anwendung ausführen können.
-* **VNets**. Erstellen Sie für jede Region ein separates VNet. Stellen Sie sicher, dass sich die Adressräume nicht überschneiden. 
+* **Ressourcengruppen:** Erstellen Sie separate [Ressourcengruppen][resource groups] für die primäre Region, die sekundäre Region und für Traffic Manager. Dies bietet Ihnen die Flexibilität, jede Region als eine einzelne Ressourcensammlung zu verwalten. Sie können beispielsweise eine Region erneut bereitstellen, ohne die andere außer Betrieb zu nehmen. [Verknüpfen Sie die Ressourcengruppen][resource-group-links], damit Sie eine Abfrage zum Auflisten aller Ressourcen für die Anwendung ausführen können.
+* **VNETs:** Erstellen Sie für jede Region ein separates VNET. Stellen Sie sicher, dass sich die Adressräume nicht überschneiden. 
 * **SQL Server Always On-Verfügbarkeitsgruppe**. Bei Verwendung von SQL Server werden [SQL Always On-Verfügbarkeitsgruppen][sql-always-on] empfohlen, um Hochverfügbarkeit zu erzielen. Erstellen Sie eine einzelne Verfügbarkeitsgruppe, die SQL Server-Instanzen in beiden Regionen enthält. 
 
     > [!NOTE]
@@ -37,32 +38,32 @@ Diese Architektur baut auf der Architektur auf, die unter [Ausführen virtueller
 
 ## <a name="recommendations"></a>Empfehlungen
 
-Eine Architektur mit mehreren Region kann eine höhere Verfügbarkeit als eine Bereitstellung in einer einzelnen Region bieten. Wenn ein regionaler Ausfall die primäre Region beeinträchtigt, können Sie mit [Traffic Manager][traffic-manager] ein Failover zur sekundären Region ausführen. Diese Architektur kann auch hilfreich sein, wenn bei einem einzelnen Subsystem der Anwendung ein Fehler auftritt.
+Eine Architektur mit mehreren Regionen kann eine höhere Verfügbarkeit als eine Bereitstellung in einer einzelnen Region bieten. Wenn ein regionaler Ausfall die primäre Region beeinträchtigt, können Sie mit [Traffic Manager][traffic-manager] ein Failover zur sekundären Region ausführen. Diese Architektur kann auch hilfreich sein, wenn bei einem einzelnen Subsystem der Anwendung ein Fehler auftritt.
 
 Es gibt mehrere allgemeine Vorgehensweisen für das Erreichen von Hochverfügbarkeit mit mehreren Regionen: 
 
-* Aktiv/Passiv mit Hot Standby. Der Datenverkehr wird an eine Region weitergeleitet, während die andere im Hot Standby wartet. Hot Standby (unmittelbar betriebsbereit) bedeutet, dass die virtuellen Computer in der sekundären Region jederzeit zugeordnet sind und ausgeführt werden.
-* Aktiv/Passiv mit Cold Standby. Der Datenverkehr wird an eine Region weitergeleitet, während die andere im Cold Standby wartet. Cold Standby (verzögert betriebsbereit) bedeutet, dass die virtuellen Computer in der sekundären Region erst zugewiesen werden, wenn sie für das Failover benötigt werden. Dieser Ansatz erfordert weniger Ausführungszeit, es dauert aber im Allgemeinen länger, bis bei einem Ausfall alle Komponenten online geschaltet sind.
-* Aktiv/Aktiv. Beide Regionen sind aktiv, und Anforderungen werden per Lastenausgleich zwischen ihnen verteilt. Wenn eine Region nicht verfügbar ist, wird sie aus der Rotation entfernt. 
+* Aktiv/passiv mit Hot Standby. Der Datenverkehr wird an eine Region weitergeleitet, während die andere im Hot Standby wartet. Hot Standby (unmittelbar betriebsbereit) bedeutet, dass die virtuellen Computer in der sekundären Region jederzeit zugeordnet sind und ausgeführt werden.
+* Aktiv/passiv mit Cold Standby. Der Datenverkehr wird an eine Region weitergeleitet, während die andere im Cold Standby wartet. Cold Standby (verzögert betriebsbereit) bedeutet, dass die virtuellen Computer in der sekundären Region erst zugewiesen werden, wenn sie für das Failover benötigt werden. Dieser Ansatz erfordert weniger Ausführungszeit, es dauert aber im Allgemeinen länger, bis bei einem Ausfall alle Komponenten online geschaltet sind.
+* Aktiv/aktiv. Beide Regionen sind aktiv, und Anforderungen werden per Lastenausgleich zwischen ihnen verteilt. Wenn eine Region nicht verfügbar ist, wird sie aus der Rotation entfernt. 
 
 Bei dieser Referenzarchitektur liegt der Schwerpunkt auf Aktiv/Passiv mit Hot Standby, wobei Traffic Manager für das Failover verwendet wird. Beachten Sie, dass Sie eine kleine Anzahl virtueller Computer für Hot Standby bereitstellen und dann nach Bedarf horizontal skalieren können.
 
 ### <a name="regional-pairing"></a>Regionspaare
 
-Jede Azure-Region ist mit einer anderen Region innerhalb desselben Gebiets gepaart. Sie wählen im Allgemeinen Regionen aus dem gleichen Regionspaar aus (z. B. „USA, Osten 2“ und „USA, Mitte“). Dies bietet die folgenden Vorteile:
+Jede Azure-Region ist mit einer anderen Region innerhalb desselben Gebiets gepaart. Sie wählen im Allgemeinen Regionen aus dem gleichen Regionspaar aus (z.B. „USA, Osten 2“ und „USA, Mitte“). Das bietet die folgenden Vorteile:
 
 * Bei einem umfassenden Ausfall wird die Wiederherstellung mindestens einer Region aus jedem Paar priorisiert.
 * Geplante Azure-Systemupdates werden in Regionspaaren nacheinander ausgeführt, um mögliche Ausfallzeiten zu minimieren.
 * Regionspaare befinden sich innerhalb des gleichen geografischen Gebiets, um Anforderungen in Bezug auf den Datenspeicherort zu erfüllen. 
 
-Sie sollten allerdings sicherstellen, dass beide Bereiche alle Azure-Dienste, die für Ihre Anwendung erforderlich sind, unterstützen (siehe [Dienste nach Region][services-by-region]). Weitere Informationen zu Regionspaaren finden Sie unter [Geschäftskontinuität und Notfallwiederherstellung: Azure-Regionspaare][regional-pairs].
+Sie sollten allerdings sicherstellen, dass beide Regionen alle Azure-Dienste, die für Ihre Anwendung erforderlich sind, unterstützen (siehe [Dienste nach Region][services-by-region]). Weitere Informationen zu Regionspaaren finden Sie unter [Geschäftskontinuität und Notfallwiederherstellung: Azure-Regionspaare][regional-pairs].
 
 ### <a name="traffic-manager-configuration"></a>Traffic Manager-Konfiguration
 
 Beachten Sie beim Konfigurieren von Traffic Manager die folgenden Punkte:
 
-* **Routing**. Traffic Manager unterstützt mehrere [Routingalgorithmen][tm-routing]. Verwenden Sie für das in diesem Artikel beschriebene Szenario das Routing nach *Priorität* (ehemals Routingmethode *Failover*). Bei dieser Einstellung sendet Traffic Manager alle Anforderungen an die primäre Region, bis die primäre Region nicht mehr erreichbar ist. Zu diesem Zeitpunkt wird automatisch ein Failover zur sekundären Region ausgeführt. Weitere Informationen finden Sie unter [Konfigurieren der Routingmethode „Failover“][tm-configure-failover].
-* **Integritätstest**. Traffic Manager verwendet einen HTTP- (oder HTTPS-) [Test][tm-monitoring], um die Verfügbarkeit jeder Region zu überwachen. Der Test prüft auf eine HTTP 200-Antwort für einen angegebenen URL-Pfad. Es hat sich bewährt, einen Endpunkt zu erstellen, der die Gesamtintegrität der Anwendung meldet, und diesen Endpunkt für den Integritätstest zu verwenden. Andernfalls könnte der Test einen fehlerfreien Endpunkt melden, obwohl wichtige Teile der Anwendung fehlerhaft sind. Weitere Informationen finden Sie unter [Überwachungsmuster für den Integritätsendpunkt][health-endpoint-monitoring-pattern].   
+* **Routing:** Traffic Manager unterstützt mehrere [Routingalgorithmen][tm-routing]. Verwenden Sie für das in diesem Artikel beschriebenen Szenario Routing nach *Priorität* (ehemals Routingmethode *Failover*). Bei dieser Einstellung sendet Traffic Manager alle Anforderungen an die primäre Region, bis die primäre Region nicht mehr erreichbar ist. Zu diesem Zeitpunkt wird automatisch ein Failover zur sekundären Region ausgeführt. Weitere Informationen finden Sie unter [Konfigurieren der Routingmethode „Failover“][tm-configure-failover].
+* **Integritätstest:** Traffic Manager verwendet einen HTTP- oder HTTPS-[Test][tm-monitoring], um die Verfügbarkeit jeder Region zu überwachen. Der Test prüft auf eine HTTP 200-Antwort für einen angegebenen URL-Pfad. Es hat sich bewährt, einen Endpunkt zu erstellen, der die Gesamtintegrität der Anwendung meldet, und diesen Endpunkt für den Integritätstest zu verwenden. Andernfalls meldet der Test eventuell einen fehlerfreien Endpunkt, obwohl wichtige Teile der Anwendung fehlerhaft sind. Weitere Informationen finden Sie unter [Überwachungsmuster für den Integritätsendpunkt][health-endpoint-monitoring-pattern].   
 
 Wenn Traffic Manager ein Failover ausführt, können die Clients die Anwendung für eine bestimmte Zeit nicht erreichen. Die Dauer wird durch folgende Faktoren beeinflusst:
 
@@ -73,9 +74,9 @@ Weitere Informationen finden Sie unter [Traffic Manager-Überwachung][tm-monitor
 
 Bei Failovern durch Traffic Manager sollten Sie ein manuelles Failback ausführen, anstatt ein automatisches Failback zu implementieren. Andernfalls könnte eine Situation eintreten, bei der die Anwendung zwischen den Regionen hin und her wechselt. Überprüfen Sie vor einem Failback, ob alle Subsysteme der Anwendung fehlerfrei sind.
 
-Beachten Sie, dass Traffic Manager in der Standardeinstellung automatisch Failbacks ausführt. Um dies zu verhindern, verringern Sie die Priorität der primären Region nach einem Failover manuell. Angenommen, die primäre Region hat die Priorität 1 und die sekundäre die Priorität 2. Nach einem Failover legen Sie dann die Priorität der primären Region auf 3 fest, um ein automatisches Failback zu verhindern. Wenn Sie wieder zurückwechseln möchten, ändern Sie die Priorität wieder in 1.
+Beachten Sie, dass Traffic Manager in der Standardeinstellung automatisch Failbacks ausführt. Um dies zu verhindern, verringern Sie die Priorität der primären Region nach einem Failover manuell. Angenommen, die primäre Region hat die Priorität 1 und die sekundäre Datenbank die Priorität 2. Nach einem Failover legen Sie dann die Priorität der primären Region auf 3 fest, um ein automatisches Failback zu verhindern. Wenn Sie wieder zurück wechseln möchten, ändern Sie die Priorität wieder in 1.
 
-Mit dem folgenden [Azure CLI][install-azure-cli]-Befehl wird die Priorität aktualisiert:
+Mit dem folgenden Befehl für die [Azure-Befehlszeilenschnittstelle][install-azure-cli] wird die Priorität aktualisiert:
 
 ```bat
 azure network traffic-manager  endpoint set --resource-group <resource-group> --profile-name <profile>
@@ -89,7 +90,7 @@ azure network traffic-manager  endpoint set --resource-group <resource-group> --
     --name <traffic-manager-name> --type AzureEndpoints --status Disabled
 ```
 
-Je nach Ursache eines Failovers müssen Sie die Ressourcen innerhalb einer Region möglicherweise erneut bereitstellen. Testen Sie vor dem Failback die Betriebsbereitschaft. Beim Test sollten z. B. folgende Punkte geprüft werden:
+Je nach Ursache eines Failovers müssen Sie die Ressourcen innerhalb einer Region möglicherweise erneut bereitstellen. Testen Sie vor dem Failback die Betriebsbereitschaft. Beim Test sollten z.B. folgende Punkte geprüft werden:
 
 * Virtuelle Computer sind richtig konfiguriert. (Alle erforderliche Software ist installiert, IIS wird ausgeführt usw.)
 * Subsysteme der Anwendung sind fehlerfrei. 
@@ -126,7 +127,7 @@ Weitere Informationen finden Sie unter [Ausführen virtueller Windows-Computer i
 
 ## <a name="availability-considerations"></a>Überlegungen zur Verfügbarkeit
 
-Bei einer komplexen Anwendung mit n-Schichten müssen Sie möglicherweise nicht die gesamte Anwendung in der sekundären Region replizieren. Stattdessen replizieren Sie nur ein kritisches Subsystem, das zur Unterstützung der Geschäftskontinuität erforderlich ist.
+Bei einer komplexen n-schichtigen Anwendung müssen Sie möglicherweise nicht die gesamte Anwendung in der sekundären Region replizieren. Stattdessen replizieren Sie nur ein kritisches Subsystem, das zur Unterstützung der Geschäftskontinuität erforderlich ist.
 
 Traffic Manager ist eine mögliche Schwachstelle im System. Wenn beim Traffic Manager-Dienst ein Fehler auftritt, können Clients während der Ausfallzeit nicht auf Ihre Anwendung zugreifen. In der [SLA für Traffic Manager][tm-sla] erfahren Sie, ob Ihre geschäftlichen Anforderungen für Hochverfügbarkeit mit Traffic Manager allein erfüllt werden. Wenn dies nicht der Fall ist, erwägen Sie als Failback eine andere Verwaltungslösung für den Datenverkehr. Wenn der Azure Traffic Manager-Dienst fehlerhaft ist, ändern Sie die CNAME-Einträge im DNS, sodass diese auf die andere Verwaltungslösung für den Datenverkehr verweisen. (Dieser Schritt muss manuell durchgeführt werden. Bis die DNS-Änderungen weitergegeben wurden, ist die Anwendung nicht verfügbar.)
 
@@ -151,11 +152,11 @@ Beim Aktualisieren der Bereitstellung aktualisieren Sie immer jeweils eine Regio
 Testen Sie die Resilienz des Systems gegenüber Fehlern. Hier sind einige häufige Fehlerszenarien aufgeführt, die getestet werden können:
 
 * Herunterfahren von VM-Instanzen
-* Auslasten von Ressourcen, z. B. CPU und Speicher
+* Auslasten von Ressourcen, z.B. CPU und Speicher
 * Trennen/Verzögern des Netzwerks
 * Absturz von Prozessen
 * Ablauf von Zertifikaten
-* Simulation von Hardwarefehlern
+* Simulieren von Hardwarefehlern
 * Herunterfahren des DNS-Diensts auf den Domänencontrollern
 
 Messen Sie die Wiederherstellungszeiten, und stellen Sie sicher, dass diese Ihren geschäftlichen Anforderungen entsprechen. Testen Sie auch Kombinationen von Fehlermodi.
@@ -164,7 +165,7 @@ Messen Sie die Wiederherstellungszeiten, und stellen Sie sicher, dass diese Ihre
 
 <!-- Links -->
 [hybrid-vpn]: ../hybrid-networking/vpn.md
-
+[azure-dns]: /azure/dns/dns-overview
 [azure-sla]: https://azure.microsoft.com/support/legal/sla/
 [azure-sql-db]: https://azure.microsoft.com/documentation/services/sql-database/
 [health-endpoint-monitoring-pattern]: https://msdn.microsoft.com/library/dn589789.aspx

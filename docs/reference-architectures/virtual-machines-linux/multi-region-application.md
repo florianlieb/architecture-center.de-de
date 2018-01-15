@@ -5,11 +5,11 @@ author: MikeWasson
 ms.date: 11/22/2016
 pnp.series.title: Linux VM workloads
 pnp.series.prev: n-tier
-ms.openlocfilehash: 3b68f6fc79ba4b29e41ba2b04537b834bb8859b0
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 7d720a004d21edbffc0ddeba54e291aa817550e0
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="run-linux-vms-in-multiple-regions-for-high-availability"></a>Ausführen virtueller Linux-Computer in mehreren Regionen für Hochverfügbarkeit
 
@@ -19,17 +19,18 @@ Diese Referenzarchitektur zeigt eine Reihe bewährter Methoden zum Ausführen ei
 
 *Laden Sie eine [Visio-Datei][visio-download] mit dieser Architektur herunter.*
 
-## <a name="architecture"></a>Architektur 
+## <a name="architecture"></a>Architecture 
 
 Diese Architektur basiert auf der in [Ausführen virtueller Linux-Computer in einer n-schichtigen Anwendung](n-tier.md) gezeigten Architektur. 
 
 * **Primäre und sekundäre Regionen**. Verwenden Sie zwei Regionen, um eine höhere Verfügbarkeit zu erreichen. Eine ist die primäre Region. Die andere Region ist für Failover vorgesehen.
+* **Azure DNS:** [Azure DNS][azure-dns] ist ein Hostingdienst für DNS-Domänen, der die Namensauflösung unter Verwendung der Microsoft Azure-Infrastruktur durchführt. Durch das Hosten Ihrer Domänen in Azure können Sie Ihre DNS-Einträge mithilfe der gleichen Anmeldeinformationen, APIs, Tools und Abrechnung wie für die anderen Azure-Dienste verwalten.
 * **Azure Traffic Manager**. [Traffic Manager][traffic-manager] leitet eingehende Anforderungen an eine der Regionen weiter. Während des normalen Betriebs werden Anforderungen an die primäre Region weitergeleitet. Wenn diese Region nicht mehr verfügbar ist, führt Traffic Manager ein Failover zur sekundären Region aus. Weitere Informationen finden Sie im Abschnitt [Traffic Manager-Konfiguration](#traffic-manager-configuration).
 * **Ressourcengruppen:** Erstellen Sie separate [Ressourcengruppen][resource groups] für die primäre Region, die sekundäre Region und für Traffic Manager. Dies bietet Ihnen die Flexibilität, jede Region als eine einzelne Ressourcensammlung zu verwalten. Sie können beispielsweise eine Region erneut bereitstellen, ohne die andere außer Betrieb zu nehmen. [Verknüpfen Sie die Ressourcengruppen][resource-group-links], damit Sie eine Abfrage zum Auflisten aller Ressourcen für die Anwendung ausführen können.
 * **VNETs:** Erstellen Sie für jede Region ein separates VNET. Stellen Sie sicher, dass sich die Adressräume nicht überschneiden.
 * **Apache Cassandra:** Stellen Sie Cassandra für Hochverfügbarkeit in Rechenzentren mehrerer Azure-Regionen bereit. In jeder Region werden die Knoten in unterschiedlichen Racks und in Fehler- und Upgradedomänen konfiguriert, um Resilienz innerhalb der Region zu erreichen.
 
-## <a name="recommendations"></a>Recommendations
+## <a name="recommendations"></a>Empfehlungen
 
 Eine Architektur mit mehreren Regionen kann eine höhere Verfügbarkeit als eine Bereitstellung in einer einzelnen Region bieten. Wenn ein regionaler Ausfall die primäre Region beeinträchtigt, können Sie mit [Traffic Manager][traffic-manager] ein Failover zur sekundären Region ausführen. Diese Architektur kann auch hilfreich sein, wenn bei einem einzelnen Subsystem der Anwendung ein Fehler auftritt.
 
@@ -128,7 +129,7 @@ Messen Sie die Wiederherstellungszeiten, und stellen Sie sicher, dass diese Ihre
 
 <!-- Links -->
 [hybrid-vpn]: ../hybrid-networking/vpn.md
-
+[azure-dns]: /azure/dns/dns-overview
 [cassandra-in-azure]: https://academy.datastax.com/resources/deployment-guide-azure
 [cassandra-consistency]: http://docs.datastax.com/en/cassandra/2.0/cassandra/dml/dml_config_consistency_c.html
 [cassandra-replication]: http://www.planetcassandra.org/data-replication-in-nosql-databases-explained/

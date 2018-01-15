@@ -6,36 +6,37 @@ ms.date: 11/22/2016
 pnp.series.title: Windows VM workloads
 pnp.series.next: multi-region-application
 pnp.series.prev: multi-vm
-ms.openlocfilehash: e25d10d661ac4759f209bd27384303dee2ee454e
-ms.sourcegitcommit: 583e54a1047daa708a9b812caafb646af4d7607b
+ms.openlocfilehash: 0654239a5bbd966a2aa776415b7f15ae723ffd63
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/28/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="run-windows-vms-for-an-n-tier-application"></a>Ausführen von Windows-VMs für eine n-schichtige Anwendung
 
-Anhand dieser Referenzarchitektur werden einige bewährte Methoden für die Ausführung virtueller Windows-Computer (VMs) für eine n-schichtige Anwendung veranschaulicht. [**Stellen Sie diese Lösung bereit**.](#deploy-the-solution) 
+Anhand dieser Referenzarchitektur werden einige bewährte Methoden für die Ausführung virtueller Windows-Computer (VMs) für eine n-schichtige Anwendung veranschaulicht. [**So stellen Sie diese Lösung bereit**.](#deploy-the-solution) 
 
 ![[0]][0]
 
 *Laden Sie eine [Visio-Datei][visio-download] mit dieser Architektur herunter.*
 
-## <a name="architecture"></a>Architektur 
+## <a name="architecture"></a>Architecture 
 
 Es gibt viele Möglichkeiten für die Implementierung einer n-schichtigen Architektur. Das Diagramm zeigt eine typische 3-schichtige Webanwendung. Diese Architektur baut auf den Informationen unter [Run load-balanced VMs for scalability and availability][multi-vm] (Ausführen von VMs mit Lastenausgleich zur Erzielung von Skalierbarkeit und Verfügbarkeit) auf. In der Internet- und Unternehmensschicht werden VMs mit Lastenausgleich verwendet.
 
 * **Verfügbarkeitsgruppen:** Erstellen Sie eine [Verfügbarkeitsgruppe][azure-availability-sets] für jede Schicht, und stellen Sie mindestens zwei VMs in jeder Schicht bereit. Dies berechtigt die VMs zu einer höheren [Vereinbarung zum Servicelevel (SLA)][vm-sla] für VMs. Sie können eine einzelne VM in einer Verfügbarkeitsgruppe bereitstellen, die einzelne VM ist jedoch nicht für eine SLA-Garantie qualifiziert, es sei denn, die VM verwendet Azure Premium Storage für alle Betriebssystem- und Datenfestplatten.  
 * **Subnetze:** Erstellen Sie für jede Schicht ein separates Subnetz. Geben Sie mit der [CIDR]-Notation den Adressbereich und die Subnetzmaske an. 
 * **Lastenausgleichsmodule:** Verwenden Sie ein [Lastenausgleichsmodul mit Internetzugriff][load-balancer-external], um eingehenden Internetdatenverkehr auf die Internetschicht zu verteilen, und ein [internes Lastenausgleichsmodul][load-balancer-internal], um den Netzwerkdatenverkehr von der Internetschicht auf die Unternehmensschicht zu verteilen.
-* **Jumpbox:** Wird auch als [geschützter Host] bezeichnet. Dies ist eine geschützte VM im Netzwerk, die von Administratoren zum Herstellen der Verbindung mit anderen VMs verwendet wird. Die Jumpbox verfügt über eine NSG, bei der Remotedatenverkehr nur von öffentlichen IP-Adressen zugelassen wird, die in einer Liste mit sicheren Adressen enthalten sind. Die NSG sollte Remotedesktop-Datenverkehr (RDP) zulassen.
+* **Jumpbox:** Wird auch als [geschützter Host] bezeichnet. Dies ist eine geschützte VM im Netzwerk, die von Administratoren zum Herstellen der Verbindung mit anderen VMs verwendet wird. Die Jumpbox verfügt über eine NSG, die Remotedatenverkehr nur von öffentlichen IP-Adressen zulässt, die in einer Liste mit sicheren Absendern aufgeführt sind. Die NSG sollte Remotedesktop-Datenverkehr (RDP) zulassen.
 * **Überwachung:** Mit Überwachungssoftware wie [Nagios], [Zabbix] oder [Icinga] können Informationen über die Antwortzeit, die VM-Betriebszeit und die allgemeine Integrität Ihres Systems bereitstellen. Installieren Sie die Überwachungssoftware auf einer VM, die sich in einem separaten Verwaltungssubnetz befindet.
 * **NSGs:** Verwenden Sie [Netzwerksicherheitsgruppen][nsg] (NSGs), um den Netzwerkdatenverkehr im VNET zu beschränken. In der hier gezeigten 3-schichtigen Architektur akzeptiert die Datenbankschicht beispielsweise keinen Datenverkehr vom Web-Front-End, sondern nur von der Unternehmensschicht und dem Verwaltungssubnetz.
 * **SQL Server Always On-Verfügbarkeitsgruppe:** Stellt Hochverfügbarkeit in der Datenschicht durch Replikation und Failover bereit.
 * **AD DS-Server (Active Directory Domain Services):** Bei älteren Versionen als Windows Server 2016 müssen SQL Server Always On-Verfügbarkeitsgruppen Mitglied einer Domäne sein. Dies ist auf die Abhängigkeit der Verfügbarkeitsgruppen von der Windows Server Failover Cluster-Technologie (WSFC) zurückzuführen. Windows Server 2016 bietet die Möglichkeit, einen Failovercluster ohne Active Directory zu erstellen. In diesem Fall sind die AD DS-Server für diese Architektur nicht erforderlich. Weitere Informationen finden Sie unter [Neuerungen beim Failoverclustering unter Windows Server 2016][wsfc-whats-new].
+* **Azure DNS:** [Azure DNS][azure-dns] ist ein Hostingdienst für DNS-Domänen, der die Namensauflösung unter Verwendung der Microsoft Azure-Infrastruktur durchführt. Durch das Hosten Ihrer Domänen in Azure können Sie Ihre DNS-Einträge mithilfe der gleichen Anmeldeinformationen, APIs, Tools und Abrechnung wie für die anderen Azure-Dienste verwalten.
 
-## <a name="recommendations"></a>Recommendations
+## <a name="recommendations"></a>Empfehlungen
 
-Ihre Anforderungen können von der hier beschriebenen Architektur abweichen. Verwenden Sie diese Empfehlungen als Ausgangspunkt. 
+Ihre Anforderungen können von der hier beschriebenen Architektur abweichen. Verwenden Sie diese Empfehlungen als Startpunkt. 
 
 ### <a name="vnet--subnets"></a>VNET/Subnetze
 
@@ -163,7 +164,7 @@ Um die Windows-VMs für eine n-schichtige Anwendungsreferenzarchitektur bereitzu
   > 
   > 
 
-Speichern Sie die Datei.
+Speichern Sie die Datei .
 
 3. Stellen Sie die Referenzarchitektur mithilfe des Befehlszeilentools **azbb** bereit, wie unten dargestellt.
 
@@ -184,6 +185,7 @@ Weitere Informationen zum Bereitstellen dieser Beispielreferenzarchitektur mithi
 [azure-availability-sets]: /azure/virtual-machines/virtual-machines-windows-manage-availability#configure-each-application-tier-into-separate-availability-sets
 [azure-cli]: /azure/virtual-machines-command-line-tools
 [azure-cli-2]: https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest
+[azure-dns]: /azure/dns/dns-overview
 [azure-key-vault]: https://azure.microsoft.com/services/key-vault
 [geschützter Host]: https://en.wikipedia.org/wiki/Bastion_host
 [CIDR]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing

@@ -6,21 +6,21 @@ ms.date: 11/16/2017
 pnp.series.title: Windows VM workloads
 pnp.series.next: n-tier
 pnp.series.prev: single-vm
-ms.openlocfilehash: c9b1e52044d38348ecf1bd29cb24b3c20d1d6a45
-ms.sourcegitcommit: 115db7ee008a0b1f2b0be50a26471050742ddb04
+ms.openlocfilehash: 14e7e023afd7cb7cbe0e8db8e224ba777f6fe863
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/17/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="run-load-balanced-vms-for-scalability-and-availability"></a>Ausführen von VMs mit Lastenausgleich zur Steigerung von Skalierbarkeit und Verfügbarkeit
 
-Diese Referenzarchitektur zeigt eine Reihe von bewährten Methoden für die Ausführung mehrerer virtueller Windows-Computer (VMs) in einer Skalierungsgruppe hinter einem Lastenausgleich, um die Verfügbarkeit und Skalierbarkeit zu verbessern. Diese Architektur kann für jede zustandslose Workload (z. B. einen Webserver) verwendet werden. Sie stellt damit eine Basis für die Bereitstellung von n-schichtigen Anwendungen dar. [**Stellen Sie diese Lösung bereit**.](#deploy-the-solution)
+Diese Referenzarchitektur zeigt eine Reihe von bewährten Methoden für die Ausführung mehrerer virtueller Windows-Computer (VMs) in einer Skalierungsgruppe hinter einem Lastenausgleich, um die Verfügbarkeit und Skalierbarkeit zu verbessern. Diese Architektur kann für jede zustandslose Workload (z. B. einen Webserver) verwendet werden. Sie stellt damit eine Basis für die Bereitstellung von n-schichtigen Anwendungen dar. [**So stellen Sie diese Lösung bereit**.](#deploy-the-solution)
 
 ![[0]][0]
 
 *Laden Sie eine [Visio-Datei][visio-download] mit dieser Architektur herunter.*
 
-## <a name="architecture"></a>Architektur
+## <a name="architecture"></a>Architecture
 
 Diese Architektur basiert auf der [Referenzarchitektur für einzelnen virtuellen Computer][single-vm]. Diese Empfehlungen gelten auch für diese Architektur.
 
@@ -29,15 +29,16 @@ In dieser Architektur wird eine Workload auf mehrere VM-Instanzen verteilt. Es g
 Die Architektur besteht aus den folgenden Komponenten:
 
 * **Ressourcengruppe:** [Ressourcengruppen][resource-manager-overview] dienen zum Gruppieren von Ressourcen, damit sie nach Lebensdauer, Besitzer oder anderen Kriterien verwaltet werden können.
-* **Virtuelles Netzwerk (VNet) und Subnetz_** Jeder virtuelle Azure-Computer wird in einem virtuellen Netzwerk (VNet) bereitgestellt, das in mehrere Subnetze segmentiert werden kann.
+* **Virtuelles Netzwerk (VNet) und Subnetz:** Jeder virtuelle Azure-Computer wird in einem virtuellen Netzwerk (VNet) bereitgestellt, das in mehrere Subnetze segmentiert werden kann.
 * **Azure Load Balancer:** Beim [Lastenausgleich][load-balancer] werden die eingehenden Internetanforderungen an die VM-Instanzen verteilt. 
 * **Öffentliche IP-Adresse:** Beim Lastenausgleich ist für den Empfang von Internetdatenverkehr eine öffentliche IP-Adresse erforderlich.
+* **Azure DNS:** [Azure DNS][azure-dns] ist ein Hostingdienst für DNS-Domänen, der die Namensauflösung unter Verwendung der Microsoft Azure-Infrastruktur durchführt. Durch das Hosten Ihrer Domänen in Azure können Sie Ihre DNS-Einträge mithilfe der gleichen Anmeldeinformationen, APIs, Tools und Abrechnung wie für die anderen Azure-Dienste verwalten.
 * **VM-Skalierungsgruppe:** Eine [VM-Skalierungsgruppe][vm-scaleset] ist ein Satz von identischen virtuellen Computern, die für das Hosten einer Workload verwendet werden. Skalierungsgruppen ermöglichen das horizontale Hoch- oder Herunterskalieren der Anzahl der VMs – und zwar sowohl manuell als auch auf vordefinierten Regeln basierend automatisch.
 * **Verfügbarkeitsgruppe**. Die [Verfügbarkeitsgruppe][availability-set] enthält die virtuellen Computer und berechtigt die virtuellen Computer damit für eine höhere [Vereinbarung zum Servicelevel (SLA)][vm-sla]. Damit eine höhere SLA angewendet werden kann, muss die Verfügbarkeitsgruppe mindestens zwei virtuelle Computer enthalten. Verfügbarkeitsgruppen sind in Skalierungsgruppen implizit. Wenn Sie virtuelle Computer außerhalb einer Skalierungsgruppe erstellen, müssen Sie die Verfügbarkeitsgruppe separat erstellen.
 * **Verwaltete Datenträger:** Azure Managed Disks verwaltet die VHD-Dateien (virtuelle Festplatte) für die VM-Datenträger. 
 * **Speicher:** Erstellen Sie ein Azure Storage-Konto zum Speichern der Diagnoseprotokolle für die virtuellen Computer.
 
-## <a name="recommendations"></a>Recommendations
+## <a name="recommendations"></a>Empfehlungen
 
 Ihre Anforderungen stimmen möglicherweise nicht vollständig mit der hier beschriebenen Architektur überein. Verwenden Sie diese Empfehlungen als Startpunkt. 
 
@@ -169,6 +170,7 @@ Weitere Informationen zum Bereitstellen dieser Beispielreferenzarchitektur finde
 [azure-automation]: /azure/automation/automation-intro
 [azure-cli]: /azure/virtual-machines-command-line-tools
 [azure-cli-2]: /azure/install-azure-cli?view=azure-cli-latest
+[azure-dns]: /azure/dns/dns-overview
 [git]: https://github.com/mspnp/reference-architectures/tree/master/virtual-machines/multi-vm
 [github-folder]: https://github.com/mspnp/reference-architectures/tree/master/virtual-machines/multi-vm
 [health-probe-log]: /azure/load-balancer/load-balancer-monitor-log

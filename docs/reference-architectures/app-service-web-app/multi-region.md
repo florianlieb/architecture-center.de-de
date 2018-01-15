@@ -4,11 +4,11 @@ description: "Empfohlene Architektur für Webanwendungen mit Hochverfügbarkeit,
 author: MikeWasson
 ms.date: 11/23/2016
 cardTitle: Run in multiple regions
-ms.openlocfilehash: 2d7d0c38bef3efc73a7ba2dd61e4190d07deb1b5
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 60caa121d0ce2f1aa2638650229bed8048804c22
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="run-a-web-application-in-multiple-regions"></a>Ausführen einer Webanwendung in mehreren Regionen
 [!INCLUDE [header](../../_includes/header.md)]
@@ -19,11 +19,12 @@ Diese Referenzarchitektur zeigt, wie Sie eine Azure App Service-Anwendung in meh
 
 *Laden Sie eine [Visio-Datei][visio-download] mit dieser Architektur herunter.*
 
-## <a name="architecture"></a>Architektur 
+## <a name="architecture"></a>Architecture 
 
 Diese Architektur basiert auf der in [Verbessern der Skalierbarkeit in einer Webanwendung][guidance-web-apps-scalability] gezeigten. Im Folgenden werden die Hauptunterschiede erläutert:
 
 * **Primäre und sekundäre Regionen**. Diese Architektur nutzt zwei Regionen, um eine höhere Verfügbarkeit zu erreichen. Die Anwendung wird in jeder Region bereitgestellt. Während des normalen Betriebs wird Netzwerkdatenverkehr an die primäre Region weitergeleitet. Wenn die primäre Region nicht verfügbar ist, wird der Datenverkehr an die sekundäre Region umgeleitet. 
+* **Azure DNS:** [Azure DNS][azure-dns] ist ein Hostingdienst für DNS-Domänen, der die Namensauflösung unter Verwendung der Microsoft Azure-Infrastruktur durchführt. Durch das Hosten Ihrer Domänen in Azure können Sie Ihre DNS-Einträge mithilfe der gleichen Anmeldeinformationen, APIs, Tools und Abrechnung wie für die anderen Azure-Dienste verwalten.
 * **Azure Traffic Manager**. [Traffic Manager][traffic-manager] leitet eingehende Anforderungen an die primäre Region weiter. Wenn die in dieser Region ausgeführte Anwendung nicht verfügbar ist, führt Traffic Manager ein Failover zur sekundären Region aus.
 * **Georeplikation** von SQL-Datenbank und Cosmos DB. 
 
@@ -38,7 +39,7 @@ Es gibt mehrere allgemeine Vorgehensweisen für das Erreichen von Hochverfügbar
 In dieser Referenzarchitektur liegt der Fokus auf aktiv/passiv mit Hot Standby, wobei Traffic Manager für das Failover verwendet wird. 
 
 
-## <a name="recommendations"></a>Recommendations
+## <a name="recommendations"></a>Empfehlungen
 
 Ihre Anforderungen können von der hier beschriebenen Architektur abweichen. Verwenden Sie die Empfehlungen in diesem Abschnitt als Ausgangspunkt.
 
@@ -147,6 +148,7 @@ Wenn die primäre Datenbank fehlerhaft ist, führen Sie ein manuelles Failover z
 <!-- links -->
 
 [azure-sql-db]: https://azure.microsoft.com/documentation/services/sql-database/
+[azure-dns]: /azure/dns/dns-overview
 [docdb-geo]: /azure/documentdb/documentdb-distribute-data-globally
 [guidance-web-apps-scalability]: ./scalable-web-app.md
 [health-endpoint-monitoring-pattern]: https://msdn.microsoft.com/library/dn589789.aspx

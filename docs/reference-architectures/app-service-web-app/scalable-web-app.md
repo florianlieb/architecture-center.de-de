@@ -7,11 +7,11 @@ pnp.series.prev: basic-web-app
 pnp.series.next: multi-region-web-app
 ms.date: 11/23/2016
 cardTitle: Improve scalability
-ms.openlocfilehash: b875b89b87edd5636d90da8b7f8211f965b39937
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 1fdaf6e3695cb814fa4c275a4a273f9fa9a7b71b
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="improve-scalability-in-a-web-application"></a>Verbessern der Skalierbarkeit in einer Webanwendung
 
@@ -21,7 +21,7 @@ Diese Referenzarchitektur zeigt bewährte Methoden zum Verbessern der Skalierbar
 
 *Laden Sie eine [Visio-Datei][visio-download] mit dieser Architektur herunter.*
 
-## <a name="architecture"></a>Architektur  
+## <a name="architecture"></a>Architecture  
 
 Diese Architektur basiert auf der unter [Einfache Webanwendung][basic-web-app] gezeigten Architektur. Sie enthält die folgenden Komponenten:
 
@@ -34,6 +34,7 @@ Diese Architektur basiert auf der unter [Einfache Webanwendung][basic-web-app] g
 * **Datenspeicher**. Verwenden Sie eine [Azure SQL-Datenbank][sql-db] für relationale Daten. Für nicht relationale Daten sollten Sie einen NoSQL-Speicher, z. B. [Cosmos DB][documentdb], in Betracht ziehen.
 * **Azure Search**. Verwenden Sie [Azure Search][azure-search] zum Hinzufügen von Suchfunktionalität wie z. B. Suchvorschläge, Fuzzysuche und sprachspezifische Suchen. Azure Search wird normalerweise in Verbindung mit einem anderen Datenspeicher verwendet, insbesondere dann, wenn der primäre Datenspeicher strikte Konsistenz erfordert. Bei dieser Vorgehensweise speichern Sie autorisierende Daten in dem anderen Datenspeicher und den Suchindex in Azure Search. Azure Search kann auch zum Konsolidieren eines einzelnen Suchindex aus mehreren Datenspeichern verwendet werden.  
 * **E-Mail/SMS**. Verwenden Sie einen Drittanbieter-Dienst, z. B. SendGrid oder Twilio, zum Senden von E-Mail- oder SMS-Nachrichten, statt diese Funktionalität direkt in die Anwendung zu integrieren.
+* **Azure DNS:** [Azure DNS][azure-dns] ist ein Hostingdienst für DNS-Domänen, der die Namensauflösung unter Verwendung der Microsoft Azure-Infrastruktur durchführt. Durch das Hosten Ihrer Domänen in Azure können Sie Ihre DNS-Einträge mithilfe der gleichen Anmeldeinformationen, APIs, Tools und Abrechnung wie für die anderen Azure-Dienste verwalten.
 
 ## <a name="recommendations"></a>Empfehlungen
 
@@ -79,14 +80,14 @@ Moderne Anwendungen verarbeiten häufig große Datenmengen. Für eine Skalierung
 | Zu speichernde Objekte | Beispiel | Empfohlener Speicher |
 | --- | --- | --- |
 | Dateien |Bilder, Dokumente, PDF-Dateien |Azure Blob Storage |
-| Schlüssel/Wert-Paare |Nach Benutzer-ID gesuchte Benutzerprofildaten |Azure-Tabellenspeicher |
+| Schlüssel/Wert-Paare |Nach Benutzer-ID gesuchte Benutzerprofildaten |Azure Table Storage |
 | Kurze Nachrichten zum Auslösen der Weiterverarbeitung |Bestellanforderungen |Azure Queue-Speicher, Service Bus-Warteschlange oder Service Bus-Thema |
 | Nicht relationale Daten mit einem flexiblen Schema, die grundlegende Abfragen erfordern |Produktkatalog |Dokumentdatenbank, z. B. Azure Cosmos DB, MongoDB oder Apache CouchDB |
 | Relationale Daten, die eine umfassendere Abfrageunterstützung, ein striktes Schema und/oder starke Konsistenz erfordern |Produktbestand |Azure SQL-Datenbank |
 
 ## <a name="scalability-considerations"></a>Überlegungen zur Skalierbarkeit
 
-Ein großer Vorteil von Azure App Service ist die Möglichkeit, Ihre Anwendung basierend auf der Last zu skalieren. Hier sind einige Punkte aufgeführt, die beim Planen der Skalierung für Ihre Anwendung zu bedenken sind.
+Ein großer Vorteil von Azure App Service ist die Möglichkeit, Ihre Anwendung abhängig von der Last zu skalieren. Hier sind einige Punkte aufgeführt, die beim Planen der Skalierung für Ihre Anwendung zu bedenken sind.
 
 ### <a name="app-service-app"></a>App Service-App
 Wenn Ihre Lösung mehrere App Service-Apps enthält, sollten Sie deren Bereitstellung in separaten App Service-Plänen in Betracht ziehen. Dieser Ansatz ermöglicht es Ihnen, diese unabhängig voneinander zu skalieren, da sie auf separaten Instanzen ausgeführt werden. 
@@ -127,6 +128,7 @@ Verwenden Sie [Transparent Data Encryption][sql-encryption], wenn in der Datenba
 [app-service-api-app]: /azure/app-service-api/app-service-api-apps-why-best-platform
 [app-service-pricing]: https://azure.microsoft.com/pricing/details/app-service/
 [azure-cdn]: https://azure.microsoft.com/services/cdn/
+[azure-dns]: /azure/dns/dns-overview
 [azure-redis]: https://azure.microsoft.com/services/cache/
 [azure-search]: https://azure.microsoft.com/documentation/services/search/
 [azure-search-scaling]: /azure/search/search-capacity-planning

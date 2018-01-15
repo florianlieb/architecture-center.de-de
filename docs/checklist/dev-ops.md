@@ -1,8 +1,6 @@
 # <a name="devops-checklist"></a>Checkliste für DevOps
 
-DevOps ist die Verschmelzung von Entwicklung, Qualitätssicherung und IT-Vorgängen in eine einheitliche Kultur und einen einheitlichen Prozesssatz für die Bereitstellung von Software. 
-
-Verwenden Sie diese Checkliste als Ausgangspunkt, um Ihre DevOps-Kultur und -Prozesse zu bewerten.
+DevOps ist die Verschmelzung von Entwicklung, Qualitätssicherung und IT-Vorgängen in eine einheitliche Kultur und einen einheitlichen Prozesssatz für die Bereitstellung von Software. Verwenden Sie diese Checkliste als Ausgangspunkt, um Ihre DevOps-Kultur und -Prozesse zu bewerten.
 
 ## <a name="culture"></a>Kultur
 
