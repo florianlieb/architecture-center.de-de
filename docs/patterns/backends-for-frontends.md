@@ -1,17 +1,17 @@
 ---
 title: "Muster „Back-Ends für Front-Ends“"
-description: Separate Back-End-Dienste zur Nutzung durch bestimmte Front-End-Anwendungen oder -Schnittstellen erstellen
+description: Erstellen Sie separate Back-End-Dienste zur Nutzung durch bestimmte Front-End-Anwendungen oder -Schnittstellen.
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: dd71b65e99ae21dff1443f5728ae5f0f54f8122c
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 87acd39d021c5e44594a2e7c9574e4dd363ce83b
+ms.sourcegitcommit: c93f1b210b3deff17cc969fb66133bc6399cfd10
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/05/2018
 ---
 # <a name="backends-for-frontends-pattern"></a>Muster „Back-Ends für Front-Ends“
 
-Erstellen Sie separate Back-End-Dienste zur Nutzung durch bestimmte Front-End-Anwendungen oder -Schnittstellen. Dieses Muster ist hilfreich, wenn Sie vermeiden möchten, dass ein einzelnes Back-End für mehrere Schnittstellen angepasst werden muss.
+Erstellen Sie separate Back-End-Dienste zur Nutzung durch bestimmte Front-End-Anwendungen oder -Schnittstellen. Dieses Muster ist hilfreich, wenn Sie vermeiden möchten, dass ein einzelnes Back-End für mehrere Schnittstellen angepasst werden muss. Dieses Muster wurde von Sam Newman erstmals beschrieben.
 
 ## <a name="context-and-problem"></a>Kontext und Problem
 
@@ -32,6 +32,8 @@ Erstellen Sie ein Back-End pro Benutzeroberfläche. Optimieren Sie das Verhalten
 ![](./_images/backend-for-frontend-example.png) 
 
 Da jedes Back-End spezifisch für eine Benutzeroberfläche gilt, kann es für diese Schnittstelle optimiert werden. Das Ergebnis ist, dass es kleiner, weniger komplex und meist auch schneller als ein generisches Back-End ist, mit dem versucht wird, die Anforderungen aller Benutzeroberflächen zu erfüllen. Jedes Benutzeroberflächenteam kann das eigene Back-End selbst steuern und ist nicht von einem zentralen Back-End-Entwicklungsteam abhängig. So kann das Benutzeroberflächenteam in den Bereichen Sprachwahl, Release-Rhythmus, Priorisierung der Workload und Featureintegration auf seinem Back-End jeweils flexibel vorgehen.
+
+Weitere Informationen finden Sie unter [Muster: Back-Ends für Front-Ends](http://samnewman.io/patterns/architectural/bff/).
 
 ## <a name="issues-and-considerations"></a>Probleme und Überlegungen
 

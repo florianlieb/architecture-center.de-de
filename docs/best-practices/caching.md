@@ -4,11 +4,11 @@ description: Anleitungen zum Caching zur Verbesserung von Leistung und Skalierba
 author: dragon119
 ms.date: 05/24/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: f8bc25ef10847e8308e830b745e87a176438d200
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 7968c1578dfef2c7ad28576b9aafbbe2b6672cd9
+ms.sourcegitcommit: 3d6dba524cc7661740bdbaf43870de7728d60a01
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/11/2018
 ---
 # <a name="caching"></a>Caching
 
@@ -105,7 +105,7 @@ Einige Caches ermöglichen Ihnen, das Ablaufdatum als absoluten Wert anzugeben, 
 
 Wenn die Zeitspanne bis zum Ablauf der Daten sehr lange ist, kann der Cache auch überlaufen. In diesem Fall müssen bei jeder erneuten Anfrage zum Hinzufügen von Daten ältere Elemente meist zwangsweise aus dem Cache entfernt werden. In der Regel entfernen Cachedienste die Daten auf Basis der am längsten zurückliegenden Verwendung (Least Recently Used, LRU), aber meist können Sie diese Richtlinie überschreiben und dadurch verhindern, dass Elemente entfernt werden. Wenn Sie jedoch diesen Ansatz verfolgen, riskieren Sie eine Überschreitung des Arbeitsspeichers, der im Cache verfügbar ist. Eine Anwendung, die versucht, ein Element zum Cache hinzufügen, wird mit einer Ausnahme fehlschlagen.
 
-Einige Cacheimplementierungen könnten auch zusätzliche Entfernungsrichtlinien bieten. Es gibt mehrere Typen von Entfernungsrichtlinien. Diese umfassen:
+Einige Cacheimplementierungen könnten auch zusätzliche Entfernungsrichtlinien bieten. Es gibt mehrere Typen von Entfernungsrichtlinien. Das umfasst:
 
 * Eine kürzlich verwendete Richtlinie (in der Annahme, dass die Daten nicht mehr benötigt werden).
 * Eine Richtlinie für First In, First Out (älteste Daten werden zuerst entfernt).
@@ -126,7 +126,7 @@ Je nach Art der Daten und der Wahrscheinlichkeit von Konflikten sollten Sie eine
 * **Optimistisch (vollständig):** Die Anwendung prüft unmittelbar vor der Aktualisierung, ob sich die Daten im Cache seit deren Abruf geändert haben. Haben sich die Daten nicht geändert, kann die Aktualisierung vorgenommen werden. Andernfalls muss die Anwendung entscheiden, ob die sie die Aktualisierung vornimmt. (Die Geschäftslogik, die dieser Entscheidung zu Grunde liegt, ist die anwendungsspezifische.) Diese Strategie eignet sich für Situationen, in denen nur selten Änderungen vorgenommen werden bzw. in denen kaum mit Konflikten zu rechnen ist.
 * **Pessimistisch (eingeschränkt):** Beim Abrufen von Daten sperrt die Anwendung die Daten im Cache, um zu verhindern, dass diese durch eine andere Anwendungsinstanz geändert werden. So werden Konflikte umgangen, allerdings werden andere Anwendungsinstanzen, die die gleichen Daten verarbeiten müssen, dabei unter Umständen blockiert. Die pessimistische Parallelität kann die Skalierbarkeit der Lösung beeinträchtigen und sollte nur für kurzlebige Prozesse verwendet werden. Diese Strategie ist eher geeignet für Situationen, in denen Konflikte wahrscheinlich sind, insbesondere dann, wenn eine Anwendung mehrere Elemente im Cache aktualisiert und sicherstellen muss, dass diese Änderungen konsistent angewendet werden.
 
-### <a name="implement-high-availability-and-scalability-and-improve-performance"></a>Implementieren einer hohen Verfügbarkeit und Skalierbarkeit mit Verbesserung der Leistung
+### <a name="implement-high-availability-and-scalability-and-improve-performance"></a>Implementieren von Hochverfügbarkeit und Skalierbarkeit mit Verbesserung der Leistung
 Verwenden Sie einen Cache nicht als primäres Datenrepository. Dies sollte der ursprüngliche Datenspeicher bleiben, aus dem der Cache gefüllt wird. Der ursprüngliche Datenspeicher ist für die Persistenz der Daten verantwortlich.
 
 Achten Sie darauf, Ihre Lösungen nicht abhängig von der Verfügbarkeit eines gemeinsam genutzten Cachediensts zu machen. Eine Anwendung sollte funktionsfähig bleiben, wenn der Dienst, der den freigegebenen Cache bereitstellt, nicht verfügbar ist. Die Anwendung sollte beim Warten auf die Fortsetzung des Cachediensts auf keinen Fall nicht mehr reagieren oder fehlschlagen.
@@ -185,23 +185,13 @@ Wenn Sie den Zugriff auf Teilmengen der Daten im Cache einschränken müssen, nu
 Sie müssen die Daten auch während der Übertragung in den und aus dem Cache schützen. Hierbei sind Sie von den Sicherheitsfeatures der Netzwerkinfrastruktur abhängig, über die sich die Clientanwendungen mit dem Cache verbinden. Wenn der Cache über einen lokalen Server innerhalb derselben Organisation bereitgestellt wird, der auch die Clientanwendungen hostet, sind dank der Isolation des Netzwerks vermutlich keine weiteren Schritte erforderlich. Wenn der Cache hingegen remote bereitgestellt wird und eine TCP- oder HTTP-Verbindung über ein öffentliches Netzwerk (z. B. das Internet) erfordert, erwägen Sie die Implementierung von SSL.
 
 ## <a name="considerations-for-implementing-caching-with-microsoft-azure"></a>Überlegungen zur Implementierung von Caching in Microsoft Azure
-Azure stellt den Redis-Cache von Azure bereit. Dies ist eine Implementierung des Open Source-Redis-Caches, der als Dienst im Azure-Rechenzentrum ausgeführt wird. Er bietet einen Cachedienst, auf den jede Azure-Anwendung zugreifen kann, und zwar unabhängig davon, ob die Anwendung als Clouddienst, als Website oder auf einem virtuellen Azure-Computer implementiert ist. Caches können von Clientanwendungen, die über den entsprechenden Zugriffsschlüssel verfügen, gemeinsam verwendet werden.
+
+[Azure Redis Cache](/azure/redis-cache/) ist eine Implementierung des quelloffenen Redis Caches, der als Dienst in einem Azure-Rechenzentrum ausgeführt wird. Er bietet einen Cachedienst, auf den jede Azure-Anwendung zugreifen kann, und zwar unabhängig davon, ob die Anwendung als Clouddienst, als Website oder auf einem virtuellen Azure-Computer implementiert ist. Caches können von Clientanwendungen, die über den entsprechenden Zugriffsschlüssel verfügen, gemeinsam verwendet werden.
 
 Azure Redis Cache ist eine hochleistungsfähige Lösung zum Zwischenspeichern, die Verfügbarkeit, Skalierbarkeit und Sicherheit bietet. Die Lösung wird in der Regel als Dienst auf einem dedizierten Computer oder verteilt auf mehrere dedizierte Computer ausgeführt. Es wird versucht, so viele Informationen wie möglich im Arbeitsspeicher zu speichern, um schnellen Zugriff sicherzustellen. Diese Architektur ist für geringe Latenzzeiten und hohen Durchsatz konzipiert, indem langsame E/A-Vorgänge möglichst vermieden werden.
 
  Azure Redis Cache ist mit zahlreichen APIs kompatibel, die von Clientanwendungen verwendet werden. Wenn Sie bereits über Anwendungen verfügen, die Azure Redis Cache lokal verwenden, stellt Azure Redis Cache einen schnellen Migrationspfad für den Übergang zum Zwischenspeichern in der Cloud bereit.
 
-> [!NOTE]
-> Darüber hinaus bietet Azure den Managed Cache Service (Dienst für verwalteten Cache). Dieser Dienst basiert auf der Azure Service Fabric Cache-Engine. Es ermöglicht die Erstellung eines verteilten Cache, der von lose verbundenen Anwendungen gemeinsam genutzt werden kann. Der Cache wird auf Hochleistungsservern im Azure-Datencenter bereitgestellt.
-> Allerdings wird diese Option nicht mehr empfohlen und dient nur noch der Unterstützung vorhandener Anwendungen, die mit diesem Cachedienst entwickelt wurden. Für alle Neuentwicklungen sollten Sie stattdessen Azure Redis Cache verwenden.
-> 
-> Außerdem unterstützt Azure In-Role-Caching. Mit diesem Feature können Sie einen Cache speziell für einen Clouddienst erstellen.
-> Der Cache wird von Instanzen einer Web- oder Workerrolle gehostet, und auf ihn können nur Rollen zugreifen, die als Teil der gleichen Clouddienst-Bereitstellungseinheit ausgeführt werden. (Eine Bereitstellungseinheit ist der Satz von Rolleninstanzen, die in einer bestimmten Region als Clouddienst bereitgestellt werden.) Der Cache ist geclustert, und alle Instanzen der Rolle innerhalb der gleichen Bereitstellungseinheit, die den Cache hostet, werden Teil des gleichen Cacheclusters. Allerdings wird diese Option nicht mehr empfohlen und dient nur noch der Unterstützung vorhandener Anwendungen, die mit diesem Cachedienst entwickelt wurden. Für alle Neuentwicklungen sollten Sie stattdessen Azure Redis Cache verwenden.
-> 
-> Sowohl Azure Managed Cache Service also auch Azure In-Role Cache sind derzeit für die Deaktivierung am 16. November 2016 vorgesehen.
-> Sie sollten zur Vorbereitung für die Einstellung dieser Dienste zu Azure Redis Cache migrieren. Weitere Informationen finden Sie unter [Welches Redis Cache-Angebot und welche Redis Cache-Größe sollte ich verwenden?](/azure/redis-cache/cache-faq#what-redis-cache-offering-and-size-should-i-use).
-> 
-> 
 
 ### <a name="features-of-redis"></a>Features von Redis
  Redis ist mehr als ein einfacher Cacheserver. Die Lösung bietet eine verteilte In-Memory-Datenbank mit einem umfassenden Befehlssatz, der zahlreiche gängige Szenarien unterstützt. Diese werden weiter unten in diesem Dokument im Abschnitt „Verwenden des Redis-Zwischenspeicherns“ beschrieben. In diesem Abschnitt werden einige der wichtigsten Features von Redis vorgestellt.

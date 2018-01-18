@@ -2,15 +2,15 @@
 title: "Architekturstil für Microservices"
 description: "Dieser Artikel beschreibt die Vorteile, Herausforderungen und bewährten Methoden für Architekturen für Microservices in Azure."
 author: MikeWasson
-ms.openlocfilehash: 6426b3342a319832baf5eec35e9c783ba9348bdd
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 08fd39b6cf0b3c88af654b27e21b2d7dd9fb19b1
+ms.sourcegitcommit: 7764a804f000180c37a4f8dbab946b525f784f58
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/09/2018
 ---
 # <a name="microservices-architecture-style"></a>Architekturstil für Microservices
 
-Eine Microservicearchitektur besteht aus einer Sammlung kleiner, autonomer Dienste. Jeder Dienst ist eigenständig und sollte eine einzige Geschäftsfunktion implementieren. 
+Eine Microservicearchitektur besteht aus einer Sammlung kleiner, autonomer Dienste. Jeder Dienst ist eigenständig und sollte eine einzige Geschäftsfunktion implementieren. Ausführliche Anleitungen zum Erstellen einer Microservices-Architektur in Azure finden unter [Entwerfen, Erstellen und Betreiben von Microservices in Azure](../../microservices/index.md).
 
 ![](./images/microservices-logical.svg)
  
@@ -111,7 +111,7 @@ Ziehen Sie diese Art von Architektur in folgenden Fällen in Betracht:
 
 ## <a name="microservices-using-azure-container-service"></a>Microservices unter Verwendung von Azure Container Service 
 
-Sie können Azure Container Service verwenden, um einen Docker-Cluster zu konfigurieren und bereitzustellen. Azure Container Service unterstützt verschiedene beliebte Containerorchestratoren wie Kubernetes, DC/OS und Docker Swarm.
+Sie können [Azure Container Service](/azure/container-service/) verwenden, um einen Docker-Cluster zu konfigurieren und bereitzustellen. Azure Container Service unterstützt verschiedene beliebte Containerorchestratoren wie Kubernetes, DC/OS und Docker Swarm.
 
 ![](./images/microservices-acs.png)
  
@@ -133,7 +133,7 @@ Das folgende Diagramm zeigt drei Knoten, die vier verschiedene Dienste ausführe
 
 ## <a name="microservices-using-azure-service-fabric"></a>Microservices unter Verwendung von Azure Service Fabric
 
-Das folgende Diagramm zeigt eine Microservicearchitektur, die Azure Service Fabric verwendet.
+Das folgende Diagramm zeigt eine Microservicearchitektur, die [Azure Service Fabric](/azure/service-fabric/) verwendet.
 
 ![](./images/service-fabric.png)
 

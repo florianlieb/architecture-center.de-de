@@ -4,18 +4,17 @@ description: Anleitung zur Implementierung einer API
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: b4d197719380bf55033942b3ebcad384170d950d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: cc28864de36afdeed2f8a7155a307e312c3a398e
+ms.sourcegitcommit: c93f1b210b3deff17cc969fb66133bc6399cfd10
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/05/2018
 ---
 # <a name="api-implementation"></a>API-Implementierung
-[!INCLUDE [header](../_includes/header.md)]
 
 Mit einer sorgfältig entworfenen RESTful-Web-API werden die Ressourcen, Beziehungen und Navigationsschemas definiert, auf die mit Clientanwendungen zugegriffen werden kann. Beim Implementieren und Bereitstellen einer Web-API sollten Sie die physischen Anforderungen der Umgebung  berücksichtigen, in der die Web-API gehostet wird. Außerdem sollten Sie eher darauf achten, wie die Web-API erstellt wurde, als auf die logische Struktur der Daten. In diesem Leitfaden geht es hauptsächlich um die bewährten Methoden zur Implementierung einer Web-API und deren Veröffentlichung, um sie für Clientanwendungen verfügbar zu machen. Ausführliche Informationen zum Web-API-Design finden Sie unter [API-Design](/azure/architecture/best-practices/api-design).
 
-## <a name="considerations-for-processing-requests"></a>Aspekte der Verarbeitung von Anforderungen
+## <a name="processing-requests"></a>Verarbeiten von Anforderungen
 
 Beachten Sie die folgenden Punkte, wenn Sie den Code zum Behandeln von Anforderungen implementieren.
 
@@ -126,7 +125,7 @@ Mit den HATEOAS-Links in der HTTP-Beispielantwort wird angegeben, dass eine Clie
 * Eine HTTP GET-Anforderung an den URI `http://adventure-works.com/customers/2/orders`, um alle Bestellungen des Kunden per Suche zu ermitteln. Die Daten können im XML- oder JSON-Format zurückgegeben werden.
 * Eine HTTP PUT-Anforderung an den URI `http://adventure-works.com/customers/2/orders`, um eine neue Bestellung für den Kunden zu erstellen. Die Daten müssen in der Anforderungsnachricht im Format „x-www-form-urlencoded“ bereitgestellt werden.
 
-## <a name="considerations-for-handling-exceptions"></a>Aspekte der Behandlung von Ausnahmen
+## <a name="handling-exceptions"></a>Behandeln von Ausnahmen
 
 Berücksichtigen Sie die folgenden Punkte, wenn ein Vorgang eine nicht abgefangene Ausnahme auslöst.
 
@@ -190,7 +189,7 @@ Erwägen Sie zum einheitlichen Behandeln von Ausnahmen die Implementierung einer
 
 Im HTTP-Protokoll wird zwischen Fehlern unterschieden, die aufgrund der Clientanwendung auftreten (HTTP 4xx-Statuscodes), und Fehlern, die aufgrund eines Problems auf dem Server auftreten (HTTP 5xx-Statuscodes). Achten Sie darauf, dass Sie diese Konvention in allen Fehlerantwortnachrichten befolgen.
 
-## <a name="considerations-for-optimizing-client-side-data-access"></a>Aspekte der Optimierung des clientseitigen Datenzugriffs
+## <a name="optimizing-client-side-data-access"></a>Optimierung des clientseitigen Datenzugriffs
 In einer verteilten Umgebung, z. B. mit einem Webserver und Clientanwendungen, ist das Netzwerk eines der Elemente, die am stärksten beachtet werden müssen. Es können sich erhebliche Engpässe ergeben, und zwar vor allem, wenn eine Clientanwendung häufig Anforderungen sendet oder Daten empfängt. Daher sollten Sie versuchen, die Menge des im Netzwerk übertragenen Datenverkehrs möglichst zu verringern. Beachten Sie beim Implementieren des Codes zum Abrufen und Verwalten von Daten die folgenden Punkte:
 
 ### <a name="support-client-side-caching"></a>Unterstützen der clientseitigen Zwischenspeicherung
@@ -541,7 +540,7 @@ public class OrdersController : ApiController
 >
 >
 
-## <a name="considerations-for-handling-large-requests-and-responses"></a>Aspekte zur Behandlung umfangreicher Anforderungen und Antworten
+## <a name="handling-large-requests-and-responses"></a>Behandlung umfangreicher Anforderungen und Antworten
 Wenn eine Clientanwendung Anforderungen ausgibt, bei denen Daten gesendet oder empfangen werden, kann es vorkommen, dass diese mehrere Megabyte groß (oder noch größer) sind. Das Warten auf den Abschluss der Übertragung dieser Datenmenge kann dazu führen, dass die Clientanwendung nicht mehr reagiert. Beachten Sie die folgenden Punkte, wenn Sie Anforderungen behandeln müssen, die größere Datenmengen enthalten:
 
 ### <a name="optimize-requests-and-responses-that-involve-large-objects"></a>Optimieren von Anforderungen und Antworten, die große Objekte enthalten
@@ -608,7 +607,7 @@ Eine Clientanwendung kann eine Anforderung senden, um 30 Bestellungen ab Offset 
 >
 >
 
-## <a name="considerations-for-maintaining-responsiveness-scalability-and-availability"></a>Aspekte zur Aufrechterhaltung der Reaktionsfähigkeit, Skalierbarkeit und Verfügbarkeit
+## <a name="maintaining-responsiveness-scalability-and-availability"></a>Aufrechterhaltung der Reaktionsfähigkeit, Skalierbarkeit und Verfügbarkeit
 Eine Web-API kann von vielen Clientanwendungen, die weltweit an den unterschiedlichsten Orten ausgeführt werden, gemeinsam verwendet werden. Es ist wichtig sicherzustellen, dass für die Implementierung der Web-API Folgendes gilt: Auch bei einer hohen Auslastung bleibt die Reaktionsfähigkeit erhalten, sie kann zur Unterstützung stark variierender Workloads skaliert werden, und für Clients, auf denen unternehmenskritische Vorgänge ausgeführt werden, wird die Verfügbarkeit garantiert. Beachten Sie die folgenden Punkte, wenn Sie ermitteln möchten, wie diese Anforderungen erfüllt werden können:
 
 ### <a name="provide-asynchronous-support-for-long-running-requests"></a>Bereitstellen von asynchroner Unterstützung für Anforderungen mit langer Ausführungsdauer
@@ -652,7 +651,7 @@ Das Offenhalten einer Verbindung kann die Reaktionsfähigkeit verbessern, indem 
 >
 >
 
-## <a name="considerations-for-publishing-and-managing-a-web-api"></a>Aspekte zur Veröffentlichung und Verwaltung einer Web-API
+## <a name="publishing-and-managing-a-web-api"></a>Veröffentlichung und Verwaltung einer Web-API
 Die Web-API muss in einer Hostumgebung bereitgestellt werden, um sie für Clientanwendungen verfügbar zu machen. Bei dieser Umgebung handelt es sich normalerweise um einen Webserver, aber es kann auch eine andere Art von Hostprozess sein. Berücksichtigen Sie beim Veröffentlichen einer Web-API die folgenden Punkte:
 
 * Alle Anforderungen müssen authentifiziert und autorisiert werden, und die Zugriffssteuerung muss im angemessenen Umfang durchgesetzt werden.
@@ -668,7 +667,7 @@ Es ist hilfreich, diese Probleme von den technischen Problemen in Bezug auf die 
 * Sie ermöglicht das Transformieren von Nachrichten und das Übersetzen von Kommunikationsprotokollen für Clients, die mit unterschiedlicher Technologie erstellt wurden.
 * Sie ermöglicht das Zwischenspeichern von Anforderungen und Antworten, um die Auslastung des Servers zu reduzieren, auf dem die Web-API gehostet wird.
 
-## <a name="considerations-for-testing-a-web-api"></a>Aspekte zum Testen einer Web-API
+## <a name="testing-a-web-api"></a>Testen einer Web-API
 Eine Web-API sollte so gründlich wie jede andere Software getestet werden. Erwägen Sie die Erstellung von Komponententests zur Überprüfung der Funktionalität einer Web-API, die über zusätzliche weitere Anforderungen verfügt, um die richtige Funktionsweise sicherzustellen. Achten Sie besonders auf die folgenden Aspekte:
 
 * Testen Sie alle Routen, um zu überprüfen, ob dabei die richtigen Vorgänge aufgerufen werden. Achten Sie besonders darauf, ob der HTTP-Statuscode 405 (Method Not Allowed) unerwartet zurückgegeben wird. Dies kann auf eine fehlende Übereinstimmung zwischen einer Route und den HTTP-Methoden (GET, POST, PUT, DELETE) hindeuten, die auf dieser Route genutzt werden können.
@@ -684,7 +683,7 @@ Eine Web-API sollte so gründlich wie jede andere Software getestet werden. Erw�
 * Achten Sie darauf, dass Anforderungs- und Antwortnachrichten richtig formatiert sind. Wenn eine HTTP POST-Anforderung beispielsweise die Daten für eine neue Ressource im Format „x-www-form-urlencoded“ enthält, müssen Sie bestätigen, dass der entsprechende Vorgang die Daten richtig analysiert, die Ressourcen erstellt und eine Antwort mit den Details der neuen Ressource zurückgibt, einschließlich des richtigen Location-Headers.
 * Überprüfen Sie alle Links und URIs in Antwortnachrichten. Beispielsweise sollte eine HTTP POST-Nachricht den URI der neu erstellten Ressource zurückgeben. Alle HATEOAS-Links müssen gültig sein.
 
-* Stellen Sie sicher, dass jeder Vorgang für unterschiedliche Eingabekombinationen die richtigen Statuscodes zurückgibt. Beispiel:
+* Stellen Sie sicher, dass jeder Vorgang für unterschiedliche Eingabekombinationen die richtigen Statuscodes zurückgibt. Beispiel: 
 
   * Wenn eine Abfrage erfolgreich ist, sollte der Vorgang den Statuscode 200 (OK) zurückgeben.
   * Wenn eine Ressource nicht gefunden wird, sollte der Vorgang den HTTP-Statuscode 404 (Nicht gefunden) zurückgeben.
@@ -699,8 +698,9 @@ Achten Sie auf unerwartete Antwortstatuscodes im Bereich 5xx. Diese Nachrichten
 
 Außerdem sollten Sie Leistungstests erstellen und ausführen, um zu überprüfen, ob die Web-API auch in Notfällen zufriedenstellend arbeitet. Sie können mit Visual Studio Ultimate ein Projekt zum Testen der Webleistung und Auslastung erstellen. Weitere Informationen finden Sie unter [Run performance tests on an application before a release](https://msdn.microsoft.com/library/dn250793.aspx) (Ausführen von Leistungstests für eine Anwendung vor der Veröffentlichung).
 
-## <a name="publish-and-manage-a-web-api-using-the-azure-api-management-service"></a>Veröffentlichen und Verwalten einer Web-API mit dem Azure API Management-Dienst
-Azure stellt den [API Management-Dienst](https://azure.microsoft.com/documentation/services/api-management/) bereit, den Sie zum Veröffentlichen und Verwalten einer Web-API verwenden können. Hiermit können Sie einen Dienst generieren, der für eine oder mehrere Web-APIs als „Fassade“ (Façade) dient. Bei diesem Dienst handelt es sich selbst um einen skalierbaren Webdienst, den Sie mit dem Azure-Verwaltungsportal erstellen und konfigurieren können. Sie können diesen Dienst verwenden, um eine Web-API wie folgt zu veröffentlichen und zu verwalten:
+## <a name="using-azure-api-management"></a>Verwenden von Azure API Management 
+
+Erwägen Sie in Azure die Verwendung von [Azue API Management](https://azure.microsoft.com/documentation/services/api-management/) zum Veröffentlichen und Verwalten einer Web-API. Hiermit können Sie einen Dienst generieren, der für eine oder mehrere Web-APIs als „Fassade“ (Façade) dient. Bei diesem Dienst handelt es sich selbst um einen skalierbaren Webdienst, den Sie mit dem Azure-Verwaltungsportal erstellen und konfigurieren können. Sie können diesen Dienst verwenden, um eine Web-API wie folgt zu veröffentlichen und zu verwalten:
 
 1. Stellen Sie die Web-API auf einer Website, in einem Azure-Clouddienst oder auf einem virtuellen Azure-Computer bereit.
 2. Verbinden Sie den API Management-Dienst mit der Web-API. Anforderungen, die an die URL der Verwaltungs-API gesendet werden, werden den URIs in der Web-API zugeordnet. Ein und derselbe API Management-Dienst kann Anforderungen an mehr als eine Web-API weiterleiten. So können Sie mehrere Web-APIs zu einem zentralen Management-Dienst zusammenfassen. Außerdem kann von mehr als einem API Management-Dienst auf dieselbe Web-API verwiesen werden, wenn Sie die Funktionalität, die für unterschiedliche Anwendungen verfügbar ist, einschränken oder partitionieren müssen.
@@ -729,7 +729,7 @@ Weitere Informationen finden Sie in der [Dokumentation zu API Management](/azure
 > Wenn Sie benutzerdefinierte DNS-Namen für Ihre Websites verwenden, sollten Sie in dieser Struktur den richtigen CNAME-Eintrag für jede Website konfigurieren, damit jeweils auf den DNS-Namen der Azure Traffic Manager-Website verwiesen wird.
 >
 
-## <a name="support-developers-building-client-applications"></a>Unterstützen von Entwicklern beim Erstellen von Clientanwendungen
+## <a name="supporting-client-side-developers"></a>Unterstützung von clientseitigen Entwicklern
 Entwickler, die Clientanwendungen erstellen, benötigen normalerweise Informationen dazu, wie sie auf die Web-API zugreifen können. Außerdem benötigen sie Dokumentation zu den Parametern, Datentypen, Rückgabetypen und Rückgabecodes, mit denen die verschiedenen Anforderungen und Antworten zwischen dem Webdienst und der Clientanwendung beschrieben werden.
 
 ### <a name="document-the-rest-operations-for-a-web-api"></a>Dokumentieren der REST-Vorgänge für eine Web-API

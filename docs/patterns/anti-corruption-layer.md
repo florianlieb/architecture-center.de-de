@@ -3,15 +3,15 @@ title: "Muster „Antibeschädigungsebene“"
 description: "Es wird beschrieben, wie Sie eine „Fassade“ oder Adapterebene zwischen einer modernen Anwendung und einem älteren System implementieren."
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: 590d5f3676c92f5f18661360106e2b2fdd4efbe1
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: e41f080abbef772596ee7f8b10ad72bb03a3b829
+ms.sourcegitcommit: c93f1b210b3deff17cc969fb66133bc6399cfd10
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/05/2018
 ---
 # <a name="anti-corruption-layer-pattern"></a>Muster „Antibeschädigungsebene“
 
-Implementieren Sie eine „Fassade“ oder Adapterebene zwischen einer modernen Anwendung und einem älteren System, von dem die Anwendung abhängig ist. Auf dieser Ebene werden Anforderungen zwischen der modernen Anwendung und dem älteren System übersetzt. Verwenden Sie dieses Muster, um sicherzustellen, dass der Entwurf einer Anwendung nicht durch Abhängigkeiten von älteren Systemen eingeschränkt wird.
+Implementieren Sie eine „Fassade“ oder Adapterebene zwischen einer modernen Anwendung und einem älteren System, von dem die Anwendung abhängig ist. Auf dieser Ebene werden Anforderungen zwischen der modernen Anwendung und dem älteren System übersetzt. Verwenden Sie dieses Muster, um sicherzustellen, dass der Entwurf einer Anwendung nicht durch Abhängigkeiten von älteren Systemen eingeschränkt wird. Dieses Muster wurde erstmals von Eric Evans in *Domain-Driven Design* beschrieben.
 
 ## <a name="context-and-problem"></a>Kontext und Problem
 
@@ -49,7 +49,7 @@ Verwenden Sie dieses Muster in folgenden Fällen:
 
 Dieses Muster ist ggf. ungeeignet, wenn zwischen neuem und altem System keine semantischen Unterschiede bestehen. 
 
-## <a name="related-guidance"></a>Verwandte Anweisungen
+## <a name="related-guidance"></a>Verwandte Leitfäden
 
 - [Strangler-Muster][strangler]
 

@@ -3,11 +3,11 @@ title: Identifizieren von Microservice-Grenzen
 description: Identifizieren von Microservice-Grenzen
 author: MikeWasson
 ms.date: 12/08/2017
-ms.openlocfilehash: 046749191bd565813218b3834cb4674c4c5100e2
-ms.sourcegitcommit: a8453c4bc7c870fa1a12bb3c02e3b310db87530c
+ms.openlocfilehash: e4f11da9f970724c55ad99824f808a10c4558971
+ms.sourcegitcommit: 744ad1381e01bbda6a1a7eff4b25e1a337385553
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/29/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="designing-microservices-identifying-microservice-boundaries"></a>Entwerfen von Microservices: Identifizieren von Microservice-Grenzen
 
@@ -116,11 +116,11 @@ Im Anschluss finden Sie einige Faktoren, die Sie bei der Wahl eines Orchestrator
 
 **Übertragbarkeit:** Alle hier aufgeführten Orchestratoren (Kubernetes, DC/OS, Docker Swarm und Service Fabric) können lokal oder in mehreren öffentlichen Clouds ausgeführt werden. 
 
-**Anwendungsintegration:** Die Erstellung einer komplexen Anwendung mit einer serverlosen Architektur ist unter Umständen nicht ganz einfach. Eine Option in Azure ist die Koordinierung einer Gruppe von Azure-Funktionen mit [Azure Logic Apps](/azure/logic-apps/). Ein Beispiel für diese Methode finden Sie unter [Erstellen einer Funktion, die in Azure Logic Apps integriert ist](/azure/azure-functions/functions-twitter-email.).
+**Anwendungsintegration:** Die Erstellung einer komplexen Anwendung mit einer serverlosen Architektur ist unter Umständen nicht ganz einfach. Eine Option in Azure ist die Koordinierung einer Gruppe von Azure-Funktionen mit [Azure Logic Apps](/azure/logic-apps/). Ein Beispiel für diese Methode finden Sie unter [Erstellen einer Funktion, die in Azure Logic Apps integriert ist](/azure/azure-functions/functions-twitter-email).
 
-**Kosten:** Bei Verwendung eines Orchestrators bezahlen Sie für die virtuellen Computer, die im Cluster ausgeführt werden. Bei einer serverlosen Anwendung bezahlen Sie nur für die tatsächlich genutzten Serverressourcen. In beiden Fällen müssen Sie die Kosten für zusätzliche Dienste wie Speicher, Datenbanken und Messaging berücksichtigen.
+**Kosten**: Bei Verwendung eines Orchestrators bezahlen Sie für die virtuellen Computer, die im Cluster ausgeführt werden. Bei einer serverlosen Anwendung bezahlen Sie nur für die tatsächlich genutzten Serverressourcen. In beiden Fällen müssen Sie die Kosten für zusätzliche Dienste wie Speicher, Datenbanken und Messaging berücksichtigen.
 
-**Skalierbarkeit:** Azure Functions wird auf der Grundlage der Anzahl eingehender Ereignisse automatisch nach Bedarf skaliert. Bei Verwendung eines Orchestrators können Sie horizontal hochskalieren, indem Sie die Anzahl der im Cluster ausgeführten Dienstinstanzen erhöhen. Darüber hinaus können Sie dem Cluster zur Skalierung weitere virtuelle Computer hinzufügen.
+**Skalierbarkeit**. Azure Functions wird auf der Grundlage der Anzahl eingehender Ereignisse automatisch nach Bedarf skaliert. Bei Verwendung eines Orchestrators können Sie horizontal hochskalieren, indem Sie die Anzahl der im Cluster ausgeführten Dienstinstanzen erhöhen. Darüber hinaus können Sie dem Cluster zur Skalierung weitere virtuelle Computer hinzufügen.
 
 In unserer Referenzimplementierung setzen wir in erster Linie auf Kubernetes. Für den Dienst „Delivery History“ haben wir allerdings Azure Functions verwendet. Aufgrund der ereignisgesteuerten Workload eignet sich Azure Functions gut für diesen speziellen Dienst. Da die Funktion über einen Event Hubs-Trigger aufgerufen wird, war für den Dienst nur sehr wenig Code erforderlich. Der Dienst „Delivery History“ gehört außerdem nicht zum Hauptworkflow, sodass die Ausführung außerhalb des Kubernetes-Clusters keine Auswirkungen auf die End-to-End-Wartezeit der von Benutzern initiierten Vorgänge hat. 
 
