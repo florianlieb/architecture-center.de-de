@@ -3,11 +3,11 @@ title: "Antimuster für ungeeignete Instanziierung"
 description: "Vermeiden Sie es, ständig neue Instanzen eines Objekts zu erstellen, das einmal erstellt und dann freigegeben werden soll."
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: d6ea27b0ea88ad7527353d263d900626c0aff720
-ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
+ms.openlocfilehash: 4b217f7fc644901eb5c3e77319d151caed30eef1
+ms.sourcegitcommit: cf207fd10110f301f1e05f91eeb9f8dfca129164
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/08/2017
+ms.lasthandoff: 01/29/2018
 ---
 # <a name="improper-instantiation-antipattern"></a>Antimuster für ungeeignete Instanziierung
 
@@ -71,7 +71,7 @@ public class ExpensiveToCreateService
 
 Wenn die Klasse, die die externe Ressource umschließt, gemeinsam nutzbar und threadsicher ist, erstellen Sie eine gemeinsame Singletoninstanz oder einen Pool von wiederverwendbaren Instanzen der Klasse.
 
-Im folgenden Beispiel wird eine statische `HttpClient`-Instanz verwendet, wodurch die Verbindung für alle Anforderungen freigegeben wird.
+Im folgenden Beispiel wird eine statische `HttpClient`-Instanz verwendet. Dadurch wird die Verbindung für alle Anforderungen freigegeben.
 
 ```csharp
 public class SingleHttpClientInstanceController : ApiController
