@@ -17,12 +17,14 @@
 - name: Referenzarchitekturen
   href: reference-architectures/index.md
   items:
+    - name: App Service-Webanwendungen
+      href: reference-architectures/app-service-web-app/index.md
+    - name: Hybridnetzwerke
+      href: reference-architectures/hybrid-networking/index.md
     - name: Identitätsverwaltung
       href: reference-architectures/identity/index.md
-    - name: Hybrides Netzwerk
-      href: reference-architectures/hybrid-networking/index.md
-    - name: App Service-Webanwendung
-      href: reference-architectures/app-service-web-app/index.md
+    - name: Jenkins-Server
+      href: reference-architectures/jenkins/index.md
     - name: Netzwerk-DMZ
       href: reference-architectures/dmz/index.md
     - name: SAP NetWeaver und SAP HANA
@@ -54,7 +56,7 @@
       href: patterns/category/security.md
 - name: Bewährte Methoden
   items:
-    - name: API-Entwurf
+    - name: API-Design
       href: best-practices/api-design.md
     - name: API-Implementierung
       href: best-practices/api-implementation.md
@@ -97,7 +99,7 @@
       href: antipatterns/synchronous-io/index.md
 - name: Checklisten für die Entwurfsüberprüfung
   items:
-    - name: Availability
+    - name: Verfügbarkeit
       href: checklist/availability.md
     - name: DevOps
       href: checklist/dev-ops.md
@@ -111,7 +113,7 @@
       href: resiliency/index.md
     - name: Checkliste für Resilienz
       href: checklist/resiliency.md?toc=/azure/architecture/resiliency/toc.json
-    - name: Analyse im Fehlermodus
+    - name: Fehlermodusanalyse
       href: resiliency/failure-mode-analysis.md
 - name: Anleitungen zu Szenarien
   items:
@@ -125,7 +127,7 @@
       href: elasticsearch/index.md
     - name: Erweitern der Azure Resource Manager-Vorlagenfunktionen
       href: building-blocks/extending-templates/index.md
-- name: Ressourcen
+- name: angeben
   items:
     - name: Azure-Roadmap
       href: 'https://azure.microsoft.com/roadmap/'

@@ -2,11 +2,11 @@
 title: Azure-Referenzarchitekturen
 description: "Referenzarchitekturen, Blaupausen und reglementierende Implementierungsanweisungen für gängige Workloads in Azure"
 layout: LandingPage
-ms.openlocfilehash: eaff531c28faeb0aac774acf70d4334fb4e1f319
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 0cc03f87dae39517e1a72a65d4767dcc21879d8f
+ms.sourcegitcommit: 9998334bebccb86be0f715ac7dffc0c3175aea68
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/26/2018
 ---
 # <a name="azure-reference-architectures"></a>Azure-Referenzarchitekturen
 
@@ -137,6 +137,26 @@ Unsere Referenzarchitekturen sind nach Szenarien angeordnet, wobei verwandte Arc
     </ul>
 
 <ul class="panelContent cardsI">
+<li>
+    <a href="./jenkins/index.md">
+    <div class="cardSize">
+        <div class="cardPadding">
+            <div class="card">
+                <div class="cardImageOuter">
+                    <div class="cardImage">
+                        <img src="./jenkins/images/logo.svg" alt="Jenkins" height="100%" />
+                    </div>
+                </div>
+                <div class="cardText">
+                    <h3>Jenkins-Buildserver</h3>
+                    <p>Bereitstellen und Betreiben eines skalierbaren Jenkins-Servers in Azure auf Unternehmensniveau</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </a>
+</li>
+
 <li>
     <a href="./sharepoint/index.md">
     <div class="cardSize">
