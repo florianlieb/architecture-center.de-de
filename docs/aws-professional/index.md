@@ -5,11 +5,11 @@ keywords: AWS experts, Azure comparison, AWS comparison, difference between azur
 author: lbrader
 ms.date: 03/24/2017
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: ac96110e3fe69b4bb69714e18fd0f193208bc244
-ms.sourcegitcommit: 744ad1381e01bbda6a1a7eff4b25e1a337385553
+ms.openlocfilehash: e5f7cb5062b0b4a8526f3b29a9fa4ddaff399fc0
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="azure-for-aws-professionals"></a>Azure für AWS-Spezialisten
 
@@ -301,7 +301,7 @@ In Azure stehen verschiedene Dienste für relationale Datenbanken zur Verfügung
 -   [Azure Database for MySQL](https://docs.microsoft.com/azure/mysql/overview)
 -   [Azure-Datenbank für PostgreSQL](https://docs.microsoft.com/azure/postgresql/overview)
 
-Andere Datenbankmodule wie [SQL Server](https://azure.microsoft.com/services/virtual-machines/sql-server/), [Oracle](https://azure.microsoft.com/campaigns/oracle/) und [MySQL](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-classic-mysql-2008r2/) können über Azure-VM-Instanzen bereitgestellt werden.
+Andere Datenbank-Engines wie [SQL Server](https://azure.microsoft.com/services/virtual-machines/sql-server/), [Oracle](https://azure.microsoft.com/campaigns/oracle/) und [MySQL](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-classic-mysql-2008r2/) können über Azure-VM-Instanzen bereitgestellt werden.
 
 Die Kosten für AWS RDS werden durch die Menge der Hardwareressourcen bestimmt, die Ihre Instanz verbraucht, z.B. CPU-, RAM- und Speicherkapazitäten sowie Netzwerkbandbreite. Bei den Azure-Datenbankdiensten hängen die Kosten von der Datenbankgröße, der Anzahl der gleichzeitigen Verbindungen und den Durchsatzstufen ab.
 
@@ -311,7 +311,7 @@ Die Kosten für AWS RDS werden durch die Menge der Hardwareressourcen bestimmt, 
 
 -   [Konfigurieren der Georeplikation für Azure SQL-Datenbank mit dem Azure-Portal](https://azure.microsoft.com/documentation/articles/sql-database-geo-replication-portal/)
 
--   [Einführung in Azure Cosmos DB: DocumentDB-API](https://azure.microsoft.com/documentation/articles/documentdb-introduction/)
+-   [Einführung in Azure Cosmos DB: DocumentDB-API](/azure/cosmos-db/sql-api-introduction)
 
 -   [Verwenden des Azure-Tabellenspeichers mit Node.js](https://azure.microsoft.com/documentation/articles/storage-nodejs-how-to-use-table-storage/)
 
