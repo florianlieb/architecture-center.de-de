@@ -2,17 +2,17 @@
 title: "Säulen der Softwarequalität"
 description: "Beschreibt die fünf Säulen der Softwarequalität: Skalierbarkeit, Verfügbarkeit, Resilienz, Verwaltung und Sicherheit."
 author: MikeWasson
-ms.openlocfilehash: 78e613368a07718f5923d619ace335d399b0cc80
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 1d5e30602cafa0d39f92de3101974e77ae258595
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="pillars-of-software-quality"></a>Säulen der Softwarequalität 
 
 Eine gelungene Cloudanwendung basiert auf fünf Säulen der Softwarequalität, nämlich Skalierbarkeit, Verfügbarkeit, Resilienz, Verwaltung und Sicherheit.
 
-| Säule | Beschreibung |
+| Säule | BESCHREIBUNG |
 |--------|-------------|
 | Skalierbarkeit | Die Fähigkeit eines Systems, eine höhere Last zu verarbeiten. |
 | Verfügbarkeit | Der Zeitanteil, in dem ein System funktioniert und erreichbar ist. |
@@ -61,7 +61,7 @@ Verfügbarkeit wird oft in Form von Neunen angegeben – „vier Neunen“ bedeu
 | 99,9 % | 10 Minuten | 43,2 Minuten | 8,76 Stunden |
 | 99,95 % | 5 Minuten | 21,6 Minuten | 4,38 Stunden |
 | 99,99 % | 1 Minute | 4,32 Minuten | 52,56 Minuten |
-| 99.999% | 6 Sekunden | 26 Sekunden | 5,26 Minuten |
+| 99,999% | 6 Sekunden | 26 Sekunden | 5,26 Minuten |
 
 Beachten Sie, dass eine Betriebszeit von 99 % eine Ausfallzeit von fast zwei Stunden pro Woche bedeuten kann. Für viele Anwendungen – insbesondere für Endverbraucheranwendungen – ist das kein akzeptables SLO. Am anderen Ende des Spektrums bedeuten fünf Neunen (99,999 %) eine Ausfallzeit von nur fünf Minuten in einem ganzen *Jahr*. Es ist schwer genug, einen Ausfall so schnell zu entdecken, geschweige denn das Problem zu lösen. Um eine sehr hohe Verfügbarkeit zu erreichen (99,99 % oder höher), dürfen Sie sich nicht auf manuelle Eingriffe verlassen, um Ihre Systeme nach einem Ausfall wiederherzustellen. Die Anwendung muss eine Selbstdiagnose und Selbstreparatur ausführen können – an diese Stelle ist die Resilienz von entscheidender Bedeutung.
 
@@ -153,7 +153,7 @@ Cloudanwendungen verwenden häufig verwaltete Dienste, die über Zugriffsschlüs
 
 Stellen Sie sicher, dass Ihre Daten in der richtigen geopolitischen Zone bleiben, wenn Sie die Hochverfügbarkeitsfeatures von Azure verwenden. Der georeplizierte Azure-Speicher nutzt das Konzept der [Regionspaare][paired-region] in der gleichen geopolitischen Region. 
 
-Verwenden Sie Key Vault, um Kryptografieschlüssel und Geheimnisse zu sichern. Mit Key Vault können Sie Schlüssel und Geheimnisse mithilfe von Schlüsseln verschlüsseln, die durch Hardwaresicherheitsmodule (HSMs) geschützt werden. Viele Speicher- und Datenbankdienste in Azure unterstützen die Verschlüsselung ruhender Daten – hierzu gehören [Azure Storage][storage-encryption], [Azure SQL-Datenbank][sql-db-encryption], [Azure SQL Data Warehouse][data-warehouse-encryption] und [Cosmos DB][documentdb-encryption].
+Verwenden Sie Key Vault, um Kryptografieschlüssel und Geheimnisse zu sichern. Mit Key Vault können Sie Schlüssel und Geheimnisse mithilfe von Schlüsseln verschlüsseln, die durch Hardwaresicherheitsmodule (HSMs) geschützt werden. Viele Speicher- und Datenbankdienste in Azure unterstützen die Verschlüsselung ruhender Daten – hierzu gehören [Azure Storage][storage-encryption], [Azure SQL-Datenbank][sql-db-encryption], [Azure SQL Data Warehouse][data-warehouse-encryption] und [Cosmos DB][cosmosdb-encryption].
 
 ### <a name="security-resources"></a>Sicherheitsressourcen
 
@@ -171,7 +171,7 @@ Verwenden Sie Key Vault, um Kryptografieschlüssel und Geheimnisse zu sichern. M
 
 [ad-subscriptions]: /azure/active-directory/active-directory-how-subscriptions-associated-directory
 [data-warehouse-encryption]: /azure/data-lake-store/data-lake-store-security-overview#data-protection
-[documentdb-encryption]: /azure/documentdb/documentdb-nosql-database-security
+[cosmosdb-encryption]: /azure/cosmos-db/database-security
 [rbac]: /azure/active-directory/role-based-access-control-what-is
 [paired-region]: /azure/best-practices-availability-paired-regions
 [resource-manager-auditing]: /azure/azure-resource-manager/resource-group-audit

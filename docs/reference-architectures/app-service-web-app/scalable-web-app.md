@@ -7,11 +7,11 @@ pnp.series.prev: basic-web-app
 pnp.series.next: multi-region-web-app
 ms.date: 11/23/2016
 cardTitle: Improve scalability
-ms.openlocfilehash: 1fdaf6e3695cb814fa4c275a4a273f9fa9a7b71b
-ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
+ms.openlocfilehash: 4ad12fb041a79fcb706530c9968fd0f96211d7f9
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="improve-scalability-in-a-web-application"></a>Verbessern der Skalierbarkeit in einer Webanwendung
 
@@ -31,7 +31,7 @@ Diese Architektur basiert auf der unter [Einfache Webanwendung][basic-web-app] g
 * **Warteschlange**. Bei der hier gezeigten Architektur setzt die Anwendung Hintergrundaufgaben in eine Warteschlange, indem eine Nachricht in einer [Azure Queue Storage][queue-storage]-Warteschlange abgelegt wird. Die Nachricht löst eine Funktion im WebJob aus. Alternativ können Sie Service Bus-Warteschlangen verwenden. Einen Vergleich finden Sie unter [Azure- und Service Bus-Warteschlangen – Vergleich und Gegenüberstellung][queues-compared].
 * **Cache**. Speichern Sie semistatische Daten in [Azure Redis Cache][azure-redis].  
 * **CDN**. Verwenden Sie [Azure Content Delivery Network][azure-cdn] (CDN) zum Zwischenspeichern öffentlich verfügbarer Inhalte für geringere Latenz und schnellere Bereitstellung der Inhalte.
-* **Datenspeicher**. Verwenden Sie eine [Azure SQL-Datenbank][sql-db] für relationale Daten. Für nicht relationale Daten sollten Sie einen NoSQL-Speicher, z. B. [Cosmos DB][documentdb], in Betracht ziehen.
+* **Datenspeicher**. Verwenden Sie eine [Azure SQL-Datenbank][sql-db] für relationale Daten. Für nicht relationale Daten sollten Sie einen NoSQL-Speicher, z. B. [Cosmos DB][cosmosdb], in Betracht ziehen.
 * **Azure Search**. Verwenden Sie [Azure Search][azure-search] zum Hinzufügen von Suchfunktionalität wie z. B. Suchvorschläge, Fuzzysuche und sprachspezifische Suchen. Azure Search wird normalerweise in Verbindung mit einem anderen Datenspeicher verwendet, insbesondere dann, wenn der primäre Datenspeicher strikte Konsistenz erfordert. Bei dieser Vorgehensweise speichern Sie autorisierende Daten in dem anderen Datenspeicher und den Suchindex in Azure Search. Azure Search kann auch zum Konsolidieren eines einzelnen Suchindex aus mehreren Datenspeichern verwendet werden.  
 * **E-Mail/SMS**. Verwenden Sie einen Drittanbieter-Dienst, z. B. SendGrid oder Twilio, zum Senden von E-Mail- oder SMS-Nachrichten, statt diese Funktionalität direkt in die Anwendung zu integrieren.
 * **Azure DNS:** [Azure DNS][azure-dns] ist ein Hostingdienst für DNS-Domänen, der die Namensauflösung unter Verwendung der Microsoft Azure-Infrastruktur durchführt. Durch das Hosten Ihrer Domänen in Azure können Sie Ihre DNS-Einträge mithilfe der gleichen Anmeldeinformationen, APIs, Tools und Abrechnung wie für die anderen Azure-Dienste verwalten.
@@ -80,10 +80,10 @@ Moderne Anwendungen verarbeiten häufig große Datenmengen. Für eine Skalierung
 | Zu speichernde Objekte | Beispiel | Empfohlener Speicher |
 | --- | --- | --- |
 | Dateien |Bilder, Dokumente, PDF-Dateien |Azure Blob Storage |
-| Schlüssel/Wert-Paare |Nach Benutzer-ID gesuchte Benutzerprofildaten |Azure Table Storage |
+| Schlüssel/Wert-Paare |Nach Benutzer-ID gesuchte Benutzerprofildaten |Azure-Tabellenspeicher |
 | Kurze Nachrichten zum Auslösen der Weiterverarbeitung |Bestellanforderungen |Azure Queue-Speicher, Service Bus-Warteschlange oder Service Bus-Thema |
 | Nicht relationale Daten mit einem flexiblen Schema, die grundlegende Abfragen erfordern |Produktkatalog |Dokumentdatenbank, z. B. Azure Cosmos DB, MongoDB oder Apache CouchDB |
-| Relationale Daten, die eine umfassendere Abfrageunterstützung, ein striktes Schema und/oder starke Konsistenz erfordern |Produktbestand |Azure SQL-Datenbank |
+| Relationale Daten, die eine umfassendere Abfrageunterstützung, ein striktes Schema und/oder starke Konsistenz erfordern |Produktbestand |Azure SQL-Datenbank |
 
 ## <a name="scalability-considerations"></a>Überlegungen zur Skalierbarkeit
 
@@ -140,7 +140,7 @@ Verwenden Sie [Transparent Data Encryption][sql-encryption], wenn in der Datenba
 [cdn-storage-account]: /azure/cdn/cdn-create-a-storage-account-with-cdn
 [cdn-guidance]: ../../best-practices/cdn.md
 [cors]: /azure/app-service-api/app-service-api-cors-consume-javascript
-[documentdb]: https://azure.microsoft.com/documentation/services/documentdb/
+[cosmosdb]: /azure/cosmos-db/
 [queue-storage]: /azure/storage/storage-dotnet-how-to-use-queues
 [queues-compared]: /azure/service-bus-messaging/service-bus-azure-and-service-bus-queues-compared-contrasted
 [resource-group]: /azure/azure-resource-manager/resource-group-overview#resource-groups

@@ -3,11 +3,11 @@ title: "Herstellen von Redundanz für alle Anwendungskomponenten"
 description: Vermeiden Sie Single Points of Failure, indem Sie Redundanz in Ihre Anwendung integrieren.
 author: MikeWasson
 layout: LandingPage
-ms.openlocfilehash: 89a1e6d2d3b1217ab07c9a99a4c4fb3e8cd2cd29
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 05ccf78c2cfbcd4e2d26200e70463d388d54f671
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="make-all-things-redundant"></a>Herstellen von Redundanz für alle Anwendungskomponenten
 
@@ -25,7 +25,7 @@ In einer robusten Anwendung werden Ausfälle umgangen. Identifizieren Sie die kr
 
 **Replizieren Sie Datenbanken.** Bei Azure SQL-Datenbank und Cosmos DB werden die Daten automatisch in einer Region repliziert, und Sie können die Georeplikation regionsübergreifend aktivieren. Wählen Sie bei Verwendung einer IaaS-Datenbanklösung die Lösung, für die Replikation und Failover unterstützt werden, z.B. [Always On-Verfügbarkeitsgruppen (SQL Server)][sql-always-on]. 
 
-**Aktivieren Sie die Georeplikation.** Bei der Georeplikation für [Azure SQL-Datenbank][sql-geo-replication] und [Cosmos DB][docdb-geo-replication] werden sekundäre lesbare Replikate Ihrer Daten in einer oder mehreren Regionen erstellt. Bei einem Ausfall kann die Datenbank für Schreibvorgänge ein Failover in die sekundäre Region durchführen.
+**Aktivieren Sie die Georeplikation.** Bei der Georeplikation für [Azure SQL-Datenbank][sql-geo-replication] und [Cosmos DB][cosmosdb-geo-replication] werden sekundäre lesbare Replikate Ihrer Daten in einer oder mehreren Regionen erstellt. Bei einem Ausfall kann die Datenbank für Schreibvorgänge ein Failover in die sekundäre Region durchführen.
 
 **Nutzen Sie die Partitionierung, um die Verfügbarkeit sicherzustellen.** Die Datenbankpartitionierung wird häufig verwendet, um die Skalierbarkeit zu verbessern, aber auch die Verfügbarkeit kann damit verbessert werden. Wenn ein Shard ausfällt, sind die anderen Shards weiterhin erreichbar. Ein Ausfall in einem Shard führt nur zu einer Störung einer Teilmenge der gesamten Transaktionen. 
 
@@ -46,6 +46,6 @@ In einer robusten Anwendung werden Ausfälle umgangen. Identifizieren Sie die kr
 [multi-vm-blueprint]: ../../reference-architectures/virtual-machines-windows/multi-vm.md
 
 [cassandra]: http://cassandra.apache.org/
-[docdb-geo-replication]: /azure/documentdb/documentdb-distribute-data-globally
+[cosmosdb-geo-replication]: /azure/cosmos-db/distribute-data-globally
 [sql-always-on]: https://msdn.microsoft.com/library/hh510230.aspx
 [sql-geo-replication]: /azure/sql-database/sql-database-geo-replication-overview
