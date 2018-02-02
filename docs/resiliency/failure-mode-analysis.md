@@ -5,11 +5,11 @@ author: MikeWasson
 ms.date: 03/24/2017
 ms.custom: resiliency
 pnp.series.title: Design for Resiliency
-ms.openlocfilehash: 09d09468eebe5c6fe1c9cdab14e142ff46cf0b25
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: aca2088cb007728c5717a968969000c0a19bcd07
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="failure-mode-analysis"></a>Fehlermodusanalyse
 [!INCLUDE [header](../_includes/header.md)]
@@ -133,7 +133,7 @@ Die standardmäßige Wiederholungsrichtlinie verwendet einen exponentiellen Back
 * Das SDK führt bei Fehlversuchen automatisch Wiederholungsversuche durch. Konfigurieren Sie zum Festlegen der Anzahl von Wiederholungsversuchen und der maximalen Wartezeit `ConnectionPolicy.RetryOptions`. Ausnahmen, die vom Client ausgelöst werden, unterliegen entweder nicht der Wiederholungsrichtlinie oder sind keine vorübergehenden Fehler.
 * Wenn Cosmos DB den Client einschränkt, wird ein HTTP 429-Fehler zurückgegeben. Überprüfen Sie den Statuscode unter `DocumentClientException`. Wenn Sie ständig den Fehler 429 erhalten, sollten Sie in Erwägung ziehen, den Durchsatzwert der Sammlung zu erhöhen.
     * Wenn Sie die MongoDB-API verwenden, gibt der Dienst bei der Einschränkung den Fehlercode 16500 zurück.
-* Replizieren Sie die Cosmos DB-Datenbank über zwei oder mehr Regionen hinweg. Alle Replikate können gelesen werden. Geben Sie den Parameter `PreferredLocations` mithilfe des Client-SDKs an. Dies ist eine sortierte Liste von Azure-Regionen. Alle Lesevorgänge werden an die erste verfügbare Region in der Liste gesendet. Wenn bei der Anforderung ein Fehler auftritt, versucht der Client die anderen Regionen in der Liste in der entsprechenden Reihenfolge. Weitere Informationen finden Sie unter [Einrichten der globalen Verteilung von Azure Cosmos DB mithilfe der DocumentDB-API][docdb-multi-region].
+* Replizieren Sie die Cosmos DB-Datenbank über zwei oder mehr Regionen hinweg. Alle Replikate können gelesen werden. Geben Sie den Parameter `PreferredLocations` mithilfe des Client-SDKs an. Dies ist eine sortierte Liste von Azure-Regionen. Alle Lesevorgänge werden an die erste verfügbare Region in der Liste gesendet. Wenn bei der Anforderung ein Fehler auftritt, versucht der Client die anderen Regionen in der Liste in der entsprechenden Reihenfolge. Weitere Informationen finden Sie unter [Einrichten der globalen Verteilung von Azure Cosmos DB mithilfe der SQL-API][cosmosdb-multi-region].
 
 **Diagnose**: Protokollieren Sie alle Fehler auf der Clientseite.
 
@@ -145,7 +145,7 @@ Die standardmäßige Wiederholungsrichtlinie verwendet einen exponentiellen Back
 * Das SDK führt bei Fehlversuchen automatisch Wiederholungsversuche durch. Konfigurieren Sie zum Festlegen der Anzahl von Wiederholungsversuchen und der maximalen Wartezeit `ConnectionPolicy.RetryOptions`. Ausnahmen, die vom Client ausgelöst werden, unterliegen entweder nicht der Wiederholungsrichtlinie oder sind keine vorübergehenden Fehler.
 * Wenn Cosmos DB den Client einschränkt, wird ein HTTP 429-Fehler zurückgegeben. Überprüfen Sie den Statuscode unter `DocumentClientException`. Wenn Sie ständig den Fehler 429 erhalten, sollten Sie in Erwägung ziehen, den Durchsatzwert der Sammlung zu erhöhen.
 * Replizieren Sie die Cosmos DB-Datenbank über zwei oder mehr Regionen hinweg. Tritt bei der primären Region ein Fehler auf, wird eine andere Region für den Schreibvorgang höher gestuft. Sie können einen Failover auch manuell auslösen. Das SDK führt die automatische Erkennung und das automatische Routing durch, sodass der Anwendungscode auch nach einem Failover weiterhin funktioniert. Während der Failoverperiode (normalerweise Minuten) weisen Schreibvorgänge eine höhere Wartezeit auf, da das SDK die neue Schreibregion sucht.
-  Weitere Informationen finden Sie unter [Einrichten der globalen Verteilung von Azure Cosmos DB mithilfe der DocumentDB-API][docdb-multi-region].
+  Weitere Informationen finden Sie unter [Einrichten der globalen Verteilung von Azure Cosmos DB mithilfe der SQL-API][cosmosdb-multi-region].
 * Als Fallback wird das Dokument in eine Sicherungswarteschlange gestellt und die Warteschlange später verarbeitet.
 
 **Diagnose**: Protokollieren Sie alle Fehler auf der Clientseite.
@@ -339,7 +339,7 @@ Weitere Informationen finden Sie unter [Übersicht über Service Bus-Warteschlan
 
 1. Versuchen Sie den Vorgang erneut, um die Wiederherstellung nach vorübergehenden Fehlern zu erreichen. Die [Wiederholungsrichtlinie][Storage.RetryPolicies] im Client-SDK verarbeitet dies automatisch.
 2. Implementieren Sie das Trennschalter-Muster, um eine Überlastung des Speichers zu vermeiden.
-3. Wenn bei N Wiederholungsversuchen Fehler auftreten, führen Sie einen ordnungsgemäßen Fallback aus. Beispiel:
+3. Wenn bei N Wiederholungsversuchen Fehler auftreten, führen Sie einen ordnungsgemäßen Fallback aus. Beispiel: 
 
    * Speichern Sie die Daten in einem lokalen Cache, und leiten Sie die Schreibvorgänge zu einem späteren Zeitpunkt, wenn der Dienst verfügbar ist, an den Speicher weiter.
    * Wenn der Schreibvorgang in einem Transaktionsbereich erfolgt ist, kompensieren Sie die Transaktion.
@@ -453,7 +453,7 @@ Weitere Informationen zur Fehlermodusanalyse finden Sie unter [Resilience by des
 [BrokeredMessage.TimeToLive]: https://msdn.microsoft.com/library/microsoft.servicebus.messaging.brokeredmessage.timetolive.aspx
 [cassandra-error-handling]: http://www.datastax.com/dev/blog/cassandra-error-handling-done-right
 [circuit-breaker]: https://msdn.microsoft.com/library/dn589784.aspx
-[docdb-multi-region]: /azure/documentdb/documentdb-developing-with-multiple-regions/
+[cosmosdb-multi-region]: /azure/cosmos-db/tutorial-global-distribution-sql-api
 [elasticsearch-azure]: ../elasticsearch/index.md
 [elasticsearch-client]: https://www.elastic.co/guide/en/elasticsearch/client/index.html
 [health-endpoint-monitoring-pattern]: https://msdn.microsoft.com/library/dn589789.aspx

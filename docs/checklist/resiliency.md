@@ -4,11 +4,11 @@ description: "Checkliste, die Hinweise zu Überlegungen hinsichtlich der Resilie
 author: petertaylor9999
 ms.date: 01/10/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 66ff802c1f7b35db147ffe4279982c827570c3c1
-ms.sourcegitcommit: 3d6dba524cc7661740bdbaf43870de7728d60a01
+ms.openlocfilehash: 51f807715d0ac929806b9a5a13da4efa00566592
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/11/2018
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="resiliency-checklist"></a>Checkliste für Resilienz
 
@@ -203,7 +203,7 @@ Die folgenden Elemente der Checkliste beziehen sich auf bestimmte Dienste in Azu
 
 ### <a name="cosmos-db"></a>Cosmos DB
 
-**Replizieren Sie die Datenbank zwischen Regionen.** Mit Cosmos DB können Sie einem Cosmos DB-Datenbankkonto eine beliebige Anzahl von Azure-Regionen zuordnen. Eine Cosmos-DB-Datenbank kann eine Schreibregion und mehrere Leseregionen aufweisen. Bei einem Fehler in der Schreibregion können Sie ein anderes Replikat für Lesezugriff verwenden. Das Client-SDK verarbeitet dies automatisch. Sie können auch ein Failover der Schreibregion auf eine andere Region ausführen. Weitere Informationen finden Sie unter [Wie werden Daten mit Azure Cosmos DB global verteilt?](/azure/documentdb/documentdb-distribute-data-globally).
+**Replizieren Sie die Datenbank zwischen Regionen.** Mit Cosmos DB können Sie einem Cosmos DB-Datenbankkonto eine beliebige Anzahl von Azure-Regionen zuordnen. Eine Cosmos-DB-Datenbank kann eine Schreibregion und mehrere Leseregionen aufweisen. Bei einem Fehler in der Schreibregion können Sie ein anderes Replikat für Lesezugriff verwenden. Das Client-SDK verarbeitet dies automatisch. Sie können auch ein Failover der Schreibregion auf eine andere Region ausführen. Weitere Informationen finden Sie unter [Wie werden Daten mit Azure Cosmos DB global verteilt?](/azure/cosmos-db/distribute-data-globally).
 
 ### <a name="redis-cache"></a>Redis-Cache
 
@@ -213,7 +213,7 @@ Die folgenden Elemente der Checkliste beziehen sich auf bestimmte Dienste in Azu
 
 Wenn Sie Redis Cache als temporären Zwischenspeicher für Daten und nicht als permanenten Speicher verwenden, sind diese Empfehlungen möglicherweise nicht relevant. 
 
-### <a name="search"></a>Suchen
+### <a name="search"></a>Suchen,
 
 **Stellen Sie mehr als ein Replikat bereit.** Verwenden Sie mindestens zwei Replikate für hohe Verfügbarkeit für Lesezugriff oder drei für hohe Verfügbarkeit für Lese-/Schreibzugriff.
 

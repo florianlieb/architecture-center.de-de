@@ -4,14 +4,13 @@ description: "Leitfaden zum Trennen von Partitionen für die separate Verwaltung
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: c139fd1ef59ea94235cd9519dd064d0722cee3c9
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: aa59a99ae87328424379e1f9c6fee8cc5887e61c
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="data-partitioning"></a>Datenpartitionierung
-[!INCLUDE [header](../_includes/header.md)]
 
 In vielen umfangreichen Lösungen werden Daten in getrennte Partitionen aufgeteilt, die getrennt verwaltet werden können und auf die separat zugegriffen werden kann. Die Partitionierungsstrategie muss sorgfältig ausgewählt werden, um die Vorteile zu maximieren und gleichzeitig nachteilige Auswirkungen zu minimieren. Partitionierung kann die Skalierbarkeit verbessern, Konflikte reduzieren und die Leistung optimieren. Ein weiterer Vorteil der Partitionierung ist, dass sie einen Mechanismus zum Unterteilen von Daten nach Verwendungsmuster bereitstellen kann. Beispielsweise können Sie ältere, weniger aktive (kalte) Daten in kostengünstigeren Datenspeichern archivieren.
 
@@ -145,7 +144,7 @@ Berücksichtigen Sie beim Entwerfen und Implementieren von Partitionen die folge
 * **Wie kritisch sind die Daten für den Geschäftsbetrieb?** Einige Daten können kritische geschäftliche Informationen wie z. B. Rechnungsdetails oder Banktransaktionen umfassen. Andere Daten enthalten möglicherweise weniger kritische operative Informationen, wie Protokolldateien, Daten zur Leistungsnachverfolgung usw. Berücksichtigen Sie nach dem Ermitteln der jeweiligen Daten Folgendes:
   * Speichern von kritischen Daten in hochverfügbaren Partitionen mit einem geeigneten Sicherungsplans.
   * Einrichten von separater Verwaltung und Überwachungsmechanismen oder Verfahren für die verschiedenen Kritikalitäten von jedem Dataset. Speichern Sie Daten der gleichen Wichtigkeitsstufe in der gleichen Partition, sodass sie mit angemessener Häufigkeit zusammen gesichert werden können. Partitionen, die Daten für Banktransaktionen enthalten, müssen z. B. häufiger gesichert werden als Partitionen mit Protokollierungs- oder Nachverfolgungsinformationen.
-* **Wie werden die einzelnen Partitionen verwaltet?** Das Entwerfen von Partitionen, um unabhängige Verwaltung und Wartung zu unterstützen, bietet mehrere Vorteile. Zum Beispiel:
+* **Wie werden die einzelnen Partitionen verwaltet?** Das Entwerfen von Partitionen, um unabhängige Verwaltung und Wartung zu unterstützen, bietet mehrere Vorteile. Beispiel: 
   * Wenn eine Partition fehlschlägt, kann sie unabhängig wiederhergestellt werden, ohne Auswirkungen auf Instanzen von Anwendungen zu haben, die auf Daten in anderen Partitionen zugreifen.
   * Das Partitionieren von Daten nach geografischem Bereich ermöglicht die Ausführung von geplanten Wartungsaufgaben außerhalb der Spitzenzeiten für jeden Standort. Stellen Sie sicher, dass die Partitionen nicht zu groß sind, um zu verhindern, dass eine geplante Wartung während dieses Zeitraums abgeschlossen wird.
 * **Sollen kritische Daten partitionsübergreifend repliziert werden?** Diese Strategie kann Verfügbarkeit und Leistung verbessern, obwohl es auch zu Konsistenzproblemen führen kann. Es dauert eine Weile, bis Änderungen an Daten in einer Partition mit jedem Replikat synchronisiert wurden. Während dieses Zeitraums enthalten verschiedene Partitionen unterschiedliche Datenwerte.
@@ -360,43 +359,30 @@ Beachten Sie die folgende Punkte, wenn Sie entscheiden, ob und wie Sie eine Serv
 * Partitionierte Warteschlangen und Topics können nicht so konfiguriert werden, dass sie im Leerlauf automatisch gelöscht werden.
 * Partitionierte Warteschlangen und Topics können zurzeit nicht mit dem Advanced Message Queuing Protocol (AMQP) verwendet werden, wenn Sie plattformübergreifende oder hybride Lösungen erstellen.
 
-## <a name="partitioning-strategies-for-documentdb-api"></a>Partitionierungsstrategien für die DocumentDB-API
-Azure Cosmos DB ist eine NoSQL-Datenbank, für die Dokumente mit der [DocumentDB-API][documentdb-api] gespeichert werden können. Ein Dokument in einer Cosmos DB-Datenbank ist eine JSON-serialisierte Darstellung eines Objekts oder sonstigen Datensegments. Es werden keine festgelegten Schemen erzwungen, außer dass jedes Dokument über eine eindeutige ID verfügen muss.
+## <a name="partitioning-strategies-for-cosmos-db"></a>Partitionierungsstrategien für Cosmos DB
+
+Azure Cosmos DB ist eine NoSQL-Datenbank, für die JSON-Dokumente mit der [SQL-API von Azure Cosmos DB][cosmosdb-sql-api] gespeichert werden können. Ein Dokument in einer Cosmos DB-Datenbank ist eine JSON-serialisierte Darstellung eines Objekts oder sonstigen Datensegments. Es werden keine festgelegten Schemen erzwungen, außer dass jedes Dokument über eine eindeutige ID verfügen muss.
 
 Dokumente werden in Auflistungen organisiert. In einer Sammlung können Sie verwandte Dokumente gruppieren. Beispielsweise könnten Sie in einem System, das Blogbeiträge verwaltet, den Inhalt jedes Blogbeitrags als Dokument in einer Sammlung speichern. Sie können auch Sammlungen für jeden Thementyp erstellen. Alternativ dazu könnten Sie in einer mehrinstanzenfähigen Anwendung, wie beispielsweise einem System, in dem verschiedene Autoren ihre eigenen Blogbeiträge kontrollieren und verwalten können, Blogs nach Autor partitionieren und für jeden Autor eine separate Sammlung erstellen. Der Speicherplatz, der Sammlungen zugeordnet ist, ist elastisch und kann je nach Bedarf schrumpfen oder wachsen.
 
-Dokumentsammlungen bieten einen natürlichen Mechanismus zum Partitionieren von Daten innerhalb einer Einzeldatenbank. Intern kann eine Cosmos-Datenbank mehrere Server umspannen und versucht unter Umständen, die Last zu verteilen, indem Sammlungen auf die Server aufgeteilt werden. Der einfachste Weg zur Implementierung von Sharding besteht darin, für jeden Shard eine Sammlung zu erstellen.
+Cosmos DB unterstützt die automatische Partitionierung von Daten basierend auf einem anwendungsdefinierten Partitionsschlüssel. Eine *logische Partition* ist eine Partition, die alle Daten für einen einzelnen Partitionsschlüsselwert speichert. Alle Dokumente, die den gleichen Wert für den Partitionsschlüssel besitzen, werden in der gleichen logischen Partition platziert. Cosmos DB verteilt Werte anhand des Hash des Partitionsschlüssels. Eine logische Partition hat eine maximale Größe von 10 GB. Daher ist die Auswahl des Partitionsschlüssels eine wichtige Entscheidung, die zur Entwurfszeit getroffen wird. Wählen Sie eine Eigenschaft mit einer Vielzahl von Werten und gleichmäßigen Zugriffsmustern. Weitere Informationen finden Sie unter [Partitionieren und Skalieren in Azure Cosmos DB](/azure/cosmos-db/partition-data).
 
 > [!NOTE]
-> Jede Cosmos DB-Datenbank weist eine bestimmte *Leistungsebene* auf, mit der der Umfang der Ressourcen festgelegt wird, die von der Datenbank genutzt werden können. Jeder Leistungsstufe ist eine Ratenbegrenzung für *Anforderungseinheiten* (Request Unit, RU) zugeordnet. Die RU-Ratenbegrenzung gibt die Menge der Ressourcen an, die für diese Sammlung reserviert sind und für die ausschließliche Verwendung durch diese Sammlung zur Verfügung stehen. Die Kosten einer Sammlung richten sich nach der Leistungsstufe, die für diese Sammlung gewählt wurde. Je höher die Leistungsstufe (und die RU-Ratenbegrenzung), desto höher die Kosten. Sie können die Leistungsstufe einer Sammlung über das Azure-Portal anpassen. Weitere Informationen finden Sie unter [Performance levels in Cosmos DB] (Leistungsebenen in Cosmos DB) auf der Microsoft-Website.
+> Jede Cosmos DB-Datenbank weist eine bestimmte *Leistungsebene* auf, mit der der Umfang der Ressourcen festgelegt wird, die von der Datenbank genutzt werden können. Jeder Leistungsstufe ist eine Ratenbegrenzung für *Anforderungseinheiten* (Request Unit, RU) zugeordnet. Die RU-Ratenbegrenzung gibt die Menge der Ressourcen an, die für diese Sammlung reserviert sind und für die ausschließliche Verwendung durch diese Sammlung zur Verfügung stehen. Die Kosten einer Sammlung richten sich nach der Leistungsstufe, die für diese Sammlung gewählt wurde. Je höher die Leistungsstufe (und die RU-Ratenbegrenzung), desto höher die Kosten. Sie können die Leistungsstufe einer Sammlung über das Azure-Portal anpassen. Weitere Informationen finden Sie unter [Anforderungseinheiten in Azure Cosmos DB][cosmos-db-ru].
 >
 >
+
+Wenn der Partitionierungsmechanismus von Cosmos DB nicht ausreicht, müssen Sie für die Daten unter Umständen Sharding auf Anwendungsebene durchführen. Dokumentsammlungen bieten einen natürlichen Mechanismus zum Partitionieren von Daten innerhalb einer Einzeldatenbank. Der einfachste Weg Sharding zu implementieren, ist für jedes Shard eine Auflistung zu erstellen. Container sind logische Ressourcen und können einen oder mehrere Server umfassen. Container mit fester Größe weisen eine Obergrenze von 10 GB und 10.000 RUs/Sek. (Request Units, Anforderungseinheiten) auf. Für unbegrenzte Container gilt keine maximale Speichergröße, sie müssen aber einen Partitionsschlüssel angeben. Bei Anwendungs-Sharding muss die Clientanwendung Anforderungen an den geeigneten Shard leiten. Für gewöhnlich erfolgt dies durch Implementieren ihres eigenen Zuordnungsmechanismus, basierend auf einigen Attributen der Daten, die den Shardschlüssel definieren. 
 
 Alle Datenbanken werden im Kontext eines Cosmos DB-Datenbankkontos erstellt. Ein einzelnes Konto kann mehrere Datenbanken enthalten und gibt an, in welcher Region die Datenbanken erstellt werden. Jedes Konto erzwingt auch seine eigene Zugriffssteuerung. Sie können Cosmos DB-Konten verwenden, um Shards (Sammlungen in Datenbanken) geografisch in der Nähe der Benutzer zu platzieren, die darauf zugreifen müssen, und Einschränkungen erzwingen, sodass nur diese Benutzer eine Verbindung damit herstellen können.
 
-Jedes Cosmos DB-Konto verfügt über ein Kontingent, durch das die Anzahl von Datenbanken und Sammlungen, die es enthalten kann, sowie die Menge des verfügbaren Dokumentspeicherplatzes begrenzt wird. Weitere Informationen finden Sie unter [Grenzwerte für Azure-Abonnements, -Dienste und -Kontingente sowie allgemeine Beschränkungen][azure-limits]. Theoretisch ist es möglich, dass bei der Implementierung eines Systems, in dem alle Shards zur gleichen Datenbank gehören, die Speicherkapazitätsgrenze des Kontos erreicht wird.
+Berücksichtigen Sie die folgenden Punkte bei der Entscheidung, wie Daten mit der SQL-API von Azure Cosmos DB partitioniert werden sollen:
 
-In diesem Fall müssen Sie unter Umständen zusätzliche Konten und Datenbanken einrichten und die Shards auf diese Datenbanken verteilen. Auch wenn es unwahrscheinlich ist, dass die maximale Speicherkapazität einer Datenbank erreicht wird, empfiehlt es sich, mehrere Datenbanken zu verwenden. Da jede Datenbank über einen eigenen Satz an Benutzern und Berechtigungen verfügt, können Sie diesen Mechanismus verwenden, um den Zugriff auf Sammlungen basierend auf der Datenbank zu steuern.
-
-In Abbildung 8 ist die allgemeine Struktur der DocumentDB-API dargestellt.
-
-![Struktur der DocumentDB-API](./images/data-partitioning/DocumentDBStructure.png)
-
-*Abbildung 8:  Struktur der DocumentDB-API-Architektur*
-
-Es ist Aufgabe der Clientanwendung, Anforderungen an den geeigneten Shard zu leiten, für gewöhnlich durch Implementieren ihres eigenen Zuordnungsmechanismus, basierend auf einigen Attributen der Daten, die den Shardschlüssel definieren. Abbildung 9 zeigt zwei DocumentDB-API-Datenbanken, von denen jede zwei Sammlungen enthält, die als Shards fungieren. Das Sharding der Daten erfolgt über eine Mandanten-ID, und die Daten sind spezifisch für einen bestimmten Mandanten. Die Datenbanken werden in separaten Cosmos DB-Konten erstellt. Diese Konten befinden sich in der gleichen Region wie die Mandanten, deren Daten sie enthalten. Die Routinglogik in der Clientanwendung verwendet die Mandanten-ID als Shardschlüssel.
-
-![Implementieren von Sharding mithilfe der DocumentDB-API](./images/data-partitioning/DocumentDBPartitions.png)
-
-*Abbildung 9: Implementieren von Sharding mithilfe der DocumentDB-API*
-
-Berücksichtigen Sie die folgenden Punkte bei der Entscheidung, wie Daten mit der DocumentDB-API partitioniert werden sollen:
-
-* **Die für eine DocumentDB-API-Datenbank verfügbaren Ressourcen unterliegen den Kontingentgrenzen für das Konto**. Jede Datenbank kann eine Reihe von Sammlungen enthalten (mit erneuter Beschränkung) und jeder Sammlung ist eine Leistungsebene zugeordnet, die die RU-Ratenbegrenzung (reservierter Durchsatz) für diese Sammlung regelt. Weitere Informationen finden Sie unter [Grenzwerte für Azure-Abonnements, -Dienste und -Kontingente sowie allgemeine Beschränkungen].
+* **Die für eine Cosmos DB-Datenbank verfügbaren Ressourcen unterliegen den Kontingentgrenzen für das Konto.** Jede Datenbank kann eine Reihe von Sammlungen enthalten, und jeder Sammlung ist eine Leistungsebene zugeordnet, die die RU-Ratenbegrenzung (reservierter Durchsatz) für diese Sammlung regelt. Weitere Informationen finden Sie unter [Grenzwerte für Azure-Abonnements, -Dienste und -Kontingente sowie allgemeine Beschränkungen][azure-limits].
 * **Jedes Dokument muss über ein Attribut verfügen, das verwendet werden kann, um das Dokument in der Sammlung, in der es enthalten ist, eindeutig zu identifizieren**. Dieses Attribut unterscheidet sich vom Shardschlüssel, der die Sammlung definiert, in der das Dokument enthalten ist. Eine Sammlung kann eine große Anzahl von Dokumenten enthalten. Theoretisch besteht die einzige Einschränkung in der maximalen Länge der Dokument-ID. Die Dokument-ID kann bis zu 255 Zeichen lang sein.
 * **Alle Vorgänge für ein Dokument werden im Kontext einer Transaktion ausgeführt. Transaktionen sind auf die Sammlung begrenzt, in der das Dokument enthalten ist.** Wenn ein Vorgang fehlschlägt, wird die Arbeit, die durch ihn ausgeführt wurde, zurückgesetzt. Während ein Vorgang für ein Dokument ausgeführt wird, unterliegen alle vorgenommenen Änderungen einer Isolierung auf Snapshotebene. Wenn z. B. eine Anforderung zum Erstellen eines neuen Dokuments fehlschlägt, stellt dieser Mechanismus sicher, dass einem anderen Benutzer, der die Datenbank gleichzeitig abfragt, kein Teildokument angezeigt wird, das dann entfernt wird.
 * **Datenbankabfragen sind ebenfalls auf die Sammlungsebene begrenzt**. Eine einzelne Abfrage kann nur Daten aus einer Sammlung abrufen. Wenn Sie Daten aus mehreren Sammlungen abrufen müssen, müssen Sie jede Sammlung einzeln abfragen und die Ergebnisse in Ihrem Anwendungscode zusammenführen.
-* **DocumentDB-API-Datenbanken unterstützen programmierbare Elemente, die alle zusammen mit Dokumenten in einer Sammlung gespeichert werden können**. Hierzu gehören gespeicherte Prozeduren, benutzerdefinierte Funktionen und Trigger (geschrieben in JavaScript). Diese Elemente können auf alle Dokumente in der gleichen Auflistung zugreifen. Außerdem werden diese Elemente entweder im Rahmen der Ambient-Transaktion ausgeführt (im Fall eines Triggers, der als Ergebnis eines für ein Dokument ausgeführten Erstellungs-, Lösch- oder Ersetzungsvorgangs ausgelöst wird) oder durch Starten einer neuen Transaktion (im Fall einer gespeicherten Prozedur, die als Ergebnis einer expliziten Clientanforderung ausgeführt wird). Wenn der Code in einem programmierbaren Element eine Ausnahme auslöst, wird für die Transaktion ein Rollback ausgeführt. Sie können gespeicherte Prozeduren und Trigger verwenden, um die Integrität und Konsistenz zwischen den Dokumenten zu verwalten, aber diese Dokumente müssen alle derselben Auflistung angehören.
+* **Cosmos DB-Datenbanken unterstützen programmierbare Elemente, die alle zusammen mit Dokumenten in einer Sammlung gespeichert werden können.** Hierzu gehören gespeicherte Prozeduren, benutzerdefinierte Funktionen und Trigger (geschrieben in JavaScript). Diese Elemente können auf alle Dokumente in der gleichen Auflistung zugreifen. Außerdem werden diese Elemente entweder im Rahmen der Ambient-Transaktion ausgeführt (im Fall eines Triggers, der als Ergebnis eines für ein Dokument ausgeführten Erstellungs-, Lösch- oder Ersetzungsvorgangs ausgelöst wird) oder durch Starten einer neuen Transaktion (im Fall einer gespeicherten Prozedur, die als Ergebnis einer expliziten Clientanforderung ausgeführt wird). Wenn der Code in einem programmierbaren Element eine Ausnahme auslöst, wird für die Transaktion ein Rollback ausgeführt. Sie können gespeicherte Prozeduren und Trigger verwenden, um die Integrität und Konsistenz zwischen den Dokumenten zu verwalten, aber diese Dokumente müssen alle derselben Auflistung angehören.
 * **Die Sammlungen, die Sie in den Datenbanken speichern möchten, sollten die von den Leistungsstufen der Sammlungen definierten Durchsatzgrenzen nicht überschreiten**. Weitere Informationen finden Sie unter [Anforderungseinheiten in Azure Cosmos DB][cosmos-db-ru]. Wenn diese Grenzwerte bei Ihnen voraussichtlich erreicht werden, sollten Sie erwägen, die Sammlungen auf Datenbanken in verschiedenen Konten zu verteilen, um die Last pro Sammlung zu verringern.
 
 ## <a name="partitioning-strategies-for-azure-search"></a>Partitionierungsstrategien für Azure Search
@@ -426,7 +412,7 @@ Sie können die Art und Weise, in der Azure Search Daten für jede Instanz des D
 Dieser Ansatz ist besonders geeignet, wenn erhebliche regionale Unterschiede in Bezug auf die gesuchten Daten vorhanden sind.
 
 ## <a name="partitioning-strategies-for-azure-redis-cache"></a>Partitionierungsstrategien für Azure Redis Cache
-Azure Redis Cache bietet einen Shared Caching Service in der Cloud, der auf dem Redis-Schlüssel-Wert-Datenspeicher basiert. Wie der Name schon sagt, ist Azure Redis Cache als Cachinglösung konzipiert. Verwenden Sie den Cache nur zur vorübergehenden Speicherung, nicht als permanenten Datenspeicher. Anwendungen, die Azure Redis Cache verwenden, sollten weiterhin funktionieren, auch wenn der Cache nicht verfügbar ist. Azure Redis Cache unterstützt die primäre/sekundäre Replikation zur Gewährleistung hoher Verfügbarkeit, derzeit ist die maximale Cachegröße jedoch auf 53 GB beschränkt. Wenn mehr Speicherplatz benötigt wird, müssen Sie zusätzliche Caches erstellen. Weitere Informationen finden Sie auf der Microsoft-Website im Artikel [Azure Redis Cache] .
+Azure Redis Cache bietet einen Shared Caching Service in der Cloud, der auf dem Redis-Schlüssel-Wert-Datenspeicher basiert. Wie der Name schon sagt, ist Azure Redis Cache als Cachinglösung konzipiert. Verwenden Sie den Cache nur zur vorübergehenden Speicherung, nicht als permanenten Datenspeicher. Anwendungen, die Azure Redis Cache verwenden, sollten weiterhin funktionieren, auch wenn der Cache nicht verfügbar ist. Azure Redis Cache unterstützt die primäre/sekundäre Replikation zur Gewährleistung von Hochverfügbarkeit, derzeit ist die maximale Cachegröße jedoch auf 53 GB beschränkt. Wenn mehr Speicherplatz benötigt wird, müssen Sie zusätzliche Caches erstellen. Weitere Informationen finden Sie auf der Microsoft-Website im Artikel [Azure Redis Cache] .
 
 Die Partitionierung eines Redis-Datenspeichers umfasst das Aufteilen von Daten über Instanzen des Redis-Diensts hinweg. Jede Instanz stellt eine einzelne Partition dar. Azure Redis Cache abstrahiert die Redis-Dienste hinter einer Fassade und zeigt sie nicht direkt an. Die einfachste Methode zum Implementieren der Partitionierung ist es, mehrere Azure Redis Cache-Instanzen zu erstellen und die Daten auf diese Instanzen zu verteilen.
 
@@ -454,14 +440,14 @@ Berücksichtigen Sie folgende Punkte bei der Entscheidung, wie Daten mit Azure R
   * Aggregierte Datentypen wie beispielsweise Listen (die als Warteschlangen und Stapel fungieren können)
   * Sätze (sortiert und nicht sortiert)
   * Hashes (die verwandte Felder gruppieren können, wie z. B. die Elemente, die die Felder in einem Objekt repräsentieren)
-* Mithilfe der aggregierten Datentypen können Sie viele ähnliche Werte mit dem gleichen Schlüssel verknüpfen. Ein Redis-Schlüssel identifiziert eine Liste, einen Satz oder einen Hash anstatt der darin enthaltenen Datenelemente. All diese Datentypen sind mit Azure Redis Cache verfügbar und werden auf der Redis-Website unter [Data types] (Datentypen) beschrieben. Beispielsweise können in dem Teil eines E-Commerce-Systems, in dem die Bestellungen von Kunden verfolgt werden, die Details der einzelnen Kunden in einem Redis-Hash gespeichert werden, der mithilfe der Kunden-ID verschlüsselt wurde. Jeder Hash kann eine Sammlung von Bestellnummern für den jeweiligen Kunden enthalten. Ein separater Redis-Satz kann die Bestellungen enthalten, die wieder als Hashes strukturiert sind und mithilfe der Bestellnummer verschlüsselt wurden. Abbildung 10 zeigt eine solche Struktur. Beachten Sie, dass Redis keine Form der referenziellen Integrität implementiert, daher ist es die Verantwortung des Entwicklers, die Beziehungen zwischen Kunden und Bestellungen zu verwalten.
+* Mithilfe der aggregierten Datentypen können Sie viele ähnliche Werte mit dem gleichen Schlüssel verknüpfen. Ein Redis-Schlüssel identifiziert eine Liste, einen Satz oder einen Hash anstatt der darin enthaltenen Datenelemente. All diese Datentypen sind mit Azure Redis Cache verfügbar und werden auf der Redis-Website unter [Data types] (Datentypen) beschrieben. Beispielsweise können in dem Teil eines E-Commerce-Systems, in dem die Bestellungen von Kunden verfolgt werden, die Details der einzelnen Kunden in einem Redis-Hash gespeichert werden, der mithilfe der Kunden-ID verschlüsselt wurde. Jeder Hash kann eine Sammlung von Bestellnummern für den jeweiligen Kunden enthalten. Ein separater Redis-Satz kann die Bestellungen enthalten, die wieder als Hashes strukturiert sind und mithilfe der Bestellnummer verschlüsselt wurden. Abbildung 8 zeigt eine solche Struktur. Beachten Sie, dass Redis keine Form der referenziellen Integrität implementiert, daher ist es die Verantwortung des Entwicklers, die Beziehungen zwischen Kunden und Bestellungen zu verwalten.
 
 ![Vorgeschlagene Struktur im Redis-Speicher für die Aufzeichnung von Bestellungen und Informationen von Kunden](./images/data-partitioning/RedisCustomersandOrders.png)
 
-*Abbildung 10: Vorgeschlagene Struktur im Redis-Speicher für die Aufzeichnung von Bestellungen und Informationen von Kunden*
+*Abbildung 8: Vorgeschlagene Struktur im Redis-Speicher für die Aufzeichnung von Bestellungen und Informationen von Kunden*
 
 > [!NOTE]
-> In Redis sind alle Schlüssel binäre Datenwerte (wie Redis-Zeichenfolgen) und können bis zu 512 MB Daten enthalten. Theoretisch kann ein Schlüssel nahezu jegliche Informationen enthalten. Es empfiehlt sich jedoch, eine konsistente Namenskonvention für Schlüssel anzuwenden, die den Datentyp beschreibt und die Entität identifiziert, aber nicht übermäßig lang ist. Eine gängige Methode ist die Verwendung von Schlüsseln im Format „Entitätstyp:ID“. Beispielsweise können Sie „Kunde:99“ verwenden, um den Schlüssel für einen Kunden mit der ID 99 anzugeben.
+> In Redis sind alle Schlüssel binäre Datenwerte (wie Redis-Zeichenfolgen) und können bis zu 512 MB Daten enthalten. Theoretisch kann ein Schlüssel nahezu jegliche Informationen enthalten. Es empfiehlt sich jedoch, eine konsistente Benennungskonvention für Schlüssel anzuwenden, die den Datentyp beschreibt und die Entität identifiziert, aber nicht übermäßig lang ist. Eine gängige Methode ist die Verwendung von Schlüsseln im Format „Entitätstyp:ID“. Beispielsweise können Sie „Kunde:99“ verwenden, um den Schlüssel für einen Kunden mit der ID 99 anzugeben.
 >
 >
 
@@ -562,18 +548,18 @@ Wenn Sie Strategien zum Implementieren der Datenkonsistenz in Betracht ziehen, k
 * Auf der Seite [Data Types] (Datentypen) auf der Redis-Website werden die Datentypen beschrieben, die mit Redis und Azure Redis Cache verfügbar sind.
 
 [Verfügbarkeit und Konsistenz in Event Hubs]: /azure/event-hubs/event-hubs-availability-and-consistency
-[azure-limits]: /azure/azure-subscription-service-limit
+[azure-limits]: /azure/azure-subscription-service-limits
 [Übersicht über das Azure Content Delivery Network (CDN)]: /azure/cdn/cdn-overview
 [Azure Redis Cache]: http://azure.microsoft.com/services/cache/
 [Azure Storage Scalability and Performance Targets]: /azure/storage/storage-scalability-targets
 [Azure Storage Table Design Guide]: /azure/storage/storage-table-design-guide
 [Building a Polyglot Solution]: https://msdn.microsoft.com/library/dn313279.aspx (Erstellen einer Polyglot-Lösung)
-[cosmos-db-ru]: /azure/documentdb/documentdb-request-units
+[cosmos-db-ru]: /azure/cosmos-db/request-units
 [Data Access for Highly-Scalable Solutions: Using SQL, NoSQL, and Polyglot Persistence]: https://msdn.microsoft.com/library/dn271399.aspx (Datenzugriff für hoch skalierbare Lösungen: Verwenden von SQL, NoSQL und Polyglot Persistence)
 [Data Consistency Primer]: http://aka.ms/Data-Consistency-Primer
 [Data Partitioning Guidance]: https://msdn.microsoft.com/library/dn589795.aspx
 [Data Types]: http://redis.io/topics/data-types
-[documentdb-api]: /azure/documentdb/documentdb-introduction
+[cosmosdb-sql-api]: /azure/cosmos-db/sql-api-introduction
 [Übersicht über Features für elastische Datenbanken]: /azure/sql-database/sql-database-elastic-scale-introduction
 [event-hubs]: /azure/event-hubs
 [Federations Migration Utility]: https://code.msdn.microsoft.com/vstudio/Federations-Migration-ce61e9c1

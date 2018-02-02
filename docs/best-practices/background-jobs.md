@@ -4,11 +4,11 @@ description: "Anleitungen für Hintergrundaufgaben, die unabhängig von der Benu
 author: dragon119
 ms.date: 05/24/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: d8c1d4dfe12208b72fd6991def805f90a830b5f0
-ms.sourcegitcommit: a8453c4bc7c870fa1a12bb3c02e3b310db87530c
+ms.openlocfilehash: 10c24afee4b880cfbf8ee534f4d7f945d2b046a9
+ms.sourcegitcommit: 3426a9c5ed937f097725c487cf3d073ae5e2a347
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/29/2017
+ms.lasthandoff: 02/01/2018
 ---
 # <a name="background-jobs"></a>Hintergrundaufträge
 [!INCLUDE [header](../_includes/header.md)]
@@ -244,7 +244,7 @@ Berücksichtigen Sie die folgenden Punkte, wenn Sie Hintergrundaufgaben in einer
     }
     ```
     
-    * Fügen Sie die Definition der **Freeze**-Einstellung den Dateien „ServiceDefinition.csdef“ und „ServiceConfiguration.*.cscfg“ für die Rolle als booleschen Wert hinzu, und legen Sie sie auf **false** fest. Wenn die Rolle in einen wiederholten Neustartmodus wechselt, können Sie diese Einstellung in **true** ändern, um die Ausführung der Rolle anzuhalten und zuzulassen, dass sie gegen eine frühere Version ausgetauscht wird.
+  * Fügen Sie die Definition der **Freeze**-Einstellung den Dateien „ServiceDefinition.csdef“ und „ServiceConfiguration.\*.cscfg“ für die Rolle als booleschen Wert hinzu, und legen Sie sie auf **false** fest. Wenn die Rolle in einen wiederholten Neustartmodus wechselt, können Sie diese Einstellung in **true** ändern, um die Ausführung der Rolle anzuhalten und zuzulassen, dass sie gegen eine frühere Version ausgetauscht wird.
 
 #### <a name="more-information"></a>Weitere Informationen
 * [Serverressourcen-Konsolidierungsmuster](http://msdn.microsoft.com/library/dn589778.aspx)

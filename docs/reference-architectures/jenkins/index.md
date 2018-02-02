@@ -3,11 +3,11 @@ title: "Ausführen eines Jenkins-Servers in Azure"
 description: "Diese Referenzarchitektur veranschaulicht, wie Sie einen für Unternehmen konzipierten skalierbaren Jenkins-Server in Azure bereitstellen und betreiben, der durch einmaliges Anmelden (Single Sign-On, SSO) geschützt ist."
 author: njray
 ms.date: 01/21/18
-ms.openlocfilehash: d06b16c212951c629612d69b13fa2b32b1030475
-ms.sourcegitcommit: 9998334bebccb86be0f715ac7dffc0c3175aea68
+ms.openlocfilehash: 9cab4990b259695f310da339bfef3060b0905640
+ms.sourcegitcommit: 3426a9c5ed937f097725c487cf3d073ae5e2a347
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/26/2018
+ms.lasthandoff: 02/01/2018
 ---
 # <a name="run-a-jenkins-server-on-azure"></a>Ausführen eines Jenkins-Servers in Azure
 
@@ -27,7 +27,7 @@ Die Architektur umfasst die folgenden Komponenten:
 
 -   **Ressourcengruppe:** Eine [Ressourcengruppe][rg] dient zum Gruppieren von Azure-Ressourcen, damit sie nach Lebensdauer, Besitzer und anderen Kriterien verwaltet werden können. Verwenden Sie Ressourcengruppen, um Azure-Ressourcen als Gruppe bereitzustellen und zu überwachen und Abrechnungskosten nach Ressourcengruppe nachzuverfolgen. Sie können auch Ressourcen als Gruppe löschen, was für Testbereitstellungen sehr nützlich ist.
 
--   **Jenkins-Server:** Ein virtueller Computer, der als Jenkins-Master fungiert, wird bereitgestellt, um [Jenkins][azure-market] als Automatisierungsserver auszuführen. Diese Referenzarchitektur verwendet die [Lösungsvorlage für Jenkins in Azure][solution] und ist auf einem virtuellen Linux-Computer (Ubuntu 14.04 LTS) in Azure installiert. Andere Jenkins-Angebote sind im Azure Marketplace erhältlich.
+-   **Jenkins-Server:** Ein virtueller Computer, der als Jenkins-Master fungiert, wird bereitgestellt, um [Jenkins][azure-market] als Automatisierungsserver auszuführen. Diese Referenzarchitektur verwendet die [Lösungsvorlage für Jenkins in Azure][solution] und ist auf einem virtuellen Linux-Computer (Ubuntu 16.04 LTS) in Azure installiert. Andere Jenkins-Angebote sind im Azure Marketplace erhältlich.
 
     > [!NOTE]
     > Nginx ist auf dem virtuellen Computer installiert und fungiert als Reverseproxy für Jenkins. Sie können Nginx zum Aktivieren von SSL für den Jenkins-Server konfigurieren.

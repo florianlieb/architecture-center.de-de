@@ -4,16 +4,16 @@ description: "Anleitungen zum Content Delivery Network (CDN) für die Bereitstel
 author: dragon119
 ms.date: 09/30/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 94036c803552d5e7061f99e6dd0ca9e563a32690
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: fffe0b0523c0a9c817f4346744ff3b5e3f11dede
+ms.sourcegitcommit: cf207fd10110f301f1e05f91eeb9f8dfca129164
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/29/2018
 ---
 # <a name="content-delivery-network"></a>Content Delivery Network
 [!INCLUDE [header](../_includes/header.md)]
 
-Das Microsoft Azure Content Delivery Network (CDN) bietet Entwicklern eine globale Lösung für die Bereitstellung von Inhalten mit hoher Bandbreite, die in Azure oder an einem beliebigen anderen Ort gehostet werden. Mit einem CDN können Sie öffentlich verfügbare Objekte zwischenspeichern, die aus dem Azure-Blobspeicher, einer Webanwendung, einem virtuellen Computer, einem Anwendungsordner oder einem anderen HTTP-/HTTPS-Speicherort geladen werden. Der zum Zwischenspeichern verwendete CDN-Cache kann an strategischen Standorten angesiedelt werden, um beim Übermitteln des Inhalts an die Benutzer eine maximale Bandbreite zu gewährleisten. Ein CDN wird normalerweise zum Bereitstellen statischer Inhalte wie Bilder, Stylesheets, Dokumente, Dateien, clientseitige Skripts und HTML-Seiten verwendet.
+Das Microsoft Azure [Content Delivery Network (CDN)](/azure/cdn/cdn-overview) bietet Entwicklern eine globale Lösung für die Bereitstellung von Inhalten mit hoher Bandbreite, die in Azure oder an einem beliebigen anderen Ort gehostet werden. Mit einem CDN können Sie öffentlich verfügbare Objekte zwischenspeichern, die aus dem Azure-Blobspeicher, einer Webanwendung, einem virtuellen Computer, einem Anwendungsordner oder einem anderen HTTP-/HTTPS-Speicherort geladen werden. Der zum Zwischenspeichern verwendete CDN-Cache kann an strategischen Standorten angesiedelt werden, um beim Übermitteln des Inhalts an die Benutzer eine maximale Bandbreite zu gewährleisten. Ein CDN wird normalerweise zum Bereitstellen statischer Inhalte wie Bilder, Stylesheets, Dokumente, Dateien, clientseitige Skripts und HTML-Seiten verwendet.
 
 Sie können das CDN auch als Cache zum Ausliefern von dynamischem Inhalt verwenden, z. B. für einen PDF-Bericht oder ein Diagramm, das von spezifischen Eingaben abhängig ist. Wenn mehrere Benutzer die gleichen Eingabewerte eingeben, sollte das Ergebnis identisch sein.
 
@@ -74,7 +74,7 @@ In folgenden Szenarien kann CDN weniger nützlich sein:
 Das Verwenden des CDN ist eine gute Möglichkeit, um die Belastung Ihrer Anwendung zu minimieren und Verfügbarkeit sowie Leistung zu maximieren. Erwägen Sie den Einsatz dieser Strategie für alle von Ihrer Anwendung genutzten Inhalte und Ressourcen, sofern sie dafür geeignet sind. Berücksichtigen Sie beim Entwerfen Ihrer Strategie zur CDN-Nutzung folgende Punkte:  
 
 ### <a name="origin"></a>Origin
-Zum Bereitstellen von Inhalten über das CDN müssen Sie einfach einen HTTP- und/oder HTTPS-Endpunkt angeben, den der CDN-Dienst für den Zugriff auf den Inhalt und für die Zwischenspeicherung verwendet.
+Zum Bereitstellen von Inhalten über das CDN müssen Sie einfach einen HTTP- und/oder HTTPS-[Endpunkt](/azure/cdn/cdn-create-new-endpoint) angeben, den der CDN-Dienst für den Zugriff auf den Inhalt und für die Zwischenspeicherung verwendet.
 
 Der Endpunkt kann einen Azure Blob Storage-Container angeben, der den statischen Inhalt enthält, den Sie über das CDN bereitstellen möchten. Der Container muss als öffentlich markiert sein. Nur Blobs in einem öffentlichen Container, die öffentlichen Lesezugriff haben, sind über das CDN verfügbar.
 
@@ -133,7 +133,7 @@ Das CDN kann Inhalte per HTTPS (SSL) bereitstellen, indem das vom CDN bereitgest
 
 Wenn Sie statische Objekte, z.B. Schriftdateien, mit dem CDN bereitstellen, können ggf. Probleme aufgrund einer Richtlinie desselben Ursprungs auftreten, falls Sie einen *XMLHttpRequest*-Aufruf zum Anfordern dieser Ressourcen aus einer anderen Domäne verwenden. Viele Webbrowser verhindern CORS (Cross-Origin Resource Sharing, ursprungsübergreifende Ressourcenfreigabe), sofern der Webserver nicht so konfiguriert wurde, dass die entsprechenden Antwortheader festgelegt werden. Sie können das CDN konfigurieren, um CORS zu unterstützen, indem Sie eine der folgenden Methoden verwenden:
 
-* Nutzen Sie das CDN-Regelmodul, um den Antworten CORS-Header hinzuzufügen. Diese Methode ist normalerweise am besten geeignet, da sowohl Platzhalter als auch mehrere spezifisch zulässige Ursprünge unterstützt werden. Weitere Informationen finden Sie unter [Verwendung von Azure CDN mit CORS](https://docs.microsoft.com/en-us/azure/cdn/cdn-cors). 
+* Nutzen Sie die CDN-Regel-Engine, um den Antworten CORS-Header hinzuzufügen. Diese Methode ist normalerweise am besten geeignet, da sowohl Platzhalter als auch mehrere spezifisch zulässige Ursprünge unterstützt werden. Weitere Informationen finden Sie unter [Verwendung von Azure CDN mit CORS](https://docs.microsoft.com/en-us/azure/cdn/cdn-cors). 
 * Fügen Sie den Diensteigenschaften eine *CorsRule* hinzu. Sie können diese Methode nutzen, wenn der Ursprung, von dem aus Sie Inhalte bereitstellen, Azure Blob Storage ist. Die Regel kann die zulässigen Ursprünge für CORS-Anforderungen, die zulässigen Methoden wie z. B. GET und das maximale Alter in Sekunden für die Regel angeben (der Zeitraum, in dem der Client die verknüpften Ressourcen nach dem Laden des ursprünglichen Inhalts anfordern muss). Wenn Sie CORS für Storage zur Verwendung mit dem CDN festlegen, wird nur der Platzhalter „*“ für die Liste mit den zulässigen Ursprüngen unterstützt. Weitere Informationen finden Sie unter [Cross-Origin Resource Sharing (CORS)-Support für die Azure Storage-Dienste](http://msdn.microsoft.com/library/azure/dn535601.aspx).
 * Konfigurieren Sie Regeln für die ausgehende Richtung in der Anwendungskonfigurationsdatei, um einen *Access-Control-Allow-Origin*-Header für alle Antworten festzulegen. Sie können diese Methode verwenden, wenn auf dem Ursprungsserver IIS ausgeführt wird. Wenn Sie diese Methode mit CDN nutzen, wird nur der Platzhalter „*“ für die Liste mit den zulässigen Ursprüngen unterstützt. Weitere Informationen zum Verwenden der Regeln für das Umschreiben finden Sie im Thema zum [URL-Umschreibemodul](http://www.iis.net/learn/extensions/url-rewrite-module).
 
@@ -205,16 +205,16 @@ Standardmäßig ist für Azure CDN-Instanzen die Einstellung für den *Status de
 
 Azure umfasst verschiedene CDN-Produkte. Sehen Sie sich bei der Wahl eines CDN die Features an, die von den einzelnen Produkten unterstützt werden. Ausführliche Informationen finden Sie unter [Azure CDN-Features][cdn-features]. Verfügbare Premium-Features sind:
 
-- **[Regelmodul](/azure/cdn/cdn-rules-engine)**: Mit dem Regelmodul können Sie anpassen, wie HTTP-Anforderungen behandelt werden, z. B. Sperren der Übermittlung bestimmter Inhaltstypen, Definieren einer Zwischenspeicherungsrichtlinie oder Ändern von HTTP-Headern. 
+- **[Regelmodul](/azure/cdn/cdn-rules-engine)**: Mit der Regel-Engine können Sie anpassen, wie HTTP-Anforderungen behandelt werden, z.B. Sperren der Übermittlung bestimmter Inhaltstypen, Definieren einer Zwischenspeicherungsrichtlinie oder Ändern von HTTP-Headern. 
 
 - **[Echtzeitstatistiken](/azure/cdn/cdn-real-time-stats)**: Sie können Echtzeitdaten überwachen, z.B. Bandbreite, Cachestatus und gleichzeitige Verbindungen mit Ihrem CDN-Profil, und [Echtzeitwarnungen](/azure/cdn/cdn-real-time-alerts) erhalten. 
 
 
-## <a name="rules-engine-url-rewriting-example"></a>Beispiel für URL-Umschreibung mit dem Regelmodul
+## <a name="rules-engine-url-rewriting-example"></a>Beispiel für URL-Umschreibung mit der Regel-Engine
 
 Im folgenden Diagramm wird veranschaulicht, wie Sie die [URL-Umschreibung](https://technet.microsoft.com/library/ee215194.aspx) bei Verwendung des CDN durchführen. Anforderungen vom CDN für zwischengespeicherte Inhalte werden basierend auf dem Ressourcentyp (z. B. Skripts und Bilder) an bestimmte Ordner innerhalb des Anwendungsstammverzeichnisses umgeleitet.  
 
-![Regelmodul-Diagramm](./images/cdn/rules-engine.png)
+![Regel-Engine-Diagramm](./images/cdn/rules-engine.png)
 
 Durch diese Umschreiberegeln werden folgende Umleitungen ausgeführt:
 

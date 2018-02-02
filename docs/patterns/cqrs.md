@@ -1,6 +1,6 @@
 ---
-title: CQRS
-description: "Trennen von Vorgängen mithilfe separater Schnittstellen, die Daten von Vorgängen zur Aktualisierung von Daten lesen"
+title: CQRS-Architektur
+description: "Trennen Sie mithilfe separater Schnittstellen Datenlesevorgänge von Vorgängen zur Aktualisierung von Daten."
 keywords: Entwurfsmuster
 author: dragon119
 ms.date: 06/23/2017
@@ -9,11 +9,11 @@ pnp.pattern.categories:
 - data-management
 - design-implementation
 - performance-scalability
-ms.openlocfilehash: f36f759b16566a6c46bf78b8c8b8df4fcd2c493d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 80f4a8880cf2212acf82dadb67b0181e1cbae099
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="command-and-query-responsibility-segregation-cqrs-pattern"></a>Muster „CQRS“ (Command and Query Responsibility Segregation)
 
@@ -39,7 +39,7 @@ Die konventionelle CRUD-Vorgehensweise birgt jedoch auch einige Nachteile:
 
 - Sie kann die Verwaltung von Sicherheitsfeatures und Berechtigungen verkomplizieren, da jede Entität sowohl Lese- als auch Schreibvorgängen unterworfen ist. Hierdurch werden Daten möglicherweise im falschen Kontext verfügbar gemacht.
 
-> Einen ausführlicheren Überblick über die Beschränkungen der CRUD-Vorgehensweise finden Sie unter [CRUD, Only When You Can Afford It](https://blogs.msdn.microsoft.com/maarten_mullender/2004/07/23/crud-only-when-you-can-afford-it-revisited/) (CRUD, aber nur wenn Sie es sich leisten können).
+> Einen ausführlicheren Überblick über die Einschränkungen des CRUD-Ansatzes finden Sie unter [CRUD, Only When You Can Afford It](https://blogs.msdn.microsoft.com/maarten_mullender/2004/07/23/crud-only-when-you-can-afford-it-revisited/) (CRUD, aber nur wenn Sie es sich leisten können).
 
 ## <a name="solution"></a>Lösung
 
@@ -239,7 +239,7 @@ Die folgenden Muster und Anweisungen könnten für die Implementierung dieses Mu
 
 - Einen Vergleich zwischen CQRS und anderen Architekturstilen finden Sie unter [Architekturstile](/azure/architecture/guide/architecture-styles/) und [Architekturstil „CQRS“](/azure/architecture/guide/architecture-styles/cqrs).
 
-- [Data Consistency Primer (Grundlagen der Datenkonsistenz)](https://msdn.microsoft.com/library/dn589800.aspx): In diesem Artikel werden die Probleme, die typischerweise aufgrund von letztlicher Konsistenz zwischen den Speichern für Lese- und Schreibvorgänge bei der Verwendung des Musters „CQRS“ auftreten, sowie Möglichkeiten zur Behandlung dieser Probleme erklärt.
+- [Data Consistency Primer](https://msdn.microsoft.com/library/dn589800.aspx) (Grundlagen der Datenkonsistenz). In diesem Artikel werden die Probleme, die typischerweise aufgrund von letztlicher Konsistenz zwischen den Speichern für Lese- und Schreibvorgänge bei der Verwendung des Musters „CQRS“ auftreten, sowie Möglichkeiten zur Behandlung dieser Probleme erklärt.
 
 - [Anweisungen zur Datenpartitionierung](https://msdn.microsoft.com/library/dn589795.aspx): In diesem Artikel wird beschrieben, wie die im Muster „CQRS“ verwendeten Speicher für Lese- und Schreibvorgänge in Partitionen aufgeteilt werden, die separat verwaltet und abgerufen werden können, um die Skalierbarkeit zu verbessern, Konflikte zu verringern und die Leistung zu optimieren.
 
