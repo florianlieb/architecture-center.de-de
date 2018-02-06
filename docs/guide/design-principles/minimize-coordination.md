@@ -3,11 +3,11 @@ title: Minimieren der Koordination
 description: Minimieren Sie die Koordination zwischen Anwendungsdiensten, um Skalierbarkeit zu erzielen.
 author: MikeWasson
 layout: LandingPage
-ms.openlocfilehash: 1f8caa8b7cd85593c937f1d99d582492d4cf9a8b
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 3cab05b539612234fd8e66517b140ac5257c3e70
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="minimize-coordination"></a>Minimieren der Koordination 
 
@@ -47,9 +47,9 @@ Diese beiden Muster ergänzen sich. Wenn der lesegeschützte Speicher im CQRS-Mu
 
 **Verwenden Sie asynchrone parallele Verarbeitung**. Wenn ein Vorgang mehrere Schritte erfordert, die asynchron ausgeführt werden (z.B. Remotedienstaufrufe), können Sie diese möglicherweise parallel aufrufen und die Ergebnisse aggregieren. Bei diesem Ansatz wird davon ausgegangen, dass kein Schritt von den Ergebnissen des vorherigen Schritts abhängig ist.   
 
-**Verwenden Sie nach Möglichkeit die optimistische Parallelität**. Bei der pessimistischen Parallelität werden Datenbanksperren verwendet, um Konflikte zu verhindern. Dies kann zu eine unzureichenden Leistung führen und die Verfügbarkeit verringern. Bei der optimistischen Parallelität ändert jede Transaktion eine Kopie oder Momentaufnahme der Daten. Wenn ein Commit für die Transaktion ausgeführt wird, überprüft das Datenbankmodul die Transaktion und lehnt sie ab, wenn sie die Datenbankkonsistenz beeinträchtigen würde. 
+**Verwenden Sie nach Möglichkeit die optimistische Parallelität**. Bei der pessimistischen Parallelität werden Datenbanksperren verwendet, um Konflikte zu verhindern. Dies kann zu eine unzureichenden Leistung führen und die Verfügbarkeit verringern. Bei der optimistischen Parallelität ändert jede Transaktion eine Kopie oder Momentaufnahme der Daten. Wenn ein Commit für die Transaktion ausgeführt wird, überprüft die Datenbank-Engine die Transaktion und lehnt sie ab, wenn sie die Datenbankkonsistenz beeinträchtigen würde. 
 
-Azure SQL-Datenbank und SQL Server unterstützen die optimistische Parallelität durch [Momentaufnahmenisolation][sql-snapshot-isolation]. Einige Azure-Speicherdienste unterstützen die optimistische Parallelität durch die Verwendung von ETags, z.B. [DocumentDB-API][docdb-faq] und [Azure Storage][storage-concurrency].
+Azure SQL-Datenbank und SQL Server unterstützen die optimistische Parallelität durch [Momentaufnahmenisolation][sql-snapshot-isolation]. Einige Azure-Speicherdienste unterstützen die optimistische Parallelität durch die Verwendung von ETags, z.B. [Azure Cosmos DB][cosmosdb-faq] und [Azure Storage][storage-concurrency].
 
 **Ziehen Sie MapReduce oder andere parallele, verteilte Algorithmen in Betracht**. Je nach Daten und der Art der auszuführenden Aufgaben können Sie die Aufgaben möglicherweise in unabhängige Tasks aufteilen, die von mehreren Knoten parallel ausgeführt werden können. Weitere Informationen dazu finden Sie unter [Big Compute-Architekturstil][big-compute].
 
@@ -62,7 +62,7 @@ Azure SQL-Datenbank und SQL Server unterstützen die optimistische Parallelität
 [compensating-transaction]: ../../patterns/compensating-transaction.md
 [cqrs-style]: ../architecture-styles/cqrs.md
 [cqrs-pattern]: ../../patterns/cqrs.md
-[docdb-faq]: /azure/documentdb/documentdb-faq
+[cosmosdb-faq]: /azure/cosmos-db/faq
 [domain-event]: https://martinfowler.com/eaaDev/DomainEvent.html
 [event-sourcing]: ../../patterns/event-sourcing.md
 [leader-election]: ../../patterns/leader-election.md
