@@ -4,11 +4,11 @@ description: "Spezifische Dienstanleitung für die Festlegung des Wiederholungsm
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 0a416bc6297c7406de92fbc695b62c39c637de8f
-ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
+ms.openlocfilehash: da1145e2f2f91befd69505ae9ef2734d6110c1d0
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/02/2018
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="retry-guidance-for-specific-services"></a>Wiederholungsanleitung für bestimmte Dienste
 
@@ -26,7 +26,7 @@ In der folgende Tabelle werden die Wiederholungsfunktionen für die in dieser An
 | **[SQL-Datenbank mit ADO.NET](#sql-database-using-adonet-retry-guidelines)** |[Polly](#transient-fault-handling-with-polly) |Deklarativ und programmatisch |Einzelne Anweisungen oder Codeblöcke |Benutzerdefiniert |
 | **[Service Bus](#service-bus-retry-guidelines)** |Systemeigen in Client |Programmgesteuert |Namespace-Manager, Messaging Factory und Client |ETW |
 | **[Azure Redis Cache](#azure-redis-cache-retry-guidelines)** |Systemeigen in Client |Programmgesteuert |Client |TextWriter |
-| **[DocumentDB-API](#documentdb-api-retry-guidelines)** |Systemeigen im Dienst |Nicht konfigurierbar |Global |TraceSource |
+| **[Cosmos DB](#cosmos-db-retry-guidelines)** |Systemeigen im Dienst |Nicht konfigurierbar |Global |TraceSource |
 | **[Azure Search](#azure-storage-retry-guidelines)** |Systemeigen in Client |Programmgesteuert |Client |ETW oder benutzerdefiniert |
 | **[Azure Active Directory](#azure-active-directory-retry-guidelines)** |Nativ in ADAL-Bibliothek |Eingebettet in ADAL-Bibliothek |Intern |Keine |
 | **[Service Fabric](#service-fabric-retry-guidelines)** |Systemeigen in Client |Programmgesteuert |Client |Keine | 
@@ -858,9 +858,9 @@ Weitere Beispiele finden Sie unter [Konfiguration](http://github.com/StackExchan
 ### <a name="more-information"></a>Weitere Informationen
 * [Redis-Website](http://redis.io/)
 
-## <a name="documentdb-api-retry-guidelines"></a>DocumentDB-API-Wiederholungsrichtlinien
+## <a name="cosmos-db-retry-guidelines"></a>Cosmos DB-Wiederholungsrichtlinien
 
-Cosmos DB ist eine vollständig verwaltete Datenbank mit Unterstützung mehrerer Modelle, die schemalose JSON-Daten per [DocumentDB-API][documentdb-api] unterstützt. Sie bietet konfigurierbare und zuverlässige Leistung, systemeigene JavaScript-Transaktionsverarbeitung und ist für die Cloud mit elastischer Skalierung konzipiert.
+Cosmos DB ist eine vollständig verwaltete Datenbank mit mehreren Modellen, die schemalose JSON-Daten unterstützt. Sie bietet konfigurierbare und zuverlässige Leistung, systemeigene JavaScript-Transaktionsverarbeitung und ist für die Cloud mit elastischer Skalierung konzipiert.
 
 ### <a name="retry-mechanism"></a>Wiederholungsmechanismus
 Die `DocumentClient`-Klasse führt bei Fehlversuchen automatisch Wiederholungsversuche durch. Konfigurieren Sie zum Festlegen der Anzahl von Wiederholungsversuchen und der maximalen Wartezeit [ConnectionPolicy.RetryOptions]. Ausnahmen, die vom Client ausgelöst werden, unterliegen entweder nicht der Wiederholungsrichtlinie oder sind keine vorübergehenden Fehler.
@@ -897,7 +897,7 @@ Wenn Sie Ihrer Datei „App.config“ beispielsweise Folgendes hinzugefügt habe
     <sources>
       <source name="DocDBTrace" switchName="SourceSwitch" switchType="System.Diagnostics.SourceSwitch" >
         <listeners>
-          <add name="MyTextListener" type="System.Diagnostics.TextWriterTraceListener" traceOutputOptions="DateTime,ProcessId,ThreadId" initializeData="DocumentDBTrace.txt"></add>
+          <add name="MyTextListener" type="System.Diagnostics.TextWriterTraceListener" traceOutputOptions="DateTime,ProcessId,ThreadId" initializeData="CosmosDBTrace.txt"></add>
         </listeners>
       </source>
     </sources>
@@ -1036,7 +1036,6 @@ Im Folgenden sind die typischen Arten von Wiederholungsstrategie-Intervallen dar
 [autorest]: https://github.com/Azure/autorest/tree/master/docs
 [circuit-breaker]: ../patterns/circuit-breaker.md
 [ConnectionPolicy.RetryOptions]: https://msdn.microsoft.com/library/azure/microsoft.azure.documents.client.connectionpolicy.retryoptions.aspx
-[documentdb-api]: /azure/documentdb/documentdb-introduction
 [dotnet-foundation]: https://dotnetfoundation.org/
 [polly]: http://www.thepollyproject.org
 [redis-cache-troubleshoot]: /azure/redis-cache/cache-how-to-troubleshoot
