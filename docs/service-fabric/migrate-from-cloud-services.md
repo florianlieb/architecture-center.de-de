@@ -3,11 +3,11 @@ title: Migrieren einer Azure Cloud Services-Anwendung zu Azure Service Fabric
 description: Informationen zum Migrieren einer Anwendung von Azure Cloud Services zu Azure Service Fabric.
 author: MikeWasson
 ms.date: 04/27/2017
-ms.openlocfilehash: 22b6cca0d4714dd4cde0fd7449340d6e1f45e65b
-ms.sourcegitcommit: fbcf9a1c25db13b2627a8a58bbc985cd01ea668d
+ms.openlocfilehash: 73e34c53ffd2f2eeb466d12a5f6c65dcfdaae389
+ms.sourcegitcommit: 2c9a8edf3e44360d7c02e626ea8ac3b03fdfadba
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/16/2017
+ms.lasthandoff: 02/03/2018
 ---
 # <a name="migrate-an-azure-cloud-services-application-to-azure-service-fabric"></a>Migrieren einer Azure Cloud Services-Anwendung zu Azure Service Fabric 
 
@@ -80,7 +80,7 @@ In der folgenden Tabelle sind einige der wichtigsten Unterschiede zwischen Cloud
 | Bereitstellungsmodell | [Klassisches Bereitstellungsmodell][azure-deployment-models] | [Resource Manager][azure-deployment-models]  |
 | Verpackung | Clouddienst-Paketdateien (.cspkg) | Anwendungs- und Dienstpakete |
 | Anwendungsupdate | VIP-Austausch oder paralleles Update | Paralleles Update |
-| Automatische Skalierung | [Integrierter Dienst][cloud-service-autoscale] | VM-Skalierungsgruppen für die automatische horizontale Skalierung |
+| Automatische Skalierung | [Integrierter Dienst][cloud-service-autoscale] | VM Scale Sets für die automatische horizontale Skalierung |
 | Debuggen | Lokaler Emulator | Lokaler Cluster |
 
 
@@ -176,7 +176,7 @@ Ein Dienst muss für jeden Endpunkt explizit Listener erstellen. Der Grund dafü
 
  Ein Clouddienst enthält die folgenden Konfigurations- und Paketdateien:
 
-| Datei | Beschreibung |
+| File | BESCHREIBUNG |
 |------|-------------|
 | Dienstdefinitionsdatei (.csdef) | Einstellungen, die von Azure verwendet werden, um den Clouddienst zu konfigurieren. Definiert die Rollen, Endpunkte, Startaufgaben und die Namen von Konfigurationseinstellungen. |
 | Dienstkonfigurationsschema (.cscfg) | Bereitstellungsabhängige Einstellungen, einschließlich der Anzahl der Rolleninstanzen, der Portnummern der Endpunkte und der Werte der Konfigurationseinstellungen. 
@@ -198,7 +198,7 @@ Das Anwendungspaket ist das, was Sie bereitstellen. Es enthält mindestens ein D
 
 Eine Service Fabric-Anwendung enthält die folgenden Konfigurationsdateien:
 
-| Datei | Standort | Beschreibung |
+| File | Speicherort | BESCHREIBUNG |
 |------|----------|-------------|
 | ApplicationManifest.xml | Anwendungspaket | Definiert die Dienste, aus denen sich die Anwendung zusammensetzt. |
 | ServiceManifest.xml | Dienstpaket| Beschreibt mindestens einen Dienst. |
@@ -289,9 +289,9 @@ Das Portieren der Survey-Anwendung zu Service Fabric hat sich als recht einfach 
 
 Darüber hinaus wurde die Bereitstellung von Cloud Services in einen Service Fabric-Cluster geändert, der in einer VM-Skalierungsgruppe ausgeführt wird.
 
-An dieser Stelle profitiert die Anwendung jedoch nicht von allen Vorteilen der Mikroservices, z. B. von der unabhängigen Bereitstellung und Versionsverwaltung von Diensten. Damit Service Fabric optimal genutzt werden kann, muss Tailspin ebenfalls weiter optimiert werden.
+## <a name="next-steps"></a>Nächste Schritte
 
-
+Nach der erfolgreichen Portierung der Anwendung „Surveys“ möchte Tailspin von Service Fabric-Features wie unabhängiger Dienstbereitstellung und Versionsverwaltung profitieren. In [Umgestalten einer Azure Service Fabric-Anwendung, die von Azure Cloud Services migriert wurde][refactor-surveys] erfahren Sie, wie Tailspin die Dienste in eine detailliertere Architektur aufgespalten hat, um diese Service Fabric-Features nutzen zu können.
 
 <!-- links -->
 
@@ -308,6 +308,7 @@ An dieser Stelle profitiert die Anwendung jedoch nicht von allen Vorteilen der M
 [kestrel]: https://docs.microsoft.com/aspnet/core/fundamentals/servers/kestrel
 [lb-probes]: /azure/load-balancer/load-balancer-custom-probe-overview
 [owin]: https://www.asp.net/aspnet/overview/owin-and-katana
+[refactor-surveys]: refactor-migrated-app.md
 [sample-code]: https://github.com/mspnp/cloud-services-to-service-fabric
 [sf-application-model]: /azure/service-fabric/service-fabric-application-model
 [sf-aspnet-core]: /azure/service-fabric/service-fabric-add-a-web-frontend
