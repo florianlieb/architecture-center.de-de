@@ -1,5 +1,10 @@
 - name: Azure Architecture Center
   href: index.md
+- name: Handbuch zur Einführung von Azure Cloud
+  href: cloud-adoption-guide/index.md
+  items:
+    - name: Grundlegende Einführungsphase
+      href: cloud-adoption-guide/adoption-intro/overview.md
 - name: Anwendungsarchitekturleitfaden
   href: guide/index.md
   items:
