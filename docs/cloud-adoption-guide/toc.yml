@@ -1,0 +1,64 @@
+- name: Azure Architecture Center
+  href: /azure/architecture
+- name: Handbuch zur Einführung von Azure Cloud
+  href: index.md
+  items:
+    - name: Grundlegende Azure-Einführung
+      href: adoption-intro/overview.md
+      items:
+        - name: Ausführliche Informationen zu Azure
+          items:
+            - name: 'Erläuterungen: Wie funktioniert Azure?'
+              href: adoption-intro/azure-explainer.md
+        - name: Grundlegendes zu digitalen Identitäten in Azure
+          items:
+            - name: 'Erläuterungen: Was ist ein Azure Active Directory-Mandant?'
+              href: adoption-intro/tenant-explainer.md
+            - name: 'Vorgehensweise: Einrichten eines Azure Active Directory-Mandanten'
+              href: /azure/active-directory/develop/active-directory-howto-tenant?toc=/azure/architecture/cloud-adoption-guide/toc.json
+            - name: 'Anleitungen: Entwerfen eines Azure AD-Mandanten'
+              href: adoption-intro/tenant.md
+            - name: 'Vorgehensweise: Hinzufügen eines Benutzers zu einem Azure AD-Mandanten'
+              href: /azure/active-directory/add-users-azure-active-directory?toc=/azure/architecture/cloud-adoption-guide/toc.json
+        - name: Grundlegendes zu Azure-Abonnements
+          items:
+            - name: 'Erläuterungen: Was ist ein Azure-Abonnement?'
+              href: adoption-intro/subscription-explainer.md
+            - name: 'Anleitungen: Entwerfen eines Azure-Abonnements'
+              href: adoption-intro/subscription.md
+        - name: Grundlegendes zur Ressourcenverwaltung in Azure
+          items:
+            - name: 'Erläuterungen: Was ist Azure Resource Manager?'
+              href: adoption-intro/resource-manager-explainer.md
+            - name: 'Erläuterungen: Was ist eine Azure-Ressourcengruppe?'
+              href: adoption-intro/resource-group-explainer.md
+            - name: 'Erläuterungen: Grundlegendes zum Zugriff auf Ressourcen in Azure'
+              href: /azure/active-directory/active-directory-understanding-resource-access?toc=/azure/architecture/cloud-adoption-guide/toc.json
+            - name: 'Vorgehensweise: Erstellen einer Ressourcengruppe mit dem Portal'
+              href: /azure/azure-resource-manager/resource-group-portal?toc=/azure/architecture/cloud-adoption-guide/toc.json
+            - name: 'Anleitung: Entwerfen einer Ressourcengruppe'
+              href: adoption-intro/resource-group.md
+            - name: 'Anleitungen: Namenskonventionen für Azure-Ressourcen'
+              href: /azure/architecture/best-practices/naming-conventions?toc=/azure/architecture/cloud-adoption-guide/toc.json
+        - name: Bereitstellen grundlegender Architekturen in Azure
+          items:
+            - name: Platform-as-a-Service-Architektur (PaaS)
+              items:
+                - name: 'Vorgehensweise: Bereitstellen einer einfachen Webanwendung in Azure'
+                  href: /azure/app-service?toc=/azure/architecture/cloud-adoption-guide/toc.json
+                - name: 'Anleitungen: Bewährte Methoden für Webanwendungen in Azure'
+                  href: /azure/architecture/reference-architectures/app-service-web-app/basic-web-app?toc=/azure/architecture/cloud-adoption-guide/toc.json
+            - name: Infrastructure-as-a-Service (IaaS)
+              items:
+                - name: 'Erläuterungen: Was ist ein virtuelles Azure-Netzwerk?'
+                  href: /azure/virtual-network/virtual-networks-overview?toc=/azure/architecture/cloud-adoption-guide/toc.json
+                - name: 'Vorgehensweise: Bereitstellen eines virtuellen Netzwerks in Azure'
+                  href: /azure/virtual-network/virtual-networks-create-vnet-arm-portal?toc=/azure/architecture/cloud-adoption-guide/toc.json
+                - name: 'Vorgehensweise: Bereitstellen einer einzelnen IaaS-Workload für virtuelle Windows-Computer in Azure'
+                  href: /azure/virtual-machines/windows/quick-create-portal?toc=/azure/architecture/cloud-adoption-guide/toc.json
+                - name: 'Anleitungen: Bewährte Methoden für die Bereitstellung eines virtuellen Windows-Computers in Azure'
+                  href: /azure/architecture/reference-architectures/virtual-machines-windows/single-vm?toc=/azure/architecture/cloud-adoption-guide/toc.json
+                - name: 'Vorgehensweise: Bereitstellen einer einzelnen IaaS-Workload für virtuelle Linux-Computer in Azure'
+                  href: /azure/virtual-machines/linux/quick-create-portal?toc=/azure/architecture/cloud-adoption-guide/toc.json
+                - name: 'Anleitungen: Bewährte Methoden für die Bereitstellung eines virtuellen Linux-Computers in Azure'
+                  href: /azure/architecture/reference-architectures/virtual-machines-linux/single-vm?toc=/azure/architecture/cloud-adoption-guide/toc.json
