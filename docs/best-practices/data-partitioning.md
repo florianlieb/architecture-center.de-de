@@ -4,11 +4,11 @@ description: "Leitfaden zum Trennen von Partitionen für die separate Verwaltung
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: aa59a99ae87328424379e1f9c6fee8cc5887e61c
-ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
+ms.openlocfilehash: d1d9c1b3cf07f724eb010fc260d86ceb84b789ca
+ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/30/2018
+ms.lasthandoff: 02/09/2018
 ---
 # <a name="data-partitioning"></a>Datenpartitionierung
 
@@ -312,8 +312,8 @@ Berücksichtigen Sie die folgenden Punkte beim Entwerfen der Entitäten für den
 
 Weitere Informationen zum Partitionieren von Daten im Azure-Tabellenspeicher finden Sie auf der Microsoft-Website im Artikel [Azure-Speichertabelle – Entwurfshandbuch] .
 
-## <a name="partitioning-azure-blob-storage"></a>Partitionierung des Azure-Blobspeichers
-Azure-Blobspeicher ermöglicht die Speicherung großer Binärobjekte – zurzeit bis zu 5 TB für Blockblobs oder 1 TB für Seitenblobs. (Aktuelle Informationen finden Sie auf der Microsoft-Website im Artikel [Skalierbarkeits- und Leistungsziele für Azure Storage].) Verwenden Sie die Block-Blobs in Szenarien wie z. B. Streaming, in denen Sie große Datenmengen schnell hoch- oder herunterladen müssen. Verwenden Sie Seitenblobs für Anwendungen, die eher zufälligen als seriellen Zugriff auf Teile der Daten erfordern.
+## <a name="partitioning-azure-blob-storage"></a>Partitionierung von Azure Blob Storage
+Azure Blob Storage ermöglicht die Speicherung großer Binärobjekte – zurzeit bis zu 5 TB für Blockblobs oder 1 TB für Seitenblobs. (Aktuelle Informationen finden Sie auf der Microsoft-Website im Artikel [Skalierbarkeits- und Leistungsziele für Azure Storage].) Verwenden Sie die Block-Blobs in Szenarien wie z. B. Streaming, in denen Sie große Datenmengen schnell hoch- oder herunterladen müssen. Verwenden Sie Seitenblobs für Anwendungen, die eher zufälligen als seriellen Zugriff auf Teile der Daten erfordern.
 
 Jedes Blob (Block oder Seite), wird in einem Container in einem Azure-Speicherkonten aufrechterhalten. Sie können Container verwenden, um verwandte Blobs zu gruppieren, für die die gleichen Sicherheitsanforderungen gelten. Diese Gruppierung ist nicht physischer, sondern logischer Art. In einem Container hat jedes Blob einen eindeutigen Namen.
 
@@ -321,7 +321,7 @@ Der Partitionsschlüssel für ein Blob setzt sich aus dem Kontonamen, Containern
 
 Die Aktionen des Schreibens eines einzelnen Blocks (Block-Blob) oder einer Seite (Seitenblob) sind atomar, aber Vorgänge, die Blöcke, Seiten oder Blobs umfassen, hingegen nicht. Wenn Sie bei der Ausführung von Schreibvorgängen Konsistenz zwischen Blöcken, Seiten und Blobs gewährleisten müssen, richten Sie mithilfe einer Bloblease eine Schreibsperre ein.
 
-Für Azure-Blobspeicher werden Übertragungsraten von bis zu 60 MB pro Sekunde oder 500 Anforderungen pro Sekunde für jedes Blob angestrebt. Wenn Sie erwarten, diese Grenzwerte zu überschreiten und die Blobdaten relativ statisch sind, sollten Sie die Replikation von Blobs mithilfe von Azure Content Delivery Network erwägen. Weitere Informationen finden Sie auf der Microsoft-Website unter [Übersicht über das Azure Content Delivery Network (CDN)]. Weitere Anleitungen und Überlegungen finden Sie im Artikel [Erste Schritte mit Azure CDN].
+Für Azure Blob Storage werden Übertragungsraten von bis zu 60 MB pro Sekunde oder 500 Anforderungen pro Sekunde für jedes Blob angestrebt. Wenn Sie erwarten, diese Grenzwerte zu überschreiten und die Blobdaten relativ statisch sind, sollten Sie die Replikation von Blobs mithilfe von Azure Content Delivery Network erwägen. Weitere Informationen finden Sie auf der Microsoft-Website unter [Übersicht über das Azure Content Delivery Network (CDN)]. Weitere Anleitungen und Überlegungen finden Sie im Artikel [Erste Schritte mit Azure CDN].
 
 ## <a name="partitioning-azure-storage-queues"></a>Partitionierung von Azure-Speicherwarteschlangen
 Azure-Speicherwarteschlangen ermöglichen Ihnen asynchrones Messaging zwischen Prozessen. Ein Azure-Speicherkonto kann eine beliebige Anzahl an Warteschlangen enthalten und jede Warteschlange kann eine beliebige Anzahl an Nachrichten enthalten. Die einzige Beschränkung ist der im Speicherkonto verfügbare Platz. Die maximale Größe einer einzelnen Nachricht beträgt 64 KB. Falls Sie größere Nachrichten erfordern, dann sollten Sie in Betracht ziehen, stattdessen Azure Service Bus-Warteschlangen zu verwenden.
@@ -538,7 +538,7 @@ Wenn Sie Strategien zum Implementieren der Datenkonsistenz in Betracht ziehen, k
 * Im Artikel [Skalierbarkeits- und Leistungsziele für Azure Storage](https://msdn.microsoft.com/library/azure/dn249410.aspx) auf der Microsoft-Website sind die aktuellen Größen- und Durchsatzgrenzen vom Azure Storage dokumentiert.
 * Im Artikel [Ausführen von Entitätsgruppentransaktionen] auf der Microsoft-Website erhalten Sie detaillierte Informationen zur Implementierung der Transaktionsvorgänge für Entitäten, die im Azure-Tabellenspeicher gespeichert sind.
 * Im Artikel [Azure-Speichertabellen – Entwurfshandbuch] auf der Microsoft-Website finden Sie ausführliche Informationen zum Partitionieren von Daten im Azure-Tabellenspeicher.
-* Im Artikel [Erste Schritte mit Azure CDN] auf der Microsoft Website wird beschrieben, wie Daten in Azure-Blobspeichern mithilfe von Azure Content Delivery Network (CDN) repliziert werden können.
+* Im Artikel [Erste Schritte mit Azure CDN] auf der Microsoft Website wird beschrieben, wie Daten in Azure Blob Storage mithilfe von Azure Content Delivery Network (CDN) repliziert werden können.
 * Im Artikel [Was ist Azure Search?] auf der Microsoft-Website finden Sie eine vollständige Beschreibung der Funktionen von Azure Search.
 * Im Artikel [Grenzwerte für den Azure Search-Dienst] auf der Microsoft-Website finden Sie Informationen zur Kapazität der einzelnen Instanzen von Azure Search.
 * Im Artikel [Unterstützte Datentypen (Azure Search)] auf der Microsoft-Website sind die Datentypen zusammengefasst, die Sie in durchsuchbaren Dokumenten und Indizes verwenden können.
