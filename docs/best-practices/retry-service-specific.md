@@ -229,7 +229,7 @@ SQL-Datenbank ist eine gehostete SQL-Datenbank, die in unterschiedlichen Größe
 Beim Zugriff auf SQL-Datenbank mit Entity Framework 6.0 und höher über einen Mechanismus namens [Verbindungsstabilität / Wiederholungslogik](http://msdn.microsoft.com/data/dn456835.aspx)wird Wiederholungsunterstützung geboten. Die wichtigsten Features des Wiederholungsmechanismus sind:
 
 * Die primäre Abstraktion ist die **IDbExecutionStrategy** -Schnittstelle. Diese Benutzeroberfläche:
-  * Definiert die synchrone und asynchrone Methoden zum **Ausführen***.
+  * Definiert die synchrone und asynchrone Methoden zum **Ausführen** \* .
   * Definiert Klassen, die direkt verwendet oder in einem Datenbankkontext als eine Standardstrategie konfiguriert werden können, einem Anbieternamen oder einem Anbieternamen und Servernamen zugeordnet werden können. Wenn sie für einen Kontext konfiguriert ist, treten Wiederholungen auf der Ebene der einzelnen Datenbankvorgängen auf, von denen es möglicherweise mehrere für einen angegebenen Kontext gibt.
   * Definiert, wann und wie versucht wird, einen fehlgeschlagene Verbindung erneut herzustellen.
 * Sie umfasst mehrere integrierte Implementierungen für die **IDbExecutionStrategy** -Schnittstelle:
