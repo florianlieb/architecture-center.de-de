@@ -2,14 +2,14 @@
 title: Implementieren einer Hub-Spoke-Netzwerktopologie in Azure
 description: Vorgehensweise zum Implementieren einer Hub-Spoke-Netzwerktopologie in Azure
 author: telmosampaio
-ms.date: 05/05/2017
+ms.date: 02/14/2018
 pnp.series.title: Implement a hub-spoke network topology in Azure
 pnp.series.prev: expressroute
-ms.openlocfilehash: e6f07a7962dd5728226b023700268340590d97a3
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: c03ecd4ba5ddbe50cfb17e56d75c18102b751cfb
+ms.sourcegitcommit: 475064f0a3c2fac23e1286ba159aaded287eec86
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 02/19/2018
 ---
 # <a name="implement-a-hub-spoke-network-topology-in-azure"></a>Implementieren einer Hub-Spoke-Netzwerktopologie in Azure
 
@@ -32,11 +32,11 @@ Typische Einsatzmöglichkeiten für diese Architektur sind Folgende:
 * Workloads, bei denen keine Konnektivität untereinander bestehen muss, die jedoch Zugriff auf gemeinsame Dienste erfordern
 * Unternehmen, die auf eine zentrale Steuerung von Sicherheitsmechanismen (z.B. eine Firewall im Hub als DMZ) und eine getrennte Verwaltung von Workloads in den einzelnen Spokes angewiesen sind
 
-## <a name="architecture"></a>Architektur
+## <a name="architecture"></a>Architecture
 
-Diese Architektur besteht aus den folgenden Komponenten:
+Die Architektur umfasst die folgenden Komponenten.
 
-* **Lokales Netzwerk**: Ein privates lokales Netzwerk innerhalb einer Organisation.
+* **Lokales Netzwerk**. Ein in einer Organisation betriebenes privates lokales Netzwerk.
 
 * **VPN-Gerät**: Ein Gerät oder ein Dienst, der externe Konnektivität mit dem lokalen Netzwerk bereitstellt. Bei dem VPN-Gerät kann es sich um ein Hardwaregerät oder eine Softwarelösung wie den Routing- und RAS-Dienst (RRAS) unter Windows Server 2012 handeln. Eine Liste der unterstützten VPN-Appliances und Informationen zur Konfiguration ausgewählter VPN-Geräte für die Verbindung mit Azure finden Sie unter [Informationen zu VPN-Geräten und IPsec-/IKE-Parametern für VPN-Gatewayverbindungen zwischen Standorten][vpn-appliance].
 
@@ -59,7 +59,7 @@ Diese Architektur besteht aus den folgenden Komponenten:
 > In diesem Artikel werden ausschließlich [Resource Manager](/azure/azure-resource-manager/resource-group-overview)-Bereitstellungen behandelt, Sie können jedoch auch eine Verbindung zwischen einem klassischen VNET und einem Resource Manager-VNET im selben Abonnement herstellen. Auf diese Weise können Ihre Spokes klassische Bereitstellungen hosten und trotzdem von gemeinsamen Diensten im Hub profitieren.
 
 
-## <a name="recommendations"></a>Recommendations
+## <a name="recommendations"></a>Empfehlungen
 
 Die folgenden Empfehlungen gelten für die meisten Szenarios. Sofern Sie keine besonderen Anforderungen haben, die Vorrang haben, sollten Sie diese Empfehlungen befolgen.
 
@@ -116,7 +116,7 @@ Eine Bereitstellung für diese Architektur ist auf [GitHub][ref-arch-repo] verf�
 
 ### <a name="prerequisites"></a>Voraussetzungen
 
-Bevor Sie die Referenzarchitektur in Ihrem eigenen Abonnement bereitstellen können, müssen Sie die folgenden Schritte durchführen.
+Bevor Sie die Referenzarchitektur in Ihrem eigenen Abonnement bereitstellen können, müssen Sie die folgenden Schritte ausführen.
 
 1. Klonen oder forken Sie das GitHub-Repository [AzureCAT-Referenzarchitekturen][ref-arch-repo], oder laden Sie die zugehörige ZIP-Datei herunter.
 
@@ -339,68 +339,6 @@ Führen Sie die folgenden Schritte durch, um zu überprüfen, ob die mit einer l
 
   ```bash
   ping 10.1.1.37
-  ```
-
-### <a name="add-connectivity-between-spokes"></a>Herstellen von Konnektivität zwischen Spokes
-
-Wenn zwischen Spokes eine Verbindung hergestellt werden soll, müssen Sie für jeden Spoke UDRs bereitstellen, der den für andere Spokes vorgesehenen Datenverkehr an das Gateway im Hub-VNET weiterleitet. Führen Sie die folgenden Schritte durch, um zu prüfen, dass Sie derzeit keine Verbindung zwischen Spokes herstellen können. Geben Sie anschließend die UDRs an, und testen Sie erneut die Konnektivität.
-
-1. Wiederholen Sie die Schritte 1 bis 4 oben, wenn Sie nicht mehr mit der Jumpbox-VM verbunden sind.
-
-2. Stellen Sie eine Verbindung mit einem der Webserver in Spoke 1 her.
-
-  ```bash
-  ssh 10.1.1.37
-  ```
-
-3. Testen Sie die Konnektivität zwischen Spoke 1 und Spoke 2. Bei dem Test sollte ein Fehler auftreten.
-
-  ```bash
-  ping 10.1.2.37
-  ```
-
-4. Kehren Sie zur Eingabeaufforderung Ihres Computers zurück.
-
-5. Wechseln Sie in den Ordner `hybrid-networking\hub-spoke\spokes` für das Repository, das Sie im vorherigen Schritt „Voraussetzungen“ heruntergeladen haben.
-
-6. Führen Sie den nachfolgenden bash- oder PowerShell-Befehl aus, um eine UDR für den ersten Spoke bereitzustellen. Ersetzen Sie die Werte durch Ihr Abonnement, den jeweiligen Namen Ihrer Ressourcengruppe sowie Ihre Azure-Region.
-
-  ```bash
-  sh ./spoke.udr.deploy.sh --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
-    --resourcegroup ra-spoke1-rg \
-    --location westus \
-    --spoke 1
-  ```
-
-  ```powershell
-  ./spoke.udr.deploy.ps1 -Subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx `
-    -ResourceGroup ra-spoke1-rg `
-    -Location westus `
-    -Spoke 1
-  ```
-
-7. Führen Sie den nachfolgenden bash- oder PowerShell-Befehl aus, um eine UDR für den zweiten Spoke bereitzustellen. Ersetzen Sie die Werte durch Ihr Abonnement, den jeweiligen Namen Ihrer Ressourcengruppe sowie Ihre Azure-Region.
-
-  ```bash
-  sh ./spoke.udr.deploy.sh --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
-    --resourcegroup ra-spoke2-rg \
-    --location westus \
-    --spoke 2
-  ```
-
-  ```powershell
-  ./spoke.udr.deploy.ps1 -Subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx `
-    -ResourceGroup ra-spoke2-rg `
-    -Location westus `
-    -Spoke 2
-  ```
-
-8. Kehren Sie zurück zum SSH-Terminal zurück.
-
-9. Testen Sie die Konnektivität zwischen Spoke 1 und Spoke 2. Der Test sollte erfolgreich abgeschlossen werden.
-
-  ```bash
-  ping 10.1.2.37
   ```
 
 <!-- links -->
