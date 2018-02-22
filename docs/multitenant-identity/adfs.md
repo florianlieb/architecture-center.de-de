@@ -6,11 +6,11 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: token-cache
 pnp.series.next: client-assertion
-ms.openlocfilehash: bf385ccc988a709a61d9bee5fb1ee084a133138d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: a5dc25a4b61ffd13d86f1abb2b839054e5fb4c7f
+ms.sourcegitcommit: 475064f0a3c2fac23e1286ba159aaded287eec86
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 02/19/2018
 ---
 # <a name="federate-with-a-customers-ad-fs"></a>Einrichten eines Verbunds mit der AD FS-Instanz eines Kunden
 
@@ -30,7 +30,7 @@ Aktivieren dieses Szenarios:
 Die Vertrauensbeziehung umfasst drei wichtige Rollen:
 
 * Die AD FS des Kunden sind der [Kontopartner], der für die Authentifizierung der Benutzer aus dem Active Directory des Kunden und die Erstellung von Sicherheitstoken mit Benutzeransprüchen zuständig ist.
-* Die AD FS des SaaS-Anbieters ist der [Ressourcenpartner], der den Kontopartnern vertraut und die Benutzeransprüche empfängt.
+* Der AD FS des SaaS-Anbieters sind die [Ressourcenpartner], die den Kontopartnern vertrauen und die Benutzeransprüche empfangen.
 * Die Anwendung wird als eine vertrauende Seite (RP) in den AD FS des SaaS-Anbieters konfiguriert.
   
   ![Verbundvertrauensstellung](./images/federation-trust.png)
@@ -55,9 +55,9 @@ Eine Beispielverwendung von WS-Verbund mit ASP.NET 4 finden Sie im Beispiel [act
 ## <a name="limitations"></a>Einschränkungen
 Standardmäßig empfängt die Anwendung der vertrauenden Seite nur einen festgelegten Satz an Ansprüchen, der in „id_token“ verfügbar ist, wie in der folgenden Tabelle gezeigt. In AD FS 2016 können Sie „id_token“ in OpenID Connect-Szenarien anpassen. Weitere Informationen finden Sie unter [Benutzerdefinierte ID-Token in AD FS](/windows-server/identity/ad-fs/development/customize-id-token-ad-fs-2016).
 
-| Anspruch | Beschreibung |
+| Anspruch | BESCHREIBUNG |
 | --- | --- |
-| aud |Zielgruppe. Die Anwendung, für die die Ansprüche ausgegeben wurden. |
+| aud |Zielgruppe. Die Anwendung, für die die Ansprüche ausgegeben wurden |
 | authenticationinstant |[Authentifizierungszeitpunkt]. Der Zeitpunkt, zu dem die Authentifizierung erfolgt ist. |
 | c_hash |Codehashwert. Dies ist ein Hash der Tokeninhalte. |
 | exp |[Ablaufzeit]. Der Zeitpunkt, nach dem das Token nicht mehr akzeptiert wird. |
