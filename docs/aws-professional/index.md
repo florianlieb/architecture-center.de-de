@@ -5,11 +5,11 @@ keywords: AWS experts, Azure comparison, AWS comparison, difference between azur
 author: lbrader
 ms.date: 03/24/2017
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: e5f7cb5062b0b4a8526f3b29a9fa4ddaff399fc0
-ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
+ms.openlocfilehash: b8698675efa42bb3fae73cefe7b078942549b412
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/30/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="azure-for-aws-professionals"></a>Azure für AWS-Spezialisten
 
@@ -351,7 +351,7 @@ AWS Simple Queueing Service (SQS) stellt ein Messagingsystem bereit, das innerha
 
 -   [Queue Storage](https://azure.microsoft.com/documentation/articles/storage-nodejs-how-to-use-queues/): Ein Cloudmessagingdienst, der die Kommunikation zwischen Anwendungskomponenten innerhalb der Azure-Plattform ermöglicht
 
--   [Service Bus](https://azure.microsoft.com/en-us/services/service-bus/): Ein zuverlässigeres Messagingsystem, um für Anwendungen, Diensten und Geräte eine Verbindung herzustellen. Mit dem entsprechenden [Service Bus Relay](https://docs.microsoft.com/en-us/azure/service-bus-relay/relay-what-is-it) kann Service Bus auch eine Verbindung mit remote gehosteten Anwendungen und Diensten herstellen.
+-   [Service Bus](https://azure.microsoft.com/services/service-bus/): Ein zuverlässigeres Messagingsystem, um für Anwendungen, Diensten und Geräte eine Verbindung herzustellen. Mit dem entsprechenden [Service Bus Relay](https://docs.microsoft.com/azure/service-bus-relay/relay-what-is-it) kann Service Bus auch eine Verbindung mit remote gehosteten Anwendungen und Diensten herstellen.
 
 #### <a name="device-farm"></a>Device Farm
 

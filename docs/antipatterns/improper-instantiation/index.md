@@ -3,11 +3,11 @@ title: "Antimuster für ungeeignete Instanziierung"
 description: "Vermeiden Sie es, ständig neue Instanzen eines Objekts zu erstellen, das einmal erstellt und dann freigegeben werden soll."
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: 8955f37e76c8b5e66c1ed7737d200d11ed321612
-ms.sourcegitcommit: 9ba82cf84cee06ccba398ec04c51dab0e1ca8974
+ms.openlocfilehash: 4d5ef9ad9e675b46df94b51e81d7a4bd4c1b25e9
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/13/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="improper-instantiation-antipattern"></a>Antimuster für ungeeignete Instanziierung
 
@@ -22,9 +22,7 @@ Viele Bibliotheken stellen Abstraktionen von externen Ressourcen bereit. Intern 
 - `Microsoft.Azure.Documents.Client.DocumentClient`(Fixierte Verbindung) festgelegt ist(Fixierte Verbindung) festgelegt ist. Stellt eine Verbindung mit einer Cosmos DB-Instanz her.
 - `StackExchange.Redis.ConnectionMultiplexer`(Fixierte Verbindung) festgelegt ist(Fixierte Verbindung) festgelegt ist. Stellt eine Verbindung mit Redis, einschließlich Azure Redis Cache, her.
 
-Diese Klassen sind dafür gedacht, einmal instanziiert und über die gesamte Lebensdauer einer Anwendung hinweg wiederverwendet zu werden. Es ist jedoch ein weit verbreiteter Irrtum, dass diese Klassen nur bei Bedarf erworben und schnell freigegeben werden sollen. (Die hier aufgelisteten Klassen beziehen sich zufälligerweise auf .NET-Bibliotheken, aber das Muster ist nicht eindeutig für .NET.)
-
-Im folgenden ASP.NET-Beispiel wird eine Instanz von `HttpClient` für die Kommunikation mit einem Remotedienst erstellt. Das vollständige Beispiel finden Sie [hier][sample-app].
+Diese Klassen sind dafür gedacht, einmal instanziiert und über die gesamte Lebensdauer einer Anwendung hinweg wiederverwendet zu werden. Es ist jedoch ein weit verbreiteter Irrtum, dass diese Klassen nur bei Bedarf erworben und schnell freigegeben werden sollen. (Die hier aufgelisteten Klassen beziehen sich zufälligerweise auf .NET-Bibliotheken, aber das Muster ist nicht eindeutig für .NET.) Im folgenden ASP.NET-Beispiel wird eine Instanz von `HttpClient` für die Kommunikation mit einem Remotedienst erstellt. Das vollständige Beispiel finden Sie [hier][sample-app].
 
 ```csharp
 public class NewHttpClientInstancePerRequestController : ApiController
@@ -76,18 +74,18 @@ Im folgenden Beispiel wird eine statische `HttpClient`-Instanz verwendet. Dadurc
 ```csharp
 public class SingleHttpClientInstanceController : ApiController
 {
-    private static readonly HttpClient HttpClient;
+    private static readonly HttpClient httpClient;
 
     static SingleHttpClientInstanceController()
     {
-        HttpClient = new HttpClient();
+        httpClient = new HttpClient();
     }
 
     // This method uses the shared instance of HttpClient for every call to GetProductAsync.
     public async Task<Product> GetProductAsync(string id)
     {
         var hostName = HttpContext.Current.Request.Url.Host;
-        var result = await HttpClient.GetStringAsync(string.Format("http://{0}:8080/api/...", hostName));
+        var result = await httpClient.GetStringAsync(string.Format("http://{0}:8080/api/...", hostName));
         return new Product { Name = result };
     }
 }

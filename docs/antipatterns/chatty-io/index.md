@@ -2,11 +2,11 @@
 title: "Antimuster „Zu viele E/A-Vorgänge“"
 description: "Eine sehr hohe Anzahl von E/A-Anforderungen kann die Leistung und Reaktionsfähigkeit beeinträchtigen."
 author: dragon119
-ms.openlocfilehash: 50001316939b56c9b57a119f6ae20f0878f54c0f
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 4f0e0e455ceb58317d3029d8ab4631d476802499
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="chatty-io-antipattern"></a>Antimuster „Zu viele E/A-Vorgänge“
 
@@ -24,7 +24,7 @@ Das folgende Beispiel liest Daten aus einer Produktdatenbank. Es gibt drei Tabel
 2. Durch Abfragen der Tabelle `Product` werden alle Produkte in dieser Unterkategorie gesucht.
 3. Für jedes Produkt werden die Preisdaten aus der Tabelle `ProductPriceListHistory` abgefragt.
 
-Die Anwendung verwendet das [Entity Framework][ef] zum Abfragen der Datenbank. Das vollständige Codebeispiel finden Sie [hier][code-sample]. 
+Die Anwendung verwendet das [Entity Framework][ef] zum Abfragen der Datenbank. Das vollständige Beispiel finden Sie [hier][code-sample]. 
 
 ```csharp
 public async Task<IHttpActionResult> GetProductsInSubCategoryAsync(int subcategoryId)
@@ -215,7 +215,7 @@ await SaveCustomerListToFileAsync(customers);
 
 - Vermeiden Sie es beim Schreiben von Daten, Ressourcen länger als notwendig zu sperren, um das Risiko von Konflikten während eines Vorgangs mit langer Ausführungsdauer zu mindern. Wenn ein Schreibvorgang mehrere Datenspeicher, Dateien oder Dienste umfasst, wenden Sie einen letztlich konsistenten Ansatz an. Weitere Informationen finden Sie unter [Data Consistency guidance][data-consistency-guidance] (Leitfaden zur Datenkonsistenz).
 
-- Wenn Sie Daten vor dem Schreiben im Arbeitsspeicher puffern, sind die Daten gefährdet, wenn der Prozess abstürzt. Wenn die Datenrate in der Regel verhältnismäßig gering ist oder Lastspitzen aufweist, ist es möglicherweise sicherer, die Daten in einer externen dauerhaften Warteschlange wie z.B. [Event Hubs](http://azure.microsoft.com/en-us/services/event-hubs/) zu puffern.
+- Wenn Sie Daten vor dem Schreiben im Arbeitsspeicher puffern, sind die Daten gefährdet, wenn der Prozess abstürzt. Wenn die Datenrate in der Regel verhältnismäßig gering ist oder Lastspitzen aufweist, ist es möglicherweise sicherer, die Daten in einer externen dauerhaften Warteschlange wie z.B. [Event Hubs](http://azure.microsoft.com/services/event-hubs/) zu puffern.
 
 - Erwägen Sie, Daten, die Sie aus einem Dienst oder einer Datenbank abrufen, zwischenzuspeichern. So lässt sich die Menge an E/A-Vorgängen verringern, da wiederholte Anforderungen für die gleichen Daten vermieden werden. Weitere Informationen finden Sie in den [bewährten Methoden für das Caching][caching-guidance].
 
