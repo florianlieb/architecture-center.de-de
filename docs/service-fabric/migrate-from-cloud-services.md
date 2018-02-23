@@ -3,11 +3,11 @@ title: Migrieren einer Azure Cloud Services-Anwendung zu Azure Service Fabric
 description: Informationen zum Migrieren einer Anwendung von Azure Cloud Services zu Azure Service Fabric.
 author: MikeWasson
 ms.date: 04/27/2017
-ms.openlocfilehash: 73e34c53ffd2f2eeb466d12a5f6c65dcfdaae389
-ms.sourcegitcommit: 2c9a8edf3e44360d7c02e626ea8ac3b03fdfadba
+ms.openlocfilehash: ce9c138a6b093fb7f0329c619c75bd4f4aacc2e7
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/03/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="migrate-an-azure-cloud-services-application-to-azure-service-fabric"></a>Migrieren einer Azure Cloud Services-Anwendung zu Azure Service Fabric 
 
@@ -227,7 +227,7 @@ Wie bereits erwähnt, benötigt der Kestrel-Webserver aus Sicherheitsgründen ei
 
 ### <a name="layer-7-routing"></a>Layer 7-Routing
 
-In der ursprünglichen [Survey-Anwendung](https://msdn.microsoft.com/en-us/library/hh534477.aspx#sec21) lauschte eine Webrolle an Port 80 und die andere Webrolle an Port 443. 
+In der ursprünglichen [Survey-Anwendung](https://msdn.microsoft.com/library/hh534477.aspx#sec21) lauschte eine Webrolle an Port 80 und die andere Webrolle an Port 443. 
 
 | Öffentliche Website | Umfrageverwaltungswebsite |
 |-------------|------------------------|
@@ -328,7 +328,7 @@ Nach der erfolgreichen Portierung der Anwendung „Surveys“ möchte Tailspin v
 [sf-reverse-proxy]: /azure/service-fabric/service-fabric-reverseproxy
 [sf-security]: /azure/service-fabric/service-fabric-cluster-security
 [sf-why-microservices]: /azure/service-fabric/service-fabric-overview-microservices
-[tailspin-book]: https://msdn.microsoft.com/en-us/library/ff966499.aspx
-[tailspin-scenario]: https://msdn.microsoft.com/en-us/library/hh534482.aspx
-[unity]: https://msdn.microsoft.com/en-us/library/ff647202.aspx
+[tailspin-book]: https://msdn.microsoft.com/library/ff966499.aspx
+[tailspin-scenario]: https://msdn.microsoft.com/library/hh534482.aspx
+[unity]: https://msdn.microsoft.com/library/ff647202.aspx
 [vm-scale-sets]: /azure/virtual-machine-scale-sets/virtual-machine-scale-sets-overview

@@ -1,12 +1,12 @@
 ---
 title: "Erläuterungen: Was ist ein Azure-Abonnement?"
 description: Hier erhalten Sie Informationen zu Abonnements, Konten und Angeboten von Azure.
-author: abuck
-ms.openlocfilehash: 7b88e9489b40b100eecb76602b45901566b3f37f
-ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
+author: alexbuckgit
+ms.openlocfilehash: 1650d90d6f78b46b7fe4128d2dab6a80bd6cca78
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/09/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="explainer-what-is-an-azure-subscription"></a>Erläuterungen: Was ist ein Azure-Abonnement?
 
@@ -23,10 +23,10 @@ Organisationen können Abonnements verwenden, um auf der Grundlage von Benutzern
 * Sie haben hier Informationen zu Azure-Abonnements erhalten. Erfahren Sie nun mehr über das [Erstellen eines Abonnements](subscription.md), bevor Sie Ihre ersten Azure-Ressourcen erstellen.
 
 <!-- Links -->
-[azure-get-started]: https://azure.microsoft.com/en-us/get-started/
-[azure-offers]: https://azure.microsoft.com/en-us/support/legal/offer-details/
-[azure-free-trial]: https://azure.microsoft.com/en-us/offers/ms-azr-0044p/
+[azure-get-started]: https://azure.microsoft.com/get-started/
+[azure-offers]: https://azure.microsoft.com/support/legal/offer-details/
+[azure-free-trial]: https://azure.microsoft.com/offers/ms-azr-0044p/
 [azure-change-subscription-offer]: /azure/billing/billing-how-to-switch-azure-offer
 [microsoft-account]: https://account.microsoft.com/account
 [subscription-service-limits]: /azure/azure-subscription-service-limits
-[docs-organizational-account]: https://docs.microsoft.com/en-us/azure/active-directory/sign-up-organization
+[docs-organizational-account]: https://docs.microsoft.com/azure/active-directory/sign-up-organization

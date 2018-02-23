@@ -4,11 +4,11 @@ description: Checkliste mit Anleitungen zu DevOps.
 author: dragon119
 ms.date: 01/10/2018
 ms.custom: checklist
-ms.openlocfilehash: c435ea0aed9571cb6508d7d23f93414a138998fe
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 356fef2415347ae132915695a25fd9b50779bd8b
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="devops-checklist"></a>Checkliste für DevOps
 
@@ -126,7 +126,7 @@ Es ist von entscheidender Bedeutung, diese Dokumentation für alle Benutzer frei
 
 **Sorgen Sie für Konfigurationsverwaltung.** Konfigurationsänderungen sollten geplant werden, für Vorgänge sichtbar sein und aufgezeichnet werden. Hierfür können Sie eine Datenbank für die Konfigurationsverwaltung verwenden oder einen Configuration-as-Code-Ansatz wählen. Die Konfiguration sollte regelmäßig überwacht werden, um sicherzustellen, dass die erwarteten Funktionen und Merkmale auch tatsächlich vorhanden sind.
 
-**Erwerben Sie einen Azure-Supportplan, und informieren Sie sich über den Prozess.** Azure bietet eine Reihe von [Supportplänen an][azure-support-plans]. Ermitteln Sie den Plan, der sich für Ihre Anforderungen am besten eignet, und stellen Sie sicher, dass das gesamte Team den Plan kennt und weiß, wie vorzugehen ist. Alle Teammitglieder müssen die Einzelheiten des Plans kennen und wissen, wie der Supportprozess funktioniert und wie sie in Azure ein Supportticket eröffnen. Wenn Sie ein Ereignis erwarten, das sich in hohem Maß auf Ihre Anwendung auswirken wird, kann der Azure-Support Ihnen beim Erhöhen der Dienstlimits helfen. Weitere Informationen finden Sie unter [Häufig gestellte Fragen zum Azure-Support](https://azure.microsoft.com/en-us/support/faq/).
+**Erwerben Sie einen Azure-Supportplan, und informieren Sie sich über den Prozess.** Azure bietet eine Reihe von [Supportplänen an][azure-support-plans]. Ermitteln Sie den Plan, der sich für Ihre Anforderungen am besten eignet, und stellen Sie sicher, dass das gesamte Team den Plan kennt und weiß, wie vorzugehen ist. Alle Teammitglieder müssen die Einzelheiten des Plans kennen und wissen, wie der Supportprozess funktioniert und wie sie in Azure ein Supportticket eröffnen. Wenn Sie ein Ereignis erwarten, das sich in hohem Maß auf Ihre Anwendung auswirken wird, kann der Azure-Support Ihnen beim Erhöhen der Dienstlimits helfen. Weitere Informationen finden Sie unter [Häufig gestellte Fragen zum Azure-Support](https://azure.microsoft.com/support/faq/).
 
 **Befolgen Sie beim Gewähren des Zugriffs auf Ressourcen das Prinzip der geringsten Rechte.** Gehen Sie beim Verwalten des Zugriffs auf Ressourcen mit großer Umsicht vor. Standardmäßig sollte der Zugriff verweigert werden, sofern einem Benutzer nicht explizit Zugriff auf eine Ressource gewährt wurde. Gewähren Sie Benutzern nur Zugriff auf diejenigen Ressourcen, die sie zum Durchführen ihrer Aufgaben benötigen. Verfolgen Sie Benutzerberechtigungen nach, und führen Sie regelmäßige Sicherheitsüberwachungen durch.
 

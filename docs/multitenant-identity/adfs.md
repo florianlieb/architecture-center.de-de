@@ -6,11 +6,11 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: token-cache
 pnp.series.next: client-assertion
-ms.openlocfilehash: a5dc25a4b61ffd13d86f1abb2b839054e5fb4c7f
-ms.sourcegitcommit: 475064f0a3c2fac23e1286ba159aaded287eec86
+ms.openlocfilehash: 08bf567085a940287de310f61b9f447d0ce5d5ec
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="federate-with-a-customers-ad-fs"></a>Einrichten eines Verbunds mit der AD FS-Instanz eines Kunden
 
@@ -63,10 +63,10 @@ Standardmäßig empfängt die Anwendung der vertrauenden Seite nur einen festgel
 | exp |[Ablaufzeit]. Der Zeitpunkt, nach dem das Token nicht mehr akzeptiert wird. |
 | iat |Ausgestellt um. Der Zeitpunkt, zu dem das Token ausgestellt wurde. |
 | iss |Aussteller. Der Wert dieses Anspruchs ist immer die AD FS-Instanz des Ressourcenpartners. |
-| name |Benutzername. Beispiel: `john@corp.fabrikam.com`. |
+| name |Benutzername. Beispiel: `john@corp.fabrikam.com` |
 | nameidentifier |[Namensbezeichner]. Der Bezeichner für den Namen der Entität, für die das Token ausgestellt wurde. |
 | nonce |Sitzungsnonce. Ein eindeutiger Wert, der von AD FS generiert wird, um Replayangriffe zu verhindern. |
-| upn |Benutzerprinzipalname (User Principal Name, UPN). Beispiel: john@corp.fabrikam.com |
+| upn |Benutzerprinzipalname (User Principal Name, UPN). Beispiel: `john@corp.fabrikam.com` |
 | pwd_exp |Ablaufzeitraum für Kennwort. Die Anzahl von Sekunden, bis das Kennwort oder ein entsprechendes Authentifizierungsgeheimnis – z.B. eine PIN – des Benutzers abläuft. |
 
 > [!NOTE]

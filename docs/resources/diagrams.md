@@ -1,11 +1,11 @@
 ---
 title: "Symbole und andere Ressourcen für Architekturdiagramme"
 description: "Symbole, Visio-Vorlagen, PNG-Dateien und SVG-Dateien, die für die Erstellung eigener Architekturdiagramme nützlich sind"
-ms.openlocfilehash: 863c5cd479e6c4b6d57299176b80d02661e5466b
-ms.sourcegitcommit: 662f27f37d45f778ad1b6355fb6fb66e3c65558c
+ms.openlocfilehash: 58a2046c0d463c1f331ea3f950f0c11c273ffc36
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/11/2017
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="icons-and-diagrams"></a>Symbole und Diagramme
 
@@ -18,7 +18,7 @@ Ein Symbolsatz ist eine Sammlung von Visio-, PowerPoint-, PNG- und SVG-Ressource
 
 ![Cloud- und Enterprise-Symbolsatz](./_images/CnESymbols.png)
 
-Zusätzliche Symbole für Microsoft Office und zugehörige Technologien stehen in der [Microsoft Office Visio-Schablone](http://www.microsoft.com/en-us/download/details.aspx?id=35772) zur Verfügung. Allerdings sind diese nicht für Architekturdiagramme optimiert.   
+Zusätzliche Symbole für Microsoft Office und zugehörige Technologien stehen in der [Microsoft Office Visio-Schablone](http://www.microsoft.com/download/details.aspx?id=35772) zur Verfügung. Allerdings sind diese nicht für Architekturdiagramme optimiert.   
 
 > [!NOTE]
 > Diese Ressourcen sind nicht für den Einsatz auf Benutzungsoberflächen vorgesehen. Drittanbietersymbole befinden sich nicht im Besitz von Microsoft.

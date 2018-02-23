@@ -4,11 +4,11 @@ description: "Anleitungen zum Content Delivery Network (CDN) für die Bereitstel
 author: dragon119
 ms.date: 02/02/2018
 pnp.series.title: Best Practices
-ms.openlocfilehash: 73da41edec246b672564dd4a52b317eacf8ad649
-ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
+ms.openlocfilehash: 9ee9099c85818af9486408f6ece41d3f6fcd9b44
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/09/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="best-practices-for-using-content-delivery-networks-cdns"></a>Bewährte Methoden für die Verwendung von Content Delivery Networks (CDNs)
 
@@ -95,5 +95,3 @@ Wenn Sie statische Objekte, z.B. Schriftdateien, mit dem CDN bereitstellen, kön
 
 ### <a name="cdn-fallback"></a>CDN-Fallback
 Berücksichtigen Sie, wie Ihre Anwendung einen Fehler oder einen vorübergehenden Ausfall des CDN verarbeitet. Clientanwendungen können möglicherweise Kopien der Ressourcen verwenden, die bei früheren Anforderungen lokal (auf dem Client) zwischengespeichert wurden, oder Sie können Code einbauen, der einen Ausfall erkennt und bei Nichtverfügbarkeit des CDNs die Ressourcen vom Ursprung anfordert (aus dem Anwendungsordner oder Azure-Blob-Container, der die Ressourcen enthält).
-
-Im folgenden Beispiel wird ein Fallbackmechanismus veranschaulicht.

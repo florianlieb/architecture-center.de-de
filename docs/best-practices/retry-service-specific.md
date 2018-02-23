@@ -4,11 +4,11 @@ description: "Spezifische Dienstanleitung für die Festlegung des Wiederholungsm
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: da1145e2f2f91befd69505ae9ef2734d6110c1d0
-ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
+ms.openlocfilehash: 6bb623bd8be89573178f250570407bf83d62c098
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/30/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="retry-guidance-for-specific-services"></a>Wiederholungsanleitung für bestimmte Dienste
 
@@ -229,7 +229,7 @@ SQL-Datenbank ist eine gehostete SQL-Datenbank, die in unterschiedlichen Größe
 Beim Zugriff auf SQL-Datenbank mit Entity Framework 6.0 und höher über einen Mechanismus namens [Verbindungsstabilität / Wiederholungslogik](http://msdn.microsoft.com/data/dn456835.aspx)wird Wiederholungsunterstützung geboten. Die wichtigsten Features des Wiederholungsmechanismus sind:
 
 * Die primäre Abstraktion ist die **IDbExecutionStrategy** -Schnittstelle. Diese Benutzeroberfläche:
-  * Definiert die synchrone und asynchrone Methoden zum **Ausführen** \* .
+  * Definiert die synchrone und asynchrone Methoden zum **Ausführen***.
   * Definiert Klassen, die direkt verwendet oder in einem Datenbankkontext als eine Standardstrategie konfiguriert werden können, einem Anbieternamen oder einem Anbieternamen und Servernamen zugeordnet werden können. Wenn sie für einen Kontext konfiguriert ist, treten Wiederholungen auf der Ebene der einzelnen Datenbankvorgängen auf, von denen es möglicherweise mehrere für einen angegebenen Kontext gibt.
   * Definiert, wann und wie versucht wird, einen fehlgeschlagene Verbindung erneut herzustellen.
 * Sie umfasst mehrere integrierte Implementierungen für die **IDbExecutionStrategy** -Schnittstelle:
@@ -416,7 +416,7 @@ using (var db = new BloggingContext())
 
 ### <a name="more-information"></a>Weitere Informationen
 * [Verbindungsstabilität](/ef/core/miscellaneous/connection-resiliency)
-* [Data Points – EF Core 1.1](https://msdn.microsoft.com/en-us/magazine/mt745093.aspx)
+* [Data Points – EF Core 1.1](https://msdn.microsoft.com/magazine/mt745093.aspx)
 
 ## <a name="sql-database-using-adonet-retry-guidelines"></a>SQL-Datenbank mit ADO.NET Wiederholungsrichtlinien
 SQL-Datenbank ist eine gehostete SQL-Datenbank, die in unterschiedlichen Größen und als Standard (freigegeben) und Premium (nicht freigegebenen)-Dienst verfügbar ist.

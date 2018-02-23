@@ -8,11 +8,11 @@ pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - data-management
 - performance-scalability
-ms.openlocfilehash: e0a6a91fda6ea43236f6eea552f7b8f8d31160ad
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 1536a33884c9c9faa1e3702c951067249e691bf8
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="cache-aside-pattern"></a>Cachefremdes Muster
 
@@ -43,9 +43,9 @@ Wenn das Element das nächste Mal benötigt wird, führt die Strategie mit dem c
 
 Beachten Sie die folgenden Punkte bei der Entscheidung, wie dieses Muster implementiert werden soll: 
 
-**Lebensdauer der zwischengespeicherten Daten**. Viele Caches implementieren eine Ablaufrichtlinie, mit der die Daten ungültig gemacht und aus dem Cache entfernt werden, wenn für einen angegebenen Zeitraum nicht darauf zugegriffen wurde. Damit das cachefremde Muster wirksam ist, stellen Sie sicher, dass die Ablaufrichtlinie zum Zugriffsmuster für Anwendungen passt, die die Daten verwenden. Legen Sie keinen zu kurzen Ablaufzeitraum fest. Dies könnte dazu führen, dass Anwendungen Daten kontinuierlich aus dem Datenspeicher abrufen und dem Cache hinzuzufügen. Legen Sie auch keinen zu langen Ablaufzeitraum fest, damit Sie keine veralteten Daten im Cache haben. Denken Sie daran, dass das Zwischenspeichern für relativ statische Daten oder für Daten, die häufig gelesen werden, am effektivsten ist.
+**Lebensdauer der zwischengespeicherten Daten**. Viele Caches implementieren eine Ablaufrichtlinie, mit der die Daten ungültig gemacht und aus dem Cache entfernt werden, wenn für einen angegebenen Zeitraum nicht darauf zugegriffen wurde. Damit das cachefremde Muster wirksam ist, stellen Sie sicher, dass die Ablaufrichtlinie zum Zugriffsmuster für Anwendungen passt, die die Daten verwenden. Legen Sie keinen zu kurzen Ablaufzeitraum fest. Dies könnte dazu führen, dass Anwendungen Daten kontinuierlich aus dem Datenspeicher abrufen und dem Cache hinzufügen. Legen Sie auch keinen zu langen Ablaufzeitraum fest, damit Sie keine veralteten Daten im Cache haben. Denken Sie daran, dass das Zwischenspeichern für relativ statische Daten oder für Daten, die häufig gelesen werden, am effektivsten ist.
 
-**Entfernen von Daten**. Die meisten Caches haben im Vergleich mit dem Datenspeicher, aus dem die Daten stammen, eine beschränkte Größe, und sie müssen Daten ggf. entfernen. In den meisten Caches werden dann die am längsten nicht mehr verwendeten Elemente entfernt, aber dies kann möglicherweise angepasst werden. Konfigurieren Sie die globale Ablaufeigenschaft und andere Eigenschaften des Cache sowie das Ablaufdatum der einzelnen Element im Cache, um sicherzustellen, dass der Cache kostengünstig ist. Es ist nicht immer angebracht, eine globale Entfernungsrichtlinie auf jedes Element im Cache anzuwenden. Wenn es z.B. mit viel Aufwand verbunden ist, ein Element im Cache aus dem Datenspeicher abzurufen, kann es von Vorteil sein, dieses Element im Cache zu belassen und stattdessen häufiger verwendete, jedoch weniger aufwändige Elemente zu löschen.
+**Entfernen von Daten**. Die meisten Caches haben im Vergleich mit dem Datenspeicher, aus dem die Daten stammen, eine beschränkte Größe, und sie müssen Daten ggf. entfernen. In den meisten Caches werden dann die am längsten nicht mehr verwendeten Elemente entfernt, aber dies kann möglicherweise angepasst werden. Konfigurieren Sie die globale Ablaufeigenschaft und andere Eigenschaften des Cache sowie das Ablaufdatum der einzelnen Elemente im Cache, um sicherzustellen, dass der Cache kostengünstig ist. Es ist nicht immer angebracht, eine globale Entfernungsrichtlinie auf jedes Element im Cache anzuwenden. Wenn es z.B. mit viel Aufwand verbunden ist, ein Element im Cache aus dem Datenspeicher abzurufen, kann es von Vorteil sein, dieses Element im Cache zu belassen und stattdessen häufiger verwendete, jedoch weniger aufwändige Elemente zu löschen.
 
 **Vorbereiten des Cache**. Viele Lösungen füllen den Cache vorab mit den Daten auf, die eine Anwendung wahrscheinlich als Teil der Verarbeitung beim Starten benötigt. Das cachefremde Muster kann dennoch nützlich sein, wenn einige dieser Daten abgelaufen sind oder entfernt werden.
 
@@ -125,7 +125,7 @@ public async Task<MyEntity> GetMyEntityAsync(int id)
 }
 ```
 
->  Die Beispiele verwenden die Azure Redis Cache-API, um auf den Speicher zuzugreifen und Informationen aus dem Cache abzurufen. Weitere Informationen finden Sie unter [Verwenden von Azure Redis Cache](https://docs.microsoft.com/en-us/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache) und [Gewusst wie: Erstellen einer Web-App mit Redis Cache](https://docs.microsoft.com/en-us/azure/redis-cache/cache-web-app-howto)
+>  Die Beispiele verwenden die Azure Redis Cache-API, um auf den Speicher zuzugreifen und Informationen aus dem Cache abzurufen. Weitere Informationen finden Sie unter [Verwenden von Azure Redis Cache](https://docs.microsoft.com/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache) und [Gewusst wie: Erstellen einer Web-App mit Redis Cache](https://docs.microsoft.com/azure/redis-cache/cache-web-app-howto)
 
 Die unten gezeigte `UpdateEntityAsync`-Methode veranschaulicht, wie ein Objekt im Cache für ungültig erklärt wird, wenn der Wert von der Anwendung geändert wird. Der Code aktualisiert den ursprünglichen Datenspeicher und entfernt dann das zwischengespeicherte Element aus dem Cache.
 
@@ -151,6 +151,6 @@ public async Task UpdateEntityAsync(MyEntity entity)
 
 Die folgenden Informationen sind unter Umständen auch relevant, wenn dieses Muster implementiert wird:
 
-- [Caching Guidance (Leitfaden zum Caching)](https://docs.microsoft.com/en-us/azure/architecture/best-practices/caching). Enthält weitere Informationen zum Zwischenspeichern von Daten in einer Cloudlösung und die Probleme, die Sie bedenken sollten, wenn Sie einen Cache implementieren.
+- [Caching Guidance (Leitfaden zum Caching)](https://docs.microsoft.com/azure/architecture/best-practices/caching). Enthält weitere Informationen zum Zwischenspeichern von Daten in einer Cloudlösung und die Probleme, die Sie bedenken sollten, wenn Sie einen Cache implementieren.
 
 - [Data Consistency Primer (Grundlagen der Datenkonsistenz)](https://msdn.microsoft.com/library/dn589800.aspx). Cloudanwendungen verwenden in der Regel Daten, die auf Datenspeicher verteilt sind. Das Verwalten und Erhalten der Datenkonsistenz in dieser Umgebung ist ein wichtiger Aspekt des Systems, insbesondere die Probleme mit Parallelität und Dienstverfügbarkeit, die auftreten können. Dieser Artikel erläutert Probleme im Zusammenhang mit der Konsistenz verteilter Daten und fasst zusammen, wie eine Anwendung letztlich Konsistenz implementieren kann, um die Verfügbarkeit von Daten beizubehalten.

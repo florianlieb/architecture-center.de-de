@@ -3,11 +3,11 @@ title: "Auswählen einer Technologie für die Echtzeiterfassung von Nachrichten"
 description: 
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 4f76e63a50c1d689ea3a37219a44aa94477a2e2e
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 2e6578b779950b5ef11bda7b8ba1fb2e45e09f4e
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="choosing-a-real-time-message-ingestion-technology-in-azure"></a>Auswählen einer Technologie für die Echtzeiterfassung von Nachrichten in Azure
 
@@ -58,7 +58,7 @@ Beantworten Sie die folgenden Fragen, um die Auswahl einzuschränken:
 
 ## <a name="capability-matrix"></a>Funktionsmatrix
 
-In den folgenden Tabellen sind die Hauptunterschiede in Bezug auf die Funktionen zusammengefasst. 
+In den folgenden Tabellen sind die Hauptunterschiede der Funktionen zusammengefasst: 
 
 | | IoT Hub | Event Hubs | Kafka in HDInsight |
 | --- | --- | --- | --- |
@@ -70,4 +70,4 @@ In den folgenden Tabellen sind die Hauptunterschiede in Bezug auf die Funktionen
 
 [1] Sie können auch das [Azure IoT-Protokollgateway](/azure/iot-hub/iot-hub-protocol-gateway) als benutzerdefiniertes Gateway verwenden, um die Protokollanpassung für IoT Hub zu ermöglichen.
 
-Weitere Informationen finden Sie unter [Vergleich zwischen Azure IoT Hub und Azure Event Hubs](/azure/iot-hub/iot-hub-compare-event-hubss).
+Weitere Informationen finden Sie unter [Vergleich zwischen Azure IoT Hub und Azure Event Hubs](/azure/iot-hub/iot-hub-compare-event-hubs).

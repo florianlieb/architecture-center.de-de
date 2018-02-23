@@ -1,16 +1,17 @@
 ---
 title: Wiederholen
-description: "Ermöglichen Sie einer Anwendung beim Herstellen einer Verbindung mit einem Dienst oder einer Netzwerkressource die Behandlung antizipierter, temporärer Fehler, indem ein Vorgang, bei dem zuvor ein Fehler aufgetreten ist, transparent wiederholt wird."
+description: "Ermöglichen Sie einer Anwendung beim Herstellen einer Verbindung mit einem Dienst oder einer Netzwerkressource die Behandlung antizipierter, temporärer Fehler, indem ein zuvor nicht erfolgreich durchgeführter Vorgang transparent wiederholt wird."
 keywords: Entwurfsmuster
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories: resiliency
-ms.openlocfilehash: 6c02b384e71c068ecbc78f3170d28cea406538e2
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+pnp.pattern.categories:
+- resiliency
+ms.openlocfilehash: 73fdcbcc2bd75593a4c8e33dc2259c90593e14db
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="retry-pattern"></a>Wiederholungsmuster
 
@@ -48,13 +49,13 @@ Die Anwendung sollte alle Zugriffsversuche auf einen Remotedienst in Code einsch
 
 Eine Anwendung sollte die Details der Fehler und fehlgeschlagenen Vorgänge protokollieren. Diese Informationen sind für Betreiber nützlich. Wenn ein Dienst häufig nicht verfügbar oder ausgelastet ist, liegt dies oft daran, dass die Ressourcen des Diensts ausgeschöpft sind. Sie können die Häufigkeit dieser Fehler reduzieren, indem Sie den Dienst horizontal skalieren. Wenn beispielsweise ein Datenbankdienst ständig überlastet ist, kann es nützlich sein, die Datenbank zu partitionieren und die Last auf mehrere Server zu verteilen.
 
-> [Microsoft Entity Framework](https://docs.microsoft.com/ef/) bietet Funktionen für das Wiederholen von Datenbankvorgängen. Auch die meisten Azure-Dienste und Client-SDKs enthalten einen Wiederholungsmechanismus. Weitere Informationen finden Sie unter [Wiederholungsanleitung für bestimmte Dienste](https://docs.microsoft.com/en-us/azure/architecture/best-practices/retry-service-specific).
+> [Microsoft Entity Framework](https://docs.microsoft.com/ef/) bietet Funktionen für das Wiederholen von Datenbankvorgängen. Auch die meisten Azure-Dienste und Client-SDKs enthalten einen Wiederholungsmechanismus. Weitere Informationen finden Sie unter [Wiederholungsanleitung für bestimmte Dienste](https://docs.microsoft.com/azure/architecture/best-practices/retry-service-specific).
 
 ## <a name="issues-and-considerations"></a>Probleme und Überlegungen
 
 Bei der Entscheidung, wie dieses Muster implementiert werden soll, sind die folgenden Punkte zu beachten.
 
-Die Wiederholungsrichtlinie sollte entsprechend den geschäftlichen Anforderungen der Anwendung und der Art des Fehlers angepasst werden. Bei einigen nicht kritischen Vorgängen ist es besser, wenn diese schnell fehlschlagen, statt sie mehrere Male zu wiederholen und dadurch den Durchsatz der Anwendung zu verringern. Bei einer interaktiven Webanwendung, die auf einen Remotedienst zugreift, ist es beispielsweise besser, nach einer kleineren Anzahl von Wiederholungen mit nur einer kurzen Verzögerung zwischen den Wiederholungsversuchen einen Fehler auszugeben und dem Benutzer eine entsprechende Meldung anzuzeigen (z. B. „Versuchen Sie es später noch einmal“). Bei einer Batchanwendung ist es möglicherweise besser, die Anzahl der Wiederholungsversuche mit einer exponentiell zunehmenden Verzögerung zwischen den einzelnen Versuchen zu erhöhen.
+Die Wiederholungsrichtlinie sollte entsprechend den geschäftlichen Anforderungen der Anwendung und der Art des Fehlers angepasst werden. Bei einigen nicht kritischen Vorgängen ist es besser, Fail-Fast-fähig zu sein, statt sie mehrere Male zu wiederholen und dadurch den Durchsatz der Anwendung zu verringern. Bei einer interaktiven Webanwendung, die auf einen Remotedienst zugreift, ist es beispielsweise besser, nach einer kleineren Anzahl von Wiederholungen mit nur einer kurzen Verzögerung zwischen den Wiederholungsversuchen einen Fehler auszugeben und dem Benutzer eine entsprechende Meldung anzuzeigen (z. B. „Versuchen Sie es später noch einmal“). Bei einer Batchanwendung ist es möglicherweise besser, die Anzahl der Wiederholungsversuche mit einer exponentiell zunehmenden Verzögerung zwischen den einzelnen Versuchen zu erhöhen.
 
 Durch eine aggressive Wiederholungsrichtlinie mit minimaler Verzögerung zwischen den Versuchen und einer großen Anzahl von Wiederholungen kann ein ausgelasteter Dienst, der nahe oder an seiner Kapazitätsgrenze ausgeführt wird, zusätzlich beeinträchtigt werden. Diese Wiederholungsrichtlinie könnte sich auch auf die Reaktionsfähigkeit der Anwendung auswirken, wenn ständig versucht wird, einen fehlgeschlagenen Vorgang auszuführen.
 
@@ -68,7 +69,7 @@ Beachten Sie, wie sich das Wiederholen eines Vorgangs, der Teil einer Transaktio
 
 Stellen Sie sicher, dass der gesamte Wiederholungscode vollständig für eine Vielzahl von Fehlerbedingungen getestet ist. Vergewissern Sie sich, dass er keine schwerwiegenden Auswirkungen auf die Leistungsfähigkeit oder Zuverlässigkeit der Anwendung hat, keine übermäßige Auslastung von Diensten und Ressourcen bewirkt und auch keine Racebedingungen oder Engpässe erzeugt.
 
-Implementieren Sie eine Wiederholungslogik nur unter Berücksichtigung des gesamten Kontexts eines fehlgeschlagenen Vorgangs. Wenn beispielsweise eine Aufgabe, die eine Wiederholungsrichtlinie enthält, eine andere Aufgabe aufruft, die ebenfalls eine Wiederholungsrichtlinie enthält, kann diese zusätzliche Ebene von Wiederholungen zu lange Verzögerungen bei der Verarbeitung führen. Möglicherweise ist es besser, die Aufgabe auf niedrigerer Ebene so zu konfigurieren, dass sie schnell fehlschlägt und die Ursache des Fehlers an die Aufgabe zurückmeldet, von der sie aufgerufen wurde. Diese Aufgabe auf höherer Ebene kann dann den Fehler basierend auf ihrer eigenen Richtlinie behandeln.
+Implementieren Sie eine Wiederholungslogik nur unter Berücksichtigung des gesamten Kontexts eines fehlgeschlagenen Vorgangs. Wenn beispielsweise eine Aufgabe, die eine Wiederholungsrichtlinie enthält, eine andere Aufgabe aufruft, die ebenfalls eine Wiederholungsrichtlinie enthält, kann diese zusätzliche Ebene von Wiederholungen zu lange Verzögerungen bei der Verarbeitung führen. Möglicherweise ist es besser, die Aufgabe auf niedrigerer Ebene so zu konfigurieren, dass sie Fail-Fast-fähig ist und die Ursache des Fehlers an die Aufgabe zurückmeldet, von der sie aufgerufen wurde. Diese Aufgabe auf höherer Ebene kann dann den Fehler basierend auf ihrer eigenen Richtlinie behandeln.
 
 Es ist wichtig, alle Konnektivitätsfehler zu protokollieren, die zu einer Wiederholung führen, damit zugrunde liegende Probleme mit der Anwendung, Diensten oder Ressourcen ermittelt werden können.
 
@@ -171,6 +172,6 @@ private bool IsTransient(Exception ex)
 
 ## <a name="related-patterns-and-guidance"></a>Zugehörige Muster und Anleitungen
 
-- [Trennschalter-Muster](circuit-breaker.md). Das Wiederholungsmuster eignet sich zum Behandeln vorübergehender Fehler. Wenn bei einem Fehler davon ausgegangen wird, dass er länger andauert, ist es möglicherweise besser, das Trennschalter-Muster zu implementieren. Das Wiederholungsmuster kann auch in Verbindung mit einem Trennschalter verwendet werden, um einen umfassenden Ansatz zur Behandlung von Fehlern bereitzustellen.
-- [Wiederholungsanleitung für bestimmte Dienste](https://docs.microsoft.com/en-us/azure/architecture/best-practices/retry-service-specific)
-- [Verbindungsstabilität](https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency)
+- [Muster „Trennschalter“](circuit-breaker.md). Das Wiederholungsmuster eignet sich zum Behandeln vorübergehender Fehler. Wenn bei einem Fehler davon ausgegangen wird, dass er länger andauert, ist es möglicherweise besser, das Trennschalter-Muster zu implementieren. Das Wiederholungsmuster kann auch in Verbindung mit einem Trennschalter verwendet werden, um einen umfassenden Ansatz zur Behandlung von Fehlern bereitzustellen.
+- [Wiederholungsanleitung für bestimmte Dienste](https://docs.microsoft.com/azure/architecture/best-practices/retry-service-specific)
+- [Verbindungsstabilität](https://docs.microsoft.com/ef/core/miscellaneous/connection-resiliency)
