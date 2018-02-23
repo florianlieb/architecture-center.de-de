@@ -1,3 +1,15 @@
+---
+title: "Checkliste für DevOps"
+description: Checkliste mit Anleitungen zu DevOps.
+author: dragon119
+ms.date: 01/10/2018
+ms.custom: checklist
+ms.openlocfilehash: c435ea0aed9571cb6508d7d23f93414a138998fe
+ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.translationtype: HT
+ms.contentlocale: de-DE
+ms.lasthandoff: 02/14/2018
+---
 # <a name="devops-checklist"></a>Checkliste für DevOps
 
 DevOps ist die Verschmelzung von Entwicklung, Qualitätssicherung und IT-Vorgängen in eine einheitliche Kultur und einen einheitlichen Prozesssatz für die Bereitstellung von Software. Verwenden Sie diese Checkliste als Ausgangspunkt, um Ihre DevOps-Kultur und -Prozesse zu bewerten.
@@ -16,7 +28,7 @@ DevOps ist die Verschmelzung von Entwicklung, Qualitätssicherung und IT-Vorgän
 
 **Lernen Sie aus Fehlern.** Fehler lassen sich nicht vermeiden, und es ist wichtig, daraus zu lernen, damit sie sich nicht wiederholen. Wenn ein Fehler im Betrieb auftritt, kategorisieren Sie ihn, dokumentieren Ursache und Lösung, und geben Sie die aus dem Fehler gezogenen Schlussfolgerungen weiter. Aktualisieren Sie Ihre Buildprozesse nach Möglichkeit, damit diese Art Fehler in Zukunft automatisch erkannt wird.
 
-**Optimieren Sie Ihr System im Hinblick auf Geschwindigkeit und Datensammlung.** Jede geplante Verbesserung ist eine Hypothese. Arbeiten Sie in möglichst kleinen Schritten. Betrachten Sie neue Ideen als Experimente. Instrumentieren Sie die Experimente, sodass Sie Produktionsdaten sammeln können, um deren Effektivität zu bewerten. Seien Sie darauf vorbereitet, eine Idee schnell zu verwerfen, wenn die Hypothese sich als falsch herausstellt.
+**Optimieren Sie Ihr System im Hinblick auf Geschwindigkeit und Datensammlung.** Jede geplante Verbesserung ist eine Hypothese. Arbeiten Sie in möglichst kleinen Schritten. Betrachten Sie neue Ideen als Experimente. Instrumentieren Sie die Experimente, sodass Sie Produktionsdaten sammeln können, um deren Effektivität zu bewerten. Seien Sie darauf vorbereitet, Fail-Fast-fähig zu sein, wenn die Hypothese sich als falsch herausstellt.
 
 **Planen Sie genügend Zeit für Lernprozesse ein.** Sowohl aus Fehlern als auch aus Erfolgen lässt sich Neues lernen. Bevor Sie neue Projekte in Angriff nehmen, planen Sie genügend Zeit ein, um die wichtigsten Erkenntnisse zusammenzustellen, und stellen Sie sicher, dass Ihr Team diese Erkenntnisse entsprechend umsetzt. Lassen Sie dem Team auch genügend Zeit, um sich neue Kenntnisse und Fähigkeiten anzueignen, zu experimentieren und neue Tools und Techniken kennenzulernen. 
 

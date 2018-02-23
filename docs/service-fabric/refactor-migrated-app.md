@@ -3,11 +3,11 @@ title: Umgestalten einer Azure Service Fabric-Anwendung, die von Azure Cloud Ser
 description: Umgestalten einer vorhandenen Azure Service Fabric-Anwendung, die von Azure Cloud Services migriert wurde
 author: petertay
 ms.date: 01/30/2018
-ms.openlocfilehash: 4889fae8f157b0f1205e7d8223f125974be59ba9
-ms.sourcegitcommit: 2c9a8edf3e44360d7c02e626ea8ac3b03fdfadba
+ms.openlocfilehash: 18af7c7fe0c0933b1a2a132ee2ee0d8479d41b2a
+ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/03/2018
+ms.lasthandoff: 02/09/2018
 ---
 # <a name="refactor-an-azure-service-fabric-application-migrated-from-azure-cloud-services"></a>Umgestalten einer Azure Service Fabric-Anwendung, die von Azure Cloud Services migriert wurde
 
@@ -64,15 +64,15 @@ Das folgende Diagramm zeigt die Architektur der Anwendung „Surveys“ nach der
 
 **Tailspin.Web** ist ein zustandsloser Dienst für eine selbstgehostete ASP.NET-MVC-Anwendung, mit der Tailspin-Kunden Umfragen erstellen und Umfrageergebnisse anzeigen. Dieser Dienst hat größtenteils den gleichen Code wie der Dienst *Tailspin.Web* aus der portierten Service Fabric-Anwendung. Wie weiter oben erwähnt, verwendet dieser Dienst ASP.NET Core und implementiert einen Weblistener, anstatt Kestrel als Web-Front-End zu verwenden.
 
-**Tailspin.Web.Surveys.Public** ist ein zustandsloser Dienst und hostet ebenfalls selbst eine ASP.NET-MVC-Website. Benutzer besuchen diese Website, um Umfragen aus einer Liste auszuwählen und zu beantworten. Dieser Dienst hat größtenteils den gleichen Code wie der Dienst *Tailspin.Web.Survey.Public* aus der portierten Service Fabric-Anwendung. Dieser Dienst verwendet ebenfalls ASP.NET Core und implementiert auch einen Weblistener, anstatt Kestrel als Web-Front-End zu verwenden.
+**Tailspin.Web.Survey.Public** ist ein zustandsloser Dienst und hostet ebenfalls selbst eine ASP.NET-MVC-Website. Benutzer besuchen diese Website, um Umfragen aus einer Liste auszuwählen und zu beantworten. Dieser Dienst hat größtenteils den gleichen Code wie der Dienst *Tailspin.Web.Survey.Public* aus der portierten Service Fabric-Anwendung. Dieser Dienst verwendet ebenfalls ASP.NET Core und implementiert auch einen Weblistener, anstatt Kestrel als Web-Front-End zu verwenden.
 
-**Tailspin.SurveyResponseService** ist ein zustandsbehafteter Dienst, der Umfrageantworten in Azure Blob Storage speichert. Darüber hinaus führt er Antworten in den Umfrageanalysedaten zusammen. Der Dienst wird als zustandsbehafteter Dienst implementiert, da er [ReliableConcurrentQueue][reliable-concurrent-queue] verwendet, um Umfrageantworten in Batches zu verarbeiten. Diese Funktion wurde ursprünglich im Dienst *Tailspin.Web.Survey.Public* der portierten Service Fabric-Anwendung implementiert. Tailspin hat die ursprüngliche Funktion in diesem Dienst umgestaltet, um eine unabhängige Skalierung zu ermöglichen.
+**Tailspin.SurveyResponseService** ist ein zustandsbehafteter Dienst, der Umfrageantworten in Azure Blob Storage speichert. Darüber hinaus führt er Antworten in den Umfrageanalysedaten zusammen. Der Dienst wird als zustandsbehafteter Dienst implementiert, da er [ReliableConcurrentQueue][reliable-concurrent-queue] verwendet, um Umfrageantworten in Batches zu verarbeiten. Diese Funktion wurde ursprünglich im Dienst *Tailspin.AnswerAnalysisService* in der portierten Service Fabric-Anwendung implementiert.
 
-**Tailspin.SurveyManagementService** ist ein zustandsloser Dienst zum Speichern und Abrufen von Umfragen und der Fragen von Umfragen. Der Dienst verwendet Azure Blob Storage. Diese Funktion wurde ebenfalls ursprünglich im Dienst *Tailspin.AnswerAnalysisService* in der portierten Service Fabric-Anwendung implementiert. Tailspin hat die ursprüngliche Funktion in diesem Dienst umgestaltet, um auch eine unabhängige Skalierung zu ermöglichen.
+**Tailspin.SurveyManagementService** ist ein zustandsloser Dienst zum Speichern und Abrufen von Umfragen und der Fragen von Umfragen. Der Dienst verwendet Azure Blob Storage. Diese Funktion wurde ebenfalls ursprünglich in den Datenzugriffskomponenten der Dienste *Tailspin.Web* und *Tailspin.Web.Survey.Public* in der portierten Service Fabric-Anwendung implementiert. Tailspin hat die ursprüngliche Funktion in diesem Dienst umgestaltet, um eine unabhängige Skalierung zu ermöglichen.
 
-**Tailspin.SurveyAnswerService** ist ein zustandsloser Dienst zum Abrufen von Umfrageantworten und -analysen. Der Dienst verwendet ebenfalls Azure Blob Storage. Diese Funktion wurde ebenfalls ursprünglich im Dienst *Tailspin.AnswerAnalysisService* in der portierten Service Fabric-Anwendung implementiert. Tailspin hat die ursprüngliche Funktion in diesem Dienst umgestaltet, da das Unternehmen mit weniger Last rechnet und durch die Verwendung von weniger Instanzen Ressourcen sparen möchte.
+**Tailspin.SurveyAnswerService** ist ein zustandsloser Dienst zum Abrufen von Umfrageantworten und -analysen. Der Dienst verwendet ebenfalls Azure Blob Storage. Diese Funktion wurde ebenfalls ursprünglich in den Datenzugriffskomponenten des Diensts *Tailspin.Web* in der portierten Service Fabric-Anwendung implementiert. Tailspin hat die ursprüngliche Funktion in diesem Dienst umgestaltet, da das Unternehmen mit weniger Last rechnet und durch die Verwendung von weniger Instanzen Ressourcen sparen möchte.
 
-**Tailspin.SurveyAnalysisService** ist ein zustandsloser Dienst, der Zusammenfassungsdaten für Umfrageantworten in einem Redis Cache speichert, um sie schnell abrufen zu können. Dieser Dienst wird von *Tailspin.SurveyResponseService* aufgerufen, wenn eine Umfrage beantwortet wird, und die neuen Umfrageantwortdaten werden in den Zusammenfassungsdaten zusammengeführt. Dieser Dienst beinhaltet die restlichen Funktionen des Diensts *Tailspin.SurveyAnalysisService* aus der portierten Service Fabric-Anwendung.
+**Tailspin.SurveyAnalysisService** ist ein zustandsloser Dienst, der Zusammenfassungsdaten für Umfrageantworten in einem Redis Cache speichert, um sie schnell abrufen zu können. Dieser Dienst wird von *Tailspin.SurveyResponseService* aufgerufen, wenn eine Umfrage beantwortet wird, und die neuen Umfrageantwortdaten werden in den Zusammenfassungsdaten zusammengeführt. Dieser Dienst enthält die Funktion, die ursprünglich im Dienst *Tailspin.AnswerAnalysisService* aus der portierten Service Fabric-Anwendung implementiert wurde.
 
 ## <a name="stateless-versus-stateful-services"></a>Gegenüberstellung von Zustandslosen und zustandsbehafteten Diensten
 
