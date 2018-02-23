@@ -19,6 +19,8 @@
       href: guide/pillars.md
     - name: Entwurfsmuster
       href: patterns/index.md?toc=/azure/architecture/guide/toc.json
+- name: Datenarchitekturleitfaden
+  href: data-guide/index.md
 - name: Referenzarchitekturen
   href: reference-architectures/index.md
   items:
