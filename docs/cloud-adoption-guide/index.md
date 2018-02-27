@@ -1,12 +1,12 @@
 ---
 layout: LandingPage
-ms.openlocfilehash: e39a744b6f0226a5b0bb14d03a0b8a3d4479e01b
-ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
+ms.openlocfilehash: b5c88ac0307c7d47f5bde73322bedd7063136576
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/09/2018
+ms.lasthandoff: 02/23/2018
 ---
-# <a name="azure-cloud-adoption-guide"></a>Handbuch zur Einführung von Azure Cloud
+# <a name="cloud-adoption-guide"></a>Handbuch zur Cloudeinführung
 
 Die Cloud hat die Beschaffung und Nutzung von Technologieressourcen durch Unternehmen grundlegend verändert. Früher lagen die Eigentumsrechte und die Verantwortlichkeit für alle Ebenen der Technologie von der Infrastruktur bis zur Software beim Unternehmen. Jetzt bietet die Cloud die Möglichkeit zu einer grundlegenden Veränderung der Nutzung von Technologie durch Unternehmen, indem Ressourcen bedarfsorientiert bereitgestellt und verbraucht werden.
 

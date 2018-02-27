@@ -1,6 +1,6 @@
 - name: Azure Architecture Center
   href: /azure/architecture
-- name: Handbuch zur Einführung von Azure Cloud
+- name: Handbuch zur Cloudeinführung
   href: index.md
   items:
     - name: Grundlegende Azure-Einführung
