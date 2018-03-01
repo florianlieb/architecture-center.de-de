@@ -2,11 +2,11 @@
 title: 'Anleitungen: Entwerfen eines Azure AD-Mandanten'
 description: "Leitfaden für den Entwurf von Azure-Mandanten im Rahmen einer Strategie für die grundlegende Cloudeinführung"
 author: telmosampaio
-ms.openlocfilehash: 5bf710f74bde04e041f2896b4a638c3513e4aa44
-ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
+ms.openlocfilehash: 9ac52e9fd44bd8b9c777625002d5960f4f269be2
+ms.sourcegitcommit: 29fbcb1eec44802d2c01b6d3bcf7d7bd0bae65fc
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/09/2018
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="guidance-azure-ad-tenant-design"></a>Anleitungen: Entwerfen eines Azure AD-Mandanten
 

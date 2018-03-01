@@ -3,11 +3,11 @@ title: "Ausführen eines Jenkins-Servers in Azure"
 description: "Diese Referenzarchitektur veranschaulicht, wie Sie einen für Unternehmen konzipierten skalierbaren Jenkins-Server in Azure bereitstellen und betreiben, der durch einmaliges Anmelden (Single Sign-On, SSO) geschützt ist."
 author: njray
 ms.date: 01/21/18
-ms.openlocfilehash: 9cab4990b259695f310da339bfef3060b0905640
-ms.sourcegitcommit: 3426a9c5ed937f097725c487cf3d073ae5e2a347
+ms.openlocfilehash: 724185e43ed743013f52ded04b779552dd8e48c1
+ms.sourcegitcommit: 29fbcb1eec44802d2c01b6d3bcf7d7bd0bae65fc
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/01/2018
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="run-a-jenkins-server-on-azure"></a>Ausführen eines Jenkins-Servers in Azure
 
@@ -44,7 +44,7 @@ Die Architektur umfasst die folgenden Komponenten:
 
 -   **Azure Blob Storage:** Das [Windows Azure Storage-Plug-In][configure-storage] nutzt Azure Blob Storage zum Speichern der Buildartefakte, die erstellt und für andere Jenkins-Builds freigegeben werden.
 
--   **Azure Active Directory (Azure AD):** [Azure AD][azure-ad] unterstützt die Benutzerauthentifizierung, sodass Sie SSO einrichten können. Azure AD-[Dienstprinzipale][service-principal] definieren die Richtlinie und Berechtigungen für jede Rollenauthentifizierung im Workflow über [rollenbasierte Zugriffssteuerung][rbac] (Role-Based Access Control, RBAC). Jeder Dienstprinzipal ist einem Jenkins-Auftrag zugeordnet.
+-   **Azure Active Directory (Azure AD):** [Azure AD][azure-ad] unterstützt die Benutzerauthentifizierung, sodass Sie SSO einrichten können. Azure AD-[Dienstprinzipale][service-principal] definieren die Richtlinie und Berechtigungen für jede Rollenauthentifizierung im Workflow unter Verwendung der [rollenbasierten Zugriffssteuerung][rbac] (Role-Based Access Control, RBAC). Jeder Dienstprinzipal ist einem Jenkins-Auftrag zugeordnet.
 
 -   **Azure Key Vault:** Diese Architektur verwendet [Key Vault][key-vault] zum Verwalten von Geheimnissen und kryptografischen Schlüssel, die zum Bereitstellen von Azure-Ressourcen verwendet werden, wenn Geheimnisse erforderlich sind. Zusätzliche Hilfe beim Speichern von Geheimnissen, die der Anwendung in der Pipeline zugeordnet sind, finden Sie auch auf der Seite für das [Azure-Anmeldeinformationen-Plug-In][configure-credential] für Jenkins.
 
@@ -78,7 +78,7 @@ Mit der Lösungsvorlage für Jenkins in Azure werden mehrere Azure-Plug-Ins inst
 
 -   Das [Azure-Anmeldeinformationen-Plug-In][configure-credential] ermöglicht Ihnen das Speichern von Anmeldeinformationen des Azure-Dienstprinzipals in Jenkins.
 
--   Das [Windows Azure Storage-Plug-In][configure-storage] lädt Buildartefakte in [Azure Blob-Speicher][blob] hoch bzw. lädt Buildabhängigkeiten daraus herunter.
+-   Das [Microsoft Azure Storage-Plug-In][configure-storage] lädt Buildartefakte in [Azure Blob Storage][blob] hoch bzw. lädt Buildabhängigkeiten daraus herunter.
 
 Es wird darüber hinaus empfohlen, die stetig wachsende Liste der verfügbaren Azure-Plug-Ins zu überprüfen, die mit Azure-Ressourcen verwendet werden können. Wenn Sie die aktuelle Liste anzeigen möchten, navigieren Sie zu [Jenkins Plugin Index][index] (Index der Jenkins-Plug-Ins), und suchen Sie nach Azure. Die folgenden Plug-Ins sind beispielsweise für die Bereitstellung verfügbar:
 
@@ -139,7 +139,7 @@ Verwenden Sie zum Schutz eines grundlegenden Jenkins-Servers die folgenden Vorge
 
 -   Installieren Sie das [Azure-Anmeldeinformationen-Plug-In][configure-credential], um mithilfe von Key Vault Geheimnisse für die Azure-Ressourcen, die Agents in der Pipeline und Drittanbieterkomponenten zu verarbeiten.
 
--   Erstellen Sie ein Sicherheitsprofil, das lediglich die von Benutzern, Diensten und Pipeline-Agents erforderlichen Ressourcen definiert. Dieser Schritt wird bei den Überlegungen zu Sicherheitseinstellungen wichtig.
+-   Verwenden Sie RBAC, um den Zugriff des Dienstprinzipals auf die Mindestanforderungen für die Auftragsausführung zu beschränken. Dies dient zur Begrenzung des Schadens, der durch einen nicht autorisierten Auftrag entstehen kann.
 
 Jenkins-Aufträge benötigen häufig Geheimnisse für den Zugriff auf Azure-Dienste, für die eine Autorisierung erforderlich ist, etwa Azure Container Service. Verwenden Sie [Key Vault][key-vault] zusammen mit dem [Azure-Anmeldeinformationen-Plug-In][configure-credential] für die sichere Verwaltung dieser Geheimnisse. Speichern Sie mithilfe von Key Vault Dienstprinzipal-Anmeldeinformationen, Kennwörter, Token und andere Geheimnisse.
 
