@@ -3,11 +3,11 @@ title: Semantische Modellierung
 description: 
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: e989a7a5a58e7d05e261931005069bb12bd79186
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 343d17af0d933d515c724a062237c8d5df3a9e31
+ms.sourcegitcommit: 29fbcb1eec44802d2c01b6d3bcf7d7bd0bae65fc
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="semantic-modeling"></a>Semantische Modellierung
 
@@ -44,11 +44,10 @@ Eine andere Option besteht darin, alle Informationen, die Benutzer benötigen, i
 
 Für die semantische Modellierung und analytische Verarbeitung gelten in der Regel die folgenden Merkmale:
 
-| Anforderung | Beschreibung |
+| Anforderung | BESCHREIBUNG |
 | --- | --- |
-| Normalisierung | Stark normalisiert |
-| Schema | Schema für Schreibvorgänge, strikte Erzwingung|
-| Nutzung von Transaktionen | Nein |
+| Schema | Schema beim Schreiben, strikte Erzwingung|
+| Nutzung von Transaktionen | Nein  |
 | Sperrstrategie | Keine |
 | Aktualisierbar | Nein (normalerweise Neuberechnung des Cubes erforderlich) |
 | Erweiterbar | Nein (normalerweise Neuberechnung des Cubes erforderlich) |
@@ -63,4 +62,4 @@ Für die semantische Modellierung und analytische Verarbeitung gelten in der Reg
 ## <a name="see-also"></a>Weitere Informationen
 
 - [Data Warehousing](../scenarios/data-warehousing.md)
-- [Analytische Onlineverarbeitung (Online Analytical Processing, OLAP)](../scenarios/online-analytical-processing.md)
+- [Analytische Onlineverarbeitung (OLAP)](../scenarios/online-analytical-processing.md)

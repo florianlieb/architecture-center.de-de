@@ -3,11 +3,11 @@ title: Erweiterte Analyse
 description: 
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 8fd3a4d8eea9e507b3e75ab825c4bd88c0eb5149
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 31ba357fe37b1de35a6eea324d2d1d6766e172e5
+ms.sourcegitcommit: 29fbcb1eec44802d2c01b6d3bcf7d7bd0bae65fc
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="advanced-analytics"></a>Erweiterte Analyse
 
@@ -21,7 +21,7 @@ Erweiterte Analyselösungen umfassen in der Regel folgende Workloads:
 
 Die meisten Architekturen für die erweiterte Analyse enthalten einige oder alle der folgenden Komponenten:
 
-* **Datenspeicher:** Erweiterte Analyselösungen benötigen Daten zum Trainieren von Machine Learning-Modellen. Datenspezialisten müssen die Daten in der Regel untersuchen, um die für die Vorhersage geeigneten Merkmale sowie die statistischen Beziehungen zwischen ihnen und den Werten zu ermitteln, die sie vorhersagen (eine so genannte Bezeichnung). Bei der vorhergesagten Bezeichnung kann es sich um einen quantitativen Wert handeln – beispielsweise um einen zukünftigen finanziellen Wert oder um die Dauer einer Flugverzögerung in Minuten. Es kann sich dabei jedoch auch um eine kategorische Klasse wie „true“ oder „false“, „Flugverzögerung“ oder „keine Flugverzögerung“ oder um Kategorien wie „geringes Risiko“, „mittleres Risiko“ und „hohes Risiko“ handeln.
+* **Datenspeicher**. Erweiterte Analyselösungen benötigen Daten zum Trainieren von Machine Learning-Modellen. Datenspezialisten müssen die Daten in der Regel untersuchen, um die für die Vorhersage geeigneten Merkmale sowie die statistischen Beziehungen zwischen ihnen und den Werten zu ermitteln, die sie vorhersagen (eine so genannte Bezeichnung). Bei der vorhergesagten Bezeichnung kann es sich um einen quantitativen Wert handeln – beispielsweise um einen zukünftigen finanziellen Wert oder um die Dauer einer Flugverzögerung in Minuten. Es kann sich dabei jedoch auch um eine kategorische Klasse wie „true“ oder „false“, „Flugverzögerung“ oder „keine Flugverzögerung“ oder um Kategorien wie „geringes Risiko“, „mittleres Risiko“ und „hohes Risiko“ handeln.
 
 * **Batchverarbeitung:** Zum Trainieren eines Machine Learning-Modells müssen in der Regel große Datenmengen verarbeitet werden. Das Trainieren des Modells kann einige Zeit dauern (von mehreren Minuten bis hin zu mehreren Stunden). Für das Training können Skripts in Sprachen wie Python oder R verwendet werden. Außerdem kann das Training mithilfe von Plattformen für die verteilte Verarbeitung horizontal hochskaliert werden, um den Vorgang zu beschleunigen. Ein Beispiel für eine solche Plattform wäre etwa Apache Spark – gehostet in HDInsight oder in einem Docker-Container.
 

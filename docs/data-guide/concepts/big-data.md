@@ -3,11 +3,11 @@ title: Big Data-Architekturen
 description: 
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 6ee44c6d94ae7ac5cb67cb5f16337deb1ffd4b70
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 2a1336faea81470b082d4eef8e2cc53a082c63c7
+ms.sourcegitcommit: 023d88e781f7fe64c62b247d876441ee40921b1b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="big-data-architectures"></a>Big Data-Architekturen
 
@@ -42,7 +42,7 @@ Die meisten Big Data-Architekturen enthalten einige oder alle der folgenden Komp
     * Von Anwendungen erzeugte statische Dateien, z.B. Webserver-Protokolldateien
     * Echtzeitdatenquellen wie z.B. IoT-Geräte
 
-* **Datenspeicher:** Daten für die Batchverarbeitung werden in der Regel in einem verteilten Dateispeicher gespeichert, der große Mengen an umfangreichen Dateien in verschiedenen Formaten aufnehmen kann. Diese Art Speicher wird häufig als *Data Lake* bezeichnet. Ein solcher Speicher lässt sich beispielsweise über Azure Data Lake Store oder Blobcontainer in Azure Storage implementieren.
+* **Datenspeicher**. Daten für die Batchverarbeitung werden in der Regel in einem verteilten Dateispeicher gespeichert, der große Mengen an umfangreichen Dateien in verschiedenen Formaten aufnehmen kann. Diese Art Speicher wird häufig als *Data Lake* bezeichnet. Ein solcher Speicher lässt sich beispielsweise über Azure Data Lake Store oder Blobcontainer in Azure Storage implementieren.
 
 * **Batchverarbeitung:** Da die Datasets so umfangreich sind, muss eine Big Data-Lösung Datendateien mithilfe von Batchaufträgen mit langer Ausführungszeit verarbeiten, um die Daten zu filtern, zu aggregieren und anderweitig auf die Analyse vorzubereiten. Diese Aufträge beinhalten in der Regel das Lesen von Quelldateien, ihre Verarbeitung und das Schreiben der Ausgabe in neue Dateien. Zu den Optionen gehört z.B. Folgendes: die Ausführung von U-SQL-Aufträgen in Azure Data Lake Analytics, die Verwendung von Hive-, Pig- oder benutzerdefinierten MapReduce-Aufträgen in einem HDInsight Hadoop-Cluster oder die Verwendung von Java-, Scala- oder Python-Programmen in einem HDInsight Spark-Cluster.
 
@@ -55,19 +55,6 @@ Die meisten Big Data-Architekturen enthalten einige oder alle der folgenden Komp
 * **Analysen und Berichte:** Ziel der meisten Big Data-Lösungen ist es, über Analysen und Berichte Einblicke in die Daten zu bieten. Um Benutzer die Datenanalyse zu ermöglichen, kann die Architektur eine Datenmodellierungsschicht umfassen, wie z.B. einen multidimensionalen OLAP-Cube oder ein Tabellendatenmodell in Azure Analysis Services. Sie kann auch Self-Service-BI unterstützen – hierbei kommen die Modellierungs- und Visualisierungstechnologien von Microsoft Power BI oder Microsoft Excel zum Einsatz. Analysen und Berichterstellung können auch in Form einer interaktiven Datenerkundung durch Data Scientists oder Data Analysts erfolgen. Für diese Szenarios unterstützen viele Azure-Dienste Analysenotebooks, z.B. Jupyter, sodass diese Benutzer ihre vorhandenen Kenntnisse von Python oder R nutzen können. Zum Erkunden sehr umfangreicher Daten können Sie Microsoft R Server als eigenständige Lösung oder zusammen mit Spark verwenden.
 
 * **Orchestrierung:** Die meisten Big Data-Lösungen bestehen aus wiederholten Datenverarbeitungsvorgängen, die in Workflows gekapselt sind. Diese Vorgänge transformieren Quelldaten, verschieben Daten zwischen mehreren Quellen und Senken, laden die verarbeiteten Daten in einen Analysedatenspeicher oder übermitteln die Ergebnisse direkt in einen Bericht oder an ein Dashboard. Um diese Workflows zu automatisieren, können Sie eine Orchestrierungstechnologie wie such Azure Data Factory oder Apache Oozie und Sqoop verwenden.
-
-## <a name="data-lake"></a>Data Lake
-
-Wenn Sie sich schon einmal mit Big Data beschäftigt haben, ist Ihnen wahrscheinlich auch der Begriff _Data Lake_ begegnet. Der Begriff kam möglicherweise als Produktname vor oder wurde vielleicht als Speicherkonzept für große Datenmengen verwendet. 
-
-Ein Data Lake umfasst sowohl Speicherung als auch Verarbeitung. Mit dem Konzept des Data Lake-Speichers werden mehrere Ziele verfolgt: Fehlertoleranz, unbegrenzte Skalierbarkeit sowie Erfassung verschiedenster Daten mit hohem Durchsatz. Die Data Lake-Verarbeitung basiert auf mindestens einem auf diese Ziele ausgerichteten Verarbeitungsmodul und ermöglicht die skalierte Verarbeitung der Daten aus einem Data Lake.
-
-Data Lake-Speicher werden häufig zum Streamen von Veranstaltungen oder für IoT-Szenarien verwendet, da sie große Mengen von relationalen und nicht relationalen Daten ohne Transformation oder Schemadefinition aufnehmen können. Sie sind auf eine große Anzahl kleiner Schreibvorgänge mit geringer Wartezeit ausgelegt und für enormen Durchsatz optimiert.
-
-Ein weiterer Begriff, der häufig in Datenszenarien verwendet wird, ist _Data Mart_. Bei einem Data Mart handelt es sich in der Regel um einen Datenspeicher, der zur einfachen Nutzung bereinigt, gepackt und strukturiert wurde. Im Gegensatz zu einem Data Mart ist ein Data Lake für die Erfassung von Rohdaten konzipiert, wodurch die Daten in ihrer ursprünglichen oder geringstmöglich verarbeiteten Form vorliegen, um verschiedene Fragen zu verschiedenen Zeiten zu ermöglichen. Wenn die Daten wie in einem Data Mart bereinigt und auf bestimmte Weise strukturiert werden, ist es schwer, bei neuen Fragen oder Tools eine entsprechende Anpassung an die Art der Verarbeitung oder Analyse vorzunehmen. Aus diesem Grund sind Speicherung und Verarbeitung in einem Data Lake als separate Entitäten enthalten.
-
-In Frage kommender Azure-Dienst:
-- [Azure Data Lake](https://azure.microsoft.com/scenarios/data-lake/)
 
 ## <a name="lambda-architecture"></a>Lambda-Architektur
 
