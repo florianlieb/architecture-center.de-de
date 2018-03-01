@@ -3,7 +3,7 @@
 - name: Datenarchitekturleitfaden
   href: index.md
   items:
-    - name: Traditionelles RDBMS
+    - name: Herkömmliches RDBMS
       items:
         - name: Konzepte
           items:
@@ -15,7 +15,7 @@
               href: concepts/semantic-modeling.md
         - name: Szenarien
           items:
-            - name: 'Onlinetransaktionsverarbeitung (Online Transaction Processing, OLTP)'
+            - name: Onlinetransaktionsverarbeitung (OLTP)
               href: scenarios/online-transaction-processing.md
             - name: 'Analytische Onlineverarbeitung (Online Analytical Processing, OLAP)'
               href: scenarios/online-analytical-processing.md
@@ -39,6 +39,8 @@
               href: concepts/non-relational-data.md
             - name: Arbeiten mit CSV- und JSON-Dateien
               href: concepts/csv-and-json.md
+            - name: Data Lakes
+              href: concepts/data-lake.md
             - name: Big Data-Architekturen
               href: concepts/big-data.md
             - name: Erweiterte Analyse
@@ -83,7 +85,7 @@
               href: technology-choices/search-options.md
             - name: Streamverarbeitung
               href: technology-choices/stream-processing.md
-    - name: Übergreifende Aspekte
+    - name: Querschnittsthemen
       items:
         - name: Datenübertragung
           href: scenarios/data-transfer.md
