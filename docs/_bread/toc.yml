@@ -18,9 +18,6 @@
         - name: Checklisten für die Entwurfsüberprüfung
           tocHref: /azure/architecture/checklist
           topicHref: /azure/architecture/checklist
-        - name: Elasticsearch
-          tocHref: /azure/architecture/elasticsearch
-          topicHref: /azure/architecture/elasticsearch
         - name: Verwalten der Identität in mehrinstanzenfähigen Anwendungen
           tocHref: /azure/architecture/multitenant-identity
         - name: Referenzarchitekturen
