@@ -3,11 +3,11 @@ title: Batchverarbeitung
 description: 
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 55113b61c2684a7826fa6c0034503f842cdb840f
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: d3d3b92034c251586ecc9caff2785ecd0808b2a7
+ms.sourcegitcommit: 943e671a8d522cef5ddc8c6e04848134b03c2de4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 03/05/2018
 ---
 # <a name="batch-processing"></a>Batchverarbeitung
 
@@ -19,7 +19,7 @@ So können beispielsweise die Protokolle eines Webservers in einen Ordner kopier
 
 ## <a name="when-to-use-this-solution"></a>Verwendung dieser Lösung
 
-Die Batchverarbeitung kommt in verschiedensten Szenarien zum Einsatz – von der einfachen Datentransformation bis hin zur umfassenderen ETL-Pipeline (Extrahieren, Transformieren, Laden). In einem Big Data-Kontext kann die Batchverarbeitung auf sehr große Datasets angewendet werden, bei denen die Berechnung viel Zeit in Anspruch nimmt. (Weitere Informationen finden Sie beispielsweise unter [Lambda-Architektur](../concepts/big-data.md##lambda-architecture).) Die Batchverarbeitung führt in der Regel zu weiteren interaktiven Untersuchungen, stellt die modellierungsbereiten Daten für Machine Learning bereit oder schreibt die Daten in einen für die Analyse und Visualisierung optimierten Datenspeicher.
+Die Batchverarbeitung kommt in verschiedensten Szenarien zum Einsatz – von der einfachen Datentransformation bis hin zur umfassenderen ETL-Pipeline (Extrahieren, Transformieren, Laden). In einem Big Data-Kontext kann die Batchverarbeitung auf sehr große Datasets angewendet werden, bei denen die Berechnung viel Zeit in Anspruch nimmt. (Weitere Informationen finden Sie beispielsweise unter [Lambda-Architektur](../concepts/big-data.md#lambda-architecture).) Die Batchverarbeitung führt in der Regel zu weiteren interaktiven Untersuchungen, stellt die modellierungsbereiten Daten für Machine Learning bereit oder schreibt die Daten in einen für die Analyse und Visualisierung optimierten Datenspeicher.
 
 Ein Beispiel für die Batchverarbeitung ist die Transformation zahlreicher teilweise strukturierter CSV- oder JSON-Flatfiles in ein schematisiertes und strukturiertes Format, das für weitere Abfragen genutzt werden kann. Die Daten werden in der Regel aus den bei der Erfassung verwendeten Rohformaten (beispielsweise CSV) in Binärformate konvertiert, mit denen sich bei Abfragen eine bessere Leistung erzielen lässt, da sie Daten in einem spaltenförmigen Format speichern und häufig Indizes und Inlinestatistiken für die Daten bereitstellen.
 
@@ -29,7 +29,7 @@ Ein Beispiel für die Batchverarbeitung ist die Transformation zahlreicher teilw
 
 - **Orchestrieren von Zeitsegmenten**: Quelldaten werden häufig in einer Ordnerhierarchie platziert, die Verarbeitungsfenster darstellt, welche nach Jahr, Monat, Tag, Stunde usw. strukturiert sind. Manchmal treffen Daten unter Umständen verspätet ein. Ein Beispiel: Angenommen, ein Webserver fällt aus, und die Protokolle für den 7. März landen erst am 9. März in dem Ordner für die Verarbeitung. Werden sie einfach ignoriert, da sie zu spät eingetroffen sind? Kommt die Downstreamverarbeitungslogik mit außerordentlichen Datensätzen zurecht?
 
-## <a name="architecture"></a>Architektur
+## <a name="architecture"></a>Architecture
 
 Eine Batchverarbeitungsarchitektur verfügt über folgende logische Komponenten, die auch im obigen Diagramm dargestellt sind:
 
@@ -50,7 +50,7 @@ Für Batchverarbeitungslösungen in Azure werden folgende Technologien empfohlen
 ### <a name="data-storage"></a>Datenspeicher
 
 - **Azure Storage Blob-Container**: Da Azure Blob Storage bereits von vielen Azure-Geschäftsprozessen genutzt wird, ist diese Option eine gute Wahl für einen Big Data-Speicher.
-- **Azure Data Lake Store**: Der nahezu unbegrenzte Speicher für jegliche Dateigröße sowie umfassende Sicherheitsoptionen machen Azure Data Lake Store zu einer guten Wahl für besonders umfangreiche Big Data-Lösungen, die einen zentralen Speicher für Daten in heterogenen Formaten benötigen.
+- **Azure Data Lake Store**. Der nahezu unbegrenzte Speicher für jegliche Dateigröße sowie umfassende Sicherheitsoptionen machen Azure Data Lake Store zu einer guten Wahl für besonders umfangreiche Big Data-Lösungen, die einen zentralen Speicher für Daten in heterogenen Formaten benötigen.
 
 Weitere Informationen finden Sie im Artikel zur [Datenspeicherung](../technology-choices/data-storage.md).
 
@@ -82,7 +82,7 @@ Weitere Informationen finden Sie im Artikel zu [Analysen und Berichten](../techn
 
 ### <a name="orchestration"></a>Orchestrierung
 
-- **Azure Data Factory**: Mit Azure Data Factory-Pipelines kann eine Abfolge von Aktivitäten definiert und für wiederkehrende temporale Fenster geplant werden. Diese Aktivitäten können Datenkopiervorgänge sowie Hive-, Pig-, MapReduce- oder Spark-Aufträge in bedarfsgesteuerten HDInsight-Clustern, U-SQL-Aufträge in Azure Data Lake Analytics und gespeicherte Prozeduren in Azure SQL Data Warehouse oder Azure SQL-Datenbank initiieren.
+- **Azure Data Factory** Mit Azure Data Factory-Pipelines kann eine Abfolge von Aktivitäten definiert und für wiederkehrende temporale Fenster geplant werden. Diese Aktivitäten können Datenkopiervorgänge sowie Hive-, Pig-, MapReduce- oder Spark-Aufträge in bedarfsgesteuerten HDInsight-Clustern, U-SQL-Aufträge in Azure Data Lake Analytics und gespeicherte Prozeduren in Azure SQL Data Warehouse oder Azure SQL-Datenbank initiieren.
 - **Oozie** und **Sqoop**: Oozie ist ein Auftragsautomatisierungsmodul für das Apache Hadoop-Ökosystem und kann verwendet werden, um Datenkopiervorgänge und Hive-, Pig- und MapReduce-Aufträge zum Verarbeiten von Daten sowie Sqoop-Aufträge zum Kopieren von Daten zwischen HDFS und SQL-Datenbanken zu initiieren.
 
 Weitere Informationen finden Sie im Artikel zur [Pipelineorchestrierung](../technology-choices/pipeline-orchestration-data-movement.md).
