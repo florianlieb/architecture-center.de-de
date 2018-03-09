@@ -4,11 +4,11 @@ description: "Empfohlene Architektur für eine einfache Webanwendung, die in Mic
 author: MikeWasson
 ms.date: 12/12/2017
 cardTitle: Basic web application
-ms.openlocfilehash: 598eb547f0e96ae334af391183a792637caa8631
-ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
+ms.openlocfilehash: 38b0739cc61d679742b610b99e92aaad8d3b394d
+ms.sourcegitcommit: 2123c25b1a0b5501ff1887f98030787191cf6994
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/02/2018
+ms.lasthandoff: 03/08/2018
 ---
 # <a name="basic-web-application"></a>Einfache Webanwendung
 [!INCLUDE [header](../../_includes/header.md)]
@@ -40,7 +40,7 @@ Die Architektur besteht aus den folgenden Komponenten:
 
 * **Azure DNS:** [Azure DNS][azure-dns] ist ein Hostingdienst für DNS-Domänen, der die Namensauflösung unter Verwendung der Microsoft Azure-Infrastruktur durchführt. Durch das Hosten Ihrer Domänen in Azure können Sie Ihre DNS-Einträge mithilfe der gleichen Anmeldeinformationen, APIs, Tools und Abrechnung wie für die anderen Azure-Dienste verwalten. Erstellen Sie zur Verwendung eines benutzerdefinierten Domänennamens (etwa `contoso.com`) DNS-Einträge, die der IP-Adresse den benutzerdefinierten Domänennamen zuordnen. Weitere Informationen finden Sie unter [Konfigurieren eines benutzerdefinierten Domänennamens in Azure App Service][custom-domain-name].  
 
-* **Azure SQL-Datenbank**. [SQL-Datenbank][sql-db] ist eine relationale Datenbank-as-a-Service in der Cloud.
+* **Azure SQL-Datenbank**. [SQL-Datenbank][sql-db] ist eine relationale Datenbank-as-a-Service in der Cloud. SQL-Datenbank nutzt diese Codebasis gemeinsam mit der Microsoft SQL Server-Datenbank-Engine. Je nach Ihren Anwendungsanforderungen können Sie auch [Azure Database for MySQL](/azure/mysql) oder [Azure Database for PostgreSQL](/azure/postgresql) verwenden. Hierbei handelt es sich um vollständig verwaltete Dienste, die auf den Open-Source-Datenbankmodulen für MySQL Server bzw. Postgres basieren.
 
 * **Logischer Server**. In Azure SQL-Datenbank werden Ihre Datenbanken auf einem logischen Server gehostet. Sie können pro logischem Server mehrere Datenbanken erstellen.
 

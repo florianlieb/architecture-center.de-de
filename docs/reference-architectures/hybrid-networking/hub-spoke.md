@@ -2,14 +2,14 @@
 title: Implementieren einer Hub-Spoke-Netzwerktopologie in Azure
 description: Vorgehensweise zum Implementieren einer Hub-Spoke-Netzwerktopologie in Azure
 author: telmosampaio
-ms.date: 02/14/2018
+ms.date: 02/23/2018
 pnp.series.title: Implement a hub-spoke network topology in Azure
 pnp.series.prev: expressroute
-ms.openlocfilehash: c03ecd4ba5ddbe50cfb17e56d75c18102b751cfb
-ms.sourcegitcommit: 475064f0a3c2fac23e1286ba159aaded287eec86
+ms.openlocfilehash: 1a2855f0d4a903fc4d7a022aef20ea73fe763e2c
+ms.sourcegitcommit: 2123c25b1a0b5501ff1887f98030787191cf6994
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2018
+ms.lasthandoff: 03/08/2018
 ---
 # <a name="implement-a-hub-spoke-network-topology-in-azure"></a>Implementieren einer Hub-Spoke-Netzwerktopologie in Azure
 
@@ -47,9 +47,7 @@ Die Architektur umfasst die folgenden Komponenten.
 
 * **Hub-VNET**: Das Azure-VNET, das als Hub in der Hub-Spoke-Topologie verwendet wird. Der Hub ist der zentrale Konnektivitätspunkt für Ihr lokales Netzwerk, mit dem Sie Dienste hosten, die von den verschiedenen in den Spoke-VNETs gehosteten Workloads genutzt werden können.
 
-* **Gatewaysubnetz**: Die Gateways für die virtuellen Netzwerke befinden sich im selben Subnetz.
-
-* **Subnetz für gemeinsame Dienste**: Ein Subnetz im Hub-VNET, das für das Hosten von Diensten verwendet wird, die von allen Spokes gemeinsam genutzt werden können (z.B. DNS oder AD DS).
+* **Gatewaysubnetz**: Die Gateways für virtuelle Netzwerke befinden sich in demselben Subnetz.
 
 * **Spoke-VNETs**: Ein oder mehrere Azure-VNETs, die als Spokes in der Hub-Spoke-Topologie verwendet werden. Spokes können verwendet werden, um Workloads in ihren eigenen VNETs, die getrennt von anderen Spokes verwaltet werden, zu isolieren. Jede Workload kann mehrere Schichten umfassen, wobei mehrere Subnetze über Azure Load Balancer verbunden sind. Weitere Informationen zur Anwendungsinfrastruktur finden Sie unter [Ausführen von Windows-VM-Workloads][windows-vm-ra] und [Ausführen von Linux-VM-Workloads][linux-vm-ra].
 
@@ -57,7 +55,6 @@ Die Architektur umfasst die folgenden Komponenten.
 
 > [!NOTE]
 > In diesem Artikel werden ausschließlich [Resource Manager](/azure/azure-resource-manager/resource-group-overview)-Bereitstellungen behandelt, Sie können jedoch auch eine Verbindung zwischen einem klassischen VNET und einem Resource Manager-VNET im selben Abonnement herstellen. Auf diese Weise können Ihre Spokes klassische Bereitstellungen hosten und trotzdem von gemeinsamen Diensten im Hub profitieren.
-
 
 ## <a name="recommendations"></a>Empfehlungen
 
@@ -118,233 +115,213 @@ Eine Bereitstellung für diese Architektur ist auf [GitHub][ref-arch-repo] verf�
 
 Bevor Sie die Referenzarchitektur in Ihrem eigenen Abonnement bereitstellen können, müssen Sie die folgenden Schritte ausführen.
 
-1. Klonen oder forken Sie das GitHub-Repository [AzureCAT-Referenzarchitekturen][ref-arch-repo], oder laden Sie die zugehörige ZIP-Datei herunter.
+1. Klonen oder Forken Sie das GitHub-Repository [AzureCAT-Referenzarchitekturen][ref-arch-repo], oder laden Sie die zugehörige ZIP-Datei herunter.
 
-2. Wenn Sie stattdessen die Azure CLI verwenden möchten, vergewissern Sie sich, dass Azure CLI 2.0 auf Ihrem Computer installiert ist. Um die CLI zu installieren, folgen Sie den Anweisungen unter [Installieren von Azure CLI 2.0][azure-cli-2].
+2. Vergewissern Sie sich, dass Azure CLI 2.0 auf Ihrem Computer installiert ist. Anweisungen zur CLI-Installation finden Sie unter [Installieren von Azure-CLI 2.0][azure-cli-2].
 
-3. Wenn Sie PowerShell bevorzugen, stellen Sie sicher, dass auf Ihrem Computer das neueste PowerShell-Modul für Azure installiert ist. Um das neueste Azure PowerShell-Modul zu installieren, folgen Sie den Anweisungen unter [Installieren von PowerShell für Azure][azure-powershell].
+3. Installieren Sie das npm-Paket mit den [Azure-Bausteinen][azbb].
 
-4. Melden Sie sich über eine Eingabeaufforderung, eine bash-Eingabeaufforderung oder die PowerShell-Eingabeaufforderung bei Ihrem Azure-Konto an. Verwenden Sie dazu die unten aufgeführten Befehle, und befolgen Sie die Anweisungen.
+4. Melden Sie sich über eine Eingabeaufforderung, eine Bash-Eingabeaufforderung oder die PowerShell-Eingabeaufforderung an Ihrem Azure-Konto an. Verwenden Sie hierzu den unten aufgeführten Befehl, und befolgen Sie die Anweisungen.
 
   ```bash
   az login
   ```
 
-  ```powershell
-  Login-AzureRmAccount
-  ```
+### <a name="deploy-the-simulated-on-premises-datacenter-using-azbb"></a>Bereitstellen des simulierten lokalen Rechenzentrums mit azbb
 
-### <a name="deploy-the-simulated-on-premises-datacenter"></a>Bereitstellen des simulierten lokalen Rechenzentrums
+Führen Sie die folgenden Schritte aus, um das simulierte lokale Rechenzentrum als Azure-VNET bereitzustellen:
 
-Führen Sie die folgenden Schritte durch, um das simulierte lokale Rechenzentrum als Azure-VNET bereitzustellen.
+1. Navigieren Sie zum Ordner `hybrid-networking\hub-spoke\` für das Repository, das Sie im vorherigen Schritt „Voraussetzungen“ heruntergeladen haben.
 
-1. Navigieren Sie zum Ordner `hybrid-networking\hub-spoke\onprem` für das Repository, das Sie im vorherigen Schritt „Voraussetzungen“ heruntergeladen haben.
-
-2. Öffnen Sie die Datei `onprem.vm.parameters.json`, geben Sie einen Benutzernamen und das Kennwort wie unten dargestellt zwischen den Anführungszeichen in Zeile 11 und 12 an, und speichern Sie die Datei.
+2. Öffnen Sie die Datei `onprem.json`, geben Sie einen Benutzernamen und das Kennwort wie unten dargestellt zwischen den Anführungszeichen in Zeile 36 und 37 ein, und speichern Sie die Datei.
 
   ```bash
   "adminUsername": "XXX",
   "adminPassword": "YYY",
   ```
 
-3. Führen Sie den nachfolgenden bash- oder PowerShell-Befehl aus, um die simulierte lokale Umgebung als VNET in Azure bereitzustellen. Ersetzen Sie die Werte durch Ihr Abonnement, den jeweiligen Namen Ihrer Ressourcengruppe sowie Ihre Azure-Region.
+3. Geben Sie in Zeile 38 unter `osType` entweder `Windows` oder `Linux` ein, um Windows Server 2016 Datacenter bzw. Ubuntu 16.04 als Betriebssystem für die Jumpbox zu installieren.
+
+4. Führen Sie `azbb` aus, um die simulierte lokale Umgebung wie unten gezeigt bereitzustellen.
 
   ```bash
-  sh ./onprem.deploy.sh --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
-    --resourcegroup ra-onprem-rg \
-    --location westus
-  ```
-
-  ```powershell
-  ./onprem.deploy.ps1 -Subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx `
-    -ResourceGroup ra-onprem-rg `
-    -Location westus
+  azbb -s <subscription_id> -g onprem-vnet-rg - l <location> -p onoprem.json --deploy
   ```
   > [!NOTE]
-  > Wenn Sie sich für einen anderen Ressourcengruppennamen (außer `ra-onprem-rg`) entscheiden, sollten Sie alle Parameterdateien mit diesem Namen suchen und durch Ihren eigenen Ressourcengruppennamen ersetzen.
+  > Wenn Sie sich für einen anderen Ressourcengruppennamen (außer `onprem-vnet-rg`) entscheiden, sollten Sie alle Parameterdateien mit diesem Namen suchen und durch Ihren eigenen Ressourcengruppennamen ersetzen.
 
-4. Warten Sie, bis die Bereitstellung abgeschlossen ist. Diese Bereitstellung erstellt ein virtuelles Netzwerk, einen virtuellen Ubuntu-Computer und ein VPN-Gateway. Die Erstellung des VPN-Gateways kann mehr als 40 Minuten in Anspruch nehmen.
+5. Warten Sie, bis die Bereitstellung abgeschlossen ist. Bei dieser Bereitstellung werden ein virtuelles Netzwerk, ein virtueller Computer und ein VPN-Gateway erstellt. Die Erstellung des VPN-Gateways kann mehr als 40 Minuten in Anspruch nehmen.
 
 ### <a name="azure-hub-vnet"></a>Azure-Hub-VNET
 
 Führen Sie die folgenden Schritte durch, um das Hub-VNET bereitzustellen und eine Verbindung mit dem oben erstellten simulierten lokalen VNET herzustellen.
 
-1. Navigieren Sie zum Ordner `hybrid-networking\hub-spoke\hub` für das Repository, das Sie im vorherigen Schritt „Voraussetzungen“ heruntergeladen haben.
-
-2. Öffnen Sie die Datei `hub.vm.parameters.json`, geben Sie einen Benutzernamen und das Kennwort wie unten dargestellt zwischen den Anführungszeichen in Zeile 11 und 12 an, und speichern Sie die Datei.
+1. Öffnen Sie die Datei `hub-vnet.json`, und geben Sie einen Benutzernamen und das Kennwort wie unten dargestellt zwischen den Anführungszeichen in Zeile 39 und 40 ein.
 
   ```bash
   "adminUsername": "XXX",
   "adminPassword": "YYY",
   ```
 
-3. Öffnen Sie die Datei `hub.gateway.parameters.json`, geben Sie einen gemeinsam verwendeten Schlüssel wie unten dargestellt zwischen den Anführungszeichen in Zeile 23 an, und speichern Sie die Datei. Notieren Sie sich diesen Wert, da Sie ihn später für die Bereitstellung benötigen.
+2. Geben Sie in Zeile 41 unter `osType` entweder `Windows` oder `Linux` ein, um Windows Server 2016 Datacenter bzw. Ubuntu 16.04 als Betriebssystem für die Jumpbox zu installieren.
+
+3. Geben Sie einen gemeinsam verwendeten Schlüssel wie unten dargestellt zwischen den Anführungszeichen in Zeile 72 ein, und speichern Sie die Datei.
 
   ```bash
   "sharedKey": "",
   ```
 
-4. Führen Sie den nachfolgenden bash- oder PowerShell-Befehl aus, um die simulierte lokale Umgebung als VNET in Azure bereitzustellen. Ersetzen Sie die Werte durch Ihr Abonnement, den jeweiligen Namen Ihrer Ressourcengruppe sowie Ihre Azure-Region.
+4. Führen Sie `azbb` aus, um die simulierte lokale Umgebung wie unten gezeigt bereitzustellen.
 
   ```bash
-  sh ./hub.deploy.sh --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
-    --resourcegroup ra-hub-rg \
-    --location westus
-  ```
-
-  ```powershell
-  ./hub.deploy.ps1 -Subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx `
-    -ResourceGroup ra-hub-rg `
-    -Location westus
+  azbb -s <subscription_id> -g hub-vnet-rg - l <location> -p hub-vnet.json --deploy
   ```
   > [!NOTE]
-  > Wenn Sie sich für einen anderen Ressourcengruppennamen (außer `ra-hub-rg`) entscheiden, sollten Sie alle Parameterdateien mit diesem Namen suchen und durch Ihren eigenen Ressourcengruppennamen ersetzen.
+  > Wenn Sie sich für einen anderen Ressourcengruppennamen (außer `hub-vnet-rg`) entscheiden, sollten Sie alle Parameterdateien mit diesem Namen suchen und durch Ihren eigenen Ressourcengruppennamen ersetzen.
 
-5. Warten Sie, bis die Bereitstellung abgeschlossen ist. Diese Bereitstellung erstellt ein virtuelles Netzwerk, einen virtuellen Ubuntu-Computer, ein VPN-Gateway und eine Verbindung mit dem im vorherigen Abschnitt erstellten Gateway. Die Erstellung des VPN-Gateways kann mehr als 40 Minuten in Anspruch nehmen.
+5. Warten Sie, bis die Bereitstellung abgeschlossen ist. Bei dieser Bereitstellung werden ein virtuelles Netzwerk, ein virtueller Computer, ein VPN-Gateway und eine Verbindung mit dem im vorherigen Abschnitt erstellten Gateway erstellt. Die Erstellung des VPN-Gateways kann mehr als 40 Minuten in Anspruch nehmen.
 
-### <a name="connection-from-on-premises-to-the-hub"></a>Verbindung zwischen lokalen Rechenzentren und dem Hub
+### <a name="optional-test-connectivity-from-onprem-to-hub"></a>(Optional) Testen der Konnektivität vom lokalen Standort zum Hub
 
-Führen Sie die folgenden Schritte durch, um eine Verbindung zwischen dem simulierten lokalen Rechenzentrum und dem Hub-VNET herzustellen.
+Führen Sie die folgenden Schritte aus, um die Konnektivität der simulierten lokalen Umgebung mit dem Hub-VNET mit Windows-VMs zu testen.
 
-1. Navigieren Sie zum Ordner `hybrid-networking\hub-spoke\onprem` für das Repository, das Sie im vorherigen Schritt „Voraussetzungen“ heruntergeladen haben.
+1. Navigieren Sie im Azure-Portal zur Ressourcengruppe `onprem-jb-rg`, und klicken Sie dann auf die VM-Ressource `jb-vm1`.
 
-2. Öffnen Sie die Datei `onprem.connection.parameters.json`, geben Sie einen gemeinsam verwendeten Schlüssel wie unten dargestellt zwischen den Anführungszeichen in Zeile 9 an, und speichern Sie die Datei. Der Wert dieses gemeinsam verwendeten Schlüssels muss mit dem des für das lokale, zuvor bereitgestellte Gateway verwendeten Schlüssels identisch sein.
+2.  Klicken Sie im Portal oben links auf dem Blatt für Ihre VM auf `Connect`, und folgen Sie den Anweisungen zur Verwendung des Remotedesktops zum Herstellen einer Verbindung mit der VM. Achten Sie darauf, dass Sie den Benutzernamen und das Kennwort verwenden, wie in den Zeilen 36 und 37 in der Datei `onprem.json` angegeben.
 
-  ```bash
-  "sharedKey": "",
-  ```
-
-3. Führen Sie den nachfolgenden bash- oder PowerShell-Befehl aus, um die simulierte lokale Umgebung als VNET in Azure bereitzustellen. Ersetzen Sie die Werte durch Ihr Abonnement, den jeweiligen Namen Ihrer Ressourcengruppe sowie Ihre Azure-Region.
-
-  ```bash
-  sh ./onprem.connection.deploy.sh --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
-    --resourcegroup ra-onprem-rg \
-    --location westus
-  ```
+3. Öffnen Sie auf der VM eine PowerShell-Konsole, und verwenden Sie das `Test-NetConnection`-Cmdlet, um sicherzustellen, dass Sie wie unten gezeigt eine Verbindung mit der Hub-Jumpbox-VM herstellen können.
 
   ```powershell
-  ./onprem.connection.deploy.ps1 -Subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx `
-    -ResourceGroup ra-onprem-rg `
-    -Location westus
+  Test-NetConnection 10.0.0.68 -CommonTCPPort RDP
   ```
   > [!NOTE]
-  > Wenn Sie sich für einen anderen Ressourcengruppennamen (außer `ra-onprem-rg`) entscheiden, sollten Sie alle Parameterdateien mit diesem Namen suchen und durch Ihren eigenen Ressourcengruppennamen ersetzen.
+  > Standardmäßig lassen Windows Server-VMs in Azure keine ICMP-Antworten zu. Wenn Sie `ping` zum Testen der Konnektivität nutzen möchten, müssen Sie für jede VM ICMP-Datenverkehr in der erweiterten Windows-Firewall aktivieren.
 
-4. Warten Sie, bis die Bereitstellung abgeschlossen ist. Diese Bereitstellung stellt eine Verbindung zwischen dem VNET für die Simulation eines lokalen Rechenzentrums und dem Hub-VNET her.
+Führen Sie die folgenden Schritte aus, um die Konnektivität der simulierten lokalen Umgebung mit dem Hub-VNET mit Linux-VMs zu testen:
+
+1. Navigieren Sie im Azure-Portal zur Ressourcengruppe `onprem-jb-rg`, und klicken Sie dann auf die VM-Ressource `jb-vm1`.
+
+2. Klicken Sie im Portal oben links auf dem Blatt für Ihre VM auf `Connect`, und kopieren Sie dann den im Portal angezeigten `ssh`-Befehl. 
+
+3. Führen Sie an einer Linux-Eingabeaufforderung `ssh` aus, um wie unten gezeigt eine Verbindung mit der Jumpbox der simulierten lokalen Umgebung herzustellen, indem Sie die oben in Schritt 2 kopierten Informationen verwenden.
+
+  ```bash
+  ssh <your_user>@<public_ip_address>
+  ```
+
+4. Nutzen Sie das Kennwort, das Sie in Zeile 37 in der Datei `onprem.json` angegeben haben, um eine Verbindung mit der VM herzustellen.
+
+5. Verwenden Sie den Befehl `ping`, um die Konnektivität mit der Hub-Jumpbox wie unten gezeigt zu testen.
+
+  ```bash
+  ping 10.0.0.68
+  ```
 
 ### <a name="azure-spoke-vnets"></a>Azure-Spoke-VNETs
 
-Führen Sie die folgenden Schritte durch, um die Spoke-VNETs bereitzustellen und eine Verbindung mit dem oben erstellten Hub-VNET herzustellen.
+Führen Sie die folgenden Schritte aus, um die Spoke-VNETs bereitzustellen.
 
-1. Wechseln Sie in den Ordner `hybrid-networking\hub-spoke\spokes` für das Repository, das Sie im vorherigen Schritt „Voraussetzungen“ heruntergeladen haben.
-
-2. Öffnen Sie die Datei `spoke1.web.parameters.json`, geben Sie einen Benutzernamen und das Kennwort wie unten dargestellt zwischen den Anführungszeichen in Zeile 53 und 54 an, und speichern Sie die Datei.
+1. Öffnen Sie die Datei `spoke1.json`, geben Sie einen Benutzernamen und das Kennwort wie unten dargestellt zwischen den Anführungszeichen in Zeile 47 und 48 ein, und speichern Sie die Datei.
 
   ```bash
   "adminUsername": "XXX",
   "adminPassword": "YYY",
   ```
 
-3. Wiederholen Sie den vorherigen Schritt für die Datei `spoke2.web.parameters.json`.
+2. Geben Sie in Zeile 49 unter `osType` entweder `Windows` oder `Linux` ein, um Windows Server 2016 Datacenter bzw. Ubuntu 16.04 als Betriebssystem für die Jumpbox zu installieren.
 
-4. Führen Sie den nachfolgenden bash- oder PowerShell-Befehl aus, um den ersten Spoke bereitzustellen und ihn mit dem Hub zu verbinden. Ersetzen Sie die Werte durch Ihr Abonnement, den jeweiligen Namen Ihrer Ressourcengruppe sowie Ihre Azure-Region.
-
-  ```bash
-  sh ./spoke.deploy.sh --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
-    --resourcegroup ra-spoke1-rg \
-    --location westus \
-    --spoke 1
-  ```
-
-  ```powershell
-  ./spoke.deploy.ps1 -Subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx `
-    -ResourceGroup ra-spoke1-rg `
-    -Location westus `
-    -Spoke 1
-  ```
-  > [!NOTE]
-  > Wenn Sie sich für einen anderen Ressourcengruppennamen (außer `ra-spoke1-rg`) entscheiden, sollten Sie alle Parameterdateien mit diesem Namen suchen und durch Ihren eigenen Ressourcengruppennamen ersetzen.
-
-5. Warten Sie, bis die Bereitstellung abgeschlossen ist. Diese Bereitstellung erstellt ein virtuelles Netzwerk, ein Lastenausgleichsmodul mit drei virtuellen Computern, auf denen Ubuntu und Apache ausgeführt werden, sowie eine VNET-Peeringverbindung mit dem im vorherigen Abschnitt erstellten Hub-VNET. Diese Bereitstellung kann mehr als 20 Minuten in Anspruch nehmen.
-
-6. Führen Sie den nachfolgenden bash- oder PowerShell-Befehl aus, um den ersten Spoke bereitzustellen und ihn mit dem Hub zu verbinden. Ersetzen Sie die Werte durch Ihr Abonnement, den jeweiligen Namen Ihrer Ressourcengruppe sowie Ihre Azure-Region.
+3. Führen Sie `azbb` aus, um die erste Spoke-VNET-Umgebung wie unten gezeigt bereitzustellen.
 
   ```bash
-  sh ./spoke.deploy.sh --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
-    --resourcegroup ra-spoke2-rg \
-    --location westus \
-    --spoke 2
+  azbb -s <subscription_id> -g spoke1-vnet-rg - l <location> -p spoke1.json --deploy
   ```
+  
+  > [!NOTE]
+  > Wenn Sie sich für einen anderen Ressourcengruppennamen (außer `spoke1-vnet-rg`) entscheiden, sollten Sie alle Parameterdateien mit diesem Namen suchen und durch Ihren eigenen Ressourcengruppennamen ersetzen.
 
-  ```powershell
-  ./spoke.deploy.ps1 -Subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx `
-    -ResourceGroup ra-spoke2-rg `
-    -Location westus `
-    -Spoke 2
+3. Wiederholen Sie den obigen Schritt 1 für die Datei `spoke2.json`.
+
+4. Führen Sie `azbb` aus, um die zweite Spoke-VNET-Umgebung wie unten gezeigt bereitzustellen.
+
+  ```bash
+  azbb -s <subscription_id> -g spoke2-vnet-rg - l <location> -p spoke2.json --deploy
   ```
   > [!NOTE]
-  > Wenn Sie sich für einen anderen Ressourcengruppennamen (außer `ra-spoke2-rg`) entscheiden, sollten Sie alle Parameterdateien mit diesem Namen suchen und durch Ihren eigenen Ressourcengruppennamen ersetzen.
-
-5. Warten Sie, bis die Bereitstellung abgeschlossen ist. Diese Bereitstellung erstellt ein virtuelles Netzwerk, ein Lastenausgleichsmodul mit drei virtuellen Computern, auf denen Ubuntu und Apache ausgeführt werden, sowie eine VNET-Peeringverbindung mit dem im vorherigen Abschnitt erstellten Hub-VNET. Diese Bereitstellung kann mehr als 20 Minuten in Anspruch nehmen.
+  > Wenn Sie sich für einen anderen Ressourcengruppennamen (außer `spoke2-vnet-rg`) entscheiden, sollten Sie alle Parameterdateien mit diesem Namen suchen und durch Ihren eigenen Ressourcengruppennamen ersetzen.
 
 ### <a name="azure-hub-vnet-peering-to-spoke-vnets"></a>Herstellen einer Peeringverbindung zwischen Azure-Hub-VNETs und Spoke-VNETs
 
-Führen Sie die folgenden Schritte durch, um VNET-Peeringverbindungen für das Hub-VNET herzustellen.
+Führen Sie die folgenden Schritte aus, um eine Peeringverbindung vom Hub-VNET mit den Spoke-VNETs zu erstellen.
 
-1. Wechseln Sie in den Ordner `hybrid-networking\hub-spoke\hub` für das Repository, das Sie im vorherigen Schritt „Voraussetzungen“ heruntergeladen haben.
+1. Öffnen Sie die Datei `hub-vnet-peering.json`, und stellen Sie sicher, dass der Ressourcengruppenname und der Name des virtuellen Netzwerks für die einzelnen VNET-Peerings ab Zeile 29 korrekt sind.
 
-2. Führen Sie den nachfolgenden bash- oder PowerShell-Befehl aus, um die Peeringverbindung für den ersten Spoke herzustellen. Ersetzen Sie die Werte durch Ihr Abonnement, den jeweiligen Namen Ihrer Ressourcengruppe sowie Ihre Azure-Region.
-
-  ```bash
-  sh ./hub.peering.deploy.sh --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
-    --resourcegroup ra-hub-rg \
-    --location westus \
-    --spoke 1
-  ```
-
-  ```powershell
-  ./hub.peering.deploy.ps1 -Subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx `
-    -ResourceGroup ra-hub-rg `
-    -Location westus `
-    -Spoke 1
-  ```
-
-2. Führen Sie den nachfolgenden bash- oder PowerShell-Befehl aus, um die Peeringverbindung für den zweiten Spoke herzustellen. Ersetzen Sie die Werte durch Ihr Abonnement, den jeweiligen Namen Ihrer Ressourcengruppe sowie Ihre Azure-Region.
+2. Führen Sie `azbb` aus, um die erste Spoke-VNET-Umgebung wie unten gezeigt bereitzustellen.
 
   ```bash
-  sh ./hub.peering.deploy.sh --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
-    --resourcegroup ra-hub-rg \
-    --location westus \
-    --spoke 2
+  azbb -s <subscription_id> -g hub-vnet-rg - l <location> -p hub-vnet-peering.json --deploy
   ```
 
-  ```powershell
-  ./hub.peering.deploy.ps1 -Subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx `
-    -ResourceGroup ra-hub-rg `
-    -Location westus `
-    -Spoke 2
-  ```
+  > [!NOTE]
+  > Wenn Sie sich für einen anderen Ressourcengruppennamen (außer `hub-vnet-rg`) entscheiden, sollten Sie alle Parameterdateien mit diesem Namen suchen und durch Ihren eigenen Ressourcengruppennamen ersetzen.
 
 ### <a name="test-connectivity"></a>Testen der Konnektivität
 
-Führen Sie die folgenden Schritte durch, um zu überprüfen, ob die mit einer lokalen Rechenzentrumsbereitstellung verbundene Hub-Spoke-Topologie funktioniert.
+Führen Sie die folgenden Schritte aus, um die Konnektivität der simulierten lokalen Umgebung mit den Spoke-VNETs mit Windows-VMs zu testen.
 
-1. Stellen Sie über das [Azure-Portal][Portal] eine Verbindung mit Ihrem Abonnement her, und navigieren Sie in der Ressourcengruppe `ra-onprem-rg` zum virtuellen Computer `ra-onprem-vm1`.
+1. Navigieren Sie im Azure-Portal zur Ressourcengruppe `onprem-jb-rg`, und klicken Sie dann auf die VM-Ressource `jb-vm1`.
 
-2. Beachten Sie auf dem Blatt `Overview` `Public IP address` für die VM.
+2.  Klicken Sie im Portal oben links auf dem Blatt für Ihre VM auf `Connect`, und folgen Sie den Anweisungen zur Verwendung des Remotedesktops zum Herstellen einer Verbindung mit der VM. Achten Sie darauf, dass Sie den Benutzernamen und das Kennwort verwenden, wie in den Zeilen 36 und 37 in der Datei `onprem.json` angegeben.
 
-3. Stellen Sie über einen SSH-Client eine Verbindung mit der oben genannten IP-Adresse her, indem Sie den Benutzernamen und das Kennwort verwenden, den bzw. das Sie bei der Bereitstellung angegeben haben.
+3. Öffnen Sie auf der VM eine PowerShell-Konsole, und verwenden Sie das `Test-NetConnection`-Cmdlet, um sicherzustellen, dass Sie wie unten gezeigt eine Verbindung mit der Hub-Jumpbox-VM herstellen können.
 
-4. Führen Sie in der Eingabeaufforderung in der VM, mit der Sie eine Verbindung hergestellt haben, den folgenden Befehl aus, um die Konnektivität zwischen dem lokalen VNET und dem VNET von Spoke 1 zu testen.
+  ```powershell
+  Test-NetConnection 10.1.0.68 -CommonTCPPort RDP
+  Test-NetConnection 10.2.0.68 -CommonTCPPort RDP
+  ```
+
+Führen Sie die folgenden Schritte aus, um die Konnektivität der simulierten lokalen Umgebung mit den Spoke-VNETs mit Linux-VMs zu testen:
+
+1. Navigieren Sie im Azure-Portal zur Ressourcengruppe `onprem-jb-rg`, und klicken Sie dann auf die VM-Ressource `jb-vm1`.
+
+2. Klicken Sie im Portal oben links auf dem Blatt für Ihre VM auf `Connect`, und kopieren Sie dann den im Portal angezeigten `ssh`-Befehl. 
+
+3. Führen Sie an einer Linux-Eingabeaufforderung `ssh` aus, um wie unten gezeigt eine Verbindung mit der Jumpbox der simulierten lokalen Umgebung herzustellen, indem Sie die oben in Schritt 2 kopierten Informationen verwenden.
 
   ```bash
-  ping 10.1.1.37
+  ssh <your_user>@<public_ip_address>
   ```
+
+5. Nutzen Sie das Kennwort, das Sie in Zeile 37 in der Datei `onprem.json` angegeben haben, um eine Verbindung mit der VM herzustellen.
+
+6. Verwenden Sie den Befehl `ping`, um die Konnektivität mit den Jumpbox-VMs in den einzelnen Spokes wie unten gezeigt zu testen.
+
+  ```bash
+  ping 10.1.0.68
+  ping 10.2.0.68
+  ```
+
+### <a name="add-connectivity-between-spokes"></a>Herstellen von Konnektivität zwischen Spokes
+
+Wenn Sie zulassen möchten, dass Spokes Verbindungen miteinander herstellen können, müssen Sie ein virtuelles Netzwerkgerät als Router im virtuellen Hubnetzwerk verwenden. Außerdem müssen Sie erzwingen, dass Datenverkehr von den Spokes über den Router verläuft, wenn versucht wird, eine Verbindung mit anderen Spokes herzustellen. Führen Sie die folgenden Schritte aus, um ein einfaches Beispiel-Netzwerkgerät als einzelne VM und die erforderlichen benutzerdefinierten Routen bereitzustellen, um die Verbindungsherstellung für zwei Spoke-VNETs zu ermöglichen:
+
+1. Öffnen Sie die Datei `hub-nva.json`, geben Sie einen Benutzernamen und das Kennwort wie unten dargestellt zwischen den Anführungszeichen in Zeile 13 und 14 ein, und speichern Sie die Datei.
+
+  ```bash
+  "adminUsername": "XXX",
+  "adminPassword": "YYY",
+  ```
+2. Führen Sie `azbb` aus, um die NVA-VM und die benutzerdefinierten Routen bereitzustellen.
+
+  ```bash
+  azbb -s <subscription_id> -g hub-nva-rg - l <location> -p hub-nva.json --deploy
+  ```
+  > [!NOTE]
+  > Wenn Sie sich für einen anderen Ressourcengruppennamen (außer `hub-nva-rg`) entscheiden, sollten Sie alle Parameterdateien mit diesem Namen suchen und durch Ihren eigenen Ressourcengruppennamen ersetzen.
 
 <!-- links -->
 
 [azure-cli-2]: /azure/install-azure-cli
-[azure-powershell]: /powershell/azure/install-azure-ps?view=azuresmps-3.7.0
+[azbb]: https://github.com/mspnp/template-building-blocks/wiki/Install-Azure-Building-Blocks
 [azure-vpn-gateway]: /azure/vpn-gateway/vpn-gateway-about-vpngateways
 [best-practices-security]: /azure/best-practices-network-securit
 [connect-to-an-Azure-vnet]: https://technet.microsoft.com/library/dn786406.aspx

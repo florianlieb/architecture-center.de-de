@@ -3,11 +3,11 @@ title: Transaktionsdaten
 description: 
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 6277badde1845c42858e69f6c8ecc73331e7a945
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: b7fdbb403d2a438ebc59e40ef58ed8067489dddc
+ms.sourcegitcommit: 943e671a8d522cef5ddc8c6e04848134b03c2de4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 03/05/2018
 ---
 # <a name="transactional-data"></a>Transaktionsdaten
 

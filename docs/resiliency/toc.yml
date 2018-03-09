@@ -4,15 +4,17 @@
   items:
     - name: Entwurf resilienter Anwendungen
       href: index.md
-    - name: Checkliste für Resilienz
+    - name: Checkliste für Resilienz (allgemein)
       href: ../checklist/resiliency.md?toc=/azure/architecture/resiliency/toc.json
-    - name: Analyse im Fehlermodus
+    - name: Checkliste für Resilienz (Azure-Dienste)
+      href: ../checklist/resiliency-per-service.md?toc=/azure/architecture/resiliency/toc.json
+    - name: Fehlermodusanalyse
       href: failure-mode-analysis.md
     - name: Zusätzliche Anleitungen
       items:
         - name: Notfallwiederherstellung
           href: disaster-recovery-azure-applications.md
-        - name: Hohe Verfügbarkeit
+        - name: Hochverfügbarkeit
           href: high-availability-azure-applications.md
         - name: Wiederherstellung nach Datenbeschädigung oder unbeabsichtigtem Löschen
           href: recovery-data-corruption.md
