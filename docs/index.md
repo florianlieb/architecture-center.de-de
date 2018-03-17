@@ -2,11 +2,12 @@
 title: Azure Architecture Center
 description: "Das Azure Architecture Center ist die offizielle zentrale Plattform, über die Sie Anleitungen, Blaupausen, Muster und bewährte Methoden für die Erstellung von Lösungen mit Microsoft Azure erhalten. Es wird von dem Microsoft-Team, das für Muster und Best Practices zuständig ist, zusammengestellt."
 layout: LandingPage
-ms.openlocfilehash: eb069ae80ce70eb66ef57b1e0e21f7181d17d21f
-ms.sourcegitcommit: 475064f0a3c2fac23e1286ba159aaded287eec86
+ms.topic: landing-page
+ms.openlocfilehash: 31177903bea137b40a457fe9360596e8096d6ab2
+ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/19/2018
+ms.lasthandoff: 03/17/2018
 ---
 # <a name="azure-architecture-center"></a>Azure Architecture Center
 
