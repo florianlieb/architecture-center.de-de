@@ -1,10 +1,10 @@
 ---
 layout: LandingPage
-ms.openlocfilehash: 00abbfdeac89a9006517195bd4bbc514d587fe74
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 9bd86f1b3527f1116d4f5169baf76f8a5b9a385b
+ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 03/17/2018
 ---
 # <a name="azure-application-architecture-guide"></a>Azure-Anwendungsarchitekturleitfaden
 
@@ -46,7 +46,7 @@ Unveränderliche Infrastruktur<br/>
 </tbody>
 </table>
 
-Dieser Leitfaden richtet sich an Anwendungsarchitekten, Entwickler und Betriebsteams. Er dient nicht als Anleitung für die Verwendung der einzelnen Azure-Dienste. Nachdem Sie diesen Leitfaden gelesen haben, werden Sie die Architekturmuster und bewährten Methoden, die beim Erstellen der Azure-Cloudplattform anzuwenden sind, kennen.
+Dieser Leitfaden richtet sich an Anwendungsarchitekten, Entwickler und Betriebsteams. Er dient nicht als Anleitung für die Verwendung der einzelnen Azure-Dienste. Nachdem Sie diesen Leitfaden gelesen haben, werden Sie die Architekturmuster und bewährten Methoden, die beim Erstellen der Azure-Cloudplattform anzuwenden sind, kennen. Sie können auch eine [E-Book-Version des Handbuchs][ebook] herunterladen.
 
 ## <a name="how-this-guide-is-structured"></a>Aufbau dieses Leitfadens
 
@@ -78,6 +78,7 @@ Der Azure-Anwendungsarchitekturleitfaden ist als Abfolge von Schritten aufgebaut
 [checklists]: ../checklist/index.md
 [compute-options]: ./technology-choices/compute-comparison.md
 [design-principles]: ./design-principles/index.md
+[ebook]: https://azure.microsoft.com/campaigns/cloud-application-architecture-guide/
 [patterns]: ../patterns/index.md?toc=/azure/architecture/guide/toc.json
 [pillars]: ./pillars.md
 [ref-archs]: ../reference-architectures/index.md
