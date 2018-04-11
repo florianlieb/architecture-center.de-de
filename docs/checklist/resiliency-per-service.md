@@ -1,6 +1,6 @@
 ---
-title: "Checkliste für Resilienz für Azure-Dienste"
-description: "Checkliste mit einer Anleitung zur Resilienz für verschiedene Azure-Dienste."
+title: Checkliste für Resilienz für Azure-Dienste
+description: Checkliste mit einer Anleitung zur Resilienz für verschiedene Azure-Dienste.
 author: petertaylor9999
 ms.date: 03/02/2018
 ms.custom: resiliency, checklist

@@ -1,6 +1,6 @@
 ---
 title: Erweitern der Azure Resource Manager-Vorlagenfunktionen
-description: "Beschreibt Tipps und Tricks für die Erweiterung der Azure Resource Manager-Vorlagenfunktionen"
+description: Beschreibt Tipps und Tricks für die Erweiterung der Azure Resource Manager-Vorlagenfunktionen
 author: petertay
 ms.date: 06/09/2017
 ms.openlocfilehash: 33ae6850ffa5b28108f30475804be5347859f0c3

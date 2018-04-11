@@ -1,6 +1,6 @@
 ---
 title: Anleitungen zum Content Delivery Network
-description: "Anleitungen zum Content Delivery Network (CDN) für die Bereitstellung von in Azure gehosteten Inhalten mit hoher Bandbreite."
+description: Anleitungen zum Content Delivery Network (CDN) für die Bereitstellung von in Azure gehosteten Inhalten mit hoher Bandbreite.
 author: dragon119
 ms.date: 02/02/2018
 pnp.series.title: Best Practices
