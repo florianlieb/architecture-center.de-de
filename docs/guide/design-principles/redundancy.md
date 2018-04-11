@@ -1,5 +1,5 @@
 ---
-title: "Herstellen von Redundanz für alle Anwendungskomponenten"
+title: Herstellen von Redundanz für alle Anwendungskomponenten
 description: Vermeiden Sie Single Points of Failure, indem Sie Redundanz in Ihre Anwendung integrieren.
 author: MikeWasson
 layout: LandingPage

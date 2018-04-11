@@ -1,6 +1,6 @@
 ---
 title: Hosten von statischen Inhalten
-description: "Stellen Sie statische Inhalte in einem cloudbasierten Speicherdienst bereit, der die Inhalte direkt an den Client übermitteln kann."
+description: Stellen Sie statische Inhalte in einem cloudbasierten Speicherdienst bereit, der die Inhalte direkt an den Client übermitteln kann.
 keywords: Entwurfsmuster
 author: dragon119
 ms.date: 06/23/2017

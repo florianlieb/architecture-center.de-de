@@ -1,6 +1,6 @@
 ---
-title: "Antimuster „Synchrone E/A-Vorgänge“"
-description: "Ein Blockieren des aufrufenden Threads, während ein E/A-Vorgang abgeschlossen wird, kann die Leistung senken und sich auf die vertikale Skalierbarkeit auswirken."
+title: Antimuster „Synchrone E/A-Vorgänge“
+description: Ein Blockieren des aufrufenden Threads, während ein E/A-Vorgang abgeschlossen wird, kann die Leistung senken und sich auf die vertikale Skalierbarkeit auswirken.
 author: dragon119
 ms.date: 06/05/2017
 ms.openlocfilehash: d5b3635565c6b71ef7716f54ee8cccc76093c3a3

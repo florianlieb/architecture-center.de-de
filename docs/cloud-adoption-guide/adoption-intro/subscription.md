@@ -1,6 +1,6 @@
 ---
 title: 'Anleitungen: Entwerfen eines Azure-Abonnements'
-description: "Leitfaden für den Entwurf von Azure-Abonnements im Rahmen einer Strategie für die grundlegende Cloudeinführung"
+description: Leitfaden für den Entwurf von Azure-Abonnements im Rahmen einer Strategie für die grundlegende Cloudeinführung
 author: alexbuckgit
 ms.openlocfilehash: 7134a0000ce33a786166d759cb390023a062dfda
 ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242

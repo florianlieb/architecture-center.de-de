@@ -1,5 +1,5 @@
 ---
-title: "Erläuterungen: Was ist ein Azure-Abonnement?"
+title: 'Erläuterungen: Was ist ein Azure-Abonnement?'
 description: Hier erhalten Sie Informationen zu Abonnements, Konten und Angeboten von Azure.
 author: alexbuckgit
 ms.openlocfilehash: 1650d90d6f78b46b7fe4128d2dab6a80bd6cca78

@@ -1,5 +1,5 @@
 ---
-title: "Kriterien für die Auswahl einer Azure-Compute-Option"
+title: Kriterien für die Auswahl einer Azure-Compute-Option
 description: Dieser Artikel vergleicht Azure-Computedienste unter verschiedenen Aspekten miteinander.
 author: MikeWasson
 layout: LandingPage

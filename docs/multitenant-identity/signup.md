@@ -1,6 +1,6 @@
 ---
-title: "Registrierung und Onboarding von Mandanten in einer mehrinstanzenfähigen Anwendung"
-description: "Informationen zum Onboarding in einer mehrmandantenfähigen Anwendung"
+title: Registrierung und Onboarding von Mandanten in einer mehrinstanzenfähigen Anwendung
+description: Informationen zum Onboarding in einer mehrmandantenfähigen Anwendung
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
@@ -259,5 +259,7 @@ private async Task<Tenant> SignUpTenantAsync(BaseControlContext context, TenantM
 [Tailspin]: tailspin.md
 
 [Status]: http://openid.net/specs/openid-connect-core-1_0.html#AuthRequest
+[state]: http://openid.net/specs/openid-connect-core-1_0.html#AuthRequest
 [Authentifizierung]: authenticate.md
+[Authentication]: authenticate.md
 [sample application]: https://github.com/mspnp/multitenant-saas-guidance

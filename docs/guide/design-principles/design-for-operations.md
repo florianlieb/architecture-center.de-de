@@ -1,6 +1,6 @@
 ---
 title: Entwurf mit Blick auf den Betrieb
-description: "Setzen Sie es sich beim Entwurf Ihrer Anwendung als Ziel, dem Betriebsteam die benötigten Verwaltungstools zur Verfügung zu stellen."
+description: Setzen Sie es sich beim Entwurf Ihrer Anwendung als Ziel, dem Betriebsteam die benötigten Verwaltungstools zur Verfügung zu stellen.
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 76338cc27daf82ccb99df4e4c51c7a5ac6f26065

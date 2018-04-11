@@ -1,6 +1,6 @@
 ---
-title: "Einschnürungsmuster"
-description: "Migrieren Sie ein älteres System inkrementell, indem Sie bestimmte Teile der Funktionalität nach und nach durch neue Anwendungen und Dienste ersetzen."
+title: Einschnürungsmuster
+description: Migrieren Sie ein älteres System inkrementell, indem Sie bestimmte Teile der Funktionalität nach und nach durch neue Anwendungen und Dienste ersetzen.
 author: dragon119
 ms.date: 06/23/2017
 ms.openlocfilehash: d03e8a1ef9077b6e00ea5a17423bf7e09b68111a

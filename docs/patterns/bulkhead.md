@@ -1,6 +1,6 @@
 ---
 title: Bulkhead-Muster
-description: "Isolieren Sie Elemente einer Anwendung in Pools, sodass die anderen Elemente beim Ausfall eines Elements weiterhin ausgeführt werden."
+description: Isolieren Sie Elemente einer Anwendung in Pools, sodass die anderen Elemente beim Ausfall eines Elements weiterhin ausgeführt werden.
 author: dragon119
 ms.date: 06/23/2017
 ms.openlocfilehash: a2c499d77fafc4bee6b74ee0e0d84e6c23b47851

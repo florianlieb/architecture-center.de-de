@@ -1,6 +1,6 @@
 ---
-title: "Arbeiten mit anspruchsbasierten Identitäten in mehrinstanzenfähigen Anwendungen"
-description: "Informationen zum Verwenden von Ansprüchen für die Ausstellerüberprüfung und Autorisierung"
+title: Arbeiten mit anspruchsbasierten Identitäten in mehrinstanzenfähigen Anwendungen
+description: Informationen zum Verwenden von Ansprüchen für die Ausstellerüberprüfung und Autorisierung
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
@@ -117,9 +117,13 @@ ms.lasthandoff: 11/14/2017
 <!-- Links -->
 
 [Bereichsparameter]: http://nat.sakimura.org/2012/01/26/scopes-and-claims-in-openid-connect/
+[scope parameter]: http://nat.sakimura.org/2012/01/26/scopes-and-claims-in-openid-connect/
 [Unterstützte Token- und Anspruchstypen]: /azure/active-directory/active-directory-token-and-claims/
+[Supported Token and Claim Types]: /azure/active-directory/active-directory-token-and-claims/
 [Aussteller]: http://openid.net/specs/openid-connect-core-1_0.html#IDToken
+[issuer]: http://openid.net/specs/openid-connect-core-1_0.html#IDToken
 [Authentifizierungsereignisse]: authenticate.md#authentication-events
+[Authentication events]: authenticate.md#authentication-events
 [signup]: signup.md
 [Claims-Based Authorization]: /aspnet/core/security/authorization/claims
 [sample application]: https://github.com/mspnp/multitenant-saas-guidance

@@ -1,6 +1,6 @@
 ---
-title: "Prioritätswarteschlange"
-description: "Priorisieren Sie an Dienste gesendete Anforderungen, sodass Anforderungen mit einer höheren Priorität schneller empfangen und verarbeitet werden als Anforderungen mit einer niedrigeren Priorität."
+title: Prioritätswarteschlange
+description: Priorisieren Sie an Dienste gesendete Anforderungen, sodass Anforderungen mit einer höheren Priorität schneller empfangen und verarbeitet werden als Anforderungen mit einer niedrigeren Priorität.
 keywords: Entwurfsmuster
 author: dragon119
 ms.date: 06/23/2017

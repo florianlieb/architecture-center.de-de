@@ -103,6 +103,7 @@ public class CertificateCredentialService : ICredentialService
 [configure-web-app]: /azure/app-service-web/web-sites-configure/
 [azure-management-portal]: https://portal.azure.com
 [Clientassertion]: https://tools.ietf.org/html/rfc7521
+[client assertion]: https://tools.ietf.org/html/rfc7521
 [key vault]: key-vault.md
 [Setup-KeyVault]: https://github.com/mspnp/multitenant-saas-guidance/blob/master/scripts/Setup-KeyVault.ps1
 [Surveys]: tailspin.md

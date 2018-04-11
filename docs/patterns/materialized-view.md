@@ -1,6 +1,6 @@
 ---
 title: Materialisierte Sicht
-description: "Generieren Sie vorausgefüllte Sichten für die Daten in einem oder mehreren Datenspeichern, wenn die Daten für erforderliche Abfrageoperationen nicht ideal formatiert sind."
+description: Generieren Sie vorausgefüllte Sichten für die Daten in einem oder mehreren Datenspeichern, wenn die Daten für erforderliche Abfrageoperationen nicht ideal formatiert sind.
 keywords: Entwurfsmuster
 author: dragon119
 ms.date: 06/23/2017

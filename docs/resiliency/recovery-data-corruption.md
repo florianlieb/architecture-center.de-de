@@ -1,6 +1,6 @@
 ---
-title: "Wiederherstellung nach Datenbeschädigung oder unbeabsichtigtem Löschen"
-description: "In diesem Leitfaden erfahren Sie, wie Sie nach Datenbeschädigung oder versehentlichem Löschen eine Wiederherstellung ausführen, ausfallsichere, hochverfügbare und fehlertolerante Anwendungen erstellen und die Notfallwiederherstellung planen"
+title: Wiederherstellung nach Datenbeschädigung oder unbeabsichtigtem Löschen
+description: In diesem Leitfaden erfahren Sie, wie Sie nach Datenbeschädigung oder versehentlichem Löschen eine Wiederherstellung ausführen, ausfallsichere, hochverfügbare und fehlertolerante Anwendungen erstellen und die Notfallwiederherstellung planen
 author: MikeWasson
 ms.date: 01/10/2018
 ms.openlocfilehash: 76d2f996750d5a67b67bd5dc4977580f3b8abbc3

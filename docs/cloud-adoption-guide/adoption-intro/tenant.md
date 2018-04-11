@@ -1,6 +1,6 @@
 ---
 title: 'Anleitungen: Entwerfen eines Azure AD-Mandanten'
-description: "Leitfaden für den Entwurf von Azure-Mandanten im Rahmen einer Strategie für die grundlegende Cloudeinführung"
+description: Leitfaden für den Entwurf von Azure-Mandanten im Rahmen einer Strategie für die grundlegende Cloudeinführung
 author: telmosampaio
 ms.openlocfilehash: 9ac52e9fd44bd8b9c777625002d5960f4f269be2
 ms.sourcegitcommit: 29fbcb1eec44802d2c01b6d3bcf7d7bd0bae65fc

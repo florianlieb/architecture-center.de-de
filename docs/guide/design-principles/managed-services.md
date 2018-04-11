@@ -1,6 +1,6 @@
 ---
 title: Verwenden verwalteter Dienste
-description: "Verwenden Sie nach Möglichkeit PaaS (Platform-as-a-Service) anstelle von IaaS (Infrastructure-as-a-Service)."
+description: Verwenden Sie nach Möglichkeit PaaS (Platform-as-a-Service) anstelle von IaaS (Infrastructure-as-a-Service).
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 7156c073db3e047fb38e031309ddb637a9e44c02

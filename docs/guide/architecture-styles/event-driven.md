@@ -1,6 +1,6 @@
 ---
 title: Ereignisgesteuerter Architekturstil
-description: "Dieser Artikel beschreibt die Vorteile, Herausforderungen und bewährten Methoden für ereignisgesteuerte und IoT-Architekturen in Azure."
+description: Dieser Artikel beschreibt die Vorteile, Herausforderungen und bewährten Methoden für ereignisgesteuerte und IoT-Architekturen in Azure.
 author: MikeWasson
 ms.openlocfilehash: 3289bf784b02d62e3d0c1a29b4839c9be3501134
 ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb

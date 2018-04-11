@@ -1,6 +1,6 @@
 ---
-title: "Allgemeiner Leitfaden zum Wiederholen von Vorgängen"
-description: "Anleitungen für die Vorgangswiederholung zur Behandlung vorübergehender Fehler."
+title: Allgemeiner Leitfaden zum Wiederholen von Vorgängen
+description: Anleitungen für die Vorgangswiederholung zur Behandlung vorübergehender Fehler.
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices

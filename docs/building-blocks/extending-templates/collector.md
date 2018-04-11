@@ -1,6 +1,6 @@
 ---
-title: "Implementieren eines Transformers und Collectors für Eigenschaften in eine Azure Resource Manager-Vorlage"
-description: "Es wird beschrieben, wie Sie einen Transformer und Collector für Eigenschaften in eine Azure Resource Manager-Vorlage implementieren."
+title: Implementieren eines Transformers und Collectors für Eigenschaften in eine Azure Resource Manager-Vorlage
+description: Es wird beschrieben, wie Sie einen Transformer und Collector für Eigenschaften in eine Azure Resource Manager-Vorlage implementieren.
 author: petertay
 ms.date: 06/09/2017
 ms.openlocfilehash: 893779e652b845b3d936d11936dc767ef632fa43

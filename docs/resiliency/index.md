@@ -1,6 +1,6 @@
 ---
-title: "Entwerfen robuster Anwendungen für Azure"
-description: "Es wird beschrieben, wie Sie in Azure robuste Anwendungen mit Hochverfügbarkeit und Notfallwiederherstellung erstellen."
+title: Entwerfen robuster Anwendungen für Azure
+description: Es wird beschrieben, wie Sie in Azure robuste Anwendungen mit Hochverfügbarkeit und Notfallwiederherstellung erstellen.
 author: MikeWasson
 ms.date: 05/26/2017
 ms.custom: resiliency

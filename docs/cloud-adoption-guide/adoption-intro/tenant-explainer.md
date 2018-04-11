@@ -1,6 +1,6 @@
 ---
-title: "Erläuterungen: Was ist ein Azure Active Directory-Mandant?"
-description: "Hier wird die interne Funktionsweise von Azure Active Directory für die Bereitstellung von Identity-as-a-Service (IDaaS) in Azure erläutert."
+title: 'Erläuterungen: Was ist ein Azure Active Directory-Mandant?'
+description: Hier wird die interne Funktionsweise von Azure Active Directory für die Bereitstellung von Identity-as-a-Service (IDaaS) in Azure erläutert.
 author: petertay
 ms.openlocfilehash: ce5a33b92047e1f360eee8fcbc7a726bcf8cd19f
 ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242

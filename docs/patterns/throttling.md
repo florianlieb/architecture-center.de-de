@@ -103,3 +103,4 @@ ms.lasthandoff: 11/14/2017
 - <span data-ttu-id="f5bdb-197">[Muster „Prioritätswarteschlange“][]:</span><span class="sxs-lookup"><span data-stu-id="f5bdb-197">[Priority Queue pattern][].</span></span> <span data-ttu-id="f5bdb-198">Ein System kann im Rahmen seiner Drosselungsstrategie Prioritätswarteschlangen einsetzen, um die Leistung von kritischen oder höherwertigen Anwendungen aufrechtzuerhalten und gleichzeitig die von weniger wichtigen Anwendungen zu reduzieren.</span><span class="sxs-lookup"><span data-stu-id="f5bdb-198">A system can use priority queuing as part of its throttling strategy to maintain performance for critical or higher value applications, while reducing the performance of less important applications.</span></span>
 
 [Muster „Prioritätswarteschlange“]: priority-queue.md
+[Priority Queue pattern]: priority-queue.md

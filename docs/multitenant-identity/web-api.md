@@ -1,6 +1,6 @@
 ---
-title: "Schützen einer Back-End-Web-API in einer mehrinstanzenfähigen Anwendung"
-description: "Schützen einer Back-End-Web-API"
+title: Schützen einer Back-End-Web-API in einer mehrinstanzenfähigen Anwendung
+description: Schützen einer Back-End-Web-API
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
@@ -272,8 +272,11 @@ public void ConfigureServices(IServiceCollection services)
 [Tailspin Surveys]: tailspin.md
 [IdentityServer3]: https://github.com/IdentityServer/IdentityServer3
 [Aktualisieren des Anwendungsmanifests]: ./run-the-app.md#update-the-application-manifests
+[Update the application manifests]: ./run-the-app.md#update-the-application-manifests
 [Tokencaching]: token-cache.md
+[Token caching]: token-cache.md
 [Mandantenanmeldung]: signup.md
+[tenant sign-up]: signup.md
 [claims-transformation]: claims.md#claims-transformations
 [Authorization]: authorize.md
 [sample application]: https://github.com/mspnp/multitenant-saas-guidance

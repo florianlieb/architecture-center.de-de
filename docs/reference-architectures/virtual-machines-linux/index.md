@@ -1,6 +1,6 @@
 ---
 title: Linux-VM-Workloads
-description: "Beschreibung einiger gängiger Architekturen für die Bereitstellung von VMs, die in Azure Anwendungen auf Unternehmensebene hosten"
+description: Beschreibung einiger gängiger Architekturen für die Bereitstellung von VMs, die in Azure Anwendungen auf Unternehmensebene hosten
 layout: LandingPage
 ms.openlocfilehash: ef06fb93355f4676f44954930bcfeb2c2d012d43
 ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb

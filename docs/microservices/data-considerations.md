@@ -1,6 +1,6 @@
 ---
-title: "Überlegungen zu Daten für Microservices"
-description: "Überlegungen zu Daten für Microservices"
+title: Überlegungen zu Daten für Microservices
+description: Überlegungen zu Daten für Microservices
 author: MikeWasson
 ms.date: 12/08/2017
 ms.openlocfilehash: 9bd7a8424309b5753b42cfb70559836288a3ce9d

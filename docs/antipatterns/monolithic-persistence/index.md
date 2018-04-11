@@ -1,6 +1,6 @@
 ---
 title: Antimuster der monolithischen Persistenz
-description: "Das Speichern sämtlicher Daten einer Anwendung in einem einzigen Datenspeicher kann die Leistung beeinträchtigen."
+description: Das Speichern sämtlicher Daten einer Anwendung in einem einzigen Datenspeicher kann die Leistung beeinträchtigen.
 author: dragon119
 ms.date: 06/05/2017
 ms.openlocfilehash: 7f04b9f0805c281068b6b2edaf040683773e6f6e
