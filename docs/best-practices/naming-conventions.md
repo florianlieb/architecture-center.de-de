@@ -1,6 +1,6 @@
 ---
-title: "Namenskonventionen für Azure-Ressourcen"
-description: "Enthält die Namenskonventionen für Azure-Ressourcen. Benennen von virtuellen Computern, Speicherkonten, Netzwerken, virtuellen Netzwerken, Subnetzen und anderen Azure-Entitäten"
+title: Namenskonventionen für Azure-Ressourcen
+description: Enthält die Namenskonventionen für Azure-Ressourcen. Benennen von virtuellen Computern, Speicherkonten, Netzwerken, virtuellen Netzwerken, Subnetzen und anderen Azure-Entitäten
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices

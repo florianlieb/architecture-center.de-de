@@ -1,6 +1,6 @@
 ---
-title: "Antimuster „Ausgelastete Datenbank“"
-description: "Das Auslagern der Verarbeitung an einen Datenbankserver kann zu Leistungs- und Skalierbarkeitsproblemen führen."
+title: Antimuster „Ausgelastete Datenbank“
+description: Das Auslagern der Verarbeitung an einen Datenbankserver kann zu Leistungs- und Skalierbarkeitsproblemen führen.
 author: dragon119
 ms.date: 06/05/2017
 ms.openlocfilehash: 9fdbde0731a1be570ef611894a9d23a1be87f4e7

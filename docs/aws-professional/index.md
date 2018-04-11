@@ -1,5 +1,5 @@
 ---
-title: "Azure für AWS-Spezialisten"
+title: Azure für AWS-Spezialisten
 description: Sie lernen die Grundlagen der Konten, Plattform und Dienste von Microsoft Azure kennen. Zudem lernen Sie die wichtigsten Gemeinsamkeiten und Unterschiede zwischen den Plattformen AWS und Azure kennen. Sie wenden Ihre Erfahrungen zu AWS in Azure an.
 keywords: AWS experts, Azure comparison, AWS comparison, difference between azure and aws, azure and aws
 author: lbrader

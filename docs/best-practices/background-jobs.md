@@ -1,6 +1,6 @@
 ---
-title: "Anleitungen für Hintergrundaufträge"
-description: "Anleitungen für Hintergrundaufgaben, die unabhängig von der Benutzeroberfläche ausgeführt werden."
+title: Anleitungen für Hintergrundaufträge
+description: Anleitungen für Hintergrundaufgaben, die unabhängig von der Benutzeroberfläche ausgeführt werden.
 author: dragon119
 ms.date: 05/24/2017
 pnp.series.title: Best Practices

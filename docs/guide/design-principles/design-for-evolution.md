@@ -1,6 +1,6 @@
 ---
-title: "Ausrichtung des Entwurfs auf Änderungen"
-description: "Ein evolutionärer Entwurf ist für einen kontinuierlichen Innovationsstrom von entscheidender Bedeutung."
+title: Ausrichtung des Entwurfs auf Änderungen
+description: Ein evolutionärer Entwurf ist für einen kontinuierlichen Innovationsstrom von entscheidender Bedeutung.
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 35e91228f3fb0a303594ec06f05b6865008e3a4f

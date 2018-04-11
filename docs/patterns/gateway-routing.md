@@ -1,6 +1,6 @@
 ---
-title: "Muster „Gatewayrouting“"
-description: "Anforderungen werden über einen einzigen Endpunkt an mehrere Dienste weitergeleitet."
+title: Muster „Gatewayrouting“
+description: Anforderungen werden über einen einzigen Endpunkt an mehrere Dienste weitergeleitet.
 author: dragon119
 ms.date: 06/23/2017
 ms.openlocfilehash: 53239b23cfd98fad1edc38ca37c2274d5a9d7a0f

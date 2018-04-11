@@ -1,6 +1,6 @@
 ---
-title: "Arbeiten mit anspruchsbasierten Identitäten in mehrinstanzenfähigen Anwendungen"
-description: "Informationen zum Verwenden von Ansprüchen für die Ausstellerüberprüfung und Autorisierung"
+title: Arbeiten mit anspruchsbasierten Identitäten in mehrinstanzenfähigen Anwendungen
+description: Informationen zum Verwenden von Ansprüchen für die Ausstellerüberprüfung und Autorisierung
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications

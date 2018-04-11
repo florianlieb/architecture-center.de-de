@@ -1,6 +1,6 @@
 ---
-title: "Architekturstil für Microservices"
-description: "Dieser Artikel beschreibt die Vorteile, Herausforderungen und bewährten Methoden für Architekturen für Microservices in Azure."
+title: Architekturstil für Microservices
+description: Dieser Artikel beschreibt die Vorteile, Herausforderungen und bewährten Methoden für Architekturen für Microservices in Azure.
 author: MikeWasson
 ms.openlocfilehash: 08fd39b6cf0b3c88af654b27e21b2d7dd9fb19b1
 ms.sourcegitcommit: 7764a804f000180c37a4f8dbab946b525f784f58

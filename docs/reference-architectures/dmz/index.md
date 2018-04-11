@@ -1,6 +1,6 @@
 ---
 title: Netzwerk-DMZ
-description: "Erläuterung und Vergleich der verschiedenen verfügbaren Methoden zum Schutz von Anwendungen und Komponenten, die in Azure als Teil eines Hybridsystems ausgeführt werden, vor unbefugtem Eindringen"
+description: Erläuterung und Vergleich der verschiedenen verfügbaren Methoden zum Schutz von Anwendungen und Komponenten, die in Azure als Teil eines Hybridsystems ausgeführt werden, vor unbefugtem Eindringen
 layout: LandingPage
 ms.openlocfilehash: 98df0a25767c7a7282e67381c6465fe3263ce1fa
 ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb

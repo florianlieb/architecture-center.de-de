@@ -1,6 +1,6 @@
 ---
-title: "Checkliste für die Verfügbarkeit"
-description: "Checkliste, die Hinweise zu Überlegungen hinsichtlich der Verfügbarkeit während des Entwurfs bereitstellt."
+title: Checkliste für die Verfügbarkeit
+description: Checkliste, die Hinweise zu Überlegungen hinsichtlich der Verfügbarkeit während des Entwurfs bereitstellt.
 author: dragon119
 ms.date: 01/10/2018
 ms.custom: checklist

@@ -1,6 +1,6 @@
 ---
 title: Entwurf mit Blick auf Selbstreparatur
-description: "Resiliente Anwendungen können nach einem Ausfall ohne manuellen Eingriff wiederhergestellt werden."
+description: Resiliente Anwendungen können nach einem Ausfall ohne manuellen Eingriff wiederhergestellt werden.
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 0782b65b77615f7c006724264ab0ca2d2c7c04e2

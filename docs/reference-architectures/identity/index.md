@@ -1,6 +1,6 @@
 ---
-title: "Identitätsverwaltung"
-description: "Erläuterung und Vergleich der verschiedenen verfügbaren Methoden für die Verwaltung der Identität in hybriden Systemen mit Azure, die die Grenze zwischen lokalen Netzwerken und Clouds überspannen."
+title: Identitätsverwaltung
+description: Erläuterung und Vergleich der verschiedenen verfügbaren Methoden für die Verwaltung der Identität in hybriden Systemen mit Azure, die die Grenze zwischen lokalen Netzwerken und Clouds überspannen.
 layout: LandingPage
 ms.openlocfilehash: de98ee30306f5e712759ab7140bd430cb6d4cd75
 ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb

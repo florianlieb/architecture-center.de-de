@@ -1,6 +1,6 @@
 ---
-title: "Auswahl der richtigen Technologien für Azure-Anwendungen"
-description: "Auswahl der richtigen Technologien für Azure-Anwendungen"
+title: Auswahl der richtigen Technologien für Azure-Anwendungen
+description: Auswahl der richtigen Technologien für Azure-Anwendungen
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 7681aeb7a6064d06674e781292c444dba9d410f2

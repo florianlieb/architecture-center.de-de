@@ -1,6 +1,6 @@
 ---
-title: "Identitätsverwaltung für mehrmandantenfähige Anwendungen"
-description: "Bewährte Methoden für die Authentifizierung, Autorisierung und Identitätsverwaltung mehrmandantenfähiger Apps."
+title: Identitätsverwaltung für mehrmandantenfähige Anwendungen
+description: Bewährte Methoden für die Authentifizierung, Autorisierung und Identitätsverwaltung mehrmandantenfähiger Apps.
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications

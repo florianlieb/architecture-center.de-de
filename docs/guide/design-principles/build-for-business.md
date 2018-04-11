@@ -1,6 +1,6 @@
 ---
 title: Ausrichtung des Entwurfs auf die Unternehmensanforderungen
-description: "Jede Entwurfsentscheidung muss durch eine geschäftliche Anforderung gerechtfertigt sein"
+description: Jede Entwurfsentscheidung muss durch eine geschäftliche Anforderung gerechtfertigt sein
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 110a441ae74334d212a717da2cb038d60b24bb1f

@@ -1,6 +1,6 @@
 ---
-title: "Leistungsbezogene Antimuster für Cloudanwendungen"
-description: "Häufige Vorgehensweisen, die wahrscheinlich zu Skalierbarkeitsproblemen führen."
+title: Leistungsbezogene Antimuster für Cloudanwendungen
+description: Häufige Vorgehensweisen, die wahrscheinlich zu Skalierbarkeitsproblemen führen.
 author: dragon119
 ms.date: 06/05/2017
 ms.openlocfilehash: 423fe6533e57268610f625f523714cd1bce89546

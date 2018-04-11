@@ -1,6 +1,6 @@
 ---
-title: "Checkliste für die Skalierbarkeit"
-description: "Checkliste für die Skalierbarkeit für Entwurfsprobleme bei automatischer Azure-Skalierung."
+title: Checkliste für die Skalierbarkeit
+description: Checkliste für die Skalierbarkeit für Entwurfsprobleme bei automatischer Azure-Skalierung.
 author: dragon119
 ms.date: 01/10/2018
 ms.custom: checklist

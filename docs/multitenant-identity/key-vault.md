@@ -1,5 +1,5 @@
 ---
-title: "Verwenden von Key Vault zum Schützen von Anwendungsgeheimnissen"
+title: Verwenden von Key Vault zum Schützen von Anwendungsgeheimnissen
 description: Informationen zur Verwendung des Key Vault-Diensts zum Speichern von Anwendungsgeheimnissen
 author: MikeWasson
 ms:date: 07/21/2017

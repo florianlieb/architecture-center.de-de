@@ -1,5 +1,5 @@
 ---
-title: "Muster „Gatewayabladung“"
+title: Muster „Gatewayabladung“
 description: Es wird beschrieben, wie Sie freigegebene oder spezielle Dienstfunktionen an einen Gatewayproxy auslagern.
 author: dragon119
 ms.date: 06/23/2017

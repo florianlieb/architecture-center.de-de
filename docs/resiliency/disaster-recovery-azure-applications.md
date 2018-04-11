@@ -1,6 +1,6 @@
 ---
-title: "Notfallwiederherstellung für Azure-Anwendungen"
-description: "Technische Übersicht und ausführliche Informationen zum Entwerfen von Anwendungen für die Notfallwiederherstellung in Microsoft Azure."
+title: Notfallwiederherstellung für Azure-Anwendungen
+description: Technische Übersicht und ausführliche Informationen zum Entwerfen von Anwendungen für die Notfallwiederherstellung in Microsoft Azure.
 author: adamglick
 ms.date: 05/26/2017
 ms.openlocfilehash: 7235e752cf1b96e392a700b223d63b07c0f85b66

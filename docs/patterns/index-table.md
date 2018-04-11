@@ -1,6 +1,6 @@
 ---
 title: Indextabelle
-description: "Erstellen von Indizes für die Felder im Datenspeicher, auf die häufig von Abfragen verwiesen wird"
+description: Erstellen von Indizes für die Felder im Datenspeicher, auf die häufig von Abfragen verwiesen wird
 keywords: Entwurfsmuster
 author: dragon119
 ms.date: 06/23/2017

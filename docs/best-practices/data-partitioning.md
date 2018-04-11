@@ -1,6 +1,6 @@
 ---
 title: Leitfaden zur Datenpartitionierung
-description: "Leitfaden zum Trennen von Partitionen für die separate Verwaltung und den separaten Zugriff"
+description: Leitfaden zum Trennen von Partitionen für die separate Verwaltung und den separaten Zugriff
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices

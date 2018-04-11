@@ -1,6 +1,6 @@
 ---
-title: "Auswählen einer Technologie zur Verarbeitung von natürlicher Sprache"
-description: 
+title: Auswählen einer Technologie zur Verarbeitung von natürlicher Sprache
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
 ms.openlocfilehash: dacf7bf9cf3e9efed212f34da93c1470954965cf

@@ -1,6 +1,6 @@
 ---
-title: "Valet-Schlüssel"
-description: "Verwenden Sie ein Token oder einen Schlüssel, das bzw. der Clients eingeschränkten direkten Zugriff auf eine bestimmte Ressource oder einen bestimmten Dienst bietet."
+title: Valet-Schlüssel
+description: Verwenden Sie ein Token oder einen Schlüssel, das bzw. der Clients eingeschränkten direkten Zugriff auf eine bestimmte Ressource oder einen bestimmten Dienst bietet.
 keywords: Entwurfsmuster
 author: dragon119
 ms.date: 06/23/2017

@@ -1,6 +1,6 @@
 ---
-title: "Antimuster „Kein Caching“"
-description: "Durch wiederholtes Abrufen der gleichen Daten können Leistung und Skalierbarkeit verringert werden."
+title: Antimuster „Kein Caching“
+description: Durch wiederholtes Abrufen der gleichen Daten können Leistung und Skalierbarkeit verringert werden.
 author: dragon119
 ms.date: 06/05/2017
 ms.openlocfilehash: 8a2bc3b473a30536cc1bef9e1dcad87acb46c4a9

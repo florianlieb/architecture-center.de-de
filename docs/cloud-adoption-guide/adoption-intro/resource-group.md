@@ -1,6 +1,6 @@
 ---
 title: 'Anleitung: Entwerfen einer Azure-Ressourcengruppe'
-description: "Leitfaden für das Entwerfen von Azure-Ressourcengruppen im Rahmen einer Strategie für die grundlegende Cloudeinführung"
+description: Leitfaden für das Entwerfen von Azure-Ressourcengruppen im Rahmen einer Strategie für die grundlegende Cloudeinführung
 author: petertay
 ms.openlocfilehash: ac6cbb03be8cdba020641d3b9034ad9d20101acf
 ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242

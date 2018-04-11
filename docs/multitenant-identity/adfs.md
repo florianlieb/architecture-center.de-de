@@ -1,6 +1,6 @@
 ---
 title: Einrichten eines Verbunds mit der AD FS-Instanz eines Kunden
-description: "Wie ein Verbund mit den AD FS eines Kunden in einer mehrinstanzenfähigen Anwendung eingegangen wird"
+description: Wie ein Verbund mit den AD FS eines Kunden in einer mehrinstanzenfähigen Anwendung eingegangen wird
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications

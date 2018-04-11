@@ -1,6 +1,6 @@
 ---
 title: Big Compute-Architekturstil
-description: "Es werden die Vorteile, Herausforderungen und bewährten Methoden für Big Compute-Architekturen in Azure beschrieben."
+description: Es werden die Vorteile, Herausforderungen und bewährten Methoden für Big Compute-Architekturen in Azure beschrieben.
 author: MikeWasson
 ms.openlocfilehash: b16be4133143d7d73062eeb280b44779c390f387
 ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60

@@ -1,6 +1,6 @@
 ---
-title: "Anleitungen für die automatische Skalierung"
-description: "Leitfaden zur automatischen Skalierung, um die von einer Anwendung benötigten Ressourcen dynamisch zuzuweisen."
+title: Anleitungen für die automatische Skalierung
+description: Leitfaden zur automatischen Skalierung, um die von einer Anwendung benötigten Ressourcen dynamisch zuzuweisen.
 author: dragon119
 ms.date: 05/17/2017
 pnp.series.title: Best Practices

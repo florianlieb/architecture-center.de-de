@@ -1,6 +1,6 @@
 ---
-title: "Entwurfsprinzipien für Azure-Anwendungen"
-description: "Entwurfsprinzipien für Azure-Anwendungen"
+title: Entwurfsprinzipien für Azure-Anwendungen
+description: Entwurfsprinzipien für Azure-Anwendungen
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 57b04839e14804ad97fc9c86e1f9c4fe6e0da472

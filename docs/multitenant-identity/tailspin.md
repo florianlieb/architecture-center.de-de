@@ -1,6 +1,6 @@
 ---
-title: "Informationen zur Tailspin-Anwendung „Surveys“"
-description: "Übersicht über die Tailspin-Anwendung „Surveys“"
+title: Informationen zur Tailspin-Anwendung „Surveys“
+description: Übersicht über die Tailspin-Anwendung „Surveys“
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications

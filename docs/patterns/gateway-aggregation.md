@@ -1,5 +1,5 @@
 ---
-title: "Muster „Gatewayaggregation“"
+title: Muster „Gatewayaggregation“
 description: Aggregieren Sie mithilfe eines Gateways mehrere einzelne Anforderungen in einer einzelnen Anforderung.
 author: dragon119
 ms.date: 06/23/2017

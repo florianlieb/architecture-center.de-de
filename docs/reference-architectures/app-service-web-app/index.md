@@ -1,6 +1,6 @@
 ---
 title: App Service-Webanwendung
-description: "Empfohlene Architekturen für in Microsoft Azure ausgeführte Webanwendungen"
+description: Empfohlene Architekturen für in Microsoft Azure ausgeführte Webanwendungen
 layout: LandingPage
 ms.openlocfilehash: ea5ca6f0a1e2995ab35333095260d8f2c3db2600
 ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb

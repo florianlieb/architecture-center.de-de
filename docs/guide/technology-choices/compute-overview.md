@@ -1,6 +1,6 @@
 ---
-title: "Übersicht über Azure-Compute-Optionen"
-description: "Übersicht über Azure-Compute-Optionen"
+title: Übersicht über Azure-Compute-Optionen
+description: Übersicht über Azure-Compute-Optionen
 author: MikeWasson
 ms.openlocfilehash: a23dd49f24bc52db6f357540e3ebccb19e0497ee
 ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60

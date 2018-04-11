@@ -1,6 +1,6 @@
 ---
 title: Warteschlangenbasierter Lastenausgleich
-description: "Verwenden Sie eine Warteschlange, die als Puffer zwischen einem Task und einem von diesem aufgerufenen Dienst fungiert, um unregelmäßig auftretende hohe Lasten aufzufangen."
+description: Verwenden Sie eine Warteschlange, die als Puffer zwischen einem Task und einem von diesem aufgerufenen Dienst fungiert, um unregelmäßig auftretende hohe Lasten aufzufangen.
 keywords: Entwurfsmuster
 author: dragon119
 ms.date: 06/23/2017

@@ -1,6 +1,6 @@
 ---
-title: "Domänenanalyse für Microservices"
-description: "Domänenanalyse für Microservices"
+title: Domänenanalyse für Microservices
+description: Domänenanalyse für Microservices
 author: MikeWasson
 ms.date: 12/08/2017
 ms.openlocfilehash: c3c353a6b30507369357af4b520a51f8afc2fb8d

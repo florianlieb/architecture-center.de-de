@@ -1,5 +1,5 @@
 ---
-title: "Zwischenspeichern von Zugangstoken in einer mehrinstanzenfähigen Anwendung"
+title: Zwischenspeichern von Zugangstoken in einer mehrinstanzenfähigen Anwendung
 description: Informationen zum Zwischenspeichern von Zugriffstoken zum Aufrufen einer Back-End-Web-API.
 author: MikeWasson
 ms:date: 07/21/2017

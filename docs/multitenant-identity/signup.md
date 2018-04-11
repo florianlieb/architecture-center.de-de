@@ -1,6 +1,6 @@
 ---
-title: "Registrierung und Onboarding von Mandanten in einer mehrinstanzenfähigen Anwendung"
-description: "Informationen zum Onboarding in einer mehrmandantenfähigen Anwendung"
+title: Registrierung und Onboarding von Mandanten in einer mehrinstanzenfähigen Anwendung
+description: Informationen zum Onboarding in einer mehrmandantenfähigen Anwendung
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications

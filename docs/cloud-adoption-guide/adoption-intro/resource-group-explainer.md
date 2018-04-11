@@ -1,6 +1,6 @@
 ---
-title: "Erläuterungen: Was ist eine Azure-Ressourcengruppe?"
-description: "Hier wird die interne Azure-Funktion einer Ressourcengruppe erläutert."
+title: 'Erläuterungen: Was ist eine Azure-Ressourcengruppe?'
+description: Hier wird die interne Azure-Funktion einer Ressourcengruppe erläutert.
 author: petertay
 ms.openlocfilehash: e7c7334bd88c28f57498486bd2bed3c349565222
 ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
