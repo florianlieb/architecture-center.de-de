@@ -1,6 +1,6 @@
 ---
-title: "Checkliste für Resilienz"
-description: "Checkliste, die Hinweise zu Überlegungen hinsichtlich der Resilienz während des Entwurfs bereitstellt."
+title: Checkliste für Resilienz
+description: Checkliste, die Hinweise zu Überlegungen hinsichtlich der Resilienz während des Entwurfs bereitstellt.
 author: petertaylor9999
 ms.date: 01/10/2018
 ms.custom: resiliency, checklist
