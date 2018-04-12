@@ -7,11 +7,11 @@ pnp.series.title: Network DMZ
 pnp.series.prev: ./index
 pnp.series.next: secure-vnet-dmz
 cardTitle: DMZ between Azure and on-premises
-ms.openlocfilehash: 778d5ef6967a09b03bb6b5aca67e3e0c170ad016
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 81dea2e4439d5a01ebb88ab86dc0a59609bb7bc3
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="dmz-between-azure-and-your-on-premises-datacenter"></a>DMZ zwischen Azure und Ihrem lokalen Datencenter
 
@@ -27,7 +27,7 @@ Für diese Architektur ist eine Verbindung mit Ihrem lokalen Rechenzentrum erfor
 * Infrastruktur, die eine präzise Kontrolle des aus einem lokalen Rechenzentrum in ein Azure VNet eingehenden Verkehrs erfordert.
 * Anwendungen, die ausgehenden Verkehr überwachen müssen. Dies ist ein oftmals auf behördliche Bestimmungen zurückgehendes Erfordernis vieler kommerzieller Systeme und kann dabei helfen, die Offenlegung privater Informationen zu verhindern.
 
-## <a name="architecture"></a>Architektur
+## <a name="architecture"></a>Architecture
 
 Die Architektur umfasst die folgenden Komponenten.
 
@@ -45,7 +45,7 @@ Die Architektur umfasst die folgenden Komponenten.
 
 * **Verwaltungssubnetz** Dieses Subnetz enthält VMs, die Verwaltungs- und Überwachungsfunktionen für die Komponenten implementieren, die im VNet ausgeführt werden.
 
-## <a name="recommendations"></a>Recommendations
+## <a name="recommendations"></a>Empfehlungen
 
 Die folgenden Empfehlungen gelten für die meisten Szenarios. Sofern Sie keine besonderen Anforderungen haben, die Vorrang haben, sollten Sie diese Empfehlungen befolgen. 
 
@@ -162,7 +162,7 @@ Verwenden Sie [RBAC][rbac], um die Vorgänge einzuschränken, die DevOps in den 
 
 Eine Bereitstellung für eine Referenzarchitektur, die diese Empfehlungen implementiert, steht auf [GitHub][github-folder] zur Verfügung. Die Referenzarchitektur kann gemäß den folgenden Anweisungen bereitgestellt werden:
 
-1. Klicken Sie auf die Schaltfläche unten:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fdmz%2Fsecure-vnet-hybrid%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
+1. Klicken Sie auf diese Schaltfläche:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fdmz%2Fsecure-vnet-hybrid%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
 2. Nachdem der Link im Azure-Portal geöffnet wurde, müssen Sie Werte für einige Einstellungen eingeben:   
    * Der Name der **Ressourcengruppe** ist bereits in der Parameterdatei definiert. Wählen Sie also **Neu erstellen**, und geben Sie im Textfeld `ra-private-dmz-rg` ein.
    * Wählen Sie im Dropdownfeld **Standort** die Region aus.
@@ -179,7 +179,7 @@ Eine Bereitstellung für eine Referenzarchitektur, die diese Empfehlungen implem
 * Weitere Informationen zum Verwalten der Netzwerksicherheit mit Azure finden Sie unter [Microsoft-Clouddienste und Netzwerksicherheit][cloud-services-network-security].
 * Ausführliche Informationen über den Schutz von Ressourcen in Azure finden Sie unter [Erste Schritte mit Microsoft Azure-Sicherheit][getting-started-with-azure-security]. 
 * Weitere Details zur Behandlung von Sicherheitsrisiken über Azure-Gatewayverbindungen finden Sie unter [Implementieren einer sicheren Hybrid-Netzwerkarchitektur mit Azure und lokalem VPN][guidance-vpn-gateway-security] und [Implementieren einer Hybrid-Netzwerkarchitektur mit Azure ExpressRoute][guidance-expressroute-security].
-> 
+  > 
 
 <!-- links -->
 
@@ -210,6 +210,6 @@ Eine Bereitstellung für eine Referenzarchitektur, die diese Empfehlungen implem
 [routing-and-remote-access-service]: https://technet.microsoft.com/library/dd469790(v=ws.11).aspx
 [security-principle-of-least-privilege]: https://msdn.microsoft.com/library/hdb58b2f(v=vs.110).aspx#Anchor_1
 [udr-overview]: /azure/virtual-network/virtual-networks-udr-overview
-[visio-download]: https://archcenter.azureedge.net/cdn/dmz-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/dmz-reference-architectures.vsdx
 [wireshark]: https://www.wireshark.org/
 [0]: ./images/dmz-private.png "Sichere Hybrid-Netzwerkarchitektur"

@@ -1,14 +1,14 @@
 ---
-title: "Checkliste für DevOps"
+title: Checkliste für DevOps
 description: Checkliste mit Anleitungen zu DevOps.
 author: dragon119
 ms.date: 01/10/2018
 ms.custom: checklist
-ms.openlocfilehash: 356fef2415347ae132915695a25fd9b50779bd8b
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: 2e338d2f2e61b404223001a61f44e06e89e7f563
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/23/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="devops-checklist"></a>Checkliste für DevOps
 
@@ -130,7 +130,7 @@ Es ist von entscheidender Bedeutung, diese Dokumentation für alle Benutzer frei
 
 **Befolgen Sie beim Gewähren des Zugriffs auf Ressourcen das Prinzip der geringsten Rechte.** Gehen Sie beim Verwalten des Zugriffs auf Ressourcen mit großer Umsicht vor. Standardmäßig sollte der Zugriff verweigert werden, sofern einem Benutzer nicht explizit Zugriff auf eine Ressource gewährt wurde. Gewähren Sie Benutzern nur Zugriff auf diejenigen Ressourcen, die sie zum Durchführen ihrer Aufgaben benötigen. Verfolgen Sie Benutzerberechtigungen nach, und führen Sie regelmäßige Sicherheitsüberwachungen durch.
 
-**Verwenden Sie die rollenbasierte Zugriffssteuerung.** Das Zuweisen von Benutzerkonten und des Zugriffs auf Ressourcen sollte kein manueller Prozess sein. Verwenden Sie die [rollenbasierte Zugriffssteuerung][rbac] (Role-Based Access Control, RBAC), um Zugriff basierend auf [Azure Active Directory][azure-ad]-Identitäten und -Gruppen zu gewähren. 
+<strong>Verwenden Sie die rollenbasierte Zugriffssteuerung.</strong> Das Zuweisen von Benutzerkonten und des Zugriffs auf Ressourcen sollte kein manueller Prozess sein. Verwenden Sie die [rollenbasierte Zugriffssteuerung][rbac] (Role-Based Access Control, RBAC), um Zugriff basierend auf [Azure Active Directory][azure-ad]-Identitäten und -Gruppen zu gewähren. 
 
 **Verwenden Sie ein System zur Nachverfolgung von Fehlern.** Ohne eine gute Methode zum Nachverfolgen von Fehlern kann es leicht passieren, dass etwas übersehen wird, Aufgaben doppelt ausgeführt werden oder sich zusätzliche Probleme einschleichen. Verlassen Sie sich nicht auf eine informelle Kommunikation zwischen Benutzern, um den Status von Fehlern nachzuverfolgen. Verwenden Sie ein Tool zum Nachverfolgen von Fehlern, um Details zu Problemen aufzuzeichnen, Ressourcen zur Behebung zuzuweisen und ein Überwachungsprotokoll in Bezug auf Fortschritt und Status bereitzustellen. 
 

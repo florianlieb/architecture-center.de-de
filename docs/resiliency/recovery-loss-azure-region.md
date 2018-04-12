@@ -1,15 +1,16 @@
 ---
 title: Wiederherstellen nach Ausfall einer Azure-Region
-description: "Artikel über die Grundlagen und den Entwurf von robusten, hoch verfügbaren, fehlertoleranten Anwendungen sowie die Planung der Notfallwiederherstellung."
+description: Artikel über die Grundlagen und den Entwurf von robusten, hoch verfügbaren, fehlertoleranten Anwendungen sowie die Planung der Notfallwiederherstellung.
 author: adamglick
 ms.date: 08/18/2016
-ms.openlocfilehash: 42a7d865e101b43279f3198f3dd75df1b15a8565
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: f551e8af8aece8aa30abfba2438c41c3944209bd
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 [!INCLUDE [header](../_includes/header.md)]
+
 # <a name="azure-resiliency-technical-guidance-recovery-from-a-region-wide-service-disruption"></a>Technischer Leitfaden zur Resilienz in Azure: Wiederherstellung nach einer regionsweiten Dienstunterbrechung
 Azure ist physisch und logisch in Einheiten unterteilt, die als Regionen bezeichnet werden. Eine Region besteht aus einem Rechenzentrum oder mehreren in unmittelbarer Nähe zueinander befindlichen Rechenzentren. 
 
@@ -36,7 +37,7 @@ Zum Implementieren verteilter Computeressourcen über mehrere Regionen hinweg st
 * **Warmspare (aktiv/passiv)**: Ein sekundärer gehosteter Dienst wird in einer alternativen Region erstellt, und Rollen werden bereitgestellt, um eine minimale Kapazität zu garantieren. Die Rollen empfangen jedoch keinen Produktionsdatenverkehr. Diese Vorgehensweise eignet sich für Anwendungen, die nicht dafür entworfen wurden, Datenverkehr über Regionen hinweg zu verteilen.
 * **Hotspare (aktiv/aktiv)**: Die Anwendung wurde dafür entworfen, Produktionslasten in mehreren Regionen zu empfangen. Die Clouddienste in jeder Region können zur Notfallwiederherstellung für eine höhere Kapazität als erforderlich konfiguriert werden. Alternativ dazu können die Clouddienste auch horizontal hochskaliert werden, wenn es zum Zeitpunkt eines Notfalls und für ein Failover erforderlich ist. Für diese Vorgehensweise sind beträchtliche Investitionen in den Anwendungsentwurf erforderlich, aber sie bietet auch erhebliche Vorteile: eine kurze und garantierte Wiederherstellungszeit, kontinuierliche Tests aller Wiederherstellungsstandorte und eine effiziente Nutzung der Kapazität.
 
-Eine vollständige Beschreibung des verteilten Entwurfs würde den Rahmen dieses Dokuments sprengen. Weitere Informationen finden Sie unter [Notfallwiederherstellung und hohe Verfügbarkeit für Azure-Anwendungen](https://aka.ms/drtechguide).
+Eine vollständige Beschreibung des verteilten Entwurfs würde den Rahmen dieses Dokuments sprengen. Weitere Informationen finden Sie unter [Notfallwiederherstellung und Hochverfügbarkeit für Azure-Anwendungen](https://aka.ms/drtechguide).
 
 ## <a name="virtual-machines"></a>Virtual Machines
 Die Wiederherstellung von IaaS-VMs (Infrastructure as a Service) ähnelt in vielerlei Hinsicht der Wiederherstellung von PaaS-Computeressourcen (Platform as a Service). Es gibt jedoch wesentliche Unterschiede aufgrund der Tatsache, dass eine IaaS-VM sowohl aus der VM als auch aus dem VM-Datenträger besteht.
@@ -85,7 +86,7 @@ Azure SQL-Datenbank stellt zwei Arten von Wiederherstellung bereit: geografische
 [Aktive Georeplikation](/azure/sql-database/sql-database-geo-replication-overview/) ist für alle Datenbanktarife verfügbar. Sie ist für Anwendungen vorgesehen, für die umfangreichere Wiederherstellungsanforderungen erforderlich sind, als die Geowiederherstellung bieten kann. Bei der aktiven Georeplikation können Sie bis zu vier lesbare sekundäre Replikate auf Servern in verschiedenen Regionen erstellen. Sie können ein Failover auf ein beliebiges sekundäres Replikat initiieren. Darüber hinaus kann die aktive Georeplikation verwendet werden, um Anwendungsupgrades oder die räumliche Verlegung von Anwendungen zu unterstützen, sowie als Lastenausgleich für schreibgeschützte Arbeitsauslastungen. Weitere Informationen finden Sie unter [Konfigurieren der Georeplikation](/azure/sql-database/sql-database-geo-replication-portal/) und [Failover zur sekundären Datenbank](/azure/sql-database/sql-database-geo-replication-failover-portal/). Einzelheiten zum Entwerfen und Implementieren von Anwendungen und Anwendungsupgrades ohne Ausfallzeiten finden Sie unter [Entwerfen einer Anwendung für die cloudbasierte Notfallwiederherstellung mithilfe der aktiven Georeplikation in SQL-Datenbank](/azure/sql-database/sql-database-designing-cloud-solutions-for-disaster-recovery/) sowie unter [Verwalten von parallelen Upgrades von Cloudanwendungen mithilfe der aktiven Georeplikation von SQL-Datenbank](/azure/sql-database/sql-database-manage-application-rolling-upgrade/).
 
 ### <a name="sql-server-on-virtual-machines"></a>SQL Server auf virtuellen Computern
-Für die Wiederherstellung und hohe Verfügbarkeit für SQL Server 2012 (und höher) auf Azure Virtual Machines steht eine Vielzahl von Optionen zur Verfügung. Weitere Informationen finden Sie unter [Hohe Verfügbarkeit und Notfallwiederherstellung für SQL Server auf virtuellen Azure-Computern](/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-high-availability-dr/).
+Für die Wiederherstellung und Hochverfügbarkeit für SQL Server 2012 (und höher) auf Azure Virtual Machines steht eine Vielzahl von Optionen zur Verfügung. Weitere Informationen finden Sie unter [Hochverfügbarkeit und Notfallwiederherstellung für SQL Server auf virtuellen Azure-Computern](/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-high-availability-dr/).
 
 ## <a name="other-azure-platform-services"></a>Weitere Azure Platform-Dienste
 Wenn Sie Ihre Clouddienste in mehreren Azure-Regionen ausführen möchten, müssen Sie die Auswirkungen für alle Abhängigkeiten bedenken. In den folgenden Abschnitten wird bei den dienstspezifischen Anleitungen davon ausgegangen, dass Sie den gleichen Azure-Dienst in einem alternativen Azure-Rechenzentrum verwenden müssen. Hierzu gehören sowohl Konfigurations- als auch Datenreplikationsaufgaben.
@@ -95,7 +96,7 @@ Wenn Sie Ihre Clouddienste in mehreren Azure-Regionen ausführen möchten, müss
 > 
 > 
 
-### <a name="service-bus"></a>Service Bus
+### <a name="service-bus"></a>SERVICE BUS
 Azure Service Bus verwendet einen eindeutigen Namespace, der nicht mehrere Azure-Regionen umfasst. Die erste Anforderung besteht also darin, die erforderlichen Service Bus-Namespaces in der alternativen Region einzurichten. Es müssen jedoch auch Überlegungen bezüglich der Beständigkeit der Nachrichten in der Warteschlange angestellt werden. Es gibt verschiedene Strategien zur Replikation von Nachrichten über Azure-Regionen hinweg. Details zu diesen Replikationsstrategien und weiteren Strategien für die Notfallwiederherstellung finden Sie unter [Bewährte Methoden zum Schützen von Anwendungen vor Service Bus-Ausfällen und Notfällen](/azure/service-bus-messaging/service-bus-outages-disasters/). Weitere Verfügbarkeitsaspekte finden Sie unter [Service Bus (Verfügbarkeit)](recovery-local-failures.md#other-azure-platform-services).
 
 ### <a name="app-service"></a>App Service

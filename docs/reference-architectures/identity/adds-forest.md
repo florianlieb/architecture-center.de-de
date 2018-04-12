@@ -1,17 +1,20 @@
 ---
 title: Erstellen einer AD DS-Ressourcengesamtstruktur in Azure
-description: "Informationen zum Erstellen einer vertrauenswürdigen Active Directory-Domäne in Azure.\nAnleitungen, VPN-Gateway, ExpressRoute, Lastenausgleich, virtuelles Netzwerk, Active Directory"
+description: >-
+  Informationen zum Erstellen einer vertrauenswürdigen Active Directory-Domäne in Azure.
+
+  Anleitungen, VPN-Gateway, ExpressRoute, Lastenausgleich, virtuelles Netzwerk, Active Directory
 author: telmosampaio
 ms.date: 11/28/2016
 pnp.series.title: Identity management
 pnp.series.prev: adds-extend-domain
 pnp.series.next: adfs
 cardTitle: Create an AD DS forest in Azure
-ms.openlocfilehash: b946afa91e8bd303c51f97e18be170c4105cc8c5
-ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
+ms.openlocfilehash: e32a6420821e70c84e77d2c39614f0c45efbb7e2
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/08/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="create-an-active-directory-domain-services-ad-ds-resource-forest-in-azure"></a>Erstellen einer Active Directory Domain Services (AD DS)-Ressourcengesamtstruktur in Azure
 
@@ -117,8 +120,8 @@ Eine Lösung zur Bereitstellung für diese Referenzarchitektur ist auf [GitHub][
      
 5. Wenn Sie die simulierte lokale Konfiguration verwenden, konfigurieren Sie die eingehende Vertrauensstellung:
    
-   1. Stellen Sie eine Verbindung mit der Jumpbox her (*ra-adtrust-mgmt-vm1* in der Ressourcengruppe *ra-adtrust-security-rg*). Melden Sie sich als *testuser* mit dem Kennwort *AweS0me@PW* an.
-   2. Öffnen Sie in der Jumpbox eine RDP-Sitzung auf dem ersten virtuellen Computer in der Domäne *contoso.com* (die lokale Domäne). Dieser virtuelle Computer hat die IP-Adresse 192.168.0.4. Der Benutzername ist *contoso\testuser* mit dem Kennwort *AweS0me@PW*.
+   1. Stellen Sie eine Verbindung mit der Jumpbox her (<em>ra-adtrust-mgmt-vm1</em> in der Ressourcengruppe <em>ra-adtrust-security-rg</em>). Melden Sie sich als <em>testuser</em> mit dem Kennwort <em>AweS0me@PW</em> an.
+   2. Öffnen Sie in der Jumpbox eine RDP-Sitzung auf dem ersten virtuellen Computer in der Domäne <em>contoso.com</em> (die lokale Domäne). Dieser virtuelle Computer hat die IP-Adresse 192.168.0.4. Der Benutzername ist <em>contoso\testuser</em> mit dem Kennwort <em>AweS0me@PW</em>.
    3. Laden Sie das Skript [incoming-trust.ps1][incoming-trust] herunter, und führen Sie es aus, um die eingehende Vertrauensstellung von der Domäne *treyresearch.com* zu erstellen.
 
 6. Wenn Sie Ihre eigene lokale Infrastruktur verwenden, gehen Sie folgendermaßen vor:
@@ -127,7 +130,7 @@ Eine Lösung zur Bereitstellung für diese Referenzarchitektur ist auf [GitHub][
    2. Bearbeiten Sie das Skript, und ersetzen Sie den Wert der Variablen `$TrustedDomainName` durch den Namen Ihrer eigenen Domäne.
    3. Führen Sie das Skript aus.
 
-7. Stellen Sie von der Jumpbox eine Verbindung mit dem ersten virtuellen Computer in der Domäne *treyresearch.com* (die Domäne in der Cloud) her. Dieser virtuelle Computer hat die IP-Adresse 10.0.4.4. Der Benutzername ist *treyresearch\testuser* mit dem Kennwort *AweS0me@PW*.
+7. Stellen Sie von der Jumpbox eine Verbindung mit dem ersten virtuellen Computer in der Domäne <em>treyresearch.com</em> (die Domäne in der Cloud) her. Dieser virtuelle Computer hat die IP-Adresse 10.0.4.4. Der Benutzername ist <em>treyresearch\testuser</em> mit dem Kennwort <em>AweS0me@PW</em>.
 
 8. Laden Sie das Skript [outgoing-trust.ps1][outgoing-trust] herunter, und führen Sie es aus, um die eingehende Vertrauensstellung von der Domäne *treyresearch.com* zu erstellen. Wenn Sie Ihre eigenen lokalen Computer verwenden, bearbeiten Sie zuerst das Skript. Legen Sie die Variable `$TrustedDomainName` auf den Namen Ihrer lokalen Domäne fest, und geben Sie die IP-Adressen der Active Directory DS-Server für diese Domäne in der Variablen `$TrustedDomainDnsIpAddresses` an.
 
@@ -162,5 +165,5 @@ Eine Lösung zur Bereitstellung für diese Referenzarchitektur ist auf [GitHub][
 [standby-operations-masters]: https://technet.microsoft.com/library/cc794737(v=ws.10).aspx
 [outgoing-trust]: https://raw.githubusercontent.com/mspnp/reference-architectures/master/identity/adds-forest/extensions/outgoing-trust.ps1
 [verify-a-trust]: https://technet.microsoft.com/library/cc753821.aspx
-[visio-download]: https://archcenter.azureedge.net/cdn/identity-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/identity-architectures.vsdx
 [0]: ./images/adds-forest.png "Schützen einer Hybrid-Netzwerkarchitektur mit separaten Active Directory-Domänen"

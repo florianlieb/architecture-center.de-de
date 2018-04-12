@@ -1,6 +1,6 @@
 ---
-title: "Auswahl einer übergeordneten Instanz"
-description: "Koordinieren Sie die von einer Sammlung zusammenarbeitender Aufgabeninstanzen ausgeführten Aktionen in einer verteilten Anwendung, indem Sie eine Instanz als übergeordnete Instanz auswählen, die die Verantwortung für die Verwaltung der anderen Instanzen übernimmt."
+title: Auswahl einer übergeordneten Instanz
+description: Koordinieren Sie die Aktionen, die von einer Sammlung zusammenarbeitender Taskinstanzen ausgeführt werden, in einer verteilten Anwendung, indem eine Instanz als übergeordnete Instanz ausgewählt wird, die die Verantwortung für die Verwaltung der anderen Instanzen übernimmt.
 keywords: Entwurfsmuster
 author: dragon119
 ms.date: 06/23/2017
@@ -8,11 +8,11 @@ pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - design-implementation
 - resiliency
-ms.openlocfilehash: ddb61097ed3229ed0ed517b94c280d3ef892c999
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 3e7d47f70f660f2507f0619e1c41bf9a32a25be4
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="leader-election-pattern"></a>Muster für die Auswahl einer übergeordneten Instanz
 
@@ -26,7 +26,7 @@ Eine typische Cloudanwendung weist viele Aufgaben auf, die koordiniert ausgefüh
 
 Zu einem großen Teil werden die Taskinstanzen möglicherweise separat ausgeführt, es kann jedoch auch notwendig sein, die Aktionen der einzelnen Instanzen zu koordinieren, um sicherzustellen, dass sie nicht in Konflikt miteinander, um freigegebene Ressourcen oder versehentlich auch mit der Arbeit anderer Instanzen stehen.
 
-Beispiel:
+Beispiel: 
 
 - In einem cloudbasierten System, in dem eine horizontale Skalierung implementiert ist, können mehrere Instanzen desselben Tasks gleichzeitig ausgeführt werden, wobei jede Instanz einem anderen Benutzer zugeordnet ist. Wenn diese Instanzen in eine freigegebene Ressource schreiben, müssen ihre Aktionen koordiniert werden, um zu verhindern, dass jede Instanz die von der anderen vorgenommenen Änderungen überschreibt.
 - Wenn die Aufgaben einzelne Elemente einer komplexen Berechnung parallel ausführen, müssen die Ergebnisse aggregiert werden, wenn alle abgeschlossen sind.
@@ -70,9 +70,9 @@ Dieses Muster ist in folgenden Fällen möglicherweise nicht geeignet:
 Das Projekt DistributedMutex in der Projektmappe LeaderElection (ein Beispiel für dieses Muster ist bei [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/leader-election) zu finden) zeigt, wie mit einer Lease für ein Azure Storage-Blob ein Mechanismus zum Implementieren eines freigegebenen, verteilten gegenseitigen Ausschlusses bereitgestellt werden kann. Mit diesem gegenseitigen Ausschluss kann eine übergeordnete Instanz aus einer Gruppe von Rolleninstanzen in einem Azure-Clouddienst gewählt werden. Die erste Rolleninstanz, die die Lease erhält, wird als übergeordnete Instanz bestimmt und bleibt diese, bis sie die Lease freigibt oder diese nicht mehr erneuern kann. Andere Rolleninstanzen können die Bloblease für den Fall, dass die übergeordnete Instanz nicht mehr verfügbar ist, weiterhin überwachen.
 
 >  Eine Bloblease ist eine exklusive Schreibsperre auf ein Blob. Ein einzelnes Blob kann jeweils nur einer Lease unterliegen. Eine Rolleninstanz kann eine Lease für ein angegebenes Blob anfordern und erhält diese, wenn keine andere Rolleninstanz über eine Lease für dasselbe Blob verfügt. Andernfalls löst die Anforderung eine Ausnahme aus.
-
+> 
 > Um eine fehlerhafte Rolleninstanz zu vermeiden, die die Lease unbegrenzt beibehält, geben Sie eine Gültigkeitsdauer für die Lease an. Wenn diese abläuft, ist die Lease wieder verfügbar. Während eine Rolleninstanz über die Lease verfügt, kann sie jedoch eine Erneuerung der Lease anfordern und erhält dann die Lease für einen weiteren Zeitraum. Die Rolleninstanz kann diesen Vorgang fortlaufend wiederholen, wenn sie die Lease beibehalten möchte.
-Weitere Informationen zum Leasen eines Blobs finden Sie unter [Leasen eines Blobs (REST-API)](https://msdn.microsoft.com/library/azure/ee691972.aspx).
+> Weitere Informationen zum Leasen eines Blobs finden Sie unter [Leasen eines Blobs (REST-API)](https://msdn.microsoft.com/library/azure/ee691972.aspx).
 
 Die `BlobDistributedMutex`-Klasse im folgenden C#-Beispiel enthält die `RunTaskWhenMutexAquired`-Methode, die einer Rolleninstanz ermöglicht, eine Lease für ein angegebenes Blob abzurufen. Die Details des Blobs (Name, Container und Speicherkonto) werden in den Konstruktor in einem `BlobSettings`-Objekt übergeben, wenn das `BlobDistributedMutex`-Objekt erstellt wird (eine einfache Struktur, die im Beispielcode enthalten ist). Der Konstruktor akzeptiert auch eine `Task`, die auf den Code verweist, den die Rolleninstanz ausführen sollte, wenn sie erfolgreich die Lease für das Blob abruft und zur übergeordneten Instanz gewählt wird. Beachten Sie, dass der Code für die Verarbeitung der Details auf niedriger Ebene zum Abrufen der Lease in der separaten Hilfsklasse `BlobLeaseManager` implementiert wird.
 

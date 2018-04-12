@@ -1,16 +1,17 @@
 ---
-title: "Hochverfügbarkeit für Azure-Anwendungen"
-description: "Technische Übersichten und ausführliche Informationen zum Entwerfen und Erstellen von Anwendungen für hohe Verfügbarkeit in Microsoft Azure."
+title: Hochverfügbarkeit für Azure-Anwendungen
+description: Technische Übersichten und ausführliche Informationen zum Entwerfen und Erstellen von Anwendungen für Hochverfügbarkeit in Microsoft Azure.
 author: adamglick
 ms.date: 05/31/2017
-ms.openlocfilehash: 46b7b802326a8de03546528aaeb1a1c6419d41db
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: f116b9e64f1722b5141ae90239d5c8a8b4a89487
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 [!INCLUDE [header](../_includes/header.md)]
-# <a name="high-availability-for-applications-built-on-microsoft-azure"></a>Hohe Verfügbarkeit für in Microsoft Azure erstellte Anwendungen
+
+# <a name="high-availability-for-applications-built-on-microsoft-azure"></a>Hochverfügbarkeit für in Microsoft Azure erstellte Anwendungen
 Eine hochverfügbare Anwendung gleicht Schwankungen bei Verfügbarkeit und Last sowie vorübergehende Ausfälle in abhängigen Diensten und Hardwarekomponenten aus. Die Anwendung funktioniert weiterhin auf einem akzeptablen Niveau, wie dies durch Geschäftsanforderungen oder Vereinbarungen zum Servicelevel (SLAs) für die Anwendung definiert ist.
 
 ## <a name="azure-high-availability-features"></a>Funktionen von Azure für hohe Verfügbarkeit
@@ -32,7 +33,7 @@ Zusätzlich zu den Plattformfeatures, die Hochverfügbarkeit von Computeressourc
 
 Eine detailliertere Erläuterung der Verfügbarkeitsfeatures der Azure-Plattform finden Sie in der [technischen Dokumentation zur Resilienz](index.md). Weitere Informationen finden Sie auch unter [Bewährte Methoden für das Entwerfen umfassender Dienste mit Microsoft Azure](https://azure.microsoft.com/blog/best-practices-for-designing-large-scale-services-on-windows-azure/).
 
-Obwohl Azure mehrere Funktionen zur Unterstützung einer hohen Verfügbarkeit bereitstellt, ist es wichtig, die Grenzen dieser Funktionen zu kennen:
+Obwohl Azure mehrere Funktionen zur Unterstützung von Hochverfügbarkeit bereitstellt, ist es wichtig, die Grenzen dieser Funktionen zu kennen:
 
 * Azure garantiert in Bezug auf die Computeleistung, dass Ihre Rollen verfügbar sind und ausgeführt werden, kann jedoch nicht erkennen, ob Ihre Anwendung ausgeführt wird oder überlastet ist.
 * Für Azure SQL-Datenbank werden Daten synchron innerhalb der Region repliziert. Sie können die aktive Georeplikation auswählen, bei der bis zu vier zusätzliche Datenbankkopien in derselben Region (oder verschiedenen Regionen) zulässig sind. Bei diesen Datenbankreplikaten handelt es sich zwar nicht um Point-in-Time-Sicherungen, diese Funktionen werden jedoch von der SQL-Datenbank bereitgestellt. Weitere Informationen finden Sie unter [Wiederherstellen einer Azure SQL-Datenbank mit automatisierten Datenbanksicherungen: Point-in-Time-Wiederherstellung](/azure/sql-database/sql-database-recovery-using-backups#point-in-time-restore).
@@ -50,8 +51,8 @@ Das folgende Diagramm zeigt zwei Verfügbarkeitsgruppen für virtuelle Webcomput
 > 
 > 
 
-## <a name="application-strategies-for-high-availability"></a>Anwendungsstrategien für hohe Verfügbarkeit
-Die meisten Anwendungsstrategien für hohe Verfügbarkeit umfassen entweder Redundanz oder die Entfernung von festen Abhängigkeiten zwischen Anwendungskomponenten. Der Anwendungsentwurf sollte Fehlertoleranz während zeitweiliger Ausfälle von Azure oder Drittanbieterdiensten unterstützen. In den folgenden Abschnitten werden Anwendungsmuster zur Erhöhung der Verfügbarkeit Ihrer Clouddienste beschrieben.
+## <a name="application-strategies-for-high-availability"></a>Anwendungsstrategien für Hochverfügbarkeit
+Die meisten Anwendungsstrategien für Hochverfügbarkeit umfassen entweder Redundanz oder die Entfernung von festen Abhängigkeiten zwischen Anwendungskomponenten. Der Anwendungsentwurf sollte Fehlertoleranz während zeitweiliger Ausfälle von Azure oder Drittanbieterdiensten unterstützen. In den folgenden Abschnitten werden Anwendungsmuster zur Erhöhung der Verfügbarkeit Ihrer Clouddienste beschrieben.
 
 ### <a name="asynchronous-communication-and-durable-queues"></a>Asynchrone Kommunikation und permanente Warteschlangen
 Um die Verfügbarkeit in Azure-Anwendungen zu erhöhen, betrachten wir die asynchrone Kommunikation zwischen lose gekoppelten Diensten. In diesem Muster werden Nachrichten zur späteren Verarbeitung entweder an Speicherwarteschlangen oder an Azure Service Bus-Warteschlangen geschrieben. Wenn eine Nachricht an die Warteschlange geschrieben wird, erfolgt sofort die Steuerelementrückgabe an den Absender. Die Nachricht wird von einem anderen Dienst der Anwendung, die üblicherweise als Workerrolle implementiert ist, verarbeitet. Wenn der Verarbeitungsdienst angehalten wird, werden die Nachrichten in der Warteschlange gesammelt, bis der Verarbeitungsdienst wiederhergestellt wird. Es gibt keine direkte Abhängigkeit zwischen dem Absender im Front-End und dem Nachrichtenprozessor. Hierdurch werden synchrone Dienstaufrufe verhindert, die Engpässe in verteilten Anwendungen verursachen können.
@@ -63,7 +64,7 @@ In beiden Szenarien verhindern die asynchrone Kommunikation und der temporäre S
 ### <a name="fault-detection-and-retry-logic"></a>Fehlererkennung und Wiederholungslogik
 Ein wichtiger Aspekt beim Entwerfen von hochverfügbaren Anwendungen ist die Verwendung einer Wiederholungslogik im Code, um einen vorübergehend nicht verfügbaren Dienst richtig behandeln zu können. Die aktuellen SDK-Versionen für Azure Storage und den Azure Service Bus bieten native Unterstützung für Wiederholungen. Weitere Informationen zum Bereitstellen einer benutzerdefinierten Wiederholungslogik für Ihre Anwendung finden Sie unter [Muster „Wiederholung“](../patterns/retry.md).
 
-### <a name="reference-data-pattern-for-high-availability"></a>Verweisdatenmuster für hohe Verfügbarkeit
+### <a name="reference-data-pattern-for-high-availability"></a>Verweisdatenmuster für Hochverfügbarkeit
 Verweisdaten sind die schreibgeschützten Daten einer Anwendung. Diese Daten stellen den Geschäftskontext bereit, innerhalb dessen die Anwendung während eines Geschäftsvorgangs Transaktionsdaten generiert. Um die Integrität der Transaktionsdaten sicherzustellen, ist eine Momentaufnahme der Verweisdaten zu dem Zeitpunkt, an dem die Transaktion abgeschlossen wurde, erforderlich.
 
 Für die ordnungsgemäße Ausführung der Anwendung sind Verweisdaten erforderlich. Verschiedene Anwendungen erstellen und verwalten Verweisdaten – Systeme zur Masterdatenverwaltung (MDM) führen diese Funktion häufig aus. Diese Systeme sind für den Lebenszyklus der Verweisdaten zuständig. Beispiele für Verweisdaten: Produktkataloge, Mitarbeitermaster, Teilemaster und Gerätemaster. Verweisdaten können auch von außerhalb der Organisation stammen, z.B. Postleitzahlen oder Steuersätze. Strategien zur Erhöhung der Verfügbarkeit von Verweisdaten sind üblicherweise weniger kompliziert als Strategien für Transaktionsdaten. Verweisdaten haben den Vorteil, größtenteils unveränderlich zu sein.
@@ -72,11 +73,11 @@ Web- und Workerrollen in Azure, die Verweisdaten verwenden, können autonom zur 
 
 Um die Verfügbarkeit zu erhöhen, sollten Sie Rollen auch einen Satz Verweisdaten enthalten, falls der Speicher ausfällt. Auf diese Weise können die Rollen mit einem Basissatz an Verweisdaten starten, bis die Speicherressource für die Updates verfügbar wird.
 
-![Hohe Anwendungsverfügbarkeit durch autonome Computeknoten](./images/high-availability-azure-applications/application-high-availability-through-autonomous-compute-nodes.png)
+![Hochverfügbarkeit von Anwendungen durch autonome Computeknoten](./images/high-availability-azure-applications/application-high-availability-through-autonomous-compute-nodes.png)
 
 Bei diesem Muster dauert das Starten neuer Bereitstellungen oder Rolleninstanzen möglicherweise länger, wenn Sie große Mengen von Verweisdaten bereitstellen oder herunterladen. Dieser Nachteil kann jedoch akzeptabel sein, wenn Sie dafür die Autonomie erhalten, dass die Verweisdaten für jede Rolle sofort verfügbar sind und Sie sich nicht auf externe Speicherdienste verlassen müssen.
 
-### <a name="transactional-data-pattern-for-high-availability"></a>Transaktionsdatenmuster für hohe Verfügbarkeit
+### <a name="transactional-data-pattern-for-high-availability"></a>Transaktionsdatenmuster für Hochverfügbarkeit
 Transaktionsdaten sind die Daten, die von einer Anwendung in einem Geschäftskontext generiert werden. Transaktionsdaten sind eine Kombination aus den Geschäftsprozessen, die von der Anwendung implementiert werden, und den Verweisdaten, die diese Prozesse unterstützen. Beispiele für Transaktionsdaten sind Bestellungen, erweiterte Versandmitteilungen, Rechnungen und CRM-Verkaufschancen. Transaktionsdaten werden zu Aufbewahrungszwecken oder zur weiteren Verarbeitung an externe Systeme übermittelt.
 
 Verweisdaten können sich innerhalb der für diese Daten zuständigen Systeme verändern. Daher müssen Transaktionsdaten den Point-in-Time-Verweisdatenkontext speichern, um externe Abhängigkeiten für die semantische Konsistenz auf ein Minimum zu reduzieren. Beispiel: Ein Produkt wird einige Monate nach Ausführung einer Bestellung aus dem Katalog entfernt. Es empfiehlt sich, einen möglichst umfangreichen Verweisdatenkontext mit der Transaktion zu speichern. Durch diese Vorgehensweise wird die mit der Transaktion verknüpfte Semantik beibehalten, auch wenn sich die Verweisdaten nach der Erfassung der Transaktion ändern.
@@ -94,7 +95,7 @@ Die folgende Sequenz beschreibt einen Workflow, der die Erfassung der Transaktio
 
 Das folgende Diagramm zeigt eine mögliche Implementierung dieses Entwurfs in einem in Azure gehosteten Clouddienst.
 
-![Hohe Verfügbarkeit durch lose Kopplung](./images/disaster-recovery-high-availability-azure-applications/application-high-availability-through-loose-coupling.png)
+![Hochverfügbarkeit durch lose Kopplung](./images/disaster-recovery-high-availability-azure-applications/application-high-availability-through-loose-coupling.png)
 
 Die gestrichelten Pfeile im vorherigen Diagramm weisen auf eine asynchrone Verarbeitung hin. Die Front-End-Webrolle hat keine Kenntnis über diese asynchrone Verarbeitung. Dadurch wird die Transaktion an ihrem endgültigen Ziel mit Verweis auf das aktuelle System gespeichert. Aufgrund der durch dieses asynchrone Modell eingeführten Latenz stehen die Transaktionsdaten nicht sofort für Abfragen zur Verfügung. Daher muss jede Transaktionsdateneinheit in einem Cache oder einer Benutzersitzung gespeichert werden, um die sofortigen Anforderungen der Benutzeroberfläche zu erfüllen.
 

@@ -1,15 +1,16 @@
 ---
-title: "Technischer Leitfaden – Wiederherstellung nach lokalen Ausfällen in Azure"
-description: "Artikel über die Grundlagen und den Entwurf von robusten, hoch verfügbaren, fehlertoleranten Anwendungen sowie die Planung der Notfallwiederherstellung nach lokalen Fehlern in Azure."
+title: Technischer Leitfaden – Wiederherstellung nach lokalen Ausfällen in Azure
+description: Artikel über die Grundlagen und den Entwurf von robusten, hoch verfügbaren, fehlertoleranten Anwendungen sowie die Planung der Notfallwiederherstellung nach lokalen Fehlern in Azure.
 author: adamglick
 ms.date: 08/18/2016
-ms.openlocfilehash: 180eb465e5f82406bb03924a29d5b06d43bbaa24
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 5fc929bd1affe3dd6616f908bae0e7d2fefb89d5
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 [!INCLUDE [header](../_includes/header.md)]
+
 # <a name="azure-resiliency-technical-guidance-recovery-from-local-failures-in-azure"></a>Technischer Leitfaden zur Resilienz in Azure – Wiederherstellung nach lokalen Ausfällen in Azure
 
 Es gibt zwei primäre Bedrohungen der Anwendungsverfügbarkeit:
@@ -17,7 +18,7 @@ Es gibt zwei primäre Bedrohungen der Anwendungsverfügbarkeit:
 * Ausfall von Geräten, z.B. Festplatten und Servern
 * Volle Auslastung kritischer Ressourcen, z.B. von Computeressourcen bei Spitzenlast
 
-Um unter solchen Umständen für hohe Verfügbarkeit zu sorgen, bietet Azure eine Kombination aus Ressourcenverwaltung, Elastizität, Lastenausgleich und Partitionierung. Einige dieser Funktionen werden automatisch für alle Azure-Dienste ausgeführt. In einigen Fällen muss der Anwendungsentwickler aber zusätzliche Schritte ausführen, um davon zu profitieren.
+Um unter solchen Umständen für Hochverfügbarkeit zu sorgen, bietet Azure eine Kombination aus Ressourcenverwaltung, Elastizität, Lastenausgleich und Partitionierung. Einige dieser Funktionen werden automatisch für alle Azure-Dienste ausgeführt. In einigen Fällen muss der Anwendungsentwickler aber zusätzliche Schritte ausführen, um davon zu profitieren.
 
 ## <a name="cloud-services"></a>Cloud Services
 Azure Cloud Services besteht aus Sammlungen mit mindestens einer Web- oder Workerrolle. Eine oder mehrere Instanzen einer Rolle können gleichzeitig ausgeführt werden. Die Konfiguration bestimmt die Anzahl von Instanzen. Rolleninstanzen werden mithilfe einer Komponente überwacht und verwaltet, die als Fabric Controller bezeichnet wird. Der Fabric Controller erkennt sowohl Software- als auch Hardwarefehler automatisch und reagiert darauf.
@@ -52,7 +53,7 @@ Gemäß der [Azure-Vereinbarung zum Servicelevel (SLA)](https://azure.microsoft.
 Jeglicher eingehender Datenverkehr einer Webrolle wird durch einen zustandslosen Lastenausgleich geleitet, der Clientanforderungen zwischen den Rolleninstanzen verteilt. Einzelne Rolleninstanzen besitzen keine öffentlichen IP-Adressen und sind nicht direkt aus dem Internet erreichbar. Webrollen sind zustandslos, sodass alle Clientanforderungen an jede Rolleninstanz weitergeleitet werden können. Alle 15 Sekunden wird ein [StatusCheck](https://msdn.microsoft.com/library/microsoft.windowsazure.serviceruntime.roleenvironment.statuscheck.aspx) -Ereignis ausgelöst. Sie können es verwenden, um anzugeben, ob die Rolle für den Empfang von Datenverkehr bereit ist oder ob sie beschäftigt ist und aus der Lastenausgleichsrotation herausgenommen werden sollte.
 
 ## <a name="virtual-machines"></a>Virtual Machines
-Virtuelle Azure-Computer unterscheiden sich von PaaS-Computerollen (Platform as a Service) im Zusammenhang mit einer hohen Verfügbarkeit in mehreren Punkten. In einigen Fällen müssen Sie zusätzliche Aufgaben ausführen, um eine hohe Verfügbarkeit sicherzustellen.
+Virtuelle Azure-Computer unterscheiden sich von PaaS-Computerollen (Platform as a Service) im Zusammenhang mit Hochverfügbarkeit in mehreren Punkten. In einigen Fällen müssen Sie zusätzliche Aufgaben ausführen, um Hochverfügbarkeit sicherzustellen.
 
 ### <a name="disk-durability"></a>Dauerhaftigkeit von Datenträgern
 Im Gegensatz zu PaaS-Rolleninstanzen sind auf virtuellen Computern gespeicherte Daten persistent, auch wenn der virtuelle Computer verschoben wird. Virtuelle Azure-Computer verwenden VM-Datenträger, die in Azure Storage als Blobs vorhanden sind. Aufgrund der Verfügbarkeitsmerkmale von Azure Storage sind die Daten, die auf Laufwerken virtueller Computer gespeichert werden, ebenfalls hoch verfügbar.
@@ -70,7 +71,7 @@ Im vorherigen Diagramm sind die IIS-Ebene (Internet Information Services), die a
 Wenn der Datenverkehr auf die virtuellen Computer verteilt werden soll, müssen Sie die virtuellen Computer in einer Anwendung gruppieren und den Lastenausgleich über einen bestimmten TCP- oder UDP-Endpunkt ausführen. Weitere Informationen finden Sie unter [Lastenausgleich zwischen virtuellen Computern](/azure/virtual-machines/virtual-machines-linux-load-balance/?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). Wenn die virtuellen Computer Eingaben aus einer anderen Quelle erhalten (beispielsweise einem Warteschlangenmechanismus), ist kein Lastenausgleich erforderlich. Der Lastenausgleich verwendet eine grundlegende Integritätsprüfung, um zu ermitteln, ob der Datenverkehr an den Knoten gesendet werden soll. Sie können auch selbst Tests erstellen, um anwendungsspezifische Integritätsmetriken zu implementieren, die bestimmen, ob der virtuelle Computer Datenverkehr empfangen soll.
 
 ## <a name="storage"></a>Speicher
-Azure Storage ist der grundlegende permanente Datendienst für Azure. Er stellt Blob-, Tabellen-, Warteschlangen- und VM-Datenträgerspeicher bereit. Storage verwendet eine Kombination aus Replikation und Ressourcenverwaltung, um innerhalb eines einzelnen Rechenzentrums hohe Verfügbarkeit bereitzustellen. Mit der Vereinbarung zum Servicelevel (SLA) zur Verfügbarkeit von Azure Storage wird gewährleistet, dass mindestens 99,9% der Zeit Folgendes sichergestellt ist:
+Azure Storage ist der grundlegende permanente Datendienst für Azure. Er stellt Blob-, Tabellen-, Warteschlangen- und VM-Datenträgerspeicher bereit. Storage verwendet eine Kombination aus Replikation und Ressourcenverwaltung, um innerhalb eines einzelnen Rechenzentrums Hochverfügbarkeit bereitzustellen. Mit der Vereinbarung zum Servicelevel (SLA) zur Verfügbarkeit von Azure Storage wird gewährleistet, dass mindestens 99,9% der Zeit Folgendes sichergestellt ist:
 
 * Richtig formatierte Anforderungen zum Hinzufügen, Aktualisieren, Lesen und Löschen von Daten werden erfolgreich und korrekt verarbeitet.
 * Speicherkonten verfügen über eine Verbindung mit dem Internetgateway.
@@ -101,7 +102,7 @@ Azure SQL-Datenbank stellt integrierte Resilienz gegenüber Fehlern auf Knoteneb
 #### <a name="resource-management"></a>Ressourcenverwaltung
 Jede Datenbank wird bei der Erstellung mit einer Größenbeschränkung konfiguriert. Die derzeit verfügbare maximale Größe beträgt 1 TB (Größenbeschränkungen variieren je nach Dienstebene, siehe [Tarife und Leistungsstufen von Azure SQL-Datenbanken](/azure/sql-database/sql-database-resource-limits/#service-tiers-and-performance-levels)). Wenn eine Datenbank den oberen Grenzwert erreicht, werden weitere INSERT- oder UPDATE-Befehle zurückgewiesen. (Das Abfragen und Löschen von Daten ist weiterhin möglich.)
 
-Innerhalb einer Datenbank verwendet Azure SQL-Datenbank ein Fabric zur Verwaltung von Ressourcen. Anstelle eines Fabric Controllers wird jedoch eine Ringtopologie eingesetzt, um Fehler zu erkennen. Jedes Replikat in einem Cluster besitzt zwei Nachbarn und ist dafür zuständig zu erkennen, wenn diese ausfallen. Wenn ein Replikat ausfällt, lösen seine Nachbarn einen Reconfiguration Agent aus, um das Replikat auf einem anderen Computer neu zu erstellen. Mithilfe einer Moduleinschränkung wird sichergestellt, dass ein logischer Server nicht zu viele Ressourcen auf einem Computer verwendet oder die physischen Grenzwerte des Computers überschreitet.
+Innerhalb einer Datenbank verwendet Azure SQL-Datenbank ein Fabric zur Verwaltung von Ressourcen. Anstelle eines Fabric Controllers wird jedoch eine Ringtopologie eingesetzt, um Fehler zu erkennen. Jedes Replikat in einem Cluster besitzt zwei Nachbarn und ist dafür zuständig zu erkennen, wenn diese ausfallen. Wenn ein Replikat ausfällt, lösen seine Nachbarn einen Reconfiguration Agent aus, um das Replikat auf einem anderen Computer neu zu erstellen. Mithilfe einer Engine-Drosselung wird sichergestellt, dass ein logischer Server nicht zu viele Ressourcen auf einem Computer verwendet oder die physischen Grenzwerte des Computers überschreitet.
 
 ### <a name="elasticity"></a>Elastizität
 Wenn für die Anwendung mehr Speicherplatz als das von der Datenbank vorgegebene Limit von 1 TB erforderlich ist, muss ein Verfahren zur horizontalen Hochskalierung implementiert werden. Sie führen die horizontale Hochskalierung mit Azure SQL-Datenbank durch, indem Sie Daten über mehrere SQL-Datenbanken hinweg manuell partitionieren (auch als Sharding bezeichnet). Ein solcher Ansatz ermöglicht es, mithilfe der Skalierung einen nahezu linearen Kostenanstieg zu erreichen. Durch elastisches Wachstum bzw. bedarfsgesteuerte Kapazität können Systeme mit inkrementellem Kostenanstieg wachsen, da Datenbanken basierend auf der pro Tag tatsächlich durchschnittlich genutzten Größe berechnet werden, nicht basierend auf der möglichen Maximalgröße.
@@ -119,13 +120,13 @@ Damit sich Azure Cloud Services-VMs, die über das klassische Portal bereitgeste
 ### <a name="azure-only-high-availability-solutions"></a>Nur in Azure: Lösungen mit hoher Verfügbarkeit
 Sie können eine Lösung mit hoher Verfügbarkeit für SQL Server-Datenbanken in Azure mit AlwaysOn-Verfügbarkeitsgruppen oder per Datenbankspiegelung umsetzen.
 
-Das folgende Diagramm veranschaulicht die Architektur von AlwaysOn-Verfügbarkeitsgruppen, die auf Azure Virtual Machines ausgeführt werden. Das Diagramm stammt aus dem detaillierten Artikel zu diesem Thema: [Hohe Verfügbarkeit und Notfallwiederherstellung für SQL Server auf virtuellen Azure-Computern](/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-high-availability-dr/).
+Das folgende Diagramm veranschaulicht die Architektur von AlwaysOn-Verfügbarkeitsgruppen, die auf Azure Virtual Machines ausgeführt werden. Das Diagramm stammt aus dem detaillierten Artikel zu diesem Thema: [Hochverfügbarkeit und Notfallwiederherstellung für SQL Server auf virtuellen Azure-Computern](/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-high-availability-dr/).
 
 ![AlwaysOn-Verfügbarkeitsgruppen in Microsoft Azure](./images/technical-guidance-recovery-local-failures/high_availability_solutions-1.png)
 
 Sie können eine AlwaysOn-Verfügbarkeitsgruppe auch als automatische End-to-End-Bereitstellung auf virtuellen Azure-Computern implementieren, indem Sie die AlwaysOn-Vorlage im Azure-Portal verwenden. Weitere Informationen finden Sie unter [SQL Server AlwaysOn Offering in Microsoft Azure Portal Gallery](https://blogs.technet.microsoft.com/dataplatforminsider/2014/08/25/sql-server-alwayson-offering-in-microsoft-azure-portal-gallery/)(in englischer Sprache).
 
-Das folgende Diagramm veranschaulicht die Verwendung der Datenbankspiegelung auf Azure Virtual Machines. Auch dieses Diagramm stammt aus dem detaillierten Artikel [Hohe Verfügbarkeit und Notfallwiederherstellung für SQL Server auf virtuellen Azure-Computern](/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-high-availability-dr/).
+Das folgende Diagramm veranschaulicht die Verwendung der Datenbankspiegelung auf Azure Virtual Machines. Auch dieses Diagramm stammt aus dem detaillierten Artikel [Hochverfügbarkeit und Notfallwiederherstellung für SQL Server auf virtuellen Azure-Computern](/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-high-availability-dr/).
 
 ![Datenbankspiegelung in Microsoft Azure](./images/technical-guidance-recovery-local-failures/high_availability_solutions-2.png)
 
@@ -137,7 +138,7 @@ Das folgende Diagramm veranschaulicht die Verwendung der Datenbankspiegelung auf
 ## <a name="other-azure-platform-services"></a>Weitere Azure Platform-Dienste
 Anwendungen, die unter Azure erstellt werden, profitieren von Plattformfunktionen für die Wiederherstellung nach lokalen Ausfällen. In einigen Fällen können Sie bestimmte Aktionen durchführen, um die Verfügbarkeit für Ihr jeweiliges Szenario zu erhöhen.
 
-### <a name="service-bus"></a>Service Bus
+### <a name="service-bus"></a>SERVICE BUS
 Um die Risiken durch einen vorübergehenden Ausfall von Azure Service Bus zu minimieren, können Sie eine dauerhafte clientseitige Warteschlange erstellen. Diese Warteschlange verwendet vorübergehend einen alternativen, lokalen Speichermechanismus, um Nachrichten zu speichern, die der Service Bus-Warteschlange nicht hinzugefügt werden können. Die Anwendung kann entscheiden, wie die temporär gespeicherten Nachrichten verarbeitet werden sollen, nachdem der Dienst wiederhergestellt wurde. Weitere Informationen finden Sie unter [Bewährte Methoden für Leistungsoptimierungen mithilfe von Service Bus-Brokermessaging](/azure/service-bus-messaging/service-bus-performance-improvements/) sowie unter [Service Bus (Notfallwiederherstellung)](recovery-loss-azure-region.md#other-azure-platform-services).
 
 ### <a name="hdinsight"></a>HDInsight
@@ -174,7 +175,7 @@ Die mit Azure HDInsight verknüpften Daten werden standardmäßig in Azure Blob 
 2. Befolgen Sie die vorherigen Empfehlungen für Virtual Machines.
 3. Verwenden Sie die Hochverfügbarkeitsfunktionen von SQL Server, z.B. AlwaysOn.
 
-### <a name="service-bus"></a>Service Bus
+### <a name="service-bus"></a>SERVICE BUS
 1. Lesen Sie den Abschnitt zu Service Bus in diesem Dokument.
 2. Erstellen Sie ggf. eine dauerhafte clientseitige Warteschlange.
 

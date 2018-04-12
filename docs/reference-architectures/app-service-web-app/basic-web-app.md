@@ -1,14 +1,14 @@
 ---
 title: Einfache Webanwendung
-description: "Empfohlene Architektur für eine einfache Webanwendung, die in Microsoft Azure ausgeführt wird."
+description: Empfohlene Architektur für eine einfache Webanwendung, die in Microsoft Azure ausgeführt wird.
 author: MikeWasson
 ms.date: 12/12/2017
 cardTitle: Basic web application
-ms.openlocfilehash: 38b0739cc61d679742b610b99e92aaad8d3b394d
-ms.sourcegitcommit: 2123c25b1a0b5501ff1887f98030787191cf6994
+ms.openlocfilehash: efd831b1f54fa0662bdfa9874318e7b314172215
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/08/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="basic-web-application"></a>Einfache Webanwendung
 [!INCLUDE [header](../../_includes/header.md)]
@@ -157,7 +157,7 @@ Tipps zur Problembehandlung bei der Anwendung:
 
 * Verwenden Sie das [Blatt „Problembehandlung“][troubleshoot-blade] im Azure-Portal, um Lösungen für häufige Probleme zu finden.
 * Aktivieren Sie [Protokollstreaming][web-app-log-stream], um Protokollierungsinformationen nahezu in Echtzeit anzuzeigen.
-* Das [Kudu-Dashboard][kudu] weist eine Reihe von Tools zum Überwachen und Debuggen Ihrer Anwendung auf. Weitere Informationen finden Sie unter [Online-Tools für Azure-Websites, die Sie kennen sollten][kudu] (Blogbeitrag). Sie können das Kudu-Dashboard vom Azure-Portal aus erreichen. Öffnen Sie das Blatt für Ihre App, klicken Sie auf **Extras**, und klicken Sie dann auf **Kudu**.
+* Das [Kudu-Dashboard][kudu] weist eine Reihe von Tools zum Überwachen und Debuggen Ihrer Anwendung auf. Weitere Informationen finden Sie unter [Online-Tools für Azure-Websites, die Sie kennen sollten][kudu] (Blogbeitrag). Sie können das Kudu-Dashboard vom Azure-Portal aus erreichen. Öffnen Sie das Blatt für Ihre App, klicken Sie auf <strong>Extras</strong>, und klicken Sie dann auf <strong>Kudu</strong>.
 * Wenn Sie Visual Studio verwenden, finden Sie Tipps zu Debuggen und Problembehandlung im Artikel [Problembehandlung von Web-Apps in Azure App Service in Visual Studio][troubleshoot-web-app].
 
 ## <a name="security-considerations"></a>Sicherheitshinweise
@@ -252,7 +252,7 @@ Weitere Informationen finden Sie unter [Bereitstellen von Ressourcen mit Azure R
 [ssl-cert]: /azure/app-service-web/web-sites-purchase-ssl-web-site
 [troubleshoot-blade]: https://azure.microsoft.com/updates/self-service-troubleshooting-for-app-service-web-apps-customers/
 [troubleshoot-web-app]: /azure/app-service-web/web-sites-dotnet-troubleshoot-visual-studio
-[visio-download]: https://archcenter.azureedge.net/cdn/app-service-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/app-service-reference-architectures.vsdx
 [vsts]: https://www.visualstudio.com/features/vso-cloud-load-testing-vs.aspx
 [web-app-autoscale]: /azure/app-service-web/web-sites-scale
 [web-app-backup]: /azure/app-service-web/web-sites-backup

@@ -1,20 +1,20 @@
 ---
-title: "Implementieren einer hoch verfügbaren Hybrid-Netzwerkarchitektur"
-description: "Erläutert, wie Sie eine sichere Site-to-Site-Netzwerkarchitektur implementieren, die ein virtuelles Azure-Netzwerk und ein lokales Netzwerk umfasst, die unter Verwendung von ExpressRoute mit VPB-Gatewayfailover verbunden werden."
+title: Implementieren einer hoch verfügbaren Hybrid-Netzwerkarchitektur
+description: Erläutert, wie Sie eine sichere Site-to-Site-Netzwerkarchitektur implementieren, die ein virtuelles Azure-Netzwerk und ein lokales Netzwerk umfasst, die unter Verwendung von ExpressRoute mit VPB-Gatewayfailover verbunden werden.
 author: telmosampaio
 ms.date: 11/28/2016
 pnp.series.title: Connect an on-premises network to Azure
 pnp.series.prev: expressroute
 cardTitle: Improving availability
-ms.openlocfilehash: 4c101f17e5e91085b61178f9efb2bc5acb61189c
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 81298215c814cee805eff57fdc28f7c127148b5f
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="connect-an-on-premises-network-to-azure-using-expressroute-with-vpn-failover"></a>Verbinden eines lokalen Netzwerks mit Azure unter Verwendung von ExpressRoute mit VPN-Failover
 
-Diese Referenzarchitektur zeigt, wie ein lokales Netzwerk unter Verwendung von ExpressRoute mit einem virtuellen Azure-Netzwerk (VNet) verbunden wird, wobei ein Site-to-Site-VPN (Virtual Private Network) als Failoververbindung dient. Der Datenverkehr zwischen dem lokalen Netzwerk und dem Azure-VNet wird über eine ExpressRoute-Verbindung übertragen. Wenn die ExpressRoute-Verbindung ausfällt, wird der Datenverkehr über einen IPSec-VPN-Tunnel weitergeleitet. [**Stellen Sie diese Lösung bereit**.](#deploy-the-solution)
+Diese Referenzarchitektur zeigt, wie ein lokales Netzwerk unter Verwendung von ExpressRoute mit einem virtuellen Azure-Netzwerk (VNet) verbunden wird, wobei ein Site-to-Site-VPN (Virtual Private Network) als Failoververbindung dient. Der Datenverkehr zwischen dem lokalen Netzwerk und dem Azure-VNet wird über eine ExpressRoute-Verbindung übertragen. Wenn die ExpressRoute-Verbindung ausfällt, wird der Datenverkehr über einen IPSec-VPN-Tunnel weitergeleitet. [**So stellen Sie diese Lösung bereit**.](#deploy-the-solution)
 
 Beachten Sie, dass die VPN-Route nur Private Peering-Verbindungen behandelt, wenn die ExpressRoute-Verbindung nicht verfügbar ist. Public Peering- und Microsoft-Peering-Verbindungen werden über das Internet geleitet. 
 
@@ -22,13 +22,13 @@ Beachten Sie, dass die VPN-Route nur Private Peering-Verbindungen behandelt, wen
 
 *Laden Sie eine [Visio-Datei][visio-download] mit dieser Architektur herunter.*
 
-## <a name="architecture"></a>Architektur 
+## <a name="architecture"></a>Architecture 
 
-Diese Architektur besteht aus den folgenden Komponenten.
+Die Architektur umfasst die folgenden Komponenten.
 
-* **Lokales Netzwerk**. Ein privates lokales Netzwerk innerhalb einer Organisation.
+* **Lokales Netzwerk**. Ein in einer Organisation betriebenes privates lokales Netzwerk.
 
-* **VPN-Gerät**. Ein Gerät oder ein Dienst, der externe Konnektivität mit dem lokalen Netzwerk bereitstellt. Bei dem VPN-Gerät kann es sich um ein Hardwaregerät oder eine Softwarelösung, z.B. den Routing- und RAS-Dienst unter Windows Server 2012, handeln. Eine Liste der unterstützten VPN-Geräte und Informationen zur Konfiguration ausgewählter VPN-Geräte für die Verbindung mit Azure finden Sie unter [Informationen zu VPN-Geräten für VPN-Gatewayverbindungen zwischen Standorten][vpn-appliance].
+* **VPN-Gerät**. Ein Gerät oder ein Dienst, das bzw. der externe Konnektivität mit dem lokalen Netzwerk bereitstellt. Bei dem VPN-Gerät kann es sich um ein Hardwaregerät oder eine Softwarelösung, z.B. den Routing- und RAS-Dienst unter Windows Server 2012, handeln. Eine Liste der unterstützten VPN-Geräte und Informationen zur Konfiguration ausgewählter VPN-Geräte für die Verbindung mit Azure finden Sie unter [Informationen zu VPN-Geräten für VPN-Gatewayverbindungen zwischen Standorten][vpn-appliance].
 
 * **ExpressRoute-Verbindung**. Eine vom Konnektivitätsanbieter bereitgestellte Layer 2- oder Layer 3-Verbindung, die das lokale Netzwerk über die Edgerouter mit Azure verbindet. Für die Verbindung wird die vom Konnektivitätsanbieter verwaltete Hardwareinfrastruktur verwendet.
 
@@ -44,7 +44,7 @@ Diese Architektur besteht aus den folgenden Komponenten.
 
 * **Cloudanwendung**. Die in Azure gehostete Anwendung. Sie kann mehrere Schichten umfassen, wobei mehrere Subnetze über Azure Load Balancer verbunden sind. Weitere Informationen zur Anwendungsinfrastruktur finden Sie unter [Ausführen von Windows-VM-Workloads][windows-vm-ra] und [Ausführen von Linux-VM-Workloads][linux-vm-ra].
 
-## <a name="recommendations"></a>Recommendations
+## <a name="recommendations"></a>Empfehlungen
 
 Die folgenden Empfehlungen gelten für die meisten Szenarios. Sofern Sie keine besonderen Anforderungen haben, die Vorrang haben, sollten Sie diese Empfehlungen befolgen.
 
@@ -98,11 +98,11 @@ Informationen zu allgemeinen Sicherheitsaspekten für Azure finden Sie unter [Mi
 
 ## <a name="deploy-the-solution"></a>Bereitstellen der Lösung
 
-**Voraussetzungen** Sie müssen über eine lokale Infrastruktur verfügen, die bereits mit einem geeigneten Netzwerkgerät konfiguriert ist.
+**Voraussetzungen** Sie müssen über eine lokale Infrastruktur verfügen, die bereits mit einer geeigneten Netzwerkappliance konfiguriert ist.
 
 Führen Sie die folgenden Schritte aus, um die Lösung bereitzustellen.
 
-1. Klicken Sie auf die Schaltfläche unten:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fhybrid-networking%2Fexpressroute-vpn-failover%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
+1. Klicken Sie auf diese Schaltfläche:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fhybrid-networking%2Fexpressroute-vpn-failover%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
 2. Warten Sie, bis der Link im Azure-Portal geöffnet wird, und gehen Sie dann folgendermaßen vor:   
    * Der Name der **Ressourcengruppe** ist bereits in der Parameterdatei definiert. Wählen Sie also **Neu erstellen**, und geben Sie im Textfeld `ra-hybrid-vpn-er-rg` ein.
    * Wählen Sie im Dropdownfeld **Standort** die Region aus.
@@ -110,9 +110,9 @@ Führen Sie die folgenden Schritte aus, um die Lösung bereitzustellen.
    * Überprüfen Sie die allgemeinen Geschäftsbedingungen, und aktivieren Sie dann das Kontrollkästchen **Ich stimme den oben genannten Geschäftsbedingungen zu**.
    * Klicken Sie auf die Schaltfläche **Kaufen**.
 3. Warten Sie, bis die Bereitstellung abgeschlossen ist.
-4. Klicken Sie auf die Schaltfläche unten:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fhybrid-networking%2Fexpressroute-vpn-failover%2Fazuredeploy-expressRouteCircuit.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
+4. Klicken Sie auf diese Schaltfläche:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fhybrid-networking%2Fexpressroute-vpn-failover%2Fazuredeploy-expressRouteCircuit.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
 5. Warten Sie, bis der Link im Azure-Portal geöffnet wird, und gehen Sie dann folgendermaßen vor:
-   * Wählen Sie **Vorhandene verwenden** im Abschnitt **Ressourcengruppe** aus, und geben Sie im Textfeld `ra-hybrid-vpn-er-rg` ein.
+   * Wählen Sie im Abschnitt **Ressourcengruppe** die Option **Vorhandene verwenden** aus, und geben Sie im Textfeld `ra-hybrid-vpn-er-rg` ein.
    * Wählen Sie im Dropdownfeld **Standort** die Region aus.
    * Lassen Sie die Textfelder für den **Vorlagenstamm-URI** bzw. **Parameterstamm-URI** unverändert.
    * Überprüfen Sie die allgemeinen Geschäftsbedingungen, und aktivieren Sie dann das Kontrollkästchen **Ich stimme den oben genannten Geschäftsbedingungen zu**.
@@ -134,5 +134,5 @@ Führen Sie die folgenden Schritte aus, um die Lösung bereitzustellen.
 [guidance-expressroute]: ./expressroute.md
 [guidance-vpn]: ./vpn.md
 [best-practices-security]: /azure/best-practices-network-security
-[visio-download]: https://archcenter.azureedge.net/cdn/hybrid-network-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/hybrid-network-architectures.vsdx
 [0]: ./images/expressroute-vpn-failover.png "Hoch verfügbare Hybrid-Netzwerkarchitektur mit ExpressRoute- und VPN-Gateway"

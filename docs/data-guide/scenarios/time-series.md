@@ -1,13 +1,13 @@
 ---
 title: Zeitreihendaten
-description: 
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: ceb8f34d4fd950e5270edfea05945a824c4492f0
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 80ff6c45988062afcb0eb92cc79e640d39dbb21f
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="time-series-solutions"></a>Zeitreihenlösungen
 
@@ -42,7 +42,7 @@ Die Verwendung von Zeitreihen bietet folgende Vorteile:
 
 Von IoT-Geräten gesammelte Daten eignen sich bestens für die Speicherung und Analyse von Zeitreihendaten. Die eingehenden Daten werden eingefügt und selten aktualisiert (wenn überhaupt). Die Daten werden mit einem Zeitstempel versehen und in der Reihenfolge eingefügt, in der sie empfangen wurden. Darüber hinaus werden diese Daten üblicherweise in chronologischer Reihenfolge angezeigt, sodass Benutzer Trends erkennen, Anomalien entdecken und die Informationen für Vorhersageanalysen verwenden können.
 
-Weitere Informationen finden Sie im Artikel zum [Internet der Dinge](../concepts/big-data.md#internet-of-things-iot).
+Weitere Informationen finden Sie im Artikel zum [Internet der Dinge](../big-data/index.md#internet-of-things-iot).
 
 ### <a name="real-time-analytics"></a>Echtzeitanalysen
 
@@ -55,9 +55,9 @@ Im Idealfall verfügen Sie über eine Streamverarbeitungsebene, die die eingehen
 * Zeitreihendaten sind häufig äußerst umfangreich. Das gilt besonders in IoT-Szenarien. Die Speicherung, Indizierung, Abfrage, Analyse und Visualisierung von Zeitreihendaten kann sich als Herausforderung erweisen. 
 * Es ist nicht immer einfach, die richtige Kombination aus Hochgeschwindigkeitsspeicher und leistungsstarken Computevorgängen für die Arbeit mit Echtzeitanalysen zu finden und gleichzeitig die Markteinführungszeit und die Gesamtkosten für Investitionen zu minimieren.
 
-## <a name="architecture"></a>Architektur
+## <a name="architecture"></a>Architecture
 
-In vielen Szenarien mit Zeitreihendaten (beispielsweise IoT) werden die Daten in Echtzeit erfasst. Daher ist eine Architektur mit [Echtzeitverarbeitung](./real-time-processing.md) angebracht. 
+In vielen Szenarien mit Zeitreihendaten (beispielsweise IoT) werden die Daten in Echtzeit erfasst. Daher ist eine Architektur mit [Echtzeitverarbeitung](../big-data/real-time-processing.md) angebracht. 
 
 Daten aus einzelnen oder mehreren Datenquellen werden durch [IoT Hub](/azure/iot-hub/), [Event Hubs](/azure/event-hubs/) oder [Kafka in HDInsight](/azure/hdinsight/kafka/apache-kafka-introduction) auf der Streampufferungsebene erfasst. Als Nächstes werden die Daten auf der Streamverarbeitungsebene verarbeitet und optional für Vorhersageanalysen an einen Machine Learning-Dienst weitergegeben. Die verarbeiteten Daten werden in einem Analysedatenspeicher wie [HBase](/azure/hdinsight/hbase/apache-hbase-overview), [Azure Cosmos DB](/azure/cosmos-db/), Azure Data Lake oder Blob Storage gespeichert. Zur Analyse können die Zeitreihendaten mit einer Analyse- und Berichtsanwendung oder einem entsprechenden Dienst angezeigt werden. Beispiele wären etwa Power BI und OpenTSDB (sofern in HBase gespeichert).
 

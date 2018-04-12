@@ -1,22 +1,23 @@
 ---
 title: 'Technischer Leitfaden: Wiederherstellung eines lokalen Rechenzentrums in Azure'
-description: "Artikel über die Grundlagen und den Entwurf von Systemen zur Wiederherstellung der lokalen Infrastruktur in Azure"
+description: Artikel über die Grundlagen und den Entwurf von Systemen zur Wiederherstellung der lokalen Infrastruktur in Azure
 author: adamglick
 ms.date: 08/18/2016
-ms.openlocfilehash: f5ce86dbd605fa7dc74e6a7cc97f0d6c6acd79e5
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 6992e27d148074b3d60c282318741f45974d1afd
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 [!INCLUDE [header](../_includes/header.md)]
+
 # <a name="azure-resiliency-technical-guidance-recovery-from-on-premises-to-azure"></a>Technischer Leitfaden zur Resilienz in Azure: Wiederherstellung eines lokalen Rechenzentrums in Azure
-Azure bietet eine Reihe von Diensten, mit denen sich ein lokales Datencenter auf Azure ausweiten lässt, um hohe Verfügbarkeit und Notfallwiederherstellung zu ermöglichen:
+Azure bietet eine Reihe von Diensten, mit denen sich ein lokales Datencenter auf Azure ausweiten lässt, um Hochverfügbarkeit und Notfallwiederherstellung zu ermöglichen:
 
 * **Netzwerk**: Mit einem virtuellen privaten Netzwerk können Sie Ihr lokales Netzwerk sicher in die Cloud erweitern.
-* **Compute**: Kunden, die Hyper-V lokal verwenden, können vorhandene virtuelle Computer ganz einfach per „Lift&amp;amp;Shift“ nach Azure verlagern.
+* **Compute**: Kunden, die Hyper-V lokal verwenden, können vorhandene virtuelle Computer ganz einfach per „Lift&amp;Shift“ nach Azure verlagern.
 * **Speicher**: StorSimple erweitert Ihr Dateisystem in Azure Storage. Der Azure Backup-Dienst ermöglicht die Sicherung von Dateien und SQL-Datenbanken in Azure Storage.
-* **Datenbankreplikation**: Mit Verfügbarkeitsgruppen in SQL Server 2014 (oder höher) können Sie eine hohe Verfügbarkeit und Notfallwiederherstellung für Ihre lokalen Daten implementieren.
+* **Datenbankreplikation**: Mit Verfügbarkeitsgruppen in SQL Server 2014 (oder höher) können Sie Hochverfügbarkeit und Notfallwiederherstellung für Ihre lokalen Daten implementieren.
 
 ## <a name="networking"></a>Netzwerk
 Azure Virtual Network ermöglicht die Erstellung eines logisch isolierten Bereichs in Azure, den Sie über eine IPsec-Verbindung sicher mit Ihrem lokalen Datencenter oder mit einem einzelnen Clientcomputer verbinden können. Mit Virtual Network profitieren Sie von den Vorteilen der skalierbaren bedarfsgesteuerten Infrastruktur in Azure und können gleichzeitig eine Verbindung mit lokalen Daten und Anwendungen bereitstellen – einschließlich Systemen, die unter Windows Server, Mainframes und UNIX ausgeführt werden. Weitere Informationen finden Sie in der [Azure-Netzwerkdokumentation](/azure/virtual-network/virtual-networks-overview/) .
@@ -41,7 +42,7 @@ Bei inkrementellen Sicherungen werden nur Änderungen an Dateien in die Cloud ü
 Weitere Informationen finden Sie unter [Was ist Azure Backup ?](/azure/backup/backup-introduction-to-azure-backup/) sowie unter [Konfigurieren von Azure Backup für DPM-Daten](https://technet.microsoft.com/library/jj728752.aspx).
 
 ## <a name="database"></a>Datenbank
-Sie können eine Notfallwiederherstellungslösung für Ihre SQL Server-Datenbanken in einer IT-Hybridumgebung mit AlwaysOn-Verfügbarkeitsgruppen, Datenbankspiegelung, Protokollversand und Sicherung/Wiederherstellung mit Azure-Blobspeicher nutzen. All diese Lösungen verwenden SQL Server auf Azure Virtual Machines.
+Sie können eine Notfallwiederherstellungslösung für Ihre SQL Server-Datenbanken in einer IT-Hybridumgebung mit AlwaysOn-Verfügbarkeitsgruppen, Datenbankspiegelung, Protokollversand und Sicherung/Wiederherstellung mit Azure Blob Storage nutzen. All diese Lösungen verwenden SQL Server auf Azure Virtual Machines.
 
 AlwaysOn-Verfügbarkeitsgruppen können in hybriden IT-Umgebungen verwenden werden, in denen Datenbankreplikate sowohl lokal als auch in der Cloud existieren. Dies wird im folgenden Diagramm veranschaulicht:
 
@@ -55,11 +56,11 @@ Der Protokollversand kann verwendet werden, um eine lokale Datenbank mit einer S
 
 ![SQL Server – Protokollversand in einer hybriden Cloudarchitektur](./images/technical-guidance-recovery-on-premises-azure/SQL_Server_Disaster_Recovery-5.png)
 
-Und schließlich können Sie eine lokale Datenbank direkt in einem Azure-Blobspeicher sichern.
+Und schließlich können Sie eine lokale Datenbank direkt in Azure Blob Storage sichern.
 
-![Sichern von SQL Server in einem Azure-Blobspeicher in einer hybriden Cloudarchitektur](./images/technical-guidance-recovery-on-premises-azure/SQL_Server_Disaster_Recovery-6.png)
+![Sichern von SQL Server in Azure Blob Storage in einer hybriden Cloudarchitektur](./images/technical-guidance-recovery-on-premises-azure/SQL_Server_Disaster_Recovery-6.png)
 
-Weitere Informationen finden Sie unter [Hohe Verfügbarkeit und Notfallwiederherstellung für SQL Server auf virtuellen Azure-Computern](/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-high-availability-dr/) und[ Sicherung und Wiederherstellung für SQL Server auf virtuellen Azure-Computern](/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-backup-recovery/).
+Weitere Informationen finden Sie unter [Hochverfügbarkeit und Notfallwiederherstellung für SQL Server auf virtuellen Azure-Computern](/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-high-availability-dr/) und[ Sicherung und Wiederherstellung für SQL Server auf virtuellen Azure-Computern](/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-backup-recovery/).
 
 ## <a name="checklists-for-on-premises-recovery-in-microsoft-azure"></a>Prüflisten für die lokale Wiederherstellung in Microsoft Azure
 ### <a name="networking"></a>Netzwerk
@@ -81,6 +82,6 @@ Weitere Informationen finden Sie unter [Hohe Verfügbarkeit und Notfallwiederher
 3. Richten Sie AlwaysOn-Verfügbarkeitsgruppen ein.
 4. Konfigurieren Sie die zertifikatbasierte Datenbankspiegelung.
 5. Nutzen Sie den Protokollversand.
-6. Sichern Sie die lokale Datenbank in einem Azure-Blobspeicher.
+6. Sichern Sie die lokale Datenbank in Azure Blob Storage.
 
 

@@ -1,13 +1,13 @@
 ---
-title: "Verarbeitung natürlicher Sprache"
-description: 
+title: Verarbeitung natürlicher Sprache
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: c03e2d017f9b4eb955a0e3494b5bc6c2603d1058
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 0afd8ac9a8a2e56f79ade0b2e10328630866c03c
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="natural-language-processing"></a>Verarbeitung natürlicher Sprache
 
@@ -34,7 +34,7 @@ Bei der Verwendung der NLP zum Extrahieren von Informationen und Einblicken aus 
 
 ## <a name="architecture"></a>Architecture
 
-In einer NLP-Lösung wird die Freitextverarbeitung für Dokumente ausgeführt, die Textabschnitte enthalten. Die allgemeine Architektur kann auf [Batchverarbeitung](./batch-processing.md) oder [Echtzeit-Datenstromverarbeitung](./real-time-processing.md) beruhen.
+In einer NLP-Lösung wird die Freitextverarbeitung für Dokumente ausgeführt, die Textabschnitte enthalten. Die allgemeine Architektur kann auf [Batchverarbeitung](../big-data/batch-processing.md) oder [Echtzeit-Datenstromverarbeitung](../big-data/real-time-processing.md) beruhen.
 
 Die tatsächliche Verarbeitung variiert je nach gewünschtem Ergebnis. Im Hinblick auf die Pipeline kann die NLP jedoch in einem Batch oder in Echtzeit angewendet werden kann. Beispielsweise kann die Standpunktanalyse für Textblöcke verwendet werden, um eine Stimmungspunktzahl zu erhalten. Die Verarbeitung kann in diesem Fall durch Ausführen eines Batchprozesses für Daten im Speicher oder in Echtzeit anhand von kleineren, durch einen Messagingdienst übermittelten Datenblöcken erfolgen.
 

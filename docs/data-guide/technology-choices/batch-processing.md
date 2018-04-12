@@ -1,13 +1,13 @@
 ---
-title: "Auswählen einer Batchverarbeitungstechnologie"
-description: 
+title: Auswählen einer Batchverarbeitungstechnologie
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: bfb850ee8e9d8fd41927b4ca3b612e15b5ae6b11
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 0117798af82f2caa6704dc86e88be57f09c381ea
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="choosing-a-batch-processing-technology-in-azure"></a>Auswählen einer Batchverarbeitungstechnologie in Azure
 
@@ -39,22 +39,23 @@ Beantworten Sie die folgenden Fragen, um die Auswahl einzuschränken:
 
 ## <a name="capability-matrix"></a>Funktionsmatrix
 
-In der folgenden Tabellen sind die Hauptunterschiede der Funktionen zusammengefasst: 
+In den folgenden Tabellen sind die Hauptunterschiede in Bezug auf die Funktionen zusammengefasst. 
 
 ### <a name="general-capabilities"></a>Allgemeine Funktionen
 
 | | Azure Data Lake Analytics | Azure SQL Data Warehouse | HDInsight mit Spark | HDInsight mit Hive | HDInsight mit Hive LLAP |
 | --- | --- | --- | --- | --- | --- |
-| Verwalteter Dienst | Ja | Ja | Ja <sup>1</sup> | Ja <sup>1</sup> | Ja <sup>1</sup> |
-| Unterstützt das Anhalten von Computevorgängen | Nein  | Ja | Nein  | Nein  | Nein  |
+| Verwalteter Dienst | Ja | Ja | Ja<sup>1</sup> | Ja<sup>1</sup> | Ja <sup>1</sup> |
+| Unterstützung des Anhaltens von Computevorgängen | Nein  | Ja | Nein  | Nein  | Nein  |
 | Relationaler Datenspeicher | Ja | Ja | Nein  | Nein  | Nein  |
 | Programmierbarkeit | U-SQL | T-SQL | Python, Scala, Java, R | HiveQL | HiveQL |
 | Programmierparadigma | Mischung aus deklarativ und imperativ  | Deklarativ | Mischung aus deklarativ und imperativ | Deklarativ | Deklarativ | 
 | Preismodell | Pro Batchauftrag | Nach Clusterstunde | Nach Clusterstunde | Nach Clusterstunde | Nach Clusterstunde |  
 
 [1] Mit manueller Konfiguration und Skalierung
- 
+
 ### <a name="integration-capabilities"></a>Integrationsfunktionen
+
 | | Azure Data Lake Analytics | SQL Data Warehouse | HDInsight mit Spark | HDInsight mit Hive | HDInsight mit Hive LLAP |
 | --- | --- | --- | --- | --- | --- |
 | Zugriff über Azure Data Lake Store | Ja | Ja | Ja | Ja | Ja |
@@ -62,6 +63,7 @@ In der folgenden Tabellen sind die Hauptunterschiede der Funktionen zusammengefa
 | Abfragen über externe relationale Speicher | Ja | Nein | Ja | Nein  | Nein  |
 
 ### <a name="scalability-capabilities"></a>Skalierbarkeitsfunktionen
+
 | | Azure Data Lake Analytics | SQL Data Warehouse | HDInsight mit Spark | HDInsight mit Hive | HDInsight mit Hive LLAP |
 | --- | --- | --- | --- | --- | --- |
 | Granularität bei der horizontalen Skalierung  | Pro Auftrag | Pro Cluster | Pro Cluster | Pro Cluster | Pro Cluster |
@@ -69,18 +71,19 @@ In der folgenden Tabellen sind die Hauptunterschiede der Funktionen zusammengefa
 | Speicherinternes Zwischenspeichern | Nein  | Ja | Ja | Nein | Ja | 
 
 ### <a name="security-capabilities"></a>Sicherheitsfunktionen
+
 | | Azure Data Lake Analytics | SQL Data Warehouse | HDInsight mit Spark | Apache Hive in HDInsight | Hive LLAP in HDInsight |
 | --- | --- | --- | --- | --- | --- |
-| Authentifizierung  | Azure Active Directory (Azure AD) | SQL/Azure AD | Nein  | lokal/Azure AD <sup>1</sup> | lokal/Azure AD <sup>1</sup> |
-| Autorisierung  | Ja | Ja| Nein  | Ja <sup>1</sup> | Ja <sup>1</sup> |
-| Überwachung  | Ja | Ja | Nein  | Ja <sup>1</sup> | Ja <sup>1</sup> |
-| Datenverschlüsselung ruhender Daten | Ja| Ja <sup>2</sup> | Ja | Ja | Ja |
-| Sicherheit auf Zeilenebene | Nein  | Ja | Nein  | Ja <sup>1</sup> | Ja <sup>1</sup> |
-| Unterstützung von Firewalls | Ja | Ja | Ja | Ja <sup>3</sup> | Ja <sup>3</sup> |
-| Dynamische Datenmaskierung | Nein  | Nein  | Nein  | Ja <sup>1</sup> | Ja <sup>1</sup> |
+| Authentifizierung  | Azure Active Directory (Azure AD) | SQL/Azure AD | Nein  | Lokal/Azure AD <sup>1</sup> | Lokal/Azure AD <sup>1</sup> |
+| Autorisierung  | Ja | Ja| Nein  | Ja<sup>1</sup> | Ja<sup>1</sup> |
+| Überwachung  | Ja | Ja | Nein  | Ja<sup>1</sup> | Ja<sup>1</sup> |
+| Datenverschlüsselung ruhender Daten | Ja| Ja<sup>2</sup> | Ja | Ja | Ja |
+| Sicherheit auf Zeilenebene | Nein  | Ja | Nein  | Ja<sup>1</sup> | Ja<sup>1</sup> |
+| Unterstützung von Firewalls | Ja | Ja | Ja | Ja<sup>3</sup> | Ja<sup>3</sup> |
+| Dynamische Datenmaskierung | Nein  | Nein  | Nein  | Ja<sup>1</sup> | Ja<sup>1</sup> |
 
-[1] Verwendung eines [in die Domäne eingebundenen HDInsight-Clusters](/azure/hdinsight/domain-joined/apache-domain-joined-introduction) erforderlich
+[1] Erfordert die Verwendung eines [in die Domäne eingebundenen HDInsight-Clusters](/azure/hdinsight/domain-joined/apache-domain-joined-introduction).
 
-[2] Verwendung von Transparent Data Encryption (TDE) zum Verschlüsseln und Entschlüsseln von ruhenden Daten erforderlich
+[2] Erfordert die Verwendung von Transparent Data Encryption (TDE) zum Verschlüsseln und Entschlüsseln ruhender Daten.
 
 [3] Unterstützt bei [Verwendung in einem virtuellen Azure-Netzwerk](/azure/hdinsight/hdinsight-extend-hadoop-virtual-network)

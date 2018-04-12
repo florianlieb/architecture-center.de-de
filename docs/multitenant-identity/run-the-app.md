@@ -1,13 +1,13 @@
 ---
-title: "Ausführen der Surveys-Anwendung"
-description: "Lokales Ausführen der Surveys-Beispielanwendung"
+title: Ausführen der Surveys-Anwendung
+description: Lokales Ausführen der Surveys-Beispielanwendung
 author: MikeWasson
 ms:date: 07/21/2017
-ms.openlocfilehash: d17cd939c1172edd0947b30ea13657806060b5f1
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 28d976374e5d6dbad434873eef149704f26a1f3f
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="run-the-surveys-application"></a>Ausführen der Surveys-Anwendung
 
@@ -40,7 +40,7 @@ In diesem Schritt erstellen Sie ein Azure AD-Verzeichnis für Tailspin.
 
     ![](./images/running-the-app/new-tenant.png)
 
-4. Klicken Sie auf **Erstellen**. Die Erstellung des neuen Verzeichnisses kann einige Minuten dauern.
+4. Klicken Sie auf **Create**. Die Erstellung des neuen Verzeichnisses kann einige Minuten dauern.
 
 Zum Abschließen des End-to-End-Szenarios benötigen Sie ein zweites Azure AD-Verzeichnis, das einen Kunden darstellt, der sich für die Anwendung registriert. Sie können Ihr Azure AD-Standardverzeichnis (nicht Tailspin) verwenden oder für diesen Zweck ein neues Verzeichnis erstellen. In den Beispielen verwenden wir als fiktiven Kunden Contoso.
 
@@ -52,17 +52,17 @@ Zum Abschließen des End-to-End-Szenarios benötigen Sie ein zweites Azure AD-Ve
 
 3. Klicken Sie auf **App-Registrierungen** > **Registrierung einer neuen Anwendung**.
 
-4.  Geben Sie auf dem Blatt **Erstellen** die folgenden Informationen ein:
+4. Geben Sie auf dem Blatt **Erstellen** die folgenden Informationen ein:
 
-  - **Name**: `Surveys.WebAPI`
+   - **Name**: `Surveys.WebAPI`
 
-  - **Anwendungstyp:**: `Web app / API`
+   - **Anwendungstyp:**: `Web app / API`
 
-  - **Anmelde-URL**: `https://localhost:44301/`
+   - **Anmelde-URL**: `https://localhost:44301/`
    
-  ![](./images/running-the-app/register-web-api.png) 
+   ![](./images/running-the-app/register-web-api.png) 
 
-5. Klicken Sie auf **Erstellen**.
+5. Klicken Sie auf **Create**.
 
 6. Wählen Sie im Blatt **App-Registrierungen** die neue Anwendung **Surveys.WebAPI** aus.
  
@@ -78,17 +78,17 @@ Zum Abschließen des End-to-End-Szenarios benötigen Sie ein zweites Azure AD-Ve
 
 ## <a name="register-the-surveys-web-app"></a>Registrieren der Surveys-Web-App 
 
-1.  Kehren Sie zum Blatt **App-Registrierungen** zurück, und klicken Sie auf **Registrierung einer neuen Anwendung**.
+1. Kehren Sie zum Blatt **App-Registrierungen** zurück, und klicken Sie auf **Registrierung einer neuen Anwendung**.
 
-2.  Geben Sie auf dem Blatt **Erstellen** die folgenden Informationen ein:
+2. Geben Sie auf dem Blatt **Erstellen** die folgenden Informationen ein:
 
-  - **Name**: `Surveys`
-  - **Anwendungstyp:**: `Web app / API`
-  - **Anmelde-URL**: `https://localhost:44300/`
+   - **Name**: `Surveys`
+   - **Anwendungstyp:**: `Web app / API`
+   - **Anmelde-URL**: `https://localhost:44300/`
    
-    Beachten Sie, dass die Anmelde-URL eine andere Portnummer als die `Surveys.WebAPI`-App im vorherigen Schritt enthält.
+   Beachten Sie, dass die Anmelde-URL eine andere Portnummer als die `Surveys.WebAPI`-App im vorherigen Schritt enthält.
 
-3. Klicken Sie auf **Erstellen**.
+3. Klicken Sie auf **Create**.
  
 4. Wählen Sie im Blatt **App-Registrierungen** die neue Anwendung **Surveys** aus.
  
@@ -150,36 +150,36 @@ Zum Abschließen des End-to-End-Szenarios benötigen Sie ein zweites Azure AD-Ve
 
     ![](./images/running-the-app/manifest.png)
  
-3.  Fügen Sie dem `appRoles`-Element den folgenden JSON-Code hinzu. Generieren Sie für die `id`-Eigenschaften neue GUIDs.
+3. Fügen Sie dem `appRoles`-Element den folgenden JSON-Code hinzu. Generieren Sie für die `id`-Eigenschaften neue GUIDs.
 
-    ```json
-    {
-      "allowedMemberTypes": ["User"],
-      "description": "Creators can create surveys",
-      "displayName": "SurveyCreator",
-      "id": "<Generate a new GUID. Example: 1b4f816e-5eaf-48b9-8613-7923830595ad>",
-      "isEnabled": true,
-      "value": "SurveyCreator"
-    },
-    {
-      "allowedMemberTypes": ["User"],
-      "description": "Administrators can manage the surveys in their tenant",
-      "displayName": "SurveyAdmin",
-      "id": "<Generate a new GUID>",  
-      "isEnabled": true,
-      "value": "SurveyAdmin"
-    }
-    ```
+   ```json
+   {
+     "allowedMemberTypes": ["User"],
+     "description": "Creators can create surveys",
+     "displayName": "SurveyCreator",
+     "id": "<Generate a new GUID. Example: 1b4f816e-5eaf-48b9-8613-7923830595ad>",
+     "isEnabled": true,
+     "value": "SurveyCreator"
+   },
+   {
+     "allowedMemberTypes": ["User"],
+     "description": "Administrators can manage the surveys in their tenant",
+     "displayName": "SurveyAdmin",
+     "id": "<Generate a new GUID>",  
+     "isEnabled": true,
+     "value": "SurveyAdmin"
+   }
+   ```
 
-5.  Fügen Sie in der `knownClientApplications`-Eigenschaft die Anwendungs-ID für die Surveys-Webanwendung hinzu, die Sie zuvor beim Registrieren der Surveys-Anwendung erhalten haben. Beispiel:
+4. Fügen Sie in der `knownClientApplications`-Eigenschaft die Anwendungs-ID für die Surveys-Webanwendung hinzu, die Sie zuvor beim Registrieren der Surveys-Anwendung erhalten haben. Beispiel: 
 
-  ```json
-  "knownClientApplications": ["be2cea23-aa0e-4e98-8b21-2963d494912e"],
-  ```
+   ```json
+   "knownClientApplications": ["be2cea23-aa0e-4e98-8b21-2963d494912e"],
+   ```
 
-  Durch diese Einstellung wird die Surveys-App der Liste der Clients hinzugefügt, die zum Aufrufen der Web-API berechtigt sind.
+   Durch diese Einstellung wird die Surveys-App der Liste der Clients hinzugefügt, die zum Aufrufen der Web-API berechtigt sind.
 
-6.  Klicken Sie auf **Speichern**.
+5. Klicken Sie auf **Speichern**.
 
 Wiederholen Sie jetzt die gleichen Schritte für die Surveys-App, fügen Sie jedoch keinen Eintrag für `knownClientApplications` hinzu. Verwenden Sie die gleichen Rollendefinitionen, generieren Sie jedoch für die IDs neue GUIDs.
 
@@ -191,7 +191,7 @@ Die Surveys-Anwendung verwendet zum Zwischenspeichern von OAuth 2-Zugriffstoken 
 
 2.  Geben Sie die erforderlichen Informationen, einschließlich DNS-Name, Ressourcengruppe, Standort und Tarif, ein. Sie können eine neue Ressourcengruppe erstellen oder eine vorhandene Ressourcengruppe verwenden.
 
-3. Klicken Sie auf **Erstellen**.
+3. Klicken Sie auf **Create**.
 
 4. Nachdem der Redis Cache erstellt wurde, navigieren Sie zu der Ressource im Portal.
 
@@ -224,7 +224,7 @@ Weitere Informationen über das Erstellen eines Redis Cache finden Sie unter [Ve
     Ersetzen Sie die Elemente in spitzen Klammern wie folgt:
 
     - `AzureAd:ClientId`: Die Anwendungs-ID der Surveys-App.
-    - `AzureAd:ClientSecret`: Der Schlüssel, der generiert wurde, als Sie die Surveys-Anwendung in Azure AD registriert haben.
+    - `AzureAd:ClientSecret`: der Schlüssel, der generiert wurde, als Sie die Surveys-Anwendung in Azure AD registriert haben
     - `AzureAd:WebApiResourceId`: der App-ID-URI, den Sie angegeben haben, als Sie die Surveys.WebAPI-Anwendung in Azure AD erstellt haben Er muss das Format `https://<directory>.onmicrosoft.com/surveys.webapi` aufweisen.
     - `Redis:Configuration`: Erstellen Sie diese Zeichenfolge aus dem DNS-Namen des Redis Cache und dem primären Zugriffsschlüssel. Beispiel: „tailspin.redis.cache.windows.net,password=2h5tBxxx,ssl=true“.
 

@@ -1,15 +1,15 @@
 ---
 title: Fehlermodusanalyse
-description: "Anleitungen zur Durchführung der Fehlermodusanalyse für Cloudlösungen, die auf Azure basieren."
+description: Anleitungen zur Durchführung der Fehlermodusanalyse für Cloudlösungen, die auf Azure basieren.
 author: MikeWasson
 ms.date: 03/24/2017
 ms.custom: resiliency
 pnp.series.title: Design for Resiliency
-ms.openlocfilehash: aca2088cb007728c5717a968969000c0a19bcd07
-ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
+ms.openlocfilehash: 8786c411249267e502003a90d5f2ff5e4c786803
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/30/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="failure-mode-analysis"></a>Fehlermodusanalyse
 [!INCLUDE [header](../_includes/header.md)]
@@ -122,7 +122,7 @@ Die standardmäßige Wiederholungsrichtlinie verwendet einen exponentiellen Back
 ### <a name="web-or-worker-roles-are-unexpectedlybeing-shut-down"></a>Web- oder Workerrollen werden unerwartet heruntergefahren.
 **Erkennung**: Das Ereignis [RoleEnvironment.Stopping][RoleEnvironment.Stopping] wird ausgelöst.
 
-**Wiederherstellen**. Setzen Sie die Methode [RoleEntryPoint.OnStop][RoleEntryPoint.OnStop] für eine ordnungsgemäße Bereinigung außer Kraft. Weitere Informationen finden Sie unter [The Right Way to Handle Azure OnStop Events][onstop-events] (Der richtige Weg zum Behandeln von Azure OnStop-Ereignissen – Blog).
+<strong>Wiederherstellen</strong>. Setzen Sie die Methode [RoleEntryPoint.OnStop][RoleEntryPoint.OnStop] für eine ordnungsgemäße Bereinigung außer Kraft. Weitere Informationen finden Sie unter [The Right Way to Handle Azure OnStop Events][onstop-events] (Der richtige Weg zum Behandeln von Azure OnStop-Ereignissen – Blog).
 
 ## <a name="cosmos-db"></a>Cosmos DB 
 ### <a name="reading-data-fails"></a>Beim Lesen von Daten tritt ein Fehler auf.

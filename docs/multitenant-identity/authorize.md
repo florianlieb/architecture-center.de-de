@@ -1,16 +1,16 @@
 ---
-title: "Autorisierung in mehrmandantenfähigen Anwendungen"
-description: "Informationen zum Durchführen der Autorisierung in einer mehrmandantenfähigen Anwendung"
+title: Autorisierung in mehrmandantenfähigen Anwendungen
+description: Informationen zum Durchführen der Autorisierung in einer mehrmandantenfähigen Anwendung
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: app-roles
 pnp.series.next: web-api
-ms.openlocfilehash: 86c308d21f19bb3ac2a4a2240a9a03a504de5cf4
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 03c4d5fa10c75437a7b066534619ba9a123c350c
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="role-based-and-resource-based-authorization"></a>Rollenbasierte und ressourcenbasierte Autorisierung
 
@@ -18,7 +18,7 @@ ms.lasthandoff: 11/14/2017
 
 Unsere [Referenzimplementierung] ist eine ASP.NET Core-Anwendung. In diesem Artikel betrachten wir zwei allgemeine Herangehensweisen an die Autorisierung und verwenden dabei die in ASP.NET Core bereitgestellten Autorisierungs-APIs.
 
-* **Rollenbasierte Autorisierung**. Autorisieren einer Aktion basierend auf den Rollen, die einem Benutzer zugewiesen sind. Einige Aktionen erfordern z.B. eine Administratorrolle.
+* **Role-based authorization**. Autorisieren einer Aktion basierend auf den Rollen, die einem Benutzer zugewiesen sind. Einige Aktionen erfordern z.B. eine Administratorrolle.
 * **Ressourcenbasierte Autorisierung**. Autorisieren eine Aktion basierend auf einer bestimmten Ressource. Jede Ressource hat beispielsweise einen Besitzer. Der Besitzer kann die Ressource löschen, andere Benutzer können das nicht.
 
 In einer Standard-App wird eine Kombination beider Varianten verwendet. Um beispielsweise eine Ressource zu löschen, muss der Benutzer Besitzer der Ressource *oder* Administrator sein.
@@ -102,7 +102,6 @@ In früheren Versionen von ASP.NET wird die **Roles** -Eigenschaft für dieses A
 ```csharp
 // old way
 [Authorize(Roles = "SurveyCreator")]
-
 ```
 
 Dies wird in ASP.NET Core noch immer unterstützt, doch gibt es verglichen mit Autorisierungsrichtlinien einige Nachteile:
@@ -154,7 +153,7 @@ Da wir ein `Survey`-Objekt übergeben, wird jetzt der `SurveyAuthorizationHandle
 Es empfiehlt sich, in Ihrem Autorisierungscode alle rollen- und ressourcenbasierten Berechtigungen des Benutzers zusammenzuführen und anschließend diesen Berechtigungssatz mit dem gewünschten Vorgang abzugleichen.
 Es folgt ein Beispiel aus der App „Surveys“. Die Anwendung definiert mehrere Typen von Berechtigungen:
 
-* Admin
+* Administrator
 * Contributor (Teilnehmer)
 * Creator (Ersteller)
 * Owner (Besitzer)

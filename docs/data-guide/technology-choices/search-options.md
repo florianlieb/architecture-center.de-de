@@ -1,13 +1,13 @@
 ---
-title: "Auswählen eines Suchdatenspeichers"
-description: 
+title: Auswählen eines Suchdatenspeichers
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 7fe5952c880921984beb30c71458fd1ef72ef239
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: ead07e307e96696faa5ddf48505eee378027523c
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="choosing-a-search-data-store-in-azure"></a>Auswählen eines Suchdatenspeichers in Azure
 
@@ -39,9 +39,10 @@ Beginnen Sie bei Suchszenarien mit der Auswahl des geeigneten Suchdatenspeichers
 
 ## <a name="capability-matrix"></a>Funktionsmatrix
 
-In der folgenden Tabellen sind die Hauptunterschiede der Funktionen zusammengefasst:
+In den folgenden Tabellen sind die Hauptunterschiede in Bezug auf die Funktionen zusammengefasst.
 
 ### <a name="general-capabilities"></a>Allgemeine Funktionen
+
 | | Azure Search | Elasticsearch | HDInsight mit Solr | SQL-Datenbank | 
 | --- | --- | --- | --- | --- | 
 | Verwalteter Dienst | Ja | Nein | Ja | Ja |  
@@ -50,12 +51,14 @@ In der folgenden Tabellen sind die Hauptunterschiede der Funktionen zusammengefa
 | Dokumentindexer für allgemeine Dateitypen (PDF, DOCX, TXT usw.) | Ja | Nein | Ja | Nein  |
 
 ### <a name="manageability-capabilities"></a>Verwaltbarkeitsfeatures
+
 | | Azure Search | Elasticsearch | HDInsight mit Solr | SQL-Datenbank | 
 | --- | --- | --- | --- | --- |
 | Aktualisierbares Schema | Nein  | Ja | Ja | Ja |
 | Unterstützung für horizontales Hochskalieren  | Ja | Ja | Ja | Nein  |
 
 ### <a name="analytic-workload-capabilities"></a>Funktionen für Analyseworkloads
+
 | | Azure Search | Elasticsearch | HDInsight mit Solr | SQL Databash | 
 | --- | --- | --- | --- | --- | 
 | Unterstützung von Analysen über die Volltextsuche hinaus | Nein  | Ja | Ja | Ja |
@@ -63,6 +66,7 @@ In der folgenden Tabellen sind die Hauptunterschiede der Funktionen zusammengefa
 | Unterstützung der semantischen Suche | Ja (nur Suche von ähnlichen Dokumenten) | Ja | Ja | Ja | 
 
 ### <a name="security-capabilities"></a>Sicherheitsfunktionen
+
 | | Azure Search | Elasticsearch | HDInsight mit Solr | SQL Databash | 
 | --- | --- | --- | --- | --- | 
 | Sicherheit auf Zeilenebene | Teilweise (Anwendungsabfrage zum Filtern nach Gruppen-ID erforderlich) | Teilweise (Anwendungsabfrage zum Filtern nach Gruppen-ID erforderlich) | Ja | Ja | 

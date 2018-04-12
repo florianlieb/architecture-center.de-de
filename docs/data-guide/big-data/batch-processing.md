@@ -3,11 +3,11 @@ title: Batchverarbeitung
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: d3d3b92034c251586ecc9caff2785ecd0808b2a7
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: d6843bf4e20c3eb26e61cfa09300ad533e969c2e
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/31/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="batch-processing"></a>Batchverarbeitung
 
@@ -19,7 +19,7 @@ So können beispielsweise die Protokolle eines Webservers in einen Ordner kopier
 
 ## <a name="when-to-use-this-solution"></a>Verwendung dieser Lösung
 
-Die Batchverarbeitung kommt in verschiedensten Szenarien zum Einsatz – von der einfachen Datentransformation bis hin zur umfassenderen ETL-Pipeline (Extrahieren, Transformieren, Laden). In einem Big Data-Kontext kann die Batchverarbeitung auf sehr große Datasets angewendet werden, bei denen die Berechnung viel Zeit in Anspruch nimmt. (Weitere Informationen finden Sie beispielsweise unter [Lambda-Architektur](../concepts/big-data.md#lambda-architecture).) Die Batchverarbeitung führt in der Regel zu weiteren interaktiven Untersuchungen, stellt die modellierungsbereiten Daten für Machine Learning bereit oder schreibt die Daten in einen für die Analyse und Visualisierung optimierten Datenspeicher.
+Die Batchverarbeitung kommt in verschiedensten Szenarien zum Einsatz – von der einfachen Datentransformation bis hin zur umfassenderen ETL-Pipeline (Extrahieren, Transformieren, Laden). In einem Big Data-Kontext kann die Batchverarbeitung auf sehr große Datasets angewendet werden, bei denen die Berechnung viel Zeit in Anspruch nimmt. (Weitere Informationen finden Sie beispielsweise unter [Lambda-Architektur](../big-data/index.md#lambda-architecture).) Die Batchverarbeitung führt in der Regel zu weiteren interaktiven Untersuchungen, stellt die modellierungsbereiten Daten für Machine Learning bereit oder schreibt die Daten in einen für die Analyse und Visualisierung optimierten Datenspeicher.
 
 Ein Beispiel für die Batchverarbeitung ist die Transformation zahlreicher teilweise strukturierter CSV- oder JSON-Flatfiles in ein schematisiertes und strukturiertes Format, das für weitere Abfragen genutzt werden kann. Die Daten werden in der Regel aus den bei der Erfassung verwendeten Rohformaten (beispielsweise CSV) in Binärformate konvertiert, mit denen sich bei Abfragen eine bessere Leistung erzielen lässt, da sie Daten in einem spaltenförmigen Format speichern und häufig Indizes und Inlinestatistiken für die Daten bereitstellen.
 

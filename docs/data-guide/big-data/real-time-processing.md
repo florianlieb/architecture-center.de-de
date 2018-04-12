@@ -3,11 +3,11 @@ title: Verarbeitung in Echtzeit
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: f1054ce5e8c2053aa4f80d8b472604125ba47187
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: 8d3497c37d15dc0aa4645ddfce3bd30740217b2c
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/31/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="real-time-processing"></a>Verarbeitung in Echtzeit
 
@@ -49,7 +49,7 @@ Weitere Informationen finden Sie unter [Echtzeiterfassung von Nachrichten](../te
 
 ### <a name="data-storage"></a>Datenspeicher
 
-- **Azure Storage Blob-Container** oder **Azure Data Lake Store**: Eingehende Echtzeitdaten werden normalerweise in einem Nachrichtenbroker erfasst (siehe oben). In einigen Szenarien kann es aber sinnvoll sein, einen Ordner auf neue Dateien zu überwachen und diese zu verarbeiten, wenn sie erstellt oder aktualisiert werden. Außerdem werden in vielen Lösungen für die Echtzeitverarbeitung Streamingdaten mit statischen Referenzdaten kombiniert, die in einem Dateispeicher gespeichert werden können. Zudem kann der Dateispeicher auch als Ausgabeziel für erfasste Echtzeitdaten zur Archivierung oder für die weitere Batchverarbeitung in einer [Lambda-Architektur](../concepts/big-data.md#lambda-architecture) verwendet werden.
+- **Azure Storage Blob-Container** oder **Azure Data Lake Store**: Eingehende Echtzeitdaten werden normalerweise in einem Nachrichtenbroker erfasst (siehe oben). In einigen Szenarien kann es aber sinnvoll sein, einen Ordner auf neue Dateien zu überwachen und diese zu verarbeiten, wenn sie erstellt oder aktualisiert werden. Außerdem werden in vielen Lösungen für die Echtzeitverarbeitung Streamingdaten mit statischen Referenzdaten kombiniert, die in einem Dateispeicher gespeichert werden können. Zudem kann der Dateispeicher auch als Ausgabeziel für erfasste Echtzeitdaten zur Archivierung oder für die weitere Batchverarbeitung in einer [Lambda-Architektur](../big-data/index.md#lambda-architecture) verwendet werden.
 
 Weitere Informationen finden Sie unter [Datenspeicher](../technology-choices/data-storage.md).
 

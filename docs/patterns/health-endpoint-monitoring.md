@@ -1,6 +1,6 @@
 ---
-title: "Überwachung der Integrität von Endpunkten"
-description: "Implementieren Sie Funktionsprüfungen in einer Anwendung, auf die externe Tools in regelmäßigen Abständen über verfügbar gemachte Endpunkte zugreifen können."
+title: Überwachung der Integrität von Endpunkten
+description: Implementieren Sie Funktionsprüfungen in einer Anwendung, auf die externe Tools in regelmäßigen Abständen über verfügbar gemachte Endpunkte zugreifen können.
 keywords: Entwurfsmuster
 author: dragon119
 ms.date: 06/23/2017
@@ -9,11 +9,11 @@ pnp.pattern.categories:
 - availability
 - management-monitoring
 - resiliency
-ms.openlocfilehash: 36171d568b9b5bfbbd48ee762b16adea695cf0e9
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 3b3bce46b460148af17bfe6064cd052a5f9a6458
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="health-endpoint-monitoring-pattern"></a>Muster für Überwachung der Integrität von Endpunkten
 
@@ -82,9 +82,9 @@ Konfigurieren der Sicherheit der Überwachungsendpunkte zum Schutz vor öffentli
 
 - Schützen Sie den Endpunkt, indem eine Authentifizierung angefordert wird. Sie können dies tun, indem Sie einen Authentifizierungssicherheitsschlüssel im Anforderungsheader verwenden oder Anmeldeinformationen mit der Anforderung übergeben, sofern der Überwachungsdienst oder das Tool die Authentifizierung unterstützt.
 
- - Verwenden Sie einen verborgenen oder ausgeblendeten Endpunkt. Machen Sie z.B. den Endpunkt an einer anderen IP-Adresse verfügbar als an der, die von der standardmäßigen Anwendungs-URL verwendet wird. Konfigurieren Sie den Endpunkt an einem nicht standardmäßigen HTTP-Port, und/oder verwenden Sie einen komplexen Pfad zur Testseite. In der Regel können Sie in der Anwendungskonfiguration zusätzliche Endpunktadressen und -ports angeben und bei Bedarf Einträge für diese Endpunkte dem DNS-Server hinzufügen, um die direkte Angabe der IP-Adresse zu vermeiden.
+  - Verwenden Sie einen verborgenen oder ausgeblendeten Endpunkt. Machen Sie z.B. den Endpunkt an einer anderen IP-Adresse verfügbar als an der, die von der standardmäßigen Anwendungs-URL verwendet wird. Konfigurieren Sie den Endpunkt an einem nicht standardmäßigen HTTP-Port, und/oder verwenden Sie einen komplexen Pfad zur Testseite. In der Regel können Sie in der Anwendungskonfiguration zusätzliche Endpunktadressen und -ports angeben und bei Bedarf Einträge für diese Endpunkte dem DNS-Server hinzufügen, um die direkte Angabe der IP-Adresse zu vermeiden.
 
- - Machen Sie eine Methode auf einem Endpunkt verfügbar, die einen Parameter wie einen Schlüsselwert oder einen Wert für die Betriebsart akzeptiert. Je nach Wert, der für diesen Parameter angegeben wird, kann der Code beim Empfangen einer Anforderung einen oder mehrere bestimmte Tests durchführen oder den Fehler 404 (Nicht gefunden) zurückgeben, wenn der Parameterwert nicht erkannt wird. Die erkannten Parameterwerte können in der Anwendungskonfiguration festgelegt werden.
+  - Machen Sie eine Methode auf einem Endpunkt verfügbar, die einen Parameter wie einen Schlüsselwert oder einen Wert für die Betriebsart akzeptiert. Je nach Wert, der für diesen Parameter angegeben wird, kann der Code beim Empfangen einer Anforderung einen oder mehrere bestimmte Tests durchführen oder den Fehler 404 (Nicht gefunden) zurückgeben, wenn der Parameterwert nicht erkannt wird. Die erkannten Parameterwerte können in der Anwendungskonfiguration festgelegt werden.
 
      >  DoS-Angriffe haben wahrscheinlich weniger Auswirkungen auf einen separaten Endpunkt, auf dem grundlegende Funktionstests durchgeführt werden, ohne den Betrieb der Anwendung zu beeinträchtigen. Vermeiden Sie im Idealfall Tests, die vertrauliche Informationen preisgeben. Wenn Sie Informationen zurückgeben müssen, die für einen Angreifer nützlich sein könnten, überlegen Sie, wie Sie den Endpunkt und die Daten vor unbefugtem Zugriff schützen können. In diesem Fall reicht es nicht aus, sich nur auf Verschleierung zu verlassen. Außerdem sollten Sie in Erwägung ziehen, eine HTTPS-Verbindung zu verwenden und sensible Daten zu verschlüsseln, obwohl dies die Verarbeitungslast des Servers erhöht.
 
@@ -96,7 +96,7 @@ Konfigurieren der Sicherheit der Überwachungsendpunkte zum Schutz vor öffentli
 
 ## <a name="when-to-use-this-pattern"></a>Verwendung dieses Musters
 
-Dieses Muster ist für die folgenden Aufgaben hilfreich:
+Dieses Muster ist hilfreich:
 - Überwachung von Websites und Webanwendungen auf Verfügbarkeit.
 - Überwachung von Websites und Webanwendungen auf ordnungsgemäßen Betrieb.
 - Überwachung von Diensten auf mittlerer Ebene oder gemeinsam genutzten Diensten, um einen Fehler zu erkennen und zu isolieren, der andere Anwendungen stören könnte.
@@ -204,7 +204,7 @@ Traffic Manager wartet jedoch nur zehn Sekunden auf eine Antwort von der Überwa
 ## <a name="related-guidance"></a>Verwandte Leitfäden
 
 Der folgende Leitfaden kann für die Implementierung dieses Musters relevant sein:
-- [Instrumentierungs- und Telemetrieanleitung](https://msdn.microsoft.com/library/dn589775.aspx). Die Überprüfung des Status von Diensten und Komponenten erfolgt in der Regel mithilfe von Tests. Es ist jedoch auch nützlich, über Informationen zu verfügen, um die Anwendungsleistung zu überwachen und Ereignisse zu erkennen, die zur Laufzeit auftreten. Diese Daten können an Überwachungstools als Zusatzinformationen für die Integritätsüberwachung zurückgegeben werden. In der Instrumentierungs- und Telemetrieanleitung wird das Erfassen von Ferndiagnoseinformationen untersucht, die mithilfe der Instrumentierung in Anwendungen gesammelt werden.
+- [Instrumentations- und Telemetrieanleitungen](https://msdn.microsoft.com/library/dn589775.aspx). Die Überprüfung des Status von Diensten und Komponenten erfolgt in der Regel mithilfe von Tests. Es ist jedoch auch nützlich, über Informationen zu verfügen, um die Anwendungsleistung zu überwachen und Ereignisse zu erkennen, die zur Laufzeit auftreten. Diese Daten können an Überwachungstools als Zusatzinformationen für die Integritätsüberwachung zurückgegeben werden. In der Instrumentierungs- und Telemetrieanleitung wird das Erfassen von Ferndiagnoseinformationen untersucht, die mithilfe der Instrumentierung in Anwendungen gesammelt werden.
 - [Empfangen von Warnungsbenachrichtigungen][portal-alerts].
 - Zu diesem Muster gehört eine herunterladbare [Beispielanwendung](https://github.com/mspnp/cloud-design-patterns/tree/master/health-endpoint-monitoring).
 

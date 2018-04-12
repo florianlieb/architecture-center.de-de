@@ -1,19 +1,19 @@
 ---
-title: "Auswählen eines Analysedatenspeichers"
-description: 
+title: Auswählen eines Analysedatenspeichers
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: b2e5e63982d4b89b95cd28e596d3b882a4a2263e
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: cdc32c16e30aec5e1c0cb6959182215f99d56b56
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="choosing-an-analytical-data-store-in-azure"></a>Auswählen eines Analysedatenspeichers in Azure
 
-In einer [Big Data](../concepts/big-data.md)-Architektur wird häufig ein Analysedatenspeicher benötigt, der verarbeitete Daten in einem strukturierten Format bereitstellt, das Abfragen mit Analysetools ermöglicht. Analysedatenspeicher, die sowohl das Abfragen von Hot-Path- als auch von Cold-Path-Daten unterstützen, werden zusammenfassend als Bereitstellungsebene oder Datenbereitstellungsspeicher bezeichnet.
+In einer [Big Data](../big-data/index.md)-Architektur wird häufig ein Analysedatenspeicher benötigt, der verarbeitete Daten in einem strukturierten Format bereitstellt, das Abfragen mit Analysetools ermöglicht. Analysedatenspeicher, die sowohl das Abfragen von Hot-Path- als auch von Cold-Path-Daten unterstützen, werden zusammenfassend als Bereitstellungsebene oder Datenbereitstellungsspeicher bezeichnet.
 
-Die Bereitstellungsebene wird für verarbeitete Hot-Path- und Cold-Path-Daten verwendet. In der [Lambda-Architektur](../concepts/big-data.md#lambda-architecture) ist die Bereitstellungsebene in zwei Ebenen unterteilt: eine Ebene für die _schnelle Bereitstellung_, auf der inkrementell verarbeitete Daten gespeichert werden, und eine Ebene für die _Batchbereitstellung_, die die Ausgabe der Batchverarbeitung enthält. Für die Bereitstellungsebene ist eine starke Unterstützung für zufällige Lesevorgänge mit kurzer Wartezeit erforderlich. Der Datenspeicher für die Geschwindigkeitsebene sollte außerdem zufällige Schreibvorgänge unterstützen, da es beim Batchladen von Daten in diesen Speicher zu unerwünschten Verzögerungen kommen kann. Andererseits wird für die Datenspeicherung für die Batchebene keine Unterstützung von zufälligen Schreibvorgängen benötigt, sondern von Batchschreibvorgängen.
+Die Bereitstellungsebene wird für verarbeitete Hot-Path- und Cold-Path-Daten verwendet. In der [Lambda-Architektur](../big-data/index.md#lambda-architecture) ist die Bereitstellungsebene in zwei Ebenen unterteilt: eine Ebene für die _schnelle Bereitstellung_, auf der inkrementell verarbeitete Daten gespeichert werden, und eine Ebene für die _Batchbereitstellung_, die die Ausgabe der Batchverarbeitung enthält. Für die Bereitstellungsebene ist eine starke Unterstützung für zufällige Lesevorgänge mit kurzer Wartezeit erforderlich. Der Datenspeicher für die Geschwindigkeitsebene sollte außerdem zufällige Schreibvorgänge unterstützen, da es beim Batchladen von Daten in diesen Speicher zu unerwünschten Verzögerungen kommen kann. Andererseits wird für die Datenspeicherung für die Batchebene keine Unterstützung von zufälligen Schreibvorgängen benötigt, sondern von Batchschreibvorgängen.
 
 Es gibt keine Lösung für die Datenverwaltung, die für alle Datenspeicheraufgaben am besten geeignet ist. Verschiedene Datenverwaltungslösungen sind für unterschiedliche Aufgaben optimiert. Die meisten Cloud-Apps und Big Data-Prozesse aus der Praxis verfügen über viele verschiedene Datenspeicheranforderungen, und häufig wird eine Kombination von Datenspeicherlösungen genutzt.
 
@@ -48,16 +48,16 @@ Beantworten Sie die folgenden Fragen, um die Auswahl einzuschränken:
 
 ## <a name="capability-matrix"></a>Funktionsmatrix
 
-In den folgenden Tabellen sind die Hauptunterschiede in Bezug auf die Funktionen zusammengefasst:
+In den folgenden Tabellen sind die Hauptunterschiede in Bezug auf die Funktionen zusammengefasst.
 
 ### <a name="general-capabilities"></a>Allgemeine Funktionen
 
 | | SQL-Datenbank | SQL Data Warehouse | HBase/Phoenix in HDInsight | Hive LLAP in HDInsight | Azure Analysis Services | Cosmos DB |
 | --- | --- | --- | --- | --- | --- | --- |
-| Verwalteter Dienst | Ja | Ja | Ja <sup>1</sup> | Ja <sup>1</sup> | Ja | Ja |
+| Verwalteter Dienst | Ja | Ja | Ja<sup>1</sup> | Ja<sup>1</sup> | Ja | Ja |
 | Primäres Datenbankmodell | Relational (Spaltenformat bei Verwendung von Columnstore-Indizes) | Relationale Tabellen mit Speicherung in Spalten | Wide Columnstore | Hive/In-Memory | Tabellarisch/MOLAP-Semantikmodelle | Dokumentspeicher, Diagramm, Schlüssel-Wert-Speicherung, Wide Columnstore |
 | SQL-Sprachunterstützung | Ja | Ja | Ja (mit [Phoenix](http://phoenix.apache.org/)-JDBC-Treiber) | Ja | Nein | Ja |
-| Optimiert für Ebene für schnelle Bereitstellung | Ja <sup>2</sup> | Nein  | Ja | Ja | Nein | Ja |
+| Optimiert für Ebene für schnelle Bereitstellung | Ja<sup>2</sup> | Nein  | Ja | Ja | Nein | Ja |
 
 [1] Mit manueller Konfiguration und Skalierung
 
@@ -65,24 +65,24 @@ In den folgenden Tabellen sind die Hauptunterschiede in Bezug auf die Funktionen
  
 ### <a name="scalability-capabilities"></a>Skalierbarkeitsfunktionen
 
-| | SQL-Datenbank | SQL Data Warehouse | HBase/Phoenix in HDInsight | Hive LLAP in HDInsight | Azure Analysis Services | Cosmos DB |
-| --- | --- | --- | --- | --- | --- | --- |
-| Redundante regionale Server für Hochverfügbarkeit  | Ja | Ja | Ja | Nein  | Nein  | Ja | Ja |
-| Unterstützt horizontales Hochskalieren für Abfragen  | Nein  | Ja | Ja | Ja | Ja | Ja |
-| Dynamische Skalierbarkeit (Zentrales Hochskalieren)  | Ja | Ja | Nein  | Nein  | Ja | Ja |
-| Unterstützt speicherinternes Zwischenspeichern von Daten | Ja | Ja | Nein | Ja | Ja | Nein  |
+|                                                  | SQL-Datenbank | SQL Data Warehouse | HBase/Phoenix in HDInsight | Hive LLAP in HDInsight | Azure Analysis Services | Cosmos DB |
+|--------------------------------------------------|--------------|--------------------|----------------------------|------------------------|-------------------------|-----------|
+| Redundante regionale Server für Hochverfügbarkeit |     Ja      |        Ja         |            Ja             |           Nein            |           Nein             |    Ja    |
+|             Unterstützung des horizontalen Hochskalierens von Abfragen             |      Nein       |        Ja         |            Ja             |          Ja           |           Ja           |    Ja    |
+|          Dynamische Skalierbarkeit (zentrales Hochskalieren)          |     Ja      |        Ja         |             Nein              |           Nein            |           Ja           |    Ja    |
+|        Unterstützung der speicherinternen Zwischenspeicherung von Daten        |     Ja      |        Ja         |             Nein             |          Ja           |           Ja           |    Nein      |
 
 ### <a name="security-capabilities"></a>Sicherheitsfunktionen
 
 | | SQL-Datenbank | SQL Data Warehouse | HBase/Phoenix in HDInsight | Hive LLAP in HDInsight | Azure Analysis Services | Cosmos DB |
 | --- | --- | --- | --- | --- | --- | --- |
 | Authentifizierung  | SQL/Azure Active Directory (Azure AD) | SQL/Azure AD | Lokal/Azure AD <sup>1</sup> | Lokal/Azure AD <sup>1</sup> | Azure AD | Datenbankbenutzer/Azure AD per Zugriffssteuerung (IAM) |
-| Datenverschlüsselung ruhender Daten | Ja <sup>2</sup> | Ja <sup>2</sup> | Ja <sup>1</sup> | Ja <sup>1</sup> | Ja | Ja |
-| Sicherheit auf Zeilenebene | Ja | Nein  | Ja <sup>1</sup> | Ja <sup>1</sup> | Ja (per Sicherheit auf Objektebene im Modell) | Nein  |
-| Unterstützung von Firewalls | Ja | Ja | Ja <sup>3</sup> | Ja <sup>3</sup> | Ja | Ja |
-| Dynamische Datenmaskierung | Ja | Nein  | Ja <sup>1</sup> | Ja * | Nein  | Nein  |
+| Datenverschlüsselung ruhender Daten | Ja<sup>2</sup> | Ja<sup>2</sup> | Ja<sup>1</sup> | Ja<sup>1</sup> | Ja | Ja |
+| Sicherheit auf Zeilenebene | Ja | Nein  | Ja<sup>1</sup> | Ja <sup>1</sup> | Ja (per Sicherheit auf Objektebene im Modell) | Nein  |
+| Unterstützung von Firewalls | Ja | Ja | Ja<sup>3</sup> | Ja<sup>3</sup> | Ja | Ja |
+| Dynamische Datenmaskierung | Ja | Nein  | Ja<sup>1</sup> | Ja * | Nein  | Nein  |
 
-[1] Verwendung eines [in die Domäne eingebundenen HDInsight-Clusters](/azure/hdinsight/domain-joined/apache-domain-joined-introduction) erforderlich
+[1] Erfordert die Verwendung eines [in die Domäne eingebundenen HDInsight-Clusters](/azure/hdinsight/domain-joined/apache-domain-joined-introduction).
 
 [2] Verwendung von Transparent Data Encryption (TDE) zum Verschlüsseln und Entschlüsseln von ruhenden Daten erforderlich
 

@@ -1,14 +1,14 @@
 ---
-title: "Webanwendungen für mehrere Regionen"
-description: "Empfohlene Architektur für Webanwendungen mit Hochverfügbarkeit, die in Microsoft Azure ausgeführt werden"
+title: Webanwendungen für mehrere Regionen
+description: Empfohlene Architektur für Webanwendungen mit Hochverfügbarkeit, die in Microsoft Azure ausgeführt werden
 author: MikeWasson
 ms.date: 11/23/2016
 cardTitle: Run in multiple regions
-ms.openlocfilehash: 50ac9636e1e3c25bd0403c89281a3a06915d065f
-ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
+ms.openlocfilehash: 00309e58c163a64f6d9796bedc19d936afcd09ab
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/30/2018
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="run-a-web-application-in-multiple-regions"></a>Ausführen einer Webanwendung in mehreren Regionen
 [!INCLUDE [header](../../_includes/header.md)]
@@ -166,4 +166,4 @@ Wenn die primäre Datenbank fehlerhaft ist, führen Sie ein manuelles Failover z
 [tm-routing]: /azure/traffic-manager/traffic-manager-routing-methods
 [tm-sla]: https://azure.microsoft.com/support/legal/sla/traffic-manager/v1_0/
 [traffic-manager]: https://azure.microsoft.com/services/traffic-manager/
-[visio-download]: https://archcenter.azureedge.net/cdn/app-service-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/app-service-reference-architectures.vsdx

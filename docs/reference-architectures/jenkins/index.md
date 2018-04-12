@@ -1,13 +1,13 @@
 ---
-title: "Ausführen eines Jenkins-Servers in Azure"
-description: "Diese Referenzarchitektur veranschaulicht, wie Sie einen für Unternehmen konzipierten skalierbaren Jenkins-Server in Azure bereitstellen und betreiben, der durch einmaliges Anmelden (Single Sign-On, SSO) geschützt ist."
+title: Ausführen eines Jenkins-Servers in Azure
+description: Diese Referenzarchitektur veranschaulicht, wie Sie einen für Unternehmen konzipierten skalierbaren Jenkins-Server in Azure bereitstellen und betreiben, der durch einmaliges Anmelden (Single Sign-On, SSO) geschützt ist.
 author: njray
 ms.date: 01/21/18
-ms.openlocfilehash: 724185e43ed743013f52ded04b779552dd8e48c1
-ms.sourcegitcommit: 29fbcb1eec44802d2c01b6d3bcf7d7bd0bae65fc
+ms.openlocfilehash: c07a341bbe4d0304087e4535408967c45d36199e
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/27/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="run-a-jenkins-server-on-azure"></a>Ausführen eines Jenkins-Servers in Azure
 
@@ -15,7 +15,7 @@ Diese Referenzarchitektur veranschaulicht, wie Sie einen für Unternehmen konzip
 
 ![In Azure ausgeführter Jenkins-Server][0]
 
-*Laden Sie eine [Visio-Datei](https://arch-center.azureedge.net/cdn/Jenkins-architecture.vsdx) herunter, die dieses Architekturdiagramm enthält.*
+*Laden Sie eine [Visio-Datei](https://archcenter.blob.core.windows.net/cdn/Jenkins-architecture.vsdx) herunter, die dieses Architekturdiagramm enthält.*
 
 Diese Architektur unterstützt die Notfallwiederherstellung mit Azure-Diensten, deckt jedoch keine komplexeren Szenarien mit horizontaler Skalierung und mehreren Mastern oder Hochverfügbarkeit (High Availability, HA) ohne Downtime ab. Allgemeine Informationen zu den verschiedenen Azure-Komponenten, etwa ein ausführliches Tutorial zum Erstellen einer CI/CD-Pipeline in Azure, finden Sie unter [Jenkins in Azure][jenkins-on-azure].
 
@@ -25,30 +25,30 @@ Der Schwerpunkt dieses Dokuments liegt auf den zentralen Azure-Vorgängen, die z
 
 Die Architektur umfasst die folgenden Komponenten:
 
--   **Ressourcengruppe:** Eine [Ressourcengruppe][rg] dient zum Gruppieren von Azure-Ressourcen, damit sie nach Lebensdauer, Besitzer und anderen Kriterien verwaltet werden können. Verwenden Sie Ressourcengruppen, um Azure-Ressourcen als Gruppe bereitzustellen und zu überwachen und Abrechnungskosten nach Ressourcengruppe nachzuverfolgen. Sie können auch Ressourcen als Gruppe löschen, was für Testbereitstellungen sehr nützlich ist.
+- **Ressourcengruppe:** Eine [Ressourcengruppe][rg] dient zum Gruppieren von Azure-Ressourcen, damit sie nach Lebensdauer, Besitzer und anderen Kriterien verwaltet werden können. Verwenden Sie Ressourcengruppen, um Azure-Ressourcen als Gruppe bereitzustellen und zu überwachen und Abrechnungskosten nach Ressourcengruppe nachzuverfolgen. Sie können auch Ressourcen als Gruppe löschen, was für Testbereitstellungen sehr nützlich ist.
 
--   **Jenkins-Server:** Ein virtueller Computer, der als Jenkins-Master fungiert, wird bereitgestellt, um [Jenkins][azure-market] als Automatisierungsserver auszuführen. Diese Referenzarchitektur verwendet die [Lösungsvorlage für Jenkins in Azure][solution] und ist auf einem virtuellen Linux-Computer (Ubuntu 16.04 LTS) in Azure installiert. Andere Jenkins-Angebote sind im Azure Marketplace erhältlich.
+- **Jenkins-Server:** Ein virtueller Computer, der als Jenkins-Master fungiert, wird bereitgestellt, um [Jenkins][azure-market] als Automatisierungsserver auszuführen. Diese Referenzarchitektur verwendet die [Lösungsvorlage für Jenkins in Azure][solution] und ist auf einem virtuellen Linux-Computer (Ubuntu 16.04 LTS) in Azure installiert. Andere Jenkins-Angebote sind im Azure Marketplace erhältlich.
 
-    > [!NOTE]
-    > Nginx ist auf dem virtuellen Computer installiert und fungiert als Reverseproxy für Jenkins. Sie können Nginx zum Aktivieren von SSL für den Jenkins-Server konfigurieren.
-    > 
-    > 
+  > [!NOTE]
+  > Nginx ist auf dem virtuellen Computer installiert und fungiert als Reverseproxy für Jenkins. Sie können Nginx zum Aktivieren von SSL für den Jenkins-Server konfigurieren.
+  > 
+  > 
 
--   **Virtuelles Netzwerk**. Ein [virtuelles Netzwerk][vnet] verknüpft Azure-Ressourcen und bietet eine logische Isolierung. In dieser Architektur wird der Jenkins-Server in einem virtuellen Netzwerk ausgeführt.
+- **Virtuelles Netzwerk**. Ein [virtuelles Netzwerk][vnet] verknüpft Azure-Ressourcen und bietet eine logische Isolierung. In dieser Architektur wird der Jenkins-Server in einem virtuellen Netzwerk ausgeführt.
 
--   **Subnetze:** Der Jenkins-Server ist in einem [Subnetz][subnet] isoliert, um die Verwaltung und Aufteilung des Netzwerkdatenverkehrs ohne Auswirkungen auf die Leistung zu vereinfachen.
+- **Subnetze:** Der Jenkins-Server ist in einem [Subnetz][subnet] isoliert, um die Verwaltung und Aufteilung des Netzwerkdatenverkehrs ohne Auswirkungen auf die Leistung zu vereinfachen.
 
--   **NSGs**. Verwenden Sie [Netzwerksicherheitsgruppen][nsg] (NSGs), um Netzwerkdatenverkehr vom Internet auf ein Subnetz eines virtuellen Netzwerks zu beschränken.
+- <strong>NSGs</strong>. Verwenden Sie [Netzwerksicherheitsgruppen][nsg] (NSGs), um Netzwerkdatenverkehr vom Internet auf ein Subnetz eines virtuellen Netzwerks zu beschränken.
 
--   **Verwaltete Datenträger:** Ein [verwalteter Datenträger][managed-disk] ist eine persistente virtuelle Festplatte (Virtual Hard Disk, VHD), die als Anwendungsspeicher sowie zum Speichern des Zustands des Jenkins-Servers und Bereitstellen der Notfallwiederherstellung verwendet wird. Datenträger werden in Azure Storage gespeichert. Für eine hohe Leistung wird [Storage Premium][premium] empfohlen.
+- **Verwaltete Datenträger:** Ein [verwalteter Datenträger][managed-disk] ist eine persistente virtuelle Festplatte (Virtual Hard Disk, VHD), die als Anwendungsspeicher sowie zum Speichern des Zustands des Jenkins-Servers und Bereitstellen der Notfallwiederherstellung verwendet wird. Datenträger werden in Azure Storage gespeichert. Für eine hohe Leistung wird [Storage Premium][premium] empfohlen.
 
--   **Azure Blob Storage:** Das [Windows Azure Storage-Plug-In][configure-storage] nutzt Azure Blob Storage zum Speichern der Buildartefakte, die erstellt und für andere Jenkins-Builds freigegeben werden.
+- **Azure Blob Storage:** Das [Windows Azure Storage-Plug-In][configure-storage] nutzt Azure Blob Storage zum Speichern der Buildartefakte, die erstellt und für andere Jenkins-Builds freigegeben werden.
 
--   **Azure Active Directory (Azure AD):** [Azure AD][azure-ad] unterstützt die Benutzerauthentifizierung, sodass Sie SSO einrichten können. Azure AD-[Dienstprinzipale][service-principal] definieren die Richtlinie und Berechtigungen für jede Rollenauthentifizierung im Workflow unter Verwendung der [rollenbasierten Zugriffssteuerung][rbac] (Role-Based Access Control, RBAC). Jeder Dienstprinzipal ist einem Jenkins-Auftrag zugeordnet.
+- <strong>Azure Active Directory (Azure AD):</strong> [Azure AD][azure-ad] unterstützt die Benutzerauthentifizierung, sodass Sie SSO einrichten können. Azure AD-[Dienstprinzipale][service-principal] definieren die Richtlinie und Berechtigungen für jede Rollenauthentifizierung im Workflow unter Verwendung der [rollenbasierten Zugriffssteuerung][rbac] (Role-Based Access Control, RBAC). Jeder Dienstprinzipal ist einem Jenkins-Auftrag zugeordnet.
 
--   **Azure Key Vault:** Diese Architektur verwendet [Key Vault][key-vault] zum Verwalten von Geheimnissen und kryptografischen Schlüssel, die zum Bereitstellen von Azure-Ressourcen verwendet werden, wenn Geheimnisse erforderlich sind. Zusätzliche Hilfe beim Speichern von Geheimnissen, die der Anwendung in der Pipeline zugeordnet sind, finden Sie auch auf der Seite für das [Azure-Anmeldeinformationen-Plug-In][configure-credential] für Jenkins.
+- **Azure Key Vault:** Diese Architektur verwendet [Key Vault][key-vault] zum Verwalten von Geheimnissen und kryptografischen Schlüssel, die zum Bereitstellen von Azure-Ressourcen verwendet werden, wenn Geheimnisse erforderlich sind. Zusätzliche Hilfe beim Speichern von Geheimnissen, die der Anwendung in der Pipeline zugeordnet sind, finden Sie auch auf der Seite für das [Azure-Anmeldeinformationen-Plug-In][configure-credential] für Jenkins.
 
--   **Azure-Überwachungsdienste:** Dieser Dienst [überwacht][monitor] den virtuellen Azure-Computer, auf dem Jenkins gehostet wird. Bei dieser Bereitstellung werden der Status des virtuellen Computers und die CPU-Auslastung überwacht und Warnungen gesendet.
+- **Azure-Überwachungsdienste:** Dieser Dienst [überwacht][monitor] den virtuellen Azure-Computer, auf dem Jenkins gehostet wird. Bei dieser Bereitstellung werden der Status des virtuellen Computers und die CPU-Auslastung überwacht und Warnungen gesendet.
 
 ## <a name="recommendations"></a>Empfehlungen
 

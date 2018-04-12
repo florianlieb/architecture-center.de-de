@@ -1,13 +1,13 @@
 ---
 title: Interaktive Datenuntersuchung
-description: 
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: a9e72f4cf88c9082fe79f854dd79e98bfaa918f5
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 20740a8fe912a63526c847416b832941f4ac33ec
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="interactive-data-exploration"></a>Interaktive Datenuntersuchung
 
@@ -50,9 +50,9 @@ In Frage kommender Azure-Dienst:
 
 - **Freigabe von Ergebnissen:** Es kann Auswirkungen auf die Sicherheit haben, wenn Benutzer Berichte oder Datenvisualisierungen erstellen und freigeben können.
 
-## <a name="architecture"></a>Architektur
+## <a name="architecture"></a>Architecture
 
-Das Ziel bei diesem Szenario ist zwar die Unterstützung der interaktiven Datenanalyse, aber die Data Science-Aufgaben zur Datenbereinigung, Stichprobenerstellung und Strukturierung umfassen häufig Prozesse mit langer Ausführungsdauer. Aus diesem Grund ist die Verwendung einer Architektur mit [Batchverarbeitung](./batch-processing.md) sinnvoll.
+Das Ziel bei diesem Szenario ist zwar die Unterstützung der interaktiven Datenanalyse, aber die Data Science-Aufgaben zur Datenbereinigung, Stichprobenerstellung und Strukturierung umfassen häufig Prozesse mit langer Ausführungsdauer. Aus diesem Grund ist die Verwendung einer Architektur mit [Batchverarbeitung](../big-data/batch-processing.md) sinnvoll.
 
 ## <a name="technology-choices"></a>Auswahl der Technologie
 
@@ -62,7 +62,7 @@ Die folgenden Technologiekomponenten sind für die interaktive Datenuntersuchung
 
 - **Azure Storage Blob-Container** oder **Azure Data Lake Store**: Data Scientists arbeiten im Allgemeinen mit Rohquelldaten, um sicherzustellen, dass sie Zugriff auf alle möglichen Features, Ausreißer und Fehler in den Daten haben. Bei einem Big Data-Szenario handelt es sich bei diesen Daten normalerweise um Dateien in einem Datenspeicher.
 
-Weitere Informationen finden Sie unter [Datenspeicher](../technology-choices/data-storage.md).
+Weitere Informationen finden Sie im Artikel zur [Datenspeicherung](../technology-choices/data-storage.md).
 
 ### <a name="batch-processing"></a>Batchverarbeitung
 

@@ -1,22 +1,22 @@
 ---
-title: "Bereitstellen virtueller Netzwerkgeräte mit hoher Verfügbarkeit"
-description: "Informationen zum Bereitstellen virtueller Netzwerkgeräte mit hoher Verfügbarkeit."
+title: Bereitstellen virtueller Netzwerkgeräte mit hoher Verfügbarkeit
+description: Informationen zum Bereitstellen virtueller Netzwerkgeräte mit hoher Verfügbarkeit.
 author: telmosampaio
 ms.date: 12/06/2016
 pnp.series.title: Network DMZ
 pnp.series.prev: secure-vnet-dmz
 cardTitle: Deploy highly available network virtual appliances
-ms.openlocfilehash: 844c87f535d2a8cb415489cb2c8e840f8c585d7d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: fe279eea3f9cb024d6c6c14943013b9b9a87bc9c
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="deploy-highly-available-network-virtual-appliances"></a>Bereitstellen hochverfügbarer virtueller Netzwerkgeräte
 
 In diesem Artikel erfahren Sie, wie eine Reihe virtueller Netzwerkgeräte (NVAs) für hohe Verfügbarkeit in Azure bereitgestellt wird. Ein NVA wird normalerweise verwendet, um den Netzwerkdatenverkehrsfluss von einem Umkreisnetzwerk (auch als DMZ bekannt) zu anderen Netzwerken oder Subnetzen zu steuern. Informationen zum Implementieren einer DMZ in Azure finden Sie unter [Microsoft-Clouddienste und Netzwerksicherheit][cloud-security]. Der Artikel enthält Beispielarchitekturen für nur eingehenden, nur ausgehenden sowie ein- und ausgehenden Datenverkehr. 
 
-**Voraussetzungen:** In diesem Artikel werden grundlegende Kenntnisse von Azure-Netzwerken, [Azure-Lastenausgleichsmodulen][lb-overview] und [benutzerdefinierten Routen][udr-overview] (UDRs) vorausgesetzt. 
+<strong>Voraussetzungen:</strong> In diesem Artikel werden grundlegende Kenntnisse von Azure-Netzwerken, [Azure-Lastenausgleichsmodulen][lb-overview] und [benutzerdefinierten Routen][udr-overview] (UDRs) vorausgesetzt. 
 
 
 ## <a name="architecture-diagrams"></a>Architekturdiagramme

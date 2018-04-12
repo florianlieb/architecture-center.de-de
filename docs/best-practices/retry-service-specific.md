@@ -1,14 +1,14 @@
 ---
 title: Anleitung zu dienstspezifischen Wiederholungsmechanismen
-description: "Spezifische Dienstanleitung für die Festlegung des Wiederholungsmechanismus."
+description: Spezifische Dienstanleitung für die Festlegung des Wiederholungsmechanismus.
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 6bb623bd8be89573178f250570407bf83d62c098
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: 332f96e73def360926b6a934bbb1361b2254ec41
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/23/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="retry-guidance-for-specific-services"></a>Wiederholungsanleitung für bestimmte Dienste
 
@@ -478,7 +478,6 @@ public async static Task<SqlDataReader> ExecuteReaderWithRetryAsync(this SqlComm
 
     }, cancellationToken);
 }
-
 ```
 
 Diese asynchrone Erweiterungsmethode kann wie unten beschrieben verwendet werden.
@@ -792,7 +791,7 @@ namespace RetryCodeSamples
                 try
                 {
                     var retryTimeInMilliseconds = TimeSpan.FromSeconds(4).Milliseconds; // delay between retries
-                    
+
                     // Using object-based configuration.
                     var options = new ConfigurationOptions
                                         {

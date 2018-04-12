@@ -1,17 +1,17 @@
 ---
 title: Bereitstellen von SAP NetWeaver und SAP HANA in Azure
-description: "Enthält die bewährten Methoden zum Ausführen von SAP HANA in einer Hochverfügbarkeitsumgebung in Azure."
+description: Enthält die bewährten Methoden zum Ausführen von SAP HANA in einer Hochverfügbarkeitsumgebung in Azure.
 author: njray
 ms.date: 06/29/2017
-ms.openlocfilehash: 27a97103c0c6f305cb8e830d670c8d0ba7e22aa5
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 33171164c59a520a87ef3209c5bb1b208377221c
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="deploy-sap-netweaver-and-sap-hana-on-azure"></a>Bereitstellen von SAP NetWeaver und SAP HANA in Azure
 
-Anhand dieser Referenzarchitektur werden einige bewährte Methoden für die Ausführung von SAP HANA in einer Hochverfügbarkeitsumgebung in Azure veranschaulicht. [**Stellen Sie diese Lösung bereit**.](#deploy-the-solution)
+Anhand dieser Referenzarchitektur werden einige bewährte Methoden für die Ausführung von SAP HANA in einer Hochverfügbarkeitsumgebung in Azure veranschaulicht. [**So stellen Sie diese Lösung bereit**.](#deploy-the-solution)
 
 ![0][0]
 
@@ -20,9 +20,9 @@ Anhand dieser Referenzarchitektur werden einige bewährte Methoden für die Ausf
 > [!NOTE]
 > Zum Bereitstellen dieser Referenzarchitektur ist eine geeignete Lizenzierung von SAP-Produkten und anderen nicht von Microsoft stammenden Technologiekomponenten erforderlich. Informationen zur Partnerschaft zwischen Microsoft und SAP finden Sie unter [SAP HANA in Azure][sap-hana-on-azure].
 
-## <a name="architecture"></a>Architektur
+## <a name="architecture"></a>Architecture
 
-Diese Architektur besteht aus den folgenden Komponenten:
+Die Architektur umfasst die folgenden Komponenten.
 
 - **Virtuelles Netzwerk (VNET)**. Ein VNet ist eine Darstellung eines logisch isolierten Netzwerks in Azure. Alle VMs in dieser Referenzarchitektur werden in demselben VNet bereitgestellt. Das VNet ist in Subnetze unterteilt. Erstellen Sie ein getrenntes Subnetz für jede Ebene, z.B. Anwendung (SAP NetWeaver), Datenbank (SAP HANA), Verwaltung (Jumpbox) und Active Directory.
 
@@ -46,9 +46,9 @@ Diese Architektur besteht aus den folgenden Komponenten:
 
 - **VPN Gateway**: Mit dem VPN Gateway wird Ihr lokales Netzwerk auf das Azure VNet erweitert. Sie können auch eine ExpressRoute-Verbindung verwenden, bei der eine dedizierte private Verbindung genutzt wird, die nicht über das öffentliche Internet verläuft. In der Beispiellösung wird das Gateway nicht bereitgestellt. Weitere Informationen finden Sie unter [Connect an on-premises network to Azure][hybrid-networking] (Verbinden eines lokalen Netzwerks mit Azure).
 
-## <a name="recommendations"></a>Recommendations
+## <a name="recommendations"></a>Empfehlungen
 
-Ihre Anforderungen können von der hier beschriebenen Architektur abweichen. Verwenden Sie diese Empfehlungen als Ausgangspunkt.
+Ihre Anforderungen können von der hier beschriebenen Architektur abweichen. Verwenden Sie diese Empfehlungen als Startpunkt.
 
 ### <a name="load-balancers"></a>Load Balancer
 
@@ -75,7 +75,7 @@ Wir empfehlen die Verwendung von [Azure Managed Disks][managed-disks], um die be
 
 Zur Erreichung eines hohen Durchsatzes in Bezug auf IOPS und die Datenträger-Bandbreite gelten für das Azure-Speicherlayout die gängigen Vorgehensweisen zur Leistungsoptimierung für Speichervolumes. Wenn beispielsweise mehrere Datenträger per Striping verknüpft werden, um ein größeres Datenträgervolume zu erstellen, verbessert sich die E/A-Leistung. Eine Aktivierung des Lesecaches für Speicherinhalte, die sich in unregelmäßigen Abständen ändern, bewirkt eine höhere Geschwindigkeit beim Datenabruf. Ausführliche Informationen zu den Leistungsanforderungen finden Sie unter [SAP Note 1943937 – Hardware Configuration Check Tool][sap-1943937] (SAP-Hinweis 1943937 – Tool für die Überprüfung der Hardwarekonfiguration).
 
-Für den Sicherungsdatenspeicher empfehlen wir die Verwendung der [kalten Speicherebene][cool-blob-storage] des Azure-Blobspeichers. Die kalte Speicherebene ist eine kostengünstige Möglichkeit zum Speichern von Daten, auf die weniger häufig zugegriffen wird und die eine lange Lebensdauer haben.
+Für den Sicherungsdatenspeicher empfehlen wir die Verwendung der [kalten Speicherebene][cool-blob-storage] von Azure Blob Storage. Die kalte Speicherebene ist eine kostengünstige Möglichkeit zum Speichern von Daten, auf die weniger häufig zugegriffen wird und die eine lange Lebensdauer haben.
 
 ## <a name="scalability-considerations"></a>Überlegungen zur Skalierbarkeit
 
@@ -165,7 +165,7 @@ Sie können diese Architektur inkrementell oder auf einmal bereitstellen. Für d
 |----------------|-----------------------------------------------------|
 | infrastructure | Stellt die Netzwerkinfrastruktur in Azure bereit.        |
 | workload       | Stellt die SAP-Server im Netzwerk bereit.             |
-| all            | Stellt alle vorherigen Bereitstellungen bereit.              |
+| alle            | Stellt alle vorherigen Bereitstellungen bereit.              |
 
 Führen Sie die folgenden Schritte aus, um die Lösung bereitzustellen:
 
@@ -235,7 +235,7 @@ Führen Sie nach dem Bereitstellen der SAP-Infrastruktur wie unten angegeben auf
 [sap-hana-on-azure]: https://azure.microsoft.com/services/virtual-machines/sap-hana/
 [sap-netweaver-dr]: http://download.microsoft.com/download/9/5/6/956FEDC3-702D-4EFB-A7D3-2DB7505566B6/SAP%20NetWeaver%20-%20Building%20an%20Azure%20based%20Disaster%20Recovery%20Solution%20V1_5%20.docx
 [sap-security]: https://archive.sap.com/documents/docs/DOC-62943
-[visio-download]: https://archcenter.azureedge.net/cdn/SAP-HANA-architecture.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/SAP-HANA-architecture.vsdx
 [vm-sizes-mem]: /azure/virtual-machines/windows/sizes-memory
 [swd]: https://help.sap.com/doc/saphelp_nw70ehp2/7.02.16/en-us/48/8fe37933114e6fe10000000a421937/frameset.htm
 [0]: ./images/sap-hana.png "SAP HANA-Architektur mit Microsoft Azure"

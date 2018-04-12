@@ -1,17 +1,17 @@
 ---
 title: Skalierbare Webanwendung
-description: "Verbessern der Skalierbarkeit in einer Webanwendung, die in Microsoft Azure ausgeführt wird."
+description: Verbessern der Skalierbarkeit in einer Webanwendung, die in Microsoft Azure ausgeführt wird.
 author: MikeWasson
 pnp.series.title: Azure App Service
 pnp.series.prev: basic-web-app
 pnp.series.next: multi-region-web-app
 ms.date: 11/23/2016
 cardTitle: Improve scalability
-ms.openlocfilehash: 4ad12fb041a79fcb706530c9968fd0f96211d7f9
-ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
+ms.openlocfilehash: 6459acebfa25491332e2118b9e8fe51d5fc79ff3
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/30/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="improve-scalability-in-a-web-application"></a>Verbessern der Skalierbarkeit in einer Webanwendung
 
@@ -30,7 +30,7 @@ Diese Architektur basiert auf der unter [Einfache Webanwendung][basic-web-app] g
 * **WebJob**. Verwenden Sie [Azure WebJobs][webjobs] zum Ausführen lang andauernder Aufgaben im Hintergrund. WebJobs können nach einem Zeitplan, fortlaufend oder als Reaktion auf einen Trigger, z. B. das Ablegen einer Nachricht in einer Warteschlange, ausgeführt werden. Ein WebJob wird als Hintergrundprozess im Kontext einer App Service-App ausgeführt.
 * **Warteschlange**. Bei der hier gezeigten Architektur setzt die Anwendung Hintergrundaufgaben in eine Warteschlange, indem eine Nachricht in einer [Azure Queue Storage][queue-storage]-Warteschlange abgelegt wird. Die Nachricht löst eine Funktion im WebJob aus. Alternativ können Sie Service Bus-Warteschlangen verwenden. Einen Vergleich finden Sie unter [Azure- und Service Bus-Warteschlangen – Vergleich und Gegenüberstellung][queues-compared].
 * **Cache**. Speichern Sie semistatische Daten in [Azure Redis Cache][azure-redis].  
-* **CDN**. Verwenden Sie [Azure Content Delivery Network][azure-cdn] (CDN) zum Zwischenspeichern öffentlich verfügbarer Inhalte für geringere Latenz und schnellere Bereitstellung der Inhalte.
+* <strong>CDN</strong>. Verwenden Sie [Azure Content Delivery Network][azure-cdn] (CDN) zum Zwischenspeichern öffentlich verfügbarer Inhalte für geringere Latenz und schnellere Bereitstellung der Inhalte.
 * **Datenspeicher**. Verwenden Sie eine [Azure SQL-Datenbank][sql-db] für relationale Daten. Für nicht relationale Daten sollten Sie einen NoSQL-Speicher, z. B. [Cosmos DB][cosmosdb], in Betracht ziehen.
 * **Azure Search**. Verwenden Sie [Azure Search][azure-search] zum Hinzufügen von Suchfunktionalität wie z. B. Suchvorschläge, Fuzzysuche und sprachspezifische Suchen. Azure Search wird normalerweise in Verbindung mit einem anderen Datenspeicher verwendet, insbesondere dann, wenn der primäre Datenspeicher strikte Konsistenz erfordert. Bei dieser Vorgehensweise speichern Sie autorisierende Daten in dem anderen Datenspeicher und den Suchindex in Azure Search. Azure Search kann auch zum Konsolidieren eines einzelnen Suchindex aus mehreren Datenspeichern verwendet werden.  
 * **E-Mail/SMS**. Verwenden Sie einen Drittanbieter-Dienst, z. B. SendGrid oder Twilio, zum Senden von E-Mail- oder SMS-Nachrichten, statt diese Funktionalität direkt in die Anwendung zu integrieren.
@@ -148,7 +148,7 @@ Verwenden Sie [Transparent Data Encryption][sql-encryption], wenn in der Datenba
 [sql-elastic]: /azure/sql-database/sql-database-elastic-scale-introduction
 [sql-encryption]: https://msdn.microsoft.com/library/dn948096.aspx
 [tm]: https://azure.microsoft.com/services/traffic-manager/
-[visio-download]: https://archcenter.azureedge.net/cdn/app-service-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/app-service-reference-architectures.vsdx
 [web-app-multi-region]: ./multi-region.md
 [webjobs-guidance]: ../../best-practices/background-jobs.md
 [webjobs]: /azure/app-service/app-service-webjobs-readme

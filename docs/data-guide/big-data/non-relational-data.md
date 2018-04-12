@@ -3,17 +3,17 @@ title: Nicht relationale Daten und NoSQL
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 8dd8f2b9dfef680f99c9c6b32aacf019c13095b0
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: 2c284099bd7e8bbb85f1252a24d699d9fca09eae
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/31/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="non-relational-data-and-nosql"></a>Nicht relationale Daten und NoSQL
 
 Eine *nicht relationale Datenbank* ist eine Datenbank, die nicht das tabellarische Schema mit Zeilen und Spalten verwendet, das in den meisten herkömmlichen Datenbanksystemen zum Einsatz kommt. Nicht relationale Daten verwenden stattdessen ein Speichermodell, das für die spezifischen Anforderungen des gespeicherten Datentyps optimiert ist. So können die Daten beispielsweise als einfache Schlüssel-Wert-Paare, als JSON-Dokumente oder als Diagramm mit Edges und Scheitelpunkten gespeichert werden. 
 
-Diese Datenspeicher haben alle eins gemeinsam: Sie verwenden kein [relationales Modell](./relational-data.md). Darüber hinaus sind sie für gewöhnlich spezifischer, was die Art der unterstützten Daten und die Vorgehensweise zum Abfragen von Daten angeht. So sind Zeitreihen-Datenspeicher beispielsweise für Abfragen über zeitbasierte Sequenzen von Daten optimiert, während Diagrammdatenspeicher für die Untersuchung gewichteter Beziehungen zwischen Entitäten optimiert sind. Beide Formate eignen sich nicht sonderlich gut für die allgemeine Verwaltung von Transaktionsdaten. 
+Diese Datenspeicher haben alle eins gemeinsam: Sie verwenden kein [relationales Modell](../relational-data/index.md). Darüber hinaus sind sie für gewöhnlich spezifischer, was die Art der unterstützten Daten und die Vorgehensweise zum Abfragen von Daten angeht. So sind Zeitreihen-Datenspeicher beispielsweise für Abfragen über zeitbasierte Sequenzen von Daten optimiert, während Diagrammdatenspeicher für die Untersuchung gewichteter Beziehungen zwischen Entitäten optimiert sind. Beide Formate eignen sich nicht sonderlich gut für die allgemeine Verwaltung von Transaktionsdaten. 
 
 Der Begriff *NoSQL* bezieht sich auf Datenspeicher, die anstelle von SQL andere Programmiersprachen und Konstrukte für Datenabfragen verwenden. In der Praxis bedeutet „NoSQL“ so viel wie „nicht relationale Datenbank“, auch wenn viele dieser Datenbanken SQL-kompatible Abfragen unterstützen. Die zugrunde liegende Abfrageausführungsstrategie unterscheidet sich jedoch in der Regel deutlich von der Ausführung der gleichen SQL-Abfrage durch ein herkömmliches RDBMS.
 

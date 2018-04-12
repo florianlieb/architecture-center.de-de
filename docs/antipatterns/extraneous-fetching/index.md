@@ -1,13 +1,13 @@
 ---
-title: "Antimuster „Extraneous Fetching“ (Irrelevante Abrufe)"
-description: "Das Abrufen von mehr Daten, als für einen Geschäftsvorgang erforderlich sind, kann zu unnötigem E/A-Mehraufwand und einer Reduzierung der Reaktionsfähigkeit führen."
+title: Antimuster „Extraneous Fetching“ (Irrelevante Abrufe)
+description: Das Abrufen von mehr Daten, als für einen Geschäftsvorgang erforderlich sind, kann zu unnötigem E/A-Mehraufwand und einer Reduzierung der Reaktionsfähigkeit führen.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: 8a808dce62a1c80c126b7b1df536f74c46726ea1
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 7a72bfd3e4b2e206f3266a046fac2083224ecb4f
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="extraneous-fetching-antipattern"></a>Antimuster „Extraneous Fetching“ (Irrelevante Abrufe)
 
@@ -17,7 +17,7 @@ Das Abrufen von mehr Daten, als für einen Geschäftsvorgang erforderlich sind, 
 
 Dieses Antimuster kann auftreten, wenn die Anwendung versucht, die Anzahl von E/A-Anforderungen gering zu halten, indem alle *ggf.* benötigten Daten abgerufen werden. Dies ist häufig das Ergebnis einer Überkompensation für das Antimuster [Chatty I/O][chatty-io] (Sehr hohe Zahl von E/A-Vorgängen). Es kann beispielsweise sein, dass eine Anwendung die Details für jedes Produkt einer Datenbank abruft. Der Benutzer benötigt aber ggf. nur einen Teil dieser Details (da einige für Kunden nicht relevant sind) und muss vermutlich nicht *alle* Produkte auf einmal sehen können. Auch wenn sich der Benutzer den gesamten Katalog ansieht, ist es sinnvoll, die Ergebnisse nach Seiten aufzuteilen und beispielsweise jeweils nur 20 anzuzeigen.
 
-Ursachen dieses Problems können eine schlechte Programmierung oder ein unzureichender Entwurf sein. Im folgenden Code wird beispielsweise Entity Framework verwendet, um die gesamten Details zu jedem Produkt abzurufen. Anschließend werden die Ergebnisse gefiltert, um nur eine Teilmenge der Felder zurückzugeben, und die restlichen Daten werden verworfen. Das vollständige Codebeispiel finden Sie [hier][sample-app].
+Ursachen dieses Problems können eine schlechte Programmierung oder ein unzureichender Entwurf sein. Im folgenden Code wird beispielsweise Entity Framework verwendet, um die gesamten Details zu jedem Produkt abzurufen. Anschließend werden die Ergebnisse gefiltert, um nur eine Teilmenge der Felder zurückzugeben, und die restlichen Daten werden verworfen. Das vollständige Beispiel finden Sie [hier][sample-app].
 
 ```csharp
 public async Task<IHttpActionResult> GetAllFieldsAsync()
@@ -34,7 +34,7 @@ public async Task<IHttpActionResult> GetAllFieldsAsync()
 }
 ```
 
-Im nächsten Beispiel ruft die Anwendung Daten zum Durchführen eines Aggregationsvorgangs ab, der stattdessen von der Datenbank übernommen werden könnte. Die Anwendung berechnet den Gesamtumsatz, indem alle Datensätze für alle bearbeiteten Bestellungen abgerufen werden und anschließend die Summe für diese Datensätze gebildet wird. Das vollständige Codebeispiel finden Sie [hier][sample-app].
+Im nächsten Beispiel ruft die Anwendung Daten zum Durchführen eines Aggregationsvorgangs ab, der stattdessen von der Datenbank übernommen werden könnte. Die Anwendung berechnet den Gesamtumsatz, indem alle Datensätze für alle bearbeiteten Bestellungen abgerufen werden und anschließend die Summe für diese Datensätze gebildet wird. Das vollständige Beispiel finden Sie [hier][sample-app].
 
 ```csharp
 public async Task<IHttpActionResult> AggregateOnClientAsync()
@@ -232,7 +232,6 @@ Hier sind die entsprechenden Telemetriedaten für die `AggregateOnDatabaseAsync`
 
 
 [BusyDatabase]: ../busy-database/index.md
-[chatty-io]: ../chatty-io.md
 [data-partitioning]: ../../best-practices/data-partitioning.md
 [new-relic]: https://newrelic.com/application-monitoring
 

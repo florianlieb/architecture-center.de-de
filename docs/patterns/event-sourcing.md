@@ -1,6 +1,6 @@
 ---
 title: Ereignissourcing
-description: "Verwenden Sie einen nur zum Anfügen vorgesehenen Speicher, um die vollständige Serie von Ereignissen aufzuzeichnen, die die mit Daten in einer Domäne ausgeführten Aktionen beschreiben."
+description: Verwenden Sie einen nur zum Anfügen vorgesehenen Speicher, um die vollständige Serie von Ereignissen aufzuzeichnen, die die mit Daten in einer Domäne ausgeführten Aktionen beschreiben.
 keywords: Entwurfsmuster
 author: dragon119
 ms.date: 06/23/2017
@@ -8,11 +8,11 @@ pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - data-management
 - performance-scalability
-ms.openlocfilehash: d5d4e99a6ff49cb823f592c83590471c0d68bfd1
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 9a0bf170c9b54c3b2ee9cc91d6dcb5c55a13b96a
+ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 03/17/2018
 ---
 # <a name="event-sourcing-pattern"></a>Muster „Ereignissourcing“
 
@@ -52,17 +52,17 @@ Die Abbildung zeigt eine Übersicht über das Muster, einschließlich einiger Op
 
 Das Ereignissourcingmuster bietet folgende Vorteile:
 
-Ereignisse sind unveränderlich und können mit einem Nur-Anfügen-Vorgang gespeichert werden. Benutzeroberflächenelemente, Workflows oder Prozesse, die ein Ereignis auslösen, können weiterhin ausgeführt werden, und Tasks, die die Ereignisse verarbeiten, können im Hintergrund ausgeführt werden. In Verbindung mit der Tatsache, dass bei der Verarbeitung von Transaktionen keine Konflikte auftreten, kann dies die Leistung und Skalierbarkeit von Anwendungen erheblich verbessern, insbesondere für die Darstellungsschicht oder die Benutzeroberfläche.
+- Ereignisse sind unveränderlich und können mit einem Nur-Anfügen-Vorgang gespeichert werden. Benutzeroberflächenelemente, Workflows oder Prozesse, die ein Ereignis auslösen, können weiterhin ausgeführt werden, und Tasks, die die Ereignisse verarbeiten, können im Hintergrund ausgeführt werden. In Verbindung mit der Tatsache, dass bei der Verarbeitung von Transaktionen keine Konflikte auftreten, kann dies die Leistung und Skalierbarkeit von Anwendungen erheblich verbessern, insbesondere für die Darstellungsschicht oder die Benutzeroberfläche.
 
-Ereignisse sind einfache Objekte, die eine bestimmte durchgeführte Aktion sowie alle zugehörigen Daten beschreiben, die zum Beschreiben der durch das Ereignis repräsentierten Aktion erforderlich sind. Ereignisse aktualisieren einen Datenspeicher nicht direkt. Sie werden nur aufgezeichnet, um zur richtigen Zeit verarbeitet zu werden. Dies kann die Implementierung und Verwaltung vereinfachen.
+- Ereignisse sind einfache Objekte, die eine bestimmte durchgeführte Aktion sowie alle zugehörigen Daten beschreiben, die zum Beschreiben der durch das Ereignis repräsentierten Aktion erforderlich sind. Ereignisse aktualisieren einen Datenspeicher nicht direkt. Sie werden nur aufgezeichnet, um zur richtigen Zeit verarbeitet zu werden. Dies kann die Implementierung und Verwaltung vereinfachen.
 
-Ereignisse haben in der Regel eine Bedeutung für einen Domänenexperten, während die [objektrelationale Unverträglichkeit](https://en.wikipedia.org/wiki/Object-relational_impedance_mismatch) (Object-Relational Impedance Mismatch) dazu führen kann, dass komplexe Datenbanktabellen schwer zu verstehen sind. Tabellen sind künstliche Konstrukte, die den aktuellen Zustand des Systems repräsentieren, nicht die aufgetretenen Ereignisse.
+- Ereignisse haben in der Regel eine Bedeutung für einen Domänenexperten, während die [objektrelationale Unverträglichkeit](https://en.wikipedia.org/wiki/Object-relational_impedance_mismatch) (Object-Relational Impedance Mismatch) dazu führen kann, dass komplexe Datenbanktabellen schwer zu verstehen sind. Tabellen sind künstliche Konstrukte, die den aktuellen Zustand des Systems repräsentieren, nicht die aufgetretenen Ereignisse.
 
-Ereignissourcing kann verhindern, dass gleichzeitige Updates Konflikte verursachen, weil Objekte nicht direkt im Datenspeicher aktualisiert werden müssen. Das Domänenmodell muss jedoch weiterhin so entworfen werden, dass es sich selbst vor Anforderungen schützen kann, die zu einem inkonsistenten Zustand führen könnten.
+- Ereignissourcing kann verhindern, dass gleichzeitige Updates Konflikte verursachen, weil Objekte nicht direkt im Datenspeicher aktualisiert werden müssen. Das Domänenmodell muss jedoch weiterhin so entworfen werden, dass es sich selbst vor Anforderungen schützen kann, die zu einem inkonsistenten Zustand führen könnten.
 
-Die Nur-Anfügen-Speicherung von Ereignissen bietet einen Überwachungspfad, der für folgende Aufgaben verwendet werden kann: Überwachen von Aktionen in einem Datenspeicher, Wiederherstellen des aktuellen Zustands als materialisierte Sichten oder Projektionen durch die Wiedergabe der Ereignisse zu einem beliebigen Zeitpunkt sowie Testen und Debuggen des Systems. Darüber hinaus wird durch die Anforderung, zum Abbrechen von Änderungen kompensierende Ereignisse zu verwenden, ein Verlauf der rückgängig gemachten Änderungen erstellt. Dies wäre nicht der Fall, wenn das Modell einfach nur den aktuellen Zustand speichern würde. Die Liste der Ereignisse kann auch verwendet werden, um die Anwendungsleistung zu analysieren und Trends im Benutzerverhalten zu erkennen oder um andere hilfreiche Geschäftsinformationen abzurufen.
+- Die Nur-Anfügen-Speicherung von Ereignissen bietet einen Überwachungspfad, der für folgende Aufgaben verwendet werden kann: Überwachen von Aktionen in einem Datenspeicher, Wiederherstellen des aktuellen Zustands als materialisierte Sichten oder Projektionen durch die Wiedergabe der Ereignisse zu einem beliebigen Zeitpunkt sowie Testen und Debuggen des Systems. Darüber hinaus wird durch die Anforderung, zum Abbrechen von Änderungen kompensierende Ereignisse zu verwenden, ein Verlauf der rückgängig gemachten Änderungen erstellt. Dies wäre nicht der Fall, wenn das Modell einfach nur den aktuellen Zustand speichern würde. Die Liste der Ereignisse kann auch verwendet werden, um die Anwendungsleistung zu analysieren und Trends im Benutzerverhalten zu erkennen oder um andere hilfreiche Geschäftsinformationen abzurufen.
 
-Der Ereignisspeicher löst Ereignisse aus, Tasks führen Vorgänge als Reaktion auf diese Ereignisse aus. Diese Abkopplung der Tasks von den Ereignissen sorgt für Flexibilität und Erweiterbarkeit. Tasks kennen den Ereignistyp und die Ereignisdaten, aber nicht den Vorgang, der das Ereignis ausgelöst hat. Darüber hinaus kann jedes Ereignis von mehreren Tasks verarbeitet werden. Dies ermöglicht eine einfache Integration in andere Dienste und Systeme, die nur auf neue vom Ereignisspeicher ausgelöste Ereignisse lauschen. Die Ereignisse beim Ereignissourcing sind jedoch zuweilen sehr spezifisch, und es ist möglicherweise erforderlich, stattdessen spezielle Integrationsereignisse zu generieren.
+- Der Ereignisspeicher löst Ereignisse aus, Tasks führen Vorgänge als Reaktion auf diese Ereignisse aus. Diese Abkopplung der Tasks von den Ereignissen sorgt für Flexibilität und Erweiterbarkeit. Tasks kennen den Ereignistyp und die Ereignisdaten, aber nicht den Vorgang, der das Ereignis ausgelöst hat. Darüber hinaus kann jedes Ereignis von mehreren Tasks verarbeitet werden. Dies ermöglicht eine einfache Integration in andere Dienste und Systeme, die nur auf neue vom Ereignisspeicher ausgelöste Ereignisse lauschen. Die Ereignisse beim Ereignissourcing sind jedoch zuweilen sehr spezifisch, und es ist möglicherweise erforderlich, stattdessen spezielle Integrationsereignisse zu generieren.
 
 > Das Ereignissourcing wird häufig mit dem CQRS-Muster kombiniert, indem als Reaktion auf die Ereignisse Datenverwaltungstasks ausgeführt und aus den gespeicherten Ereignissen Sichten materialisiert werden.
 

@@ -1,13 +1,13 @@
 ---
 title: Erweiterte Analyse
-description: 
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
 ms.openlocfilehash: 31ba357fe37b1de35a6eea324d2d1d6766e172e5
-ms.sourcegitcommit: 29fbcb1eec44802d2c01b6d3bcf7d7bd0bae65fc
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/27/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="advanced-analytics"></a>Erweiterte Analyse
 

@@ -1,22 +1,53 @@
 ---
-title: Auswählen eines Data Warehouse
+title: Data Warehousing und Data Marts
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 9cb3d4d0196b02da76d85c7f7f0e4a2a69d531e9
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: 552cdfad2d571c93f83bc1e4ff0d09ac12d0b6a4
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/31/2018
+ms.lasthandoff: 04/06/2018
 ---
-# <a name="choosing-a-data-warehouse-in-azure"></a>Auswählen eines Data Warehouse in Azure
+# <a name="data-warehousing-and-data-marts"></a>Data Warehousing und Data Marts
 
-Ein Datawarehouse ist ein zentrales, organisatorisches, relationales Repository für integrierte Daten aus einer einzelnen Quelle oder aus mehreren unterschiedlichen Quellen. In diesem Thema werden Data Warehouse-Optionen in Azure verglichen.
+Ein Datawarehouse ist ein zentrales, organisatorisches, relationales Repository für integrierte Daten aus einer einzelnen Quelle oder aus mehreren unterschiedlichen Quellen, die sich über mehrere oder alle Themenbereiche erstrecken. Data Warehouses speichern aktuelle und historische Daten und werden zur Erstellung verschiedener Datenberichte und -analysen verwendet.
 
-> [!NOTE]
-> Weitere Informationen zur Verwendung eines Data Warehouse finden Sie unter [Data warehousing and data marts](../scenarios/data-warehousing.md) (Data Warehousing und Data Marts).
+![Data Warehousing in Azure](../images/data-warehousing.png)
 
-## <a name="what-are-your-options-when-choosing-a-data-warehouse"></a>Welche Data Warehouse-Optionen stehen zur Verfügung?
+Für ein Data Warehouse vorgesehene Daten werden in regelmäßigen Abständen aus verschiedenen Quellen mit wichtigen Unternehmensdaten extrahiert. Die Daten können im Zuge der Verschiebung formatiert, bereinigt, validiert, zusammengefasst und neu strukturiert werden. Alternativ können die Daten in der niedrigsten Detailebene gespeichert werden – mit aggregierten Ansichten, die im Warehouse zur Berichterstellung zur Verfügung stehen. In beiden Fällen fungiert das Data Warehouse als permanenter Speicherplatz für Daten, die für Berichte, zur Analyse und zum Treffen wichtiger geschäftlicher Entscheidungen unter Verwendung von BI-Tools (Business Intelligence) verwendet werden.
+
+## <a name="data-marts-and-operational-data-stores"></a>Data Marts und Speicher für operative Daten
+
+Die bedarfsgerechte Verwaltung von Daten ist eine komplexe Angelegenheit, und es wird immer seltener ein einzelnes Data Warehouse verwendet, das alle Daten des gesamten Unternehmens darstellt. Stattdessen erstellen Organisationen kleinere, spezifischere Data Warehouses. Diese werden als *Data Marts* bezeichnet und machen die gewünschten Daten für die Analyse verfügbar. Ein Orchestrierungsprozess füllt die Data Marts mit Daten aus einem Speicher für operative Daten. Der Speicher für operative Daten fungiert als Vermittler zwischen dem Quelltransaktionssystem und dem Data Mart. Bei den Daten, die durch den Speicher für operative Daten verwaltet werden, handelt es sich um eine bereinigte Version der Daten aus dem Quelltransaktionssystem und in der Regel um eine Teilmenge der historischen Daten, die vom Data Warehouse oder Data Mart verwaltet werden. 
+
+## <a name="when-to-use-this-solution"></a>Verwendung dieser Lösung
+
+Entscheiden Sie sich für ein Data Warehouse, wenn Sie große Mengen von Daten aus operativen Systemen in ein leicht verständliches, aktuelles und exaktes Format bringen müssen. Data Warehouses müssen nicht die gleiche knappe Datenstruktur verwenden, die ggf. in Ihren operativen Datenbanken/OLTP-Datenbanken zur Anwendung kommt. Sie können Spaltennamen verwenden, die für geschäftliche Benutzer und Analytiker sinnvoll sind, das Schema zur Vereinfachung von Datenbeziehungen umstrukturieren und mehrere Tabellen in einer einzelnen Tabelle zusammenfassen. Dadurch unterstützen Sie Benutzer bei der Erstellung von Ad-hoc-Berichten bzw. bei der Erstellung von Berichten und der Analyse der Daten in BI-Systemen, sodass sie diese Schritte ohne die Hilfe von einem Datenbankadministrator (DBA) oder Datenentwickler ausführen können.
+
+Ziehen Sie die Verwendung eines Data Warehouse in Betracht, wenn historische Daten aus Leistungsgründen von den Quelltransaktionssystemen getrennt bleiben müssen. Data Warehouses bieten einen zentralen Ort mit gängigen Formaten, Schlüsseln, Datenmodellen und Zugriffsmethoden, um den Zugriff auf historische Daten von mehreren Orten zu vereinfachen.
+
+Data Warehouses sind für Lesezugriff optimiert, was eine schnellere Berichterstellung ermöglicht (verglichen mit der Ausführung von Berichten für das Quelltransaktionssystem). Darüber hinaus bieten Data Warehouses folgende Vorteile:
+
+* Alle historischen Daten aus mehreren Quellen können über ein Data Warehouse gespeichert und als alleingültige Quelle genutzt werden.
+* Sie können die Qualität der Daten verbessern, indem Sie sie beim Importieren in das Data Warehouse bereinigen sowie präzisere Daten und konsistente Codes und Beschreibungen bereitstellen.
+* Berichtstools konkurrieren nicht mit den Quelltransaktionssystemen um Abfrageverarbeitungszyklen. Mit einem Data Warehouse kann sich das Transaktionssystem vorwiegend um die Behandlung von Schreibvorgängen kümmern, während das Data Warehouse den Großteil der Leseanforderungen bewältigt.
+* Ein Data Warehouse kann zur Konsolidierung von Daten aus anderer Software verwendet werden.
+* Mit Data Mining-Tools lassen sich automatische Methoden auf in Ihrem Warehouse gespeicherte Daten anwenden, um verborgene Muster zu finden.
+* Data Warehouses vereinfachen die Bereitstellung von sicherem Zugriff für autorisierte Benutzer sowie die Beschränkung des Zugriffs für andere. Die geschäftlichen Benutzer benötigen keinen Zugriff auf die Quelldaten, wodurch ein potenzieller Angriffsvektor für Transaktionssysteme in der Produktionsumgebung beseitigt wird.
+* Data Warehouses vereinfachen die Erstellung von Business Intelligence-Lösungen, die auf den Daten aufbauen (beispielsweise [OLAP-Cubes](online-analytical-processing.md)).
+
+## <a name="challenges"></a>Herausforderungen
+
+Benutzer, die ein Data Warehouse ordnungsgemäß für ihre geschäftlichen Anforderungen konfigurieren möchten, sehen sich unter Umständen mit einigen der folgenden Herausforderungen konfrontiert:
+
+* Zeitaufwand für die ordnungsgemäße Modellierung der Geschäftskonzepte: Dies ist ein wichtiger Aspekt, da Data Warehouses informationsgesteuert sind und der Rest des Projekts auf der Konzeptzuordnung basiert. Dieser Schritt umfasst die Standardisierung geschäftsspezifischer Begriffe und allgemeiner Formate (etwa für Währung und Datumsangaben) sowie die Strukturierung des Schemas in einer Weise, die für geschäftliche Benutzer sinnvoll ist, ohne jedoch die Präzision von Datenaggregaten und Beziehungen zu beeinträchtigen.
+* Planung und Einrichtung Ihrer Datenorchestrierung: Hierbei ist zu berücksichtigen, wie Daten aus dem Quelltransaktionssystem in das Data Warehouse kopiert und wann historische Daten aus Ihren Speichern für operative Daten in das Warehouse verschoben werden sollen.
+* Gewährleistung oder Optimierung der Datenqualität durch Bereinigung der Daten beim Importieren in das Warehouse
+
+## <a name="data-warehousing-in-azure"></a>Data Warehousing in Azure
+
+In Azure können einzelne oder mehrere Datenquellen vorhanden sein, die entweder auf Kundentransaktionen oder auf verschiedenen Geschäftsanwendungen basieren, die von unterschiedlichen Abteilungen verwendet werden. Diese Daten sind üblicherweise in mindestens einer [OLTP](online-transaction-processing.md)-Datenbank gespeichert. Die Daten können auf anderen Speichermedien wie Netzwerkfreigaben, in Azure Storage-Blobs oder in einem Data Lake gespeichert werden. Die Daten können auch vom Data Warehouse selbst oder in einer relationalen Datenbank wie Azure SQL-Datenbank gespeichert werden. Die Analysedatenspeicher-Ebene dient zum Abwickeln von Abfragen, die von Analyse- und Berichtstools für das Data Warehouse oder für den Data Mart ausgegeben werden. In Azure kann für diese Analysespeicherfunktion Azure SQL Data Warehouse oder Azure HDInsight mit Hive oder Interactive Query verwendet werden. Darüber hinaus benötigen Sie ein gewisses Maß an Orchestrierung, um Daten in regelmäßigen Abständen aus dem Datenspeicher in das Data Warehouse zu verschieben oder zu kopieren. Hierzu können Sie Azure Data Factory oder Oozie in Azure HDInsight verwenden.
 
 Ein Data Warehouse kann in Azure auf verschiedene Arten implementiert werden. Für welche Option Sie sich entscheiden, hängt ganz von Ihren Anforderungen ab. Die folgenden Listen sind in zwei Kategorien unterteilt: [symmetrisches Multiprocessing](https://en.wikipedia.org/wiki/Symmetric_multiprocessing) (SMP) und [Massively Parallel Processing](https://en.wikipedia.org/wiki/Massively_parallel) (MPP). 
 
@@ -31,7 +62,7 @@ MPP:
 - [Apache Hive in HDInsight](/azure/hdinsight/hadoop/hdinsight-use-hive)
 - [Interactive Query (Hive LLAP) in HDInsight](/azure/hdinsight/interactive-query/apache-interactive-query-get-started)
 
-Allgemein gilt: SMP-basierte Warehouses eignen sich am besten für kleine bis mittelgroße Datasets (4 bis 100 TB), während MPP häufig für Big Data verwendet wird. Die Abgrenzung zwischen kleinen/mittelgroßen Daten und Big Data hängt zum Teil mit der Definition und der unterstützenden Infrastruktur Ihres Unternehmens zusammen. (Weitere Informationen finden Sie unter [Choosing an OLTP data store](oltp-data-stores.md#scalability-capabilities) (Auswählen eines OLTP-Datenspeichers).) 
+Allgemein gilt: SMP-basierte Warehouses eignen sich am besten für kleine bis mittelgroße Datasets (4 bis 100 TB), während MPP häufig für Big Data verwendet wird. Die Abgrenzung zwischen kleinen/mittelgroßen Daten und Big Data hängt zum Teil mit der Definition und der unterstützenden Infrastruktur Ihres Unternehmens zusammen. (Weitere Informationen finden Sie unter [Choosing an OLTP data store](online-transaction-processing.md#scalability-capabilities) (Auswählen eines OLTP-Datenspeichers).) 
 
 Abgesehen davon hat die Art des Workloadmusters wahrscheinlich einen größeren Einfluss auf die Entscheidung als die Datengröße. So können beispielsweise komplexe Abfragen für eine SMP-Lösung zu langsam sein und die Verwendung einer MPP-Lösung erforderlich machen. Bei MPP-basierten Systemen ist mit Leistungseinbußen bei geringen Datengrößen zu rechnen, was auf die knotenübergreifende Verteilung und Konsolidierung der Aufträge zurückzuführen ist. Wenn die Größe Ihrer Daten bereits 1 TB übersteigt und voraussichtlich weiter zunimmt, empfiehlt sich die Verwendung einer MPP-Lösung. Und auch wenn Ihre Daten kleiner sind, Ihre Workloads aber die verfügbaren Ressourcen Ihrer SMP-Lösung übersteigen, ist MPP wahrscheinlich die beste Wahl.
 
@@ -60,7 +91,7 @@ Beantworten Sie die folgenden Fragen, um die Auswahl einzuschränken:
 
 - Ist die Datenquelle bei einem großen Dataset strukturiert oder unstrukturiert? Unstrukturierte Daten müssen ggf. in einer Big Data-Umgebung wie Spark in HDInsight, Azure Databricks, Hive LLAP in HDInsight oder Azure Data Lake Analytics verarbeitet werden. Alle diese Optionen können als ELT-Modul (Extrahieren, Laden, Transformieren) sowie als ETL-Modul (Extrahieren, Transformieren, Laden) fungieren. Die verarbeiteten Daten können als strukturierte Daten ausgegeben werden, um sie leichter in SQL Data Warehouse oder in eine der anderen Optionen laden zu können. Für strukturierte Daten bietet SQL Data Warehouse die Leistungsstufe „Optimiert für Compute“, die für rechenintensive Workloads mit sehr hohen Leistungsanforderungen konzipiert ist.
 
-- Möchten Sie Ihre historischen Daten und Ihre aktuellen operativen Daten trennen? Falls ja, wählen Sie eine der Optionen, die eine [Orchestrierung](pipeline-orchestration-data-movement.md) erfordern. Hierbei handelt es sich um eigenständige Warehouses, die für intensiven Lesezugriff optimiert und am besten als separater Speicher für historische Daten geeignet sind.
+- Möchten Sie Ihre historischen Daten und Ihre aktuellen operativen Daten trennen? Falls ja, wählen Sie eine der Optionen, die eine [Orchestrierung](../technology-choices/pipeline-orchestration-data-movement.md) erfordern. Hierbei handelt es sich um eigenständige Warehouses, die für intensiven Lesezugriff optimiert und am besten als separater Speicher für historische Daten geeignet sind.
 
 - Müssen Sie Daten aus mehreren Quellen (abgesehen von Ihrem OLTP-Datenspeicher) integrieren? Falls ja, empfiehlt sich die Verwendung einer Option mit einfacher Integration mehrerer Datenquellen. 
 
@@ -118,15 +149,15 @@ In den folgenden Tabellen sind die Hauptunterschiede der Funktionen zusammengefa
 
 ### <a name="security-capabilities"></a>Sicherheitsfunktionen
 
-| | Azure SQL-Datenbank | SQL Server auf einem virtuellen Computer | SQL Data Warehouse | Apache Hive in HDInsight | Hive LLAP in HDInsight |
-| --- | --- | --- | --- | --- | --- | -- |
-| Authentifizierung  | SQL/Azure Active Directory (Azure AD) | SQL/Azure AD/Active Directory | SQL/Azure AD | Lokal/Azure AD <sup>1</sup> | Lokal/Azure AD <sup>1</sup> |
-| Autorisierung  | Ja | Ja | Ja | Ja | Ja<sup>1</sup> | Ja<sup>1</sup> |
-| Überwachung  | Ja | Ja | Ja | Ja | Ja<sup>1</sup> | Ja<sup>1</sup> |
-| Datenverschlüsselung ruhender Daten | Ja<sup>2</sup> | Ja<sup>2</sup> | Ja<sup>2</sup> | Ja<sup>2</sup> | Ja<sup>1</sup> | Ja<sup>1</sup> |
-| Sicherheit auf Zeilenebene | Ja | Ja | Ja | Nein  | Ja<sup>1</sup> | Ja<sup>1</sup> |
-| Unterstützung von Firewalls | Ja | Ja | Ja | Ja | Ja<sup>3</sup> | Ja<sup>3</sup> |
-| Dynamische Datenmaskierung | Ja | Ja | Ja | Nein  | Ja<sup>1</sup> | Ja<sup>1</sup> |
+|                         |           Azure SQL-Datenbank            |  SQL Server auf einem virtuellen Computer  | SQL Data Warehouse |   Apache Hive in HDInsight    |    Hive LLAP in HDInsight     |
+|-------------------------|-----------------------------------------|-----------------------------------|--------------------|-------------------------------|-------------------------------|
+|     Authentifizierung      | SQL/Azure Active Directory (Azure AD) | SQL/Azure AD/Active Directory |   SQL/Azure AD   | Lokal/Azure AD <sup>1</sup> | Lokal/Azure AD <sup>1</sup> |
+|      Autorisierung      |                   Ja                   |                Ja                |        Ja         |              Ja              |       Ja<sup>1</sup>        |
+|        Überwachung         |                   Ja                   |                Ja                |        Ja         |              Ja              |       Ja<sup>1</sup>        |
+| Datenverschlüsselung ruhender Daten |            Ja<sup>2</sup>             |         Ja<sup>2</sup>          |  Ja<sup>2</sup>  |       Ja<sup>2</sup>        |       Ja<sup>1</sup>        |
+|   Sicherheit auf Zeilenebene    |                   Ja                   |                Ja                |        Ja         |              Nein                |       Ja<sup>1</sup>        |
+|   Unterstützung von Firewalls    |                   Ja                   |                Ja                |        Ja         |              Ja              |       Ja<sup>3</sup>        |
+|  Dynamische Datenmaskierung   |                   Ja                   |                Ja                |        Ja         |              Nein                |       Ja<sup>1</sup>        |
 
 [1] Erfordert die Verwendung eines [in die Domäne eingebundenen HDInsight-Clusters](/azure/hdinsight/domain-joined/apache-domain-joined-introduction).
 

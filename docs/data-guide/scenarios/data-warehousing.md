@@ -1,13 +1,13 @@
 ---
 title: Data Warehousing und Data Marts
-description: 
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
 ms.openlocfilehash: eec883c68cf94637c3061814d0841c73b58d7e52
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 03/31/2018
 ---
 # <a name="data-warehousing-and-data-marts"></a>Data Warehousing und Data Marts
 

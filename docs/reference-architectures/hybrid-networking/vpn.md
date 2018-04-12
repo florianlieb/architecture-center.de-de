@@ -1,27 +1,27 @@
 ---
-title: "Verbinden eines lokalen Netzwerks mit Azure über ein VPN"
-description: "Erläutert, wie Sie eine sichere Netzwerkarchitektur zwischen Standorten implementieren, die ein virtuelles Azure-Netzwerk und ein lokales Netzwerk umfasst, die über ein VPN verbunden sind."
+title: Verbinden eines lokalen Netzwerks mit Azure über ein VPN
+description: Erläutert, wie Sie eine sichere Netzwerkarchitektur zwischen Standorten implementieren, die ein virtuelles Azure-Netzwerk und ein lokales Netzwerk umfasst, die über ein VPN verbunden sind.
 author: RohitSharma-pnp
 ms.date: 11/28/2016
 pnp.series.title: Connect an on-premises network to Azure
 pnp.series.next: expressroute
 pnp.series.prev: ./index
 cardTitle: VPN
-ms.openlocfilehash: 66b2605c551148fadcdee6808c4e85940089f1e5
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: dafcee6607d9cc7c56c332f9ed5d9568ff70f0e7
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="connect-an-on-premises-network-to-azure-using-a-vpn-gateway"></a>Verbinden eines lokalen Netzwerks mit Azure über ein VPN-Gateway
 
-Diese Referenzarchitektur zeigt, wie Sie ein lokales Netzwerk auf Azure ausdehnen, indem Sie ein VPN (virtuelles privates Netzwerk) zwischen Standorten verwenden. Der Datenverkehr zwischen dem lokalen Netzwerk und dem virtuellen Azure-Netzwerk (VNet) wird durch einen IPSec-VPN-Tunnel übertragen. [**Stellen Sie diese Lösung bereit**.](#deploy-the-solution)
+Diese Referenzarchitektur zeigt, wie Sie ein lokales Netzwerk auf Azure ausdehnen, indem Sie ein VPN (virtuelles privates Netzwerk) zwischen Standorten verwenden. Der Datenverkehr zwischen dem lokalen Netzwerk und dem virtuellen Azure-Netzwerk (VNet) wird durch einen IPSec-VPN-Tunnel übertragen. [**So stellen Sie diese Lösung bereit**.](#deploy-the-solution)
 
 ![[0]][0]
 
 *Laden Sie eine [Visio-Datei][visio-download] mit dieser Architektur herunter.*
 
-## <a name="architecture"></a>Architektur 
+## <a name="architecture"></a>Architecture 
 
 Die Architektur umfasst die folgenden Komponenten.
 
@@ -29,7 +29,7 @@ Die Architektur umfasst die folgenden Komponenten.
 
 * **VPN-Gerät**. Ein Gerät oder ein Dienst, das bzw. der externe Konnektivität mit dem lokalen Netzwerk bereitstellt. Bei dem VPN-Gerät kann es sich um ein Hardwaregerät oder eine Softwarelösung, z.B. den Routing- und RAS-Dienst unter Windows Server 2012, handeln. Eine Liste unterstützter VPN-Geräte und Informationen zu ihrer Konfiguration für die Verbindung mit einem Azure-VPN-Gateway finden Sie in den Anweisungen für das ausgewählte Gerät unter [Informationen zu VPN-Geräten für VPN-Gatewayverbindungen zwischen Standorten][vpn-appliance].
 
-* **Virtuelles Netzwerk (VNet)**. Die Cloudanwendung und die Komponenten des Azure-VPN-Gateways befinden sich im selben [VNet][azure-virtual-network].
+* **Virtuelles Netzwerk (VNET)**. Die Cloudanwendung und die Komponenten des Azure-VPN-Gateways befinden sich im selben [VNet][azure-virtual-network].
 
 * **Azure-VPN-Gateway**. Der Dienst [VPN Gateway][azure-vpn-gateway] ermöglicht dem VNet, über ein VPN-Gerät eine Verbindung mit dem lokalen Netzwerk herzustellen. Weitere Informationen finden Sie unter [Verbinden eines lokalen Netzwerks mit einem Microsoft Azure Virtual Network][connect-to-an-Azure-vnet]. Das VPN-Gateway enthält die folgenden Elemente:
   
@@ -44,7 +44,7 @@ Die Architektur umfasst die folgenden Komponenten.
 
 ## <a name="recommendations"></a>Empfehlungen
 
-Die folgenden Empfehlungen gelten für die meisten Szenarien. Sofern Sie keine besonderen Anforderungen haben, die Vorrang haben, sollten Sie diese Empfehlungen befolgen.
+Die folgenden Empfehlungen gelten für die meisten Szenarios. Sofern Sie keine besonderen Anforderungen haben, die Vorrang haben, sollten Sie diese Empfehlungen befolgen.
 
 ### <a name="vnet-and-gateway-subnet"></a>VNet und Gatewaysubnetz
 
@@ -85,7 +85,7 @@ Wählen Sie die Azure VPN Gateway SKU, die Ihren Durchsatzanforderungen am ehest
 | --- | --- | --- |
 | Basic |100 MBit/s |10 |
 | Standard |100 MBit/s |10 |
-| High Performance |200 MBit/s |30 |
+| Leistung |200 MBit/s |30 |
 
 > [!NOTE]
 > Die SKU „Basic“ ist nicht mit Azure ExpressRoute kompatibel. Sie können [die SKU ändern][changing-SKUs], nachdem das Gateway erstellt wurde.
@@ -433,11 +433,11 @@ Die folgenden Empfehlungen sind nützlich, um festzustellen, ob es Probleme mit 
 ## <a name="deploy-the-solution"></a>Bereitstellen der Lösung
 
 
-**Voraussetzungen**. Sie müssen über eine lokale Infrastruktur verfügen, die bereits mit einem geeigneten Netzwerkgerät konfiguriert ist.
+**Voraussetzungen** Sie müssen über eine lokale Infrastruktur verfügen, die bereits mit einer geeigneten Netzwerkappliance konfiguriert ist.
 
 Führen Sie die folgenden Schritte aus, um die Lösung bereitzustellen.
 
-1. Klicken Sie auf die Schaltfläche unten:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fhybrid-networking%2Fvpn%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
+1. Klicken Sie auf diese Schaltfläche:<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fhybrid-networking%2Fvpn%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
 2. Warten Sie, bis der Link im Azure-Portal geöffnet wird, und gehen Sie dann folgendermaßen vor: 
    * Der Name der **Ressourcengruppe** ist bereits in der Parameterdatei definiert. Wählen Sie also **Neu erstellen**, und geben Sie im Textfeld `ra-hybrid-vpn-rg` ein.
    * Wählen Sie im Dropdownfeld **Standort** die Region aus.
@@ -488,7 +488,7 @@ Führen Sie die folgenden Schritte aus, um die Lösung bereitzustellen.
 [application-insights]: /azure/application-insights/app-insights-overview-usage
 [forced-tunneling]: https://azure.microsoft.com/documentation/articles/vpn-gateway-about-forced-tunneling/
 [vpn-appliances]: /azure/vpn-gateway/vpn-gateway-about-vpn-devices
-[visio-download]: https://archcenter.azureedge.net/cdn/hybrid-network-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/hybrid-network-architectures.vsdx
 [vpn-appliance-ipsec]: /azure/vpn-gateway/vpn-gateway-about-vpn-devices#ipsec-parameters
 <!--[solution-script]: https://github.com/mspnp/reference-architectures/tree/master/guidance-hybrid-network-vpn/Deploy-ReferenceArchitecture.ps1-->
 <!--[solution-script-bash]: https://github.com/mspnp/reference-architectures/tree/master/guidance-hybrid-network-vpn/deploy-reference-architecture.sh-->

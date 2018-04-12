@@ -1,5 +1,5 @@
 ---
-title: "Integrieren von lokalen AD-Domänen in Azure Active Directory"
+title: Integrieren von lokalen AD-Domänen in Azure Active Directory
 description: Erfahren Sie, wie Sie eine sichere hybride Netzwerkarchitektur mit Azure Active Directory implementieren.
 author: telmosampaio
 pnp.series.title: Identity management
@@ -7,15 +7,15 @@ ms.date: 11/28/2016
 pnp.series.next: adds-extend-domain
 pnp.series.prev: ./index
 cardTitle: Integrate on-premises AD with Azure AD
-ms.openlocfilehash: dd4cf0369974ea68d240ed294b1c50972d361d74
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 431de4b2e08c79f70cc9830fda8315e07bf22c64
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="integrate-on-premises-active-directory-domains-with-azure-active-directory"></a>Integrieren von lokalen Active Directory-Domänen in Azure Active Directory
 
-Azure Active Directory (Azure AD) ist ein cloudbasierter mehrinstanzenfähiger Verzeichnis- und Identitätsdienst. Die folgende Referenzarchitektur zeigt bewährte Methoden zum Integrieren von lokalen Active Directory-Domänen in Azure AD, um cloudbasierte Identitätsauthentifizierung bereitzustellen. [**Stellen Sie diese Lösung bereit**.](#deploy-the-solution)
+Azure Active Directory (Azure AD) ist ein cloudbasierter mehrinstanzenfähiger Verzeichnis- und Identitätsdienst. Die folgende Referenzarchitektur zeigt bewährte Methoden zum Integrieren von lokalen Active Directory-Domänen in Azure AD, um cloudbasierte Identitätsauthentifizierung bereitzustellen. [**So stellen Sie diese Lösung bereit**.](#deploy-the-solution)
 
 [![0]][0] 
 
@@ -37,7 +37,7 @@ Typische Einsatzmöglichkeiten für diese Referenzarchitektur sind:
 
 Weitere Überlegungen finden Sie unter [Auswählen einer Lösung für die Integration einer lokalen Active Directory-Instanz in Azure][considerations]. 
 
-## <a name="architecture"></a>Architektur
+## <a name="architecture"></a>Architecture
 
 Diese Architektur besteht aus den folgenden Komponenten.
 
@@ -52,7 +52,7 @@ Diese Architektur besteht aus den folgenden Komponenten.
 
 * **Virtuelle Computer (VMs) für eine n-schichtige Anwendung**. Die Bereitstellung beinhaltet eine Infrastruktur für eine n-schichtige Anwendung. Weitere Informationen zu diesen Ressourcen finden Sie unter [Ausführen von Windows-VMs für eine n-schichtige Anwendung][implementing-a-multi-tier-architecture-on-Azure].
 
-## <a name="recommendations"></a>Recommendations
+## <a name="recommendations"></a>Empfehlungen
 
 Die folgenden Empfehlungen gelten für die meisten Szenarios. Sofern Sie keine besonderen Anforderungen haben, die Vorrang haben, sollten Sie diese Empfehlungen befolgen. 
 
@@ -107,7 +107,7 @@ Konfigurieren Sie Azure AD Connect so, dass eine Topologie implementiert wird, d
 
 * **Stagingserver**. In dieser Konfiguration wird eine zweite Instanz des Azure AD Connect-Synchronisierungsservers parallel zur ersten ausgeführt. Diese Struktur unterstützt Szenarien wie die folgenden:
   
-  * Hohe Verfügbarkeit.
+  * Hochverfügbarkeit.
   * Testen und Bereitstellen einer neuen Konfigurations des Azure AD Connect-Synchronisierungsservers.
   * Einführen eines neuen Servers und Außerbetriebnahme einer alten Konfiguration. 
     
@@ -119,7 +119,7 @@ Weitere Informationen zu diesen Topologien finden Sie unter [Topologien für Azu
 
 ### <a name="user-authentication"></a>Benutzerauthentifizierung
 
-Standardmäßig konfiguriert der Azure AD Connect-Synchronisierungsserver Kennwortsynchronisierung zwischen der lokalen Domäne und Azure AD, und für den Azure AD-Dienst wird davon ausgegangen, dass Benutzer sich authentifizieren, indem sie das Kennwort bereitstellen, dass sie lokal verwenden. Für viele Organisationen ist dies geeignet, Sie sollten aber die vorhandenen Richtlinien und die vorhandene Infrastruktur Ihres Unternehmens berücksichtigen. Beispiel:
+Standardmäßig konfiguriert der Azure AD Connect-Synchronisierungsserver Kennwortsynchronisierung zwischen der lokalen Domäne und Azure AD, und für den Azure AD-Dienst wird davon ausgegangen, dass Benutzer sich authentifizieren, indem sie das Kennwort bereitstellen, dass sie lokal verwenden. Für viele Organisationen ist dies geeignet, Sie sollten aber die vorhandenen Richtlinien und die vorhandene Infrastruktur Ihres Unternehmens berücksichtigen. Beispiel: 
 
 * Die Sicherheitsrichtlinie Ihrer Organisation könnte verhindern, dass Kennworthashes in der Cloud synchronisiert werden.
 * Sie könnten fordern, dass für Benutzer nahtloses einmaligen Anmelden verwendet wird, wenn sie im Unternehmensnetzwerk von Computern, die zur Domäne gehören, auf Cloudressourcen zugreifen.
@@ -260,7 +260,7 @@ Eine Bereitstellung für eine Referenzarchitektur, die diese Empfehlungen und Ü
 [considerations]: ./considerations.md
 [resource-manager-overview]: /azure/azure-resource-manager/resource-group-overview
 [sla-aad]: https://azure.microsoft.com/support/legal/sla/active-directory/v1_0/
-[visio-download]: https://archcenter.azureedge.net/cdn/identity-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/identity-architectures.vsdx
 
 
 [0]: ./images/azure-ad.png "Cloud-Identitätsarchitektur mit Azure Active Directory"
