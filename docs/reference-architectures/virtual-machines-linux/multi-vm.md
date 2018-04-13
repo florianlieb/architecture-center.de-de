@@ -1,16 +1,16 @@
 ---
-title: "Ausführen von VMs mit Lastenausgleich in Azure zur Steigerung von Skalierbarkeit und Verfügbarkeit"
-description: "Ausführen mehrerer virtueller Linux-Computer in Azure zur Steigerung von Skalierbarkeit und Verfügbarkeit"
+title: Ausführen von VMs mit Lastenausgleich in Azure zur Steigerung von Skalierbarkeit und Verfügbarkeit
+description: Ausführen mehrerer virtueller Linux-Computer in Azure zur Steigerung von Skalierbarkeit und Verfügbarkeit
 author: telmosampaio
 ms.date: 11/16/2017
 pnp.series.title: Linux VM workloads
 pnp.series.next: n-tier
 pnp.series.prev: single-vm
-ms.openlocfilehash: 8f081baa40355b4f02b83c308466df8333d7ad87
-ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
+ms.openlocfilehash: 2c8b1310e0a76ae0cea0a52cdbd2a0e5d3205d6e
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="run-load-balanced-vms-for-scalability-and-availability"></a>Ausführen von VMs mit Lastenausgleich zur Steigerung von Skalierbarkeit und Verfügbarkeit
 
@@ -129,7 +129,7 @@ Eine Bereitstellung für diese Architektur ist auf [GitHub][github-folder] verf�
 
 Bevor Sie die Referenzarchitektur in Ihrem eigenen Abonnement bereitstellen können, müssen Sie die folgenden Schritte ausführen.
 
-1. Klonen oder Forken Sie das GitHub-Repository [AzureCAT-Referenzarchitekturen][ref-arch-repo], oder laden Sie die zugehörige ZIP-Datei herunter.
+1. Klonen oder Forken Sie das GitHub-Repository [Referenzarchitekturen][ref-arch-repo], oder laden Sie die entsprechende ZIP-Datei herunter.
 
 2. Vergewissern Sie sich, dass Azure CLI 2.0 auf Ihrem Computer installiert ist. Anweisungen zur CLI-Installation finden Sie unter [Installieren von Azure-CLI 2.0][azure-cli-2].
 
@@ -137,9 +137,9 @@ Bevor Sie die Referenzarchitektur in Ihrem eigenen Abonnement bereitstellen kön
 
 4. Melden Sie sich über eine Eingabeaufforderung, eine bash-Eingabeaufforderung oder die PowerShell-Eingabeaufforderung bei Ihrem Azure-Konto an. Verwenden Sie dazu die unten aufgeführten Befehle, und befolgen Sie die Anweisungen.
 
-  ```bash
-  az login
-  ```
+   ```bash
+   az login
+   ```
 
 ### <a name="deploy-the-solution-using-azbb"></a>Bereitstellen der Lösung mit azbb
 
@@ -149,16 +149,16 @@ Gehen Sie zum Bereitstellen der einzelnen VM-Beispielworkloads folgendermaßen v
 
 2. Öffnen Sie die Datei `multi-vm-v2.json`, geben Sie einen Benutzernamen und den SSH-Schlüssel wie unten dargestellt zwischen den Anführungszeichen an, und speichern Sie die Datei.
 
-  ```bash
-  "adminUsername": "",
-  "sshPublicKey": "",
-  ```
+   ```bash
+   "adminUsername": "",
+   "sshPublicKey": "",
+   ```
 
 3. Führen Sie `azbb` aus, um die virtuellen Computer wie unten dargestellt bereitzustellen.
 
-  ```bash
-  azbb -s <subscription_id> -g <resource_group_name> -l <location> -p multi-vm-v2.json --deploy
-  ```
+   ```bash
+   azbb -s <subscription_id> -g <resource_group_name> -l <location> -p multi-vm-v2.json --deploy
+   ```
 
 Weitere Informationen zum Bereitstellen dieser Beispielreferenzarchitektur finden Sie in unserem [GitHub-Repository][git].
 
@@ -187,7 +187,7 @@ Weitere Informationen zum Bereitstellen dieser Beispielreferenzarchitektur finde
 [runbook-gallery]: /azure/automation/automation-runbook-gallery#runbooks-in-runbook-gallery
 [single-vm]: single-vm.md
 [subscription-limits]: /azure/azure-subscription-service-limits
-[visio-download]: https://archcenter.azureedge.net/cdn/vm-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/vm-reference-architectures.vsdx
 [vm-disk-limits]: /azure/azure-subscription-service-limits#virtual-machine-disk-limits
 [vm-scaleset]: /azure/virtual-machine-scale-sets/virtual-machine-scale-sets-overview
 [vm-sizes]: https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/

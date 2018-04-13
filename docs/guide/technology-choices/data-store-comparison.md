@@ -1,12 +1,12 @@
 ---
-title: "Kriterien für die Auswahl eines Datenspeichers"
-description: "Übersicht über Azure-Computeoptionen"
+title: Kriterien für die Auswahl eines Datenspeichers
+description: Übersicht über Azure-Computeoptionen
 author: MikeWasson
-ms.openlocfilehash: 7fb75cd334438c5b985fa04ad8afe3236f2391f8
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 9cb2f77b854a38450490bc96bf0b6a2998ceb1c7
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="criteria-for-choosing-a-data-store"></a>Kriterien für die Auswahl eines Datenspeichers
 
@@ -61,7 +61,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
 ## <a name="relational-database-management-systems-rdbms"></a>Managementsysteme für relationale Datenbanken (RDBMS)
 
 <table>
-<tr><td>**Workload**</td>
+<tr><td><strong>Workload</strong></td>
     <td>
         <ul>
             <li>Die Erstellung neuer Datensätze sowie die Aktualisierung vorhandener Daten werden regelmäßig durchgeführt.</li>
@@ -74,7 +74,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
         </ul>
     </td>
 </tr>
-<tr><td>**Datentyp**</td>
+<tr><td><strong>Datentyp</strong></td>
     <td>
         <ul>
             <li>Daten sind stark normalisiert.</li>
@@ -87,7 +87,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
         </ul>
     </td>
 </tr>
-<tr><td>**Beispiele**</td>
+<tr><td><strong>Beispiele</strong></td>
     <td>
         <ul>
             <li>Branchenspezifisch (Personalverwaltung, Customer Relationship Management, Enterprise Resource Planning)</li>
@@ -105,7 +105,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
 ## <a name="document-databases"></a>Dokumentdatenbanken
 
 <table>
-<tr><td>**Workload**</td>
+<tr><td><strong>Workload</strong></td>
     <td>
         <ul>
             <li>Allgemeiner Zweck.</li>
@@ -117,7 +117,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
             <li>Einzelne Dokumente werden abgerufen und als einzelner Block geschrieben.</li>
     </td>
 </tr>
-<tr><td>**Datentyp**</td>
+<tr><td><strong>Datentyp</strong></td>
     <td>
         <ul>
             <li>Daten können auf denormalisierte Weise verwaltet werden.</li>
@@ -129,7 +129,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
         </ul>
     </td>
 </tr>
-<tr><td>**Beispiele**</td>
+<tr><td><strong>Beispiele</strong></td>
     <td>
         <ul>
             <li>Produktkatalog</li>
@@ -149,7 +149,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
 ## <a name="keyvalue-stores"></a>Schlüssel-Wert-Speicher
 
 <table>
-<tr><td>**Workload**</td>
+<tr><td><strong>Workload</strong></td>
     <td>
         <ul>
             <li>Die Identifizierung und der Zugriff auf Daten erfolgen mithilfe eines einzigen ID-Schlüssels, z.B. über ein Wörterbuch.</li>
@@ -160,7 +160,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
         </ul>
     </td>
 </tr>
-<tr><td>**Datentyp**</td>
+<tr><td><strong>Datentyp</strong></td>
     <td>
         <ul>
             <li>Die Datengröße ist tendenziell umfangreich.</li>
@@ -170,7 +170,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
         </ul>
     </td>
 </tr>
-<tr><td>**Beispiele**</td>
+<tr><td><strong>Beispiele</strong></td>
     <td>
         <ul>
             <li>Datenzwischenspeicherung</li>
@@ -186,7 +186,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
 ## <a name="graph-databases"></a>Diagrammdatenbanken
 
 <table>
-<tr><td>**Workload**</td>
+<tr><td><strong>Workload</strong></td>
     <td>
         <ul>
             <li>Die Beziehungen zwischen Datenelementen sind sehr komplex und erfordern viele Hops zwischen zugehörigen Datenelementen.</li>
@@ -195,7 +195,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
         </ul>
     </td>
 </tr>
-<tr><td>**Datentyp**</td>
+<tr><td><strong>Datentyp</strong></td>
     <td>
         <ul>
             <li>Daten bestehen aus Knoten und Beziehungen.</li>
@@ -205,23 +205,23 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
         </ul>
     </td>
 </tr>
-<tr><td>**Beispiele**</td>
+<tr><td><strong>Beispiele</strong></td>
     <td>
         <ul>
             <li>Organigramme</li>
             <li>Social Graphs</li>
             <li>Betrugserkennung</li>
             <li>Analyse</li>
-            <li>Empfehlungsmodule</li>
+            <li>Empfehlungs-Engines</li>
         </ul>
     </td>
 </tr>
 </table>
 
-## <a name="column-family-databases"></a>Column-Family-Datenbanken
+## <a name="column-family-databases"></a>Spaltenfamilien-Datenbanken
 
 <table>
-<tr><td>**Workload**</td>
+<tr><td><strong>Workload</strong></td>
     <td>
         <ul>
             <li>In den meisten Column-Family-Datenbanken werden Schreibvorgänge extrem schnell durchgeführt.</li>
@@ -232,7 +232,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
         </ul>
     </td>
 </tr>
-<tr><td>**Datentyp**</td>
+<tr><td><strong>Datentyp</strong></td>
     <td>
         <ul>
             <li>Daten werden in Tabellen gespeichert, die aus einer Schlüsselspalte und einer oder mehreren Spaltenfamilien bestehen.</li>
@@ -242,10 +242,10 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
         </ul>
     </td>
 </tr>
-<tr><td>**Beispiele**</td>
+<tr><td><strong>Beispiele</strong></td>
     <td>
         <ul>
-            <li>Recommendations</li>
+            <li>Empfehlungen</li>
             <li>Personalisierung</li>
             <li>Sensordaten</li>
             <li>Telemetrie</li>
@@ -262,7 +262,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
 ## <a name="search-engine-databases"></a>Suchmaschinen-Datenbanken
 
 <table>
-<tr><td>**Workload**</td>
+<tr><td><strong>Workload</strong></td>
     <td>
         <ul>
             <li>Indizierung von Daten aus mehreren Quellen und Diensten.</li>
@@ -274,7 +274,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
         </ul>
     </td>
 </tr>
-<tr><td>**Datentyp**</td>
+<tr><td><strong>Datentyp</strong></td>
     <td>
         <ul>
             <li>Teilweise strukturiert oder unstrukturiert</li>
@@ -283,7 +283,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
         </ul>
     </td>
 </tr>
-<tr><td>**Beispiele**</td>
+<tr><td><strong>Beispiele</strong></td>
     <td>
         <ul>
             <li>Produktkataloge</li>
@@ -299,7 +299,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
 ## <a name="data-warehouse"></a>Data Warehouse
 
 <table>
-<tr><td>**Workload**</td>
+<tr><td><strong>Workload</strong></td>
     <td>
         <ul>
             <li>Datenanalysen</li>
@@ -307,17 +307,17 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
         </ul>
     </td>
 </tr>
-<tr><td>**Datentyp**</td>
+<tr><td><strong>Datentyp</strong></td>
     <td>
         <ul>
             <li>Verlaufsdaten aus mehreren Quellen.</li>
-            <li>In der Regel denormalisiert in einem „Stern“- oder „Schneeflocken“-Schema, das aus Fakten- und Dimensionstabellen besteht.</li>
+            <li>In der Regel denormalisiert in einem Schema vom Typ &quot;Stern&quot; oder &quot;Schneeflocke&quot;, das aus Fakten- und Dimensionstabellen besteht.</li>
             <li>Wird normalerweise mit neuen Daten auf Basis eines Zeitplans geladen.</li>
-            <li>Dimensionstabellen enthalten häufig mehrere Verlaufsversionen einer Entität, die als *langsam veränderliche Dimension* bezeichnet wird.</li>
+            <li>Dimensionstabellen enthalten häufig mehrere Verlaufsversionen einer Entität, die als <em>langsam veränderliche Dimension</em> bezeichnet wird.</li>
         </ul>
     </td>
 </tr>
-<tr><td>**Beispiele**</td>
+<tr><td><strong>Beispiele</strong></td>
     <td>Enterprise Data Warehouse, das Daten für analytische Modelle, Berichte und Dashboards umfasst
     </td>
 </tr>
@@ -327,7 +327,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
 ## <a name="time-series-databases"></a>Zeitreihendatenbanken
 
 <table>
-<tr><td>**Workload**</td>
+<tr><td><strong>Workload</strong></td>
     <td>
         <ul>
             <li>Der überwiegende Anteil der Vorgänge sind Schreibvorgänge (95 bis 99 %).</li>
@@ -340,7 +340,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
         </ul>
     </td>
 </tr>
-<tr><td>**Datentyp**</td>
+<tr><td><strong>Datentyp</strong></td>
     <td>
         <ul>
             <li>Ein Zeitstempel wird als primärer Schlüssel und Sortiermechanismus verwendet.</li>
@@ -349,7 +349,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
         </ul>
     </td>
 </tr>
-<tr><td>**Beispiele**</td>
+<tr><td><strong>Beispiele</strong></td>
     <td>
         <ul>
             <li>Überwachungs- und Ereignistelemetrie</li>
@@ -362,7 +362,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
 ## <a name="object-storage"></a>Objektspeicher
 
 <table>
-<tr><td>**Workload**</td>
+<tr><td><strong>Workload</strong></td>
     <td>
         <ul>
             <li>Identifizierung erfolgt nach Schlüssel.</li>
@@ -372,7 +372,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
         </ul>
     </td>
 </tr>
-<tr><td>**Datentyp**</td>
+<tr><td><strong>Datentyp</strong></td>
     <td>
         <ul>
             <li>Die Datengröße ist umfangreich.</li>
@@ -381,7 +381,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
         </ul>
     </td>
 </tr>
-<tr><td>**Beispiele**</td>
+<tr><td><strong>Beispiele</strong></td>
     <td>
         <ul>
             <li>Bilder, Videos, Office-Dokumente, PDF-Dateien</li>
@@ -397,7 +397,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
 ## <a name="shared-files"></a>Freigegebene Dateien
 
 <table>
-<tr><td>**Workload**</td>
+<tr><td><strong>Workload</strong></td>
     <td>
         <ul>
             <li>Migration aus vorhandenen Apps, die mit dem Dateisystem interagieren.</li>
@@ -405,7 +405,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
         </ul>
     </td>
 </tr>
-<tr><td>**Datentyp**</td>
+<tr><td><strong>Datentyp</strong></td>
     <td>
         <ul>
             <li>Dateien in einer hierarchischen Gruppe von Ordnern.</li>
@@ -413,7 +413,7 @@ In den folgenden Abschnitten werden verschiedene Datenspeichermodelle in Bezug a
         </ul>
     </td>
 </tr>
-<tr><td>**Beispiele**</td>
+<tr><td><strong>Beispiele</strong></td>
     <td>
         <ul>
             <li>Legacydateien</li>

@@ -4,11 +4,11 @@ description: Leitfaden zum Erstellen einer gut konzipierten Web-API
 author: dragon119
 ms.date: 01/12/2018
 pnp.series.title: Best Practices
-ms.openlocfilehash: f0813c18da03b9deeabbf529a560c60e8ce579d8
-ms.sourcegitcommit: c93f1b210b3deff17cc969fb66133bc6399cfd10
+ms.openlocfilehash: a8c4a81835ebd3ebdba2fd2cec624a9a9d5646f5
+ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/05/2018
+ms.lasthandoff: 03/17/2018
 ---
 # <a name="api-design"></a>API-Design
 
@@ -121,7 +121,7 @@ Die Auswirkungen einer bestimmten Anforderung sollten davon abhängen, ob die Re
 | **Ressource** | **POST** | **GET** | **PUT** | **DELETE** |
 | --- | --- | --- | --- | --- |
 | /Kunden |Neuen Kunden erstellen |Alle Kunden abrufen |Massenaktualisierung aller Kunden |Alle Kunden entfernen |
-| /Kunden/1 |Fehler |Details für Kunden 1 abrufen |Details von Kunde 1 aktualisieren, falls vorhanden |Kunde 1 entfernen |
+| /Kunden/1 |Error |Details für Kunden 1 abrufen |Details von Kunde 1 aktualisieren, falls vorhanden |Kunde 1 entfernen |
 | /Kunden/1/Bestellungen |Neue Bestellung für Kunden 1 erstellen |Alle Bestellungen für Kunde 1 abrufen |Massenaktualisierung von Bestellungen für Kunde 1 |Alle Bestellungen für Kunde 1 entfernen |
 
 Die Unterschiede zwischen POST, PUT und PATCH können verwirrend sein.
@@ -422,7 +422,7 @@ Vorhandene Clientanwendungen werden möglicherweise weiterhin ordnungsgemäß au
 ### <a name="uri-versioning"></a>URI-Versionsverwaltung
 Bei jeder Änderung der Web-API oder des Ressourcenschemas fügen Sie eine für jede Ressource eine Versionsnummer für den URI hinzu. Die bereits vorhandenen URIs sollten weiterhin Ressourcen zurückgeben, die ihrem ursprünglichen Schema entsprechen.
 
-Erweiterung des vorherigen Beispiels: Wenn das Feld `address` in untergeordnete Felder umstrukturiert wird, die jeden einzelnen Teil der Adresse enthalten (z.B. `streetAddress`, `city`, `state` und `zipCode`), kann diese Version der Ressource über einen URI verfügbar gemacht werden, der eine Versionsnummer enthält, z.B. „http://adventure-works.com/v2/customers/3“:
+Erweiterung des vorherigen Beispiels: Wenn das Feld `address` in untergeordnete Felder umstrukturiert wird, die jeweils einzelne Teile der Adresse enthalten (etwa `streetAddress`, `city`, `state` und `zipCode`), kann diese Version der Ressource über einen URI verfügbar gemacht werden, der eine Versionsnummer enthält (Beispiel: http://adventure-works.com/v2/customers/3:).
 
 ```HTTP
 HTTP/1.1 200 OK
@@ -434,7 +434,7 @@ Content-Type: application/json; charset=utf-8
 Dieser Versionsverwaltungsmechanismus ist sehr einfach, hängt jedoch vom Server ab, der die Anforderung an das entsprechende Endgerät weiterleitet. Dieser Mechanismus kann jedoch schwerfällig werden, wenn die API mehrere Iterationen durchläuft und der Server eine Reihe von verschiedenen Versionen unterstützen muss. Aus der Sicht einer Puristen rufen die Clientanwendungen außerdem in allen Fällen dieselben Daten (Kunde 3) ab; daher sollte sich der URI im Grunde nicht abhängig von der Version unterscheiden. Dieses Schema erschwert zudem die Implementierung von HATEOAS, da alle Links die Versionsnummer in den URIs enthalten müssen.
 
 ### <a name="query-string-versioning"></a>Versionsverwaltung der Abfragezeichenfolge
-Anstatt mehrere URIs bereitzustellen, können Sie auch die Version der Ressource angeben, indem Sie in der Abfragezeichenfolge einen Parameter an die HTTP-Anforderung anfügen, z.B. *http://adventure-works.com/customers/3?version=2*. Der Versionsparameter sollte einen aussagekräftigen Standardwert wie z. B. „1“ aufweisen, wenn er von älteren Clientanwendungen weggelassen wird.
+Anstatt mehrere URIs bereitzustellen, können Sie auch die Version der Ressource angeben, indem Sie in der Abfragezeichenfolge einen Parameter an die HTTP-Anforderung anfügen (Beispiel: *http://adventure-works.com/customers/3?version=2*). Der Versionsparameter sollte einen aussagekräftigen Standardwert wie z. B. „1“ aufweisen, wenn er von älteren Clientanwendungen weggelassen wird.
 
 Dieser Ansatz hat den semantischen Vorteil, dass dieselbe Ressource immer vom gleichen URI abgerufen wird; er hängt jedoch davon ab, dass der Code, der die Anforderung behandelt, die Abfragezeichenfolge analysiert und die entsprechende HTTP-Antwort zurücksendet. Dieser Ansatz bringt beim Implementieren von HATEOAS dieselben Schwierigkeiten mit sich, wie der Mechanismus für die URI-Versionsverwaltung.
 

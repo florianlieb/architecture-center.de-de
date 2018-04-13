@@ -1,11 +1,11 @@
 ---
-title: "Symbole und andere Ressourcen für Architekturdiagramme"
-description: "Symbole, Visio-Vorlagen, PNG-Dateien und SVG-Dateien, die für die Erstellung eigener Architekturdiagramme nützlich sind"
-ms.openlocfilehash: 58a2046c0d463c1f331ea3f950f0c11c273ffc36
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+title: Symbole und andere Ressourcen für Architekturdiagramme
+description: Symbole, Visio-Vorlagen, PNG-Dateien und SVG-Dateien, die für die Erstellung eigener Architekturdiagramme nützlich sind
+ms.openlocfilehash: f65a09450ba1b7154e6d43bbc7bdb65212b21828
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/23/2018
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="icons-and-diagrams"></a>Symbole und Diagramme
 
@@ -27,6 +27,10 @@ Zusätzliche Symbole für Microsoft Office und zugehörige Technologien stehen i
 ## <a name="reference-architectures-visio-template"></a>Visio-Vorlage für Referenzarchitekturen 
 
 Eine Version der in den [Referenzarchitekturen](../reference-architectures/index.md) verwendeten Diagramme steht [im Visio-Format zum Download](https://aka.ms/arch-diagrams) bereit.
+
+## <a name="solution-architecture-diagrams"></a>Diagramme für die Lösungsarchitektur
+
+Microsoft veröffentlicht [Lösungsarchitekturen und dazugehörige Diagramme](https://azure.microsoft.com/solutions/architecture/). Die Diagramme können im SVG-Format heruntergeladen werden. Das SVG-Format kann in zahlreichen Tools geöffnet und bearbeitet werden (unter anderem in Visio und PowerPoint). Wenn Sie die Gruppierung des Diagramms aufheben, können Sie die einzelnen Symbole auswählen.   
 
 ## <a name="3d-blueprint-visio-template"></a>Visio-Vorlage „3D Blueprint“
 

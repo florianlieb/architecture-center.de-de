@@ -1,13 +1,13 @@
 ---
 title: Azure Architecture Center
-description: "Das Azure Architecture Center ist die offizielle zentrale Plattform, über die Sie Anleitungen, Blaupausen, Muster und bewährte Methoden für die Erstellung von Lösungen mit Microsoft Azure erhalten. Es wird von dem Microsoft-Team, das für Muster und Best Practices zuständig ist, zusammengestellt."
+description: Das Azure Architecture Center ist die offizielle zentrale Plattform, über die Sie Anleitungen, Blaupausen, Muster und bewährte Methoden für die Erstellung von Lösungen mit Microsoft Azure erhalten. Es wird von dem Microsoft-Team, das für Muster und Best Practices zuständig ist, zusammengestellt.
 layout: LandingPage
 ms.topic: landing-page
-ms.openlocfilehash: 31177903bea137b40a457fe9360596e8096d6ab2
-ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
+ms.openlocfilehash: 0ac5dd79f765fe9b649cc2ca83c0213b4ba28544
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/17/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="azure-architecture-center"></a>Azure Architecture Center
 
@@ -19,7 +19,7 @@ ms.lasthandoff: 03/17/2018
             <div class="cardSize">
                 <div class="cardPadding">
                     <div class="card">
-                        <img src="_images/a3g-logo.svg" alt="Azure Application Architecture Guide" />
+                        <img src="_images/a3g-logo.svg" alt="" />
                         <div class="cardText">
                             <h3>Azure-Anwendungsarchitekturleitfaden</h3>
                             <p> Ein Leitfaden für den Entwurf von skalierbaren, stabilen und hochverfügbaren Anwendungen basierend auf bewährten Methoden, die wir basierend auf Kundeninteraktionen entwickelt haben</p>
@@ -35,7 +35,7 @@ ms.lasthandoff: 03/17/2018
             <div class="cardSize">
                 <div class="cardPadding">
                     <div class="card">
-                        <img src="_images/reference-architectures.svg" alt="Azure Reference Architectures" />
+                        <img src="_images/reference-architectures.svg" alt="" />
                         <div class="cardText">
                             <h3>Referenzarchitekturen</h3>
                             <p>Eine Gruppe empfohlener Architekturen für Azure Jede Architektur umfasst bewährte Vorgehensweisen, Anweisungen und eine bereitstellbare Lösung.</p>
@@ -51,7 +51,7 @@ ms.lasthandoff: 03/17/2018
             <div class="cardSize">
                 <div class="cardPadding">
                     <div class="card">
-                        <img src="_images/cloud-design-patterns.svg" alt="Cloud Design Patterns" />
+                        <img src="_images/cloud-design-patterns.svg" alt="" />
                         <div class="cardText">
                             <h3>Cloudentwurfsmuster</h3>
                             <p>Entwurfsmuster für Entwickler und Lösungsarchitekten. Jedes Muster beschreibt ein Problem, einen Ansatz zu dessen Lösung und ein auf Azure basierendes Beispiel.</p>
@@ -73,7 +73,7 @@ ms.lasthandoff: 03/17/2018
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="_images/microservices.svg" alt="Designing, building, and operating microservices on Azure" />
+                                <img src="_images/microservices.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -93,7 +93,7 @@ ms.lasthandoff: 03/17/2018
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="_images/data-guide.svg" alt="Data Architecture Guide"  />
+                                <img src="_images/data-guide.svg" alt=""  />
                             </div>
                         </div>
                         <div class="cardText">
@@ -113,7 +113,7 @@ ms.lasthandoff: 03/17/2018
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="_images/best-practices.svg" alt="Best Practices" />
+                                <img src="_images/best-practices.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -133,7 +133,7 @@ ms.lasthandoff: 03/17/2018
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="_images/resiliency.svg" alt="Designing for Resiliency" />
+                                <img src="_images/resiliency.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -153,7 +153,7 @@ ms.lasthandoff: 03/17/2018
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="_images/azbb.svg" alt="Azure Building Blocks" />
+                                <img src="_images/azbb.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -173,7 +173,7 @@ ms.lasthandoff: 03/17/2018
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="_images/checklist.svg" alt="Design Review Checklists" />
+                                <img src="_images/checklist.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -187,18 +187,18 @@ ms.lasthandoff: 03/17/2018
     </li>
     <!-- Azure Virtual Datacenter -->
     <li>
-        <a href="https://aka.ms/vdc">
+        <a href="./vdc/index.md">
             <div class="cardSize">
                 <div class="cardPadding">
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="_images/virtual-datacenter.svg" alt="Azure Virtual Datacenter e-book" />
+                                <img src="_images/virtual-datacenter.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
-                            <h3>E-Book: Azure Virtual Datacenter</h3>
-                            <p>In diesem E-Book erfahren Sie, wie Sie Unternehmensworkloads unter Berücksichtigung Ihrer bereits vorhandenen Sicherheits- und Netzwerkrichtlinien für die Azure-Cloudplattform bereitstellen.</p>
+                            <h3>Virtuelles Azure-Rechenzentrum</h3>
+                            <p>Bei der Bereitstellung von Unternehmensworkloads in der Cloud müssen Organisationen die richtige Balance zwischen Governance und Entwickleragilität finden. Mit den Modellen des virtuellen Azure-Rechenzentrums können Sie diese Balance erreichen, wobei die Governance im Vordergrund steht.</p>
                         </div>
                     </div>
                 </div>
@@ -213,7 +213,7 @@ ms.lasthandoff: 03/17/2018
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="_images/aws-professional.svg" alt="Azure for AWS Professionals" />
+                                <img src="_images/aws-professional.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -233,7 +233,7 @@ ms.lasthandoff: 03/17/2018
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="_images/performance.svg" alt="Performance antipatterns" />
+                                <img src="_images/performance.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -253,7 +253,7 @@ ms.lasthandoff: 03/17/2018
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="/azure/architecture/reference-architectures/sharepoint/images/sharepoint.svg" alt="Run SharePoint 2016 on Azure" />
+                                <img src="/azure/architecture/reference-architectures/sharepoint/images/sharepoint.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -273,7 +273,7 @@ ms.lasthandoff: 03/17/2018
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="/azure/architecture/reference-architectures/sap/images/sap.svg" width="100%" alt="Run Elasticsearch on Azure" />
+                                <img src="/azure/architecture/reference-architectures/sap/images/sap.svg" width="100%" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -293,7 +293,7 @@ ms.lasthandoff: 03/17/2018
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="_images/multitenant-identity.svg" alt="Identity Management for Multitenant Applications" />
+                                <img src="_images/multitenant-identity.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -313,12 +313,12 @@ ms.lasthandoff: 03/17/2018
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="_images/azurecat.svg" alt="Azure Customer Advisory Team" />
+                                <img src="_images/azurecat.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
                             <h3>Azure Customer Advisory Team</h3>
-                            <p>AzureCAT-Blog</p>
+                            <p>Blog des AzureCAT-Teams</p>
                         </div>
                     </div>
                 </div>
@@ -333,12 +333,12 @@ ms.lasthandoff: 03/17/2018
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="_images/sqlcat.svg" alt="SQL Server Customer Advisory Team" />
+                                <img src="_images/sqlcat.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
                             <h3>SQL Server Customer Advisory Team</h3>
-                            <p>SQLCAT-Blog</p>
+                            <p>Blog des SQLCAT-Teams</p>
                         </div>
                     </div>
                 </div>

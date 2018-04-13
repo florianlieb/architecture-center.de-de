@@ -1,12 +1,12 @@
 ---
-title: "Erläuterungen: Wie funktioniert Azure?"
-description: "Enthält eine Beschreibung der internen Funktionsweise von Azure."
+title: 'Erläuterungen: Wie funktioniert Azure?'
+description: Enthält eine Beschreibung der internen Funktionsweise von Azure.
 author: petertay
-ms.openlocfilehash: 847d24b7057d80f3d34aac7900cfb64fec60a640
-ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
+ms.openlocfilehash: b4830fec69ac6d256d934d91ea2c295219925a9a
+ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/09/2018
+ms.lasthandoff: 03/17/2018
 ---
 # <a name="explainer-how-does-azure-work"></a>Erläuterungen: Wie funktioniert Azure?
 
@@ -22,7 +22,7 @@ Innerhalb jedes Racks oder Clusters haben die meisten Server die Aufgabe, diese 
 
 Jede Instanz des Fabric Controllers ist mit einem anderen Satz von Servern verbunden, auf denen Software für die Cloudorchestrierung ausgeführt wird, die normalerweise als **Front-End** bezeichnet wird. Auf dem Front-End werden die Webdienste, RESTful-APIs und internen Azure-Datenbanken gehostet, die für alle Funktionen der Cloud verwendet werden. 
 
-Beispielsweise hostet das Front-End die Dienste, mit denen Kundenanforderungen zur Zuordnung von Azure-Ressourcen verarbeitet werden, z.B. [virtuelle Netzwerke][vnet], [virtuelle Computer][vms] und Dienste wie [CosmosDB]. Zuerst überprüft das Front-End den Benutzer und stellt sicher, dass der Benutzer zur Zuordnung der angeforderten Ressourcen berechtigt ist. Wenn die Berechtigung vorhanden ist, zieht das Front-End eine Datenbank heran, um ein Serverrack mit ausreichender Kapazität zu ermitteln. Anschließend weist es den Fabric Controller im Rack an, die Ressource zuzuordnen.
+Beispielsweise hostet das Front-End die Dienste, mit denen Kundenanforderungen zur Zuordnung von Azure-Ressourcen verarbeitet werden. Hierzu zählen beispielsweise [virtuelle Netzwerke][vnet], [virtuelle Computer][vms] und Dienste wie [Cosmos DB][cosmosdb]. Zuerst überprüft das Front-End den Benutzer und stellt sicher, dass der Benutzer zur Zuordnung der angeforderten Ressourcen berechtigt ist. Wenn die Berechtigung vorhanden ist, zieht das Front-End eine Datenbank heran, um ein Serverrack mit ausreichender Kapazität zu ermitteln. Anschließend weist es den Fabric Controller im Rack an, die Ressource zuzuordnen.
 
 Einfach ausgedrückt: Azure ist eine große Sammlung von Servern und Netzwerkhardware und verfügt über einen komplexen Satz mit verteilten Anwendungen, die die Konfiguration und den Betrieb der virtualisierten Hardware und Software auf diesen Servern orchestrieren. Diese Orchestrierung macht Azure so leistungsstark. Benutzer müssen sich nicht mehr um das Pflegen und Aktualisieren der Hardware kümmern, sondern dies wird von Azure im Hintergrund durchgeführt. 
 

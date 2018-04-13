@@ -1,13 +1,13 @@
 ---
-title: "Muster „Back-Ends für Front-Ends“"
+title: Muster „Back-Ends für Front-Ends“
 description: Erstellen Sie separate Back-End-Dienste zur Nutzung durch bestimmte Front-End-Anwendungen oder -Schnittstellen.
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: 87acd39d021c5e44594a2e7c9574e4dd363ce83b
-ms.sourcegitcommit: c93f1b210b3deff17cc969fb66133bc6399cfd10
+ms.openlocfilehash: 2991d7a3e05b3ce6cd5148a552bae6d4ba8f7c4c
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/05/2018
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="backends-for-frontends-pattern"></a>Muster „Back-Ends für Front-Ends“
 
@@ -17,7 +17,7 @@ Erstellen Sie separate Back-End-Dienste zur Nutzung durch bestimmte Front-End-An
 
 Eine Anwendung kann ursprünglich auf eine Desktop-Webbenutzeroberfläche ausgerichtet sein. Normalerweise wird ein Back-End-Dienst parallel entwickelt, mit dem die für die Benutzeroberfläche benötigten Features bereitgestellt werden. Wenn die Benutzerbasis der Anwendung wächst, wird eine mobile Anwendung entwickelt, die mit demselben Back-End interagieren muss. Der Back-End-Dienst wird zu einem Back-End für allgemeine Zwecke, mit dem die Anforderungen der Desktopbenutzeroberfläche und mobilen Benutzeroberfläche erfüllt werden.
 
-Die Funktionen eines mobilen Geräts unterscheiden sich aber erheblich von einem Desktopbrowser in Bezug auf die Bildschirmgröße, Leistung und Anzeigebeschränkungen. Die Anforderungen für das Back-End einer mobilen Anwendung unterscheiden sich von der Desktop-Webbenutzeroberfläche. 
+Die Funktionen eines mobilen Geräts unterscheiden sich aufgrund von Bildschirmgröße, Leistung und Anzeigebeschränkungen aber erheblich von einem Desktopbrowser. Die Anforderungen für das Back-End einer mobilen Anwendung unterscheiden sich von der Desktop-Webbenutzeroberfläche. 
 
 Diese Unterschiede führen zu konkurrierenden Anforderungen für das Back-End. Für das Back-End sind regelmäßige und signifikante Änderungen erforderlich, damit es sowohl für die Desktop-Webbenutzeroberfläche als auch für die mobile Anwendung genutzt werden kann. Häufig arbeiten separate Benutzeroberflächenteams an den einzelnen Front-Ends, sodass das Back-End im Entwicklungsprozess zu einem Engpass wird. In Konflikt stehende Updateanforderungen und die Notwendigkeit, dass der Dienst für beide Front-Ends betriebsbereit gehalten werden muss, kann dazu führen, dass für eine einzelne bereitstellbare Ressource hoher Aufwand entsteht.
 

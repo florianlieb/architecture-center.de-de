@@ -1,16 +1,16 @@
 ---
-title: "Ausführen von Linux-VMs für eine n-schichtige Anwendung in Azure"
-description: "Vorgehensweise zum Ausführen von Linux-VMs in einer n-schichtigen Architektur in Microsoft Azure"
+title: Ausführen von Linux-VMs für eine n-schichtige Anwendung in Azure
+description: Vorgehensweise zum Ausführen von Linux-VMs in einer n-schichtigen Architektur in Microsoft Azure
 author: MikeWasson
 ms.date: 11/22/2017
 pnp.series.title: Linux VM workloads
 pnp.series.next: multi-region-application
 pnp.series.prev: multi-vm
-ms.openlocfilehash: e875a58aa83339560fd1de5b03a960f071883927
-ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
+ms.openlocfilehash: 8d3e6e5124a0abb27a3c72e1ecbd52a1a1da2a33
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="run-linux-vms-for-an-n-tier-application"></a>Ausführen von Linux-VMs für eine n-schichtige Anwendung
 
@@ -30,7 +30,7 @@ Es gibt viele Möglichkeiten für die Implementierung einer n-schichtigen Archit
 * **Azure DNS:** [Azure DNS][azure-dns] ist ein Hostingdienst für DNS-Domänen, der die Namensauflösung unter Verwendung der Microsoft Azure-Infrastruktur durchführt. Durch das Hosten Ihrer Domänen in Azure können Sie Ihre DNS-Einträge mithilfe der gleichen Anmeldeinformationen, APIs, Tools und Abrechnung wie für die anderen Azure-Dienste verwalten.
 * **Jumpbox:** Wird auch als [geschützter Host] bezeichnet. Dies ist eine geschützte VM im Netzwerk, die von Administratoren zum Herstellen der Verbindung mit anderen VMs verwendet wird. Die Jumpbox verfügt über eine NSG, die Remotedatenverkehr nur von öffentlichen IP-Adressen zulässt, die in einer Liste mit sicheren Absendern aufgeführt sind. Die NSG sollte SSH-Datenverkehr (Secure Shell) zulassen.
 * **Überwachung:** Mit Überwachungssoftware wie [Nagios], [Zabbix] oder [Icinga] können Informationen über die Antwortzeit, die VM-Betriebszeit und die allgemeine Integrität Ihres Systems bereitstellen. Installieren Sie die Überwachungssoftware auf einer VM, die sich in einem separaten Verwaltungssubnetz befindet.
-* **NSGs:** Verwenden Sie [Netzwerksicherheitsgruppen][nsg] (NSGs), um den Netzwerkdatenverkehr im VNET zu beschränken. In der hier gezeigten 3-schichtigen Architektur akzeptiert die Datenbankschicht beispielsweise keinen Datenverkehr vom Web-Front-End, sondern nur von der Unternehmensschicht und dem Verwaltungssubnetz.
+* <strong>NSGs:</strong> Verwenden Sie [Netzwerksicherheitsgruppen][nsg] (NSGs), um den Netzwerkdatenverkehr im VNET zu beschränken. In der hier gezeigten 3-schichtigen Architektur akzeptiert die Datenbankschicht beispielsweise keinen Datenverkehr vom Web-Front-End, sondern nur von der Unternehmensschicht und dem Verwaltungssubnetz.
 * **Apache Cassandra-Datenbank**: Stellt Hochverfügbarkeit in der Datenschicht durch Replikation und Failover bereit.
 
 ## <a name="recommendations"></a>Empfehlungen
@@ -120,21 +120,21 @@ Eine Bereitstellung für diese Referenzarchitektur ist auf [GitHub][github-folde
 
 Bevor Sie die Referenzarchitektur in Ihrem eigenen Abonnement bereitstellen können, müssen Sie die folgenden Schritte ausführen.
 
-1. Klonen oder Forken Sie das GitHub-Repository [AzureCAT-Referenzarchitekturen][ref-arch-repo], oder laden Sie die zugehörige ZIP-Datei herunter.
+1. Klonen oder Forken Sie das GitHub-Repository [Referenzarchitekturen][ref-arch-repo], oder laden Sie die entsprechende ZIP-Datei herunter.
 
 2. Vergewissern Sie sich, dass Azure CLI 2.0 auf Ihrem Computer installiert ist. Um die Befehlszeilenschnittstelle zu installieren, befolgen Sie die Anweisungen unter [Installieren von Azure CLI 2.0][azure-cli-2].
 
 3. Installieren Sie das npm-Paket mit den [Azure Bausteinen][azbb].
 
-  ```bash
-  npm install -g @mspnp/azure-building-blocks
-  ```
+   ```bash
+   npm install -g @mspnp/azure-building-blocks
+   ```
 
 4. Melden Sie sich über eine Eingabeaufforderung, eine bash-Eingabeaufforderung oder die PowerShell-Eingabeaufforderung bei Ihrem Azure-Konto an. Verwenden Sie dazu die unten aufgeführten Befehle, und befolgen Sie die Anweisungen.
 
-  ```bash
-  az login
-  ```
+   ```bash
+   az login
+   ```
 
 ### <a name="deploy-the-solution-using-azbb"></a>Bereitstellen der Lösung mit azbb
 
@@ -146,9 +146,9 @@ Um die Linux VMs für eine n-schichtige Anwendungsreferenzarchitektur bereitzust
 
 3. Stellen Sie die Referenzarchitektur mithilfe des Befehlszeilentools **azbb** bereit, wie unten dargestellt.
 
-  ```bash
-  azbb -s <your subscription_id> -g <your resource_group_name> -l <azure region> -p n-tier-linux.json --deploy
-  ```
+   ```bash
+   azbb -s <your subscription_id> -g <your resource_group_name> -l <azure region> -p n-tier-linux.json --deploy
+   ```
 
 Weitere Informationen zum Bereitstellen dieser Beispielreferenzarchitektur mithilfe von Azure-Bausteinen finden Sie im [GitHub-Repository][git].
 
@@ -183,7 +183,7 @@ Weitere Informationen zum Bereitstellen dieser Beispielreferenzarchitektur mithi
 [ref-arch-repo]: https://github.com/mspnp/reference-architectures
 [vm-sla]: https://azure.microsoft.com/support/legal/sla/virtual-machines
 [vnet faq]: /azure/virtual-network/virtual-networks-faq
-[visio-download]: https://archcenter.azureedge.net/cdn/vm-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/vm-reference-architectures.vsdx
 [Nagios]: https://www.nagios.org/
 [Zabbix]: http://www.zabbix.com/
 [Icinga]: http://www.icinga.org/

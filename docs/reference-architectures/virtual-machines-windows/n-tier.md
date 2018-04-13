@@ -1,16 +1,16 @@
 ---
-title: "Ausführen von Windows-VMs für eine n-schichtige Architektur"
-description: "Vorgehensweise zur Implementierung einer mehrschichtigen Architektur in Azure mit Fokus auf eine zuverlässige Verfügbarkeit, Sicherheit, Skalierbarkeit und Verwaltbarkeit"
+title: Ausführen von Windows-VMs für eine n-schichtige Architektur
+description: Vorgehensweise zur Implementierung einer mehrschichtigen Architektur in Azure mit Fokus auf eine zuverlässige Verfügbarkeit, Sicherheit, Skalierbarkeit und Verwaltbarkeit
 author: MikeWasson
 ms.date: 11/22/2016
 pnp.series.title: Windows VM workloads
 pnp.series.next: multi-region-application
 pnp.series.prev: multi-vm
-ms.openlocfilehash: 0654239a5bbd966a2aa776415b7f15ae723ffd63
-ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
+ms.openlocfilehash: 5ed94eb9ab8203d35d9597336e367d54e03944d7
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="run-windows-vms-for-an-n-tier-application"></a>Ausführen von Windows-VMs für eine n-schichtige Anwendung
 
@@ -29,7 +29,7 @@ Es gibt viele Möglichkeiten für die Implementierung einer n-schichtigen Archit
 * **Lastenausgleichsmodule:** Verwenden Sie ein [Lastenausgleichsmodul mit Internetzugriff][load-balancer-external], um eingehenden Internetdatenverkehr auf die Internetschicht zu verteilen, und ein [internes Lastenausgleichsmodul][load-balancer-internal], um den Netzwerkdatenverkehr von der Internetschicht auf die Unternehmensschicht zu verteilen.
 * **Jumpbox:** Wird auch als [geschützter Host] bezeichnet. Dies ist eine geschützte VM im Netzwerk, die von Administratoren zum Herstellen der Verbindung mit anderen VMs verwendet wird. Die Jumpbox verfügt über eine NSG, die Remotedatenverkehr nur von öffentlichen IP-Adressen zulässt, die in einer Liste mit sicheren Absendern aufgeführt sind. Die NSG sollte Remotedesktop-Datenverkehr (RDP) zulassen.
 * **Überwachung:** Mit Überwachungssoftware wie [Nagios], [Zabbix] oder [Icinga] können Informationen über die Antwortzeit, die VM-Betriebszeit und die allgemeine Integrität Ihres Systems bereitstellen. Installieren Sie die Überwachungssoftware auf einer VM, die sich in einem separaten Verwaltungssubnetz befindet.
-* **NSGs:** Verwenden Sie [Netzwerksicherheitsgruppen][nsg] (NSGs), um den Netzwerkdatenverkehr im VNET zu beschränken. In der hier gezeigten 3-schichtigen Architektur akzeptiert die Datenbankschicht beispielsweise keinen Datenverkehr vom Web-Front-End, sondern nur von der Unternehmensschicht und dem Verwaltungssubnetz.
+* <strong>NSGs:</strong> Verwenden Sie [Netzwerksicherheitsgruppen][nsg] (NSGs), um den Netzwerkdatenverkehr im VNET zu beschränken. In der hier gezeigten 3-schichtigen Architektur akzeptiert die Datenbankschicht beispielsweise keinen Datenverkehr vom Web-Front-End, sondern nur von der Unternehmensschicht und dem Verwaltungssubnetz.
 * **SQL Server Always On-Verfügbarkeitsgruppe:** Stellt Hochverfügbarkeit in der Datenschicht durch Replikation und Failover bereit.
 * **AD DS-Server (Active Directory Domain Services):** Bei älteren Versionen als Windows Server 2016 müssen SQL Server Always On-Verfügbarkeitsgruppen Mitglied einer Domäne sein. Dies ist auf die Abhängigkeit der Verfügbarkeitsgruppen von der Windows Server Failover Cluster-Technologie (WSFC) zurückzuführen. Windows Server 2016 bietet die Möglichkeit, einen Failovercluster ohne Active Directory zu erstellen. In diesem Fall sind die AD DS-Server für diese Architektur nicht erforderlich. Weitere Informationen finden Sie unter [Neuerungen beim Failoverclustering unter Windows Server 2016][wsfc-whats-new].
 * **Azure DNS:** [Azure DNS][azure-dns] ist ein Hostingdienst für DNS-Domänen, der die Namensauflösung unter Verwendung der Microsoft Azure-Infrastruktur durchführt. Durch das Hosten Ihrer Domänen in Azure können Sie Ihre DNS-Einträge mithilfe der gleichen Anmeldeinformationen, APIs, Tools und Abrechnung wie für die anderen Azure-Dienste verwalten.
@@ -82,10 +82,10 @@ Konfigurieren Sie die SQL Server-Always On-Verfügbarkeitsgruppe wie folgt:
 3. Erstellen Sie einen Verfügbarkeitsgruppenlistener, und ordnen Sie den DNS-Namen des Listeners der IP-Adresse eines internen Lastenausgleichsmoduls zu. 
 4. Erstellen Sie eine Lastenausgleichsregel für den SQL Server-Überwachungsport (standardmäßig TCP-Port 1433). Die Lastenausgleichsregel muss *Floating IP*, auch als „Direct Server Return“ bezeichnet, aktivieren. Dies bewirkt, dass die VM direkt auf den Client antwortet, was eine direkte Verbindung mit dem primären Replikat ermöglicht.
   
-  > [!NOTE]
-  > Wenn die Floating IP aktiviert ist, muss die Portnummer des Front-Ends mit der des Back-Ends in der Lastenausgleichsregel übereinstimmen.
-  > 
-  > 
+   > [!NOTE]
+   > Wenn die Floating IP aktiviert ist, muss die Portnummer des Front-Ends mit der des Back-Ends in der Lastenausgleichsregel übereinstimmen.
+   > 
+   > 
 
 Wenn ein SQL-Client versucht, eine Verbindung herzustellen, leitet das Lastenausgleichsmodul die Verbindungsanforderung an das primäre Replikat weiter. Bei einem Failover zu einem anderen Replikat leitet das Lastenausgleichsmodul nachfolgende Anforderungen automatisch an ein neues primäres Replikat weiter. Weitere Informationen finden Sie unter [Konfigurieren eines ILB-Listeners für AlwaysOn-Verfügbarkeitsgruppen in Azure][sql-alwayson-ilb].
 
@@ -135,21 +135,21 @@ Eine Bereitstellung für diese Referenzarchitektur ist auf [GitHub][github-folde
 
 Bevor Sie die Referenzarchitektur in Ihrem eigenen Abonnement bereitstellen können, müssen Sie die folgenden Schritte ausführen.
 
-1. Klonen oder Forken Sie das GitHub-Repository [AzureCAT-Referenzarchitekturen][ref-arch-repo], oder laden Sie die zugehörige ZIP-Datei herunter.
+1. Klonen oder Forken Sie das GitHub-Repository [Referenzarchitekturen][ref-arch-repo], oder laden Sie die entsprechende ZIP-Datei herunter.
 
 2. Vergewissern Sie sich, dass Azure CLI 2.0 auf Ihrem Computer installiert ist. Um die Befehlszeilenschnittstelle zu installieren, befolgen Sie die Anweisungen unter [Installieren von Azure CLI 2.0][azure-cli-2].
 
 3. Installieren Sie das npm-Paket mit den [Azure Bausteinen][azbb].
 
-  ```bash
-  npm install -g @mspnp/azure-building-blocks
-  ```
+   ```bash
+   npm install -g @mspnp/azure-building-blocks
+   ```
 
 4. Melden Sie sich über eine Eingabeaufforderung, eine bash-Eingabeaufforderung oder die PowerShell-Eingabeaufforderung bei Ihrem Azure-Konto an. Verwenden Sie dazu die unten aufgeführten Befehle, und befolgen Sie die Anweisungen.
 
-  ```bash
-  az login
-  ```
+   ```bash
+   az login
+   ```
 
 ### <a name="deploy-the-solution-using-azbb"></a>Bereitstellen der Lösung mit azbb
 
@@ -159,18 +159,18 @@ Um die Windows-VMs für eine n-schichtige Anwendungsreferenzarchitektur bereitzu
 
 2. Die Parameterdatei gibt einen Standard-Administratorbenutzernamen und ein Standardkennwort für jede VM in der Bereitstellung an. Sie müssen diese vor der Bereitstellung der Referenzarchitektur ändern. Öffnen Sie die `n-tier-windows.json`-Datei, und ersetzen Sie jedes Feld **adminUsername** und **adminPassword** durch neue Einstellungen.
   
-  > [!NOTE]
-  > Während dieser Bereitstellung werden sowohl in den **VirtualMachineExtension**-Objekten als auch in den **extensions**-Einstellungen für einige der **VirtualMachine**-Objekte mehrere Skripts ausgeführt. Für einige dieser Skripts sind der Administratorbenutzername und das Kennwort erforderlich, die Sie soeben geändert haben. Wir empfehlen Ihnen, diese Skripts zu überprüfen, um sicherzustellen, dass Sie die richtigen Anmeldeinformationen angegeben haben. Wenn Sie nicht die richtigen Anmeldeinformationen angegeben haben, tritt bei der Bereitstellung möglicherweise ein Fehler auf.
-  > 
-  > 
+   > [!NOTE]
+   > Während dieser Bereitstellung werden sowohl in den **VirtualMachineExtension**-Objekten als auch in den **extensions**-Einstellungen für einige der **VirtualMachine**-Objekte mehrere Skripts ausgeführt. Für einige dieser Skripts sind der Administratorbenutzername und das Kennwort erforderlich, die Sie soeben geändert haben. Wir empfehlen Ihnen, diese Skripts zu überprüfen, um sicherzustellen, dass Sie die richtigen Anmeldeinformationen angegeben haben. Wenn Sie nicht die richtigen Anmeldeinformationen angegeben haben, tritt bei der Bereitstellung möglicherweise ein Fehler auf.
+   > 
+   > 
 
 Speichern Sie die Datei .
 
 3. Stellen Sie die Referenzarchitektur mithilfe des Befehlszeilentools **azbb** bereit, wie unten dargestellt.
 
-  ```bash
-  azbb -s <your subscription_id> -g <your resource_group_name> -l <azure region> -p n-tier-windows.json --deploy
-  ```
+   ```bash
+   azbb -s <your subscription_id> -g <your resource_group_name> -l <azure region> -p n-tier-windows.json --deploy
+   ```
 
 Weitere Informationen zum Bereitstellen dieser Beispielreferenzarchitektur mithilfe von Azure-Bausteinen finden Sie im [GitHub-Repository][git].
 
@@ -216,5 +216,5 @@ Weitere Informationen zum Bereitstellen dieser Beispielreferenzarchitektur mithi
 [Nagios]: https://www.nagios.org/
 [Zabbix]: http://www.zabbix.com/
 [Icinga]: http://www.icinga.org/
-[visio-download]: https://archcenter.azureedge.net/cdn/vm-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/vm-reference-architectures.vsdx
 [0]: ./images/n-tier-diagram.png "n-schichtige Architektur mit Microsoft Azure"
