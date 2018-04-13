@@ -3,56 +3,36 @@
 - name: Datenarchitekturleitfaden
   href: index.md
   items:
-    - name: Herkömmliches RDBMS
+    - name: Herkömmliche RDMBS-Workloads
       items:
-        - name: Konzepte
-          items:
-            - name: Relationale Daten
-              href: concepts/relational-data.md
-            - name: Transaktionsdaten
-              href: concepts/transactional-data.md
-            - name: Semantische Modellierung
-              href: concepts/semantic-modeling.md
+        - name: Übersicht
+          href: relational-data/index.md
+        - name: Onlinetransaktionsverarbeitung (OLTP)
+          href: relational-data/online-transaction-processing.md
+        - name: Data Warehousing
+          href: relational-data/data-warehousing.md
+        - name: 'Analytische Onlineverarbeitung (Online Analytical Processing, OLAP)'
+          href: relational-data/online-analytical-processing.md
+        - name: 'Extrahieren, Transformieren und Laden (ETL)'
+          href: relational-data/etl.md
+    - name: Big Data-Architekturen
+      items:
+        - name: Übersicht
+          href: big-data/index.md
+        - name: Batchverarbeitung
+          href: big-data/batch-processing.md
+        - name: Verarbeitung in Echtzeit
+          href: big-data/real-time-processing.md
+        - name: Bedarfsorientiertes Machine Learning
+          href: big-data/machine-learning-at-scale.md
+        - name: Nicht relationale Datenspeicher
+          href: big-data/non-relational-data.md
         - name: Szenarien
           items:
-            - name: Onlinetransaktionsverarbeitung (OLTP)
-              href: scenarios/online-transaction-processing.md
-            - name: 'Analytische Onlineverarbeitung (Online Analytical Processing, OLAP)'
-              href: scenarios/online-analytical-processing.md
-            - name: Data Warehousing
-              href: scenarios/data-warehousing.md
-            - name: 'Extrahieren, Transformieren und Laden (ETL)'
-              href: scenarios/etl.md
-        - name: Auswahl der Technologie
-          items:
-            - name: Data Warehouses
-              href: technology-choices/data-warehouses.md
-            - name: 'Analytische Onlineverarbeitung (Online Analytical Processing, OLAP)'
-              href: technology-choices/olap-data-stores.md
-            - name: 'Onlinetransaktionsverarbeitung (Online Transaction Processing, OLTP)'
-              href: technology-choices/oltp-data-stores.md
-    - name: Big Data und NoSQL
-      items:
-        - name: Konzepte
-          items:
-            - name: Nicht relationale Datenspeicher
-              href: concepts/non-relational-data.md
-            - name: Arbeiten mit CSV- und JSON-Dateien
-              href: concepts/csv-and-json.md
-            - name: Data Lakes
-              href: concepts/data-lake.md
-            - name: Big Data-Architekturen
-              href: concepts/big-data.md
             - name: Erweiterte Analyse
-              href: concepts/advanced-analytics.md
-            - name: Bedarfsorientiertes Machine Learning
-              href: concepts/machine-learning-at-scale.md
-        - name: Szenarien
-          items:
-            - name: Batchverarbeitung
-              href: scenarios/batch-processing.md
-            - name: Verarbeitung in Echtzeit
-              href: scenarios/real-time-processing.md
+              href: scenarios/advanced-analytics.md
+            - name: Data Lakes
+              href: scenarios/data-lake.md
             - name: Freiform-Textsuche
               href: scenarios/search.md
             - name: Interaktive Datenuntersuchung
@@ -61,6 +41,8 @@
               href: scenarios/natural-language-processing.md
             - name: Zeitreihenlösungen
               href: scenarios/time-series.md
+            - name: Arbeiten mit CSV- und JSON-Dateien
+              href: scenarios/csv-and-json.md
         - name: Auswahl der Technologie
           items:
             - name: Analysedatenspeicher

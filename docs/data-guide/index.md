@@ -1,14 +1,15 @@
 ---
 title: Azure-Datenarchitekturleitfaden
-description: 
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
 layout: LandingPage
-ms.openlocfilehash: 848601f27faf56ea069852d8983e4d10fbad9d77
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.topic: landing-page
+ms.openlocfilehash: 9ffbe74bc55f4731369e938848cc5bbf9f7775f4
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="azure-data-architecture-guide"></a>Azure-Datenarchitekturleitfaden
 
@@ -20,58 +21,16 @@ Die Cloud verändert die Art und Weise, wie Anwendungen entwickelt werden, und a
 
 ## <a name="how-this-guide-is-structured"></a>Aufbau dieses Leitfadens
 
-Dieser Leitfaden basiert auf einem Schlüsselkonzept: der Unterscheidung zwischen *relationalen* Daten und *nicht relationalen* Daten. 
+Dieser Leitfaden basiert auf zwei allgemeinen Kategorien für Datenlösungen: *herkömmliche RDMBS-Workloads* und *Big Data-Lösungen*. 
 
-![](./images/guide-steps.svg)
+**[Herkömmliche RDMBS-Workloads:](./relational-data/index.md)** Hierzu zählen OLTP (Online Transaction Processing, Onlinetransaktionsverarbeitung) und OLAP (Online Analytical Processing, analytische Onlineverarbeitung). Bei den Daten in OLTP-Systemen handelt es sich in der Regel um relationale Daten mit einem vordefinierten Schema und einer Reihe von Einschränkungen zur Wahrung der referenziellen Integrität. Häufig werden Daten aus mehreren Quellen in der Organisation in einem Data Warehouse konsolidiert. Dabei werden die Quelldaten mithilfe eines ETL-Prozesses verschoben und transformiert.
 
-Relationale Daten werden in der Regel in einem herkömmlichen RDBMS oder einem Data Warehouse gespeichert. Sie verfügen über ein vordefiniertes Schema (Schema-on-Write, SOW) mit einer Reihe von Einschränkungen zur Aufrechterhaltung der referentiellen Integrität. Die meisten relationalen Datenbanken verwenden zum Abfragen die strukturierte Abfragesprache (Structured Query Language, SQL). Zu den Lösungen, die relationale Datenbanken nutzen, zählen die Onlinetransaktionsverarbeitung (Online Transaction Processing, OLTP) und die analytische Onlineverarbeitung (Online Analytical Processing, OLAP).
+![](./images/guide-rdbms.svg)
 
-Nicht relationale Daten sind alle Daten, die nicht das in herkömmlichen RDBMS-Systemen übliche [relationale Modell](https://en.wikipedia.org/wiki/Relational_model) verwenden. Dazu können Schlüssel-Wert-Daten, JSON-Daten, Diagrammdaten, Zeitreihendaten und andere Datentypen gehören. Der Begriff *NoSQL* bezieht sich auf Datenbanken, die für die Speicherung verschiedener Typen nicht relationaler Daten ausgelegt sind. Der Begriff ist jedoch nicht ganz zutreffend, da viele nicht relationale Datenspeicher SQL-kompatible Abfragen unterstützen. Nicht relationale Daten und NoSQL-Datenbanken sind Themen, die bei Diskussionen über *Big Data*-Lösungen häufig zur Sprache kommen. Eine Big Data-Architektur ist für die Erfassung, Verarbeitung und Analyse von Daten konzipiert, die für herkömmliche Datenbanksysteme zu groß oder zu komplex sind. 
+**[Big Data-Lösungen:](./big-data/index.md)** Eine Big Data-Architektur ist für die Erfassung, Verarbeitung und Analyse von Daten konzipiert, die für herkömmliche Datenbanksysteme zu groß oder zu komplex sind. Die Verarbeitung der Daten kann in Batches oder in Echtzeit erfolgen. Big Data-Lösungen umfassen in der Regel große Mengen nicht-relationaler Daten. Hierzu zählen etwa Schlüssel-Wert-Daten, JSON-Dokumente oder Zeitreihendaten. Herkömmliche RDBMS-Systeme eignen sich üblicherweise nicht besonders für die Speicherung solcher Daten. Der Begriff *NoSQL* bezieht sich auf eine Datenbankfamilie, die für die Speicherung nicht relationaler Daten konzipiert ist. (Der Begriff ist nicht ganz zutreffend, da viele nicht relationale Datenspeicher SQL-kompatible Abfragen unterstützen.)
 
-Der Architekturleitfaden enthält die folgenden Abschnitte zu diesen zwei Hauptkategorien:
+![](./images/guide-big-data.svg)
 
-- **Konzepte.** Einführende Artikel, in denen die wichtigsten Konzepte vorgestellt werden, mit denen Sie bei der Arbeit mit dieser Art von Daten vertraut sein müssen.
-- **Szenarien.** Ein repräsentativer Satz von Datenszenarien, einschließlich einer Erläuterung der relevanten Azure-Dienste und der geeigneten Architektur für das Szenario.
-- **Auswahl der Technologie.** Ein ausführlicher Vergleich verschiedener Datentechnologien, die in Azure verfügbar sind, einschließlich Open Source-Optionen. In jeder Kategorie finden Sie eine Beschreibung der wichtigsten Auswahlkriterien und eine Funktionsmatrix, die Ihnen die Auswahl der passenden Technologie für Ihr Szenario erleichtert.
+Diese beiden Kategorien schließen sich nicht gegenseitig aus und überschneiden sich teilweise. Wir sind jedoch der Ansicht, dass sie eine gute Diskussionsgrundlage bilden. Der Leitfaden geht auf **gängige Szenarien** für die jeweilige Kategorie sowie auf die relevanten Azure-Dienste und die geeignete Architektur für das jeweilige Szenario ein. Darüber hinaus werden die **Technologieoptionen** für Datenlösungen in Azure (einschließlich Open-Source-Optionen) verglichen. In jeder Kategorie finden Sie eine Beschreibung der wichtigsten Auswahlkriterien und eine Funktionsmatrix, die Ihnen die Auswahl der passenden Technologie für Ihr Szenario erleichtert. 
 
 In diesem Leitfaden geht es nicht um Data Science oder Datenbanktheorie. Zu diesen Themen wurden bereits ganze Bücher verfasst. Stattdessen möchten wir Ihnen dabei helfen, die passende Datenarchitektur oder Datenpipeline für Ihr Szenario zu finden und anschließend die Azure-Dienste und -Technologien auszuwählen, die am besten für Ihre Anforderungen geeignet sind. Wenn Sie bereits eine bestimmte Architektur geplant haben, können Sie direkt mit dem Abschnitt zur Auswahl der Technologie fortfahren.
-
-## <a name="traditional-rdbms"></a>Herkömmliches RDBMS
-
-### <a name="concepts"></a>Konzepte
-
-- [Relationale Daten](./concepts/relational-data.md) 
-- [Transaktionsdaten](./concepts/transactional-data.md) 
-- [Semantische Modellierung](./concepts/semantic-modeling.md) 
-
-### <a name="scenarios"></a>Szenarien
-
-- [Analytische Onlineverarbeitung (OLAP)](./scenarios/online-analytical-processing.md)
-- [Onlinetransaktionsverarbeitung (OLTP)](./scenarios/online-transaction-processing.md) 
-- [Data Warehousing und Data Marts](./scenarios/data-warehousing.md)
-- [ETL](./scenarios/etl.md) 
-
-## <a name="big-data-and-nosql"></a>Big Data und NoSQL
-
-### <a name="concepts"></a>Konzepte
-
-- [Nicht relationale Datenspeicher](./concepts/non-relational-data.md)
-- [Arbeiten mit CSV- und JSON-Dateien](./concepts/csv-and-json.md)
-- [Big Data-Architekturen](./concepts/big-data.md)
-- [Erweiterte Analyse](./concepts/advanced-analytics.md) 
-- [Bedarfsorientiertes Machine Learning](./concepts/machine-learning-at-scale.md)
-
-### <a name="scenarios"></a>Szenarien
-
-- [Batchverarbeitung](./scenarios/batch-processing.md)
-- [Verarbeitung in Echtzeit](./scenarios/real-time-processing.md)
-- [Freitextsuche](./scenarios/search.md)
-- [Interaktive Datenuntersuchung](./scenarios/interactive-data-exploration.md)
-- [Verarbeitung natürlicher Sprache](./scenarios/natural-language-processing.md)
-- [Zeitreihenlösungen](./scenarios/time-series.md)
-
-## <a name="cross-cutting-concerns"></a>Querschnittsthemen
-
-- [Datenübertragung](./scenarios/data-transfer.md) 
-- [Erweitern lokaler Datenlösungen auf die Cloud](./scenarios/hybrid-on-premises-and-cloud.md) 
-- [Schützen von Datenlösungen](./scenarios/securing-data-solutions.md) 
