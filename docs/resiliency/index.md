@@ -5,11 +5,11 @@ author: MikeWasson
 ms.date: 05/26/2017
 ms.custom: resiliency
 pnp.series.title: Design for Resiliency
-ms.openlocfilehash: 0cbcf0a8af1a8e20f2a1c024f5146a37176c5d1e
-ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
+ms.openlocfilehash: 9a6bd1332ea59923b32379018060403024b15e10
+ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/08/2017
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Entwerfen robuster Anwendungen für Azure
 
@@ -153,7 +153,7 @@ Azure verfügt über eine Reihe von Features, mit denen für eine Anwendung für
 
 **Verfügbarkeitsgruppen**: Stellen Sie als Schutz vor lokalen Hardwarefehlern, z.B. ein Ausfall eines Datenträgers oder Netzwerkswitchs, in einer Verfügbarkeitsgruppe zwei oder mehr VMs bereit. Eine Verfügbarkeitsgruppe besteht aus mindestens zwei *Fehlerdomänen*, die eine Stromquelle und einen Netzwerkswitch gemeinsam nutzen. VMs in einer Verfügbarkeitsgruppe sind auf die Fehlerdomänen verteilt. Wenn ein Hardwarefehler eine Fehlerdomäne betrifft, kann der Netzwerkdatenverkehr so weiterhin an die VMs in den anderen Fehlerdomänen weitergeleitet werden. Weitere Informationen zu Verfügbarkeitsgruppen finden Sie unter [Verwalten der Verfügbarkeit virtueller Windows-Computer in Azure](/azure/virtual-machines/windows/manage-availability).
 
-**Verfügbarkeitszonen (Vorschau)**.  Eine Verfügbarkeitszone ist eine physisch getrennte Zone in einer Azure-Region. Jede Verfügbarkeitszone verfügt über eine eigene Stromquelle, ein Netzwerk und eine Kühlung. Die Bereitstellung von VMs über Verfügbarkeitszonen hinweg dient dem Schutz einer Anwendung vor Ausfällen, die ein gesamtes Rechenzentrum betreffen. 
+**Verfügbarkeitszonen**.  Eine Verfügbarkeitszone ist eine physisch getrennte Zone in einer Azure-Region. Jede Verfügbarkeitszone verfügt über eine eigene Stromquelle, ein Netzwerk und eine Kühlung. Die Bereitstellung von VMs über Verfügbarkeitszonen hinweg dient dem Schutz einer Anwendung vor Ausfällen, die ein gesamtes Rechenzentrum betreffen. 
 
 **Regionspaare**: Um eine Anwendung vor einem regionalen Ausfall zu schützen, können Sie sie in mehreren Regionen bereitstellen, indem Sie Azure Traffic Manager zum Verteilen von Internetdatenverkehr auf die verschiedenen Regionen verwenden. Jede Azure-Region ist mit einer anderen Region gekoppelt. Zusammen bilden sie ein [Regionspaar](/azure/best-practices-availability-paired-regions). Mit Ausnahme von „Brasilien, Süden“ befinden sich die Regionen der Regionspaare immer innerhalb des gleichen geografischen Gebiets, um steuerliche und rechtliche Anforderungen an den Speicherort von Daten zu erfüllen.
 
@@ -164,7 +164,7 @@ Berücksichtigen Sie beim Entwerfen einer Anwendung für mehrere Regionen, dass 
 | Fehlerumfang | Rack | Datacenter | Region |
 | Routinganforderung | Lastenausgleichsmodul | Zonenübergreifender Lastenausgleich | Traffic Manager |
 | Netzwerklatenz | Sehr niedrig | Niedrig | Mittel bis hoch |
-| Virtuelles Netzwerk  | VNet | VNet | Regionsübergreifendes VNet-Peering (Vorschau) |
+| Virtuelles Netzwerk  | VNet | VNet | Regionsübergreifendes VNet-Peering |
 
 ## <a name="designing-for-resiliency"></a>Entwerfen mit Blick auf Resilienz
 In der Entwurfsphase ist es ratsam, eine Fehlermodusanalyse (Failure Mode Analysis, FMA) durchzuführen. Das Ziel einer FMA ist die Identifizierung von möglichen Fehlerpunkten, und es wird definiert, wie die Anwendung auf diese Fehler reagiert.

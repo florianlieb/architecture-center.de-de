@@ -5,11 +5,11 @@ keywords: AWS experts, Azure comparison, AWS comparison, difference between azur
 author: lbrader
 ms.date: 03/24/2017
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: b8698675efa42bb3fae73cefe7b078942549b412
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: 0af0890d383d22db0ed9d3b445cdd5b561b498ae
+ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/23/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="azure-for-aws-professionals"></a>Azure für AWS-Spezialisten
 
@@ -118,7 +118,7 @@ Die einzelnen Optionen sind in der folgenden Tabelle zusammengefasst:
 | Fehlerumfang | Rack | Datacenter | Region |
 | Routinganforderung | Lastenausgleichsmodul | Zonenübergreifender Lastenausgleich | Traffic Manager |
 | Netzwerklatenz | Sehr niedrig | Niedrig | Mittel bis hoch |
-| Virtuelle Netzwerke  | VNet | VNet | Regionsübergreifendes VNet-Peering (Vorschau) |
+| Virtuelle Netzwerke  | VNet | VNet | Regionsübergreifendes VNet-Peering |
 
 ### <a name="availability-sets"></a>Verfügbarkeitsgruppen 
 
@@ -130,7 +130,7 @@ Verfügbarkeitsgruppen sollten nach der Rolle der Instanz in Ihrer Anwendung org
 
 ![Azure-Verfügbarkeitsgruppen für die einzelnen Anwendungsrollen](./images/three-tier-example.png "Verfügbarkeitsgruppen für die einzelnen Anwendungsrollen")
 
-### <a name="availability-zones-preview"></a>Verfügbarkeitszonen (Vorschauversion)
+### <a name="availability-zones"></a>Verfügbarkeitszonen
 
 Eine [Verfügbarkeitszone](/azure/availability-zones/az-overview) ist eine physisch getrennte Zone in einer Azure-Region. Jede Verfügbarkeitszone verfügt über eine eigene Stromquelle, ein Netzwerk und eine Kühlung. Die Bereitstellung von VMs über Verfügbarkeitszonen hinweg dient dem Schutz einer Anwendung vor Ausfällen, die ein gesamtes Rechenzentrum betreffen. 
 
