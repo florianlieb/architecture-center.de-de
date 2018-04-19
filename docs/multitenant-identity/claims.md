@@ -81,7 +81,7 @@ Bei einer Anwendung mit nur einem Mandanten können Sie prüfen, ob der Ausstell
 * Legen Sie in den Optionen der OIDC-Middleware **ValidateIssuer** auf „false“ fest. Dadurch wird die automatische Prüfung deaktiviert.
 * Wenn sich ein Mandant anmeldet, speichern Sie den Mandanten und den Aussteller in der Benutzerdatenbank.
 * Wenn sich ein Benutzer anmeldet, schlagen Sie den Aussteller in der Datenbank nach. Wenn der Aussteller nicht gefunden wird, bedeutet dies, dass sich dieser Mandant nicht registriert hat. Sie können ihn zu einer Registrierungsseite umleiten.
-* Sie können auch bestimmte Mandanten auf eine schwarze Liste setzen, z. B. für Kunden, die ihr Abonnement nicht bezahlt haben.
+* Sie können auch bestimmte Mandanten auf eine Blockliste setzen, z. B. für Kunden, die ihr Abonnement nicht bezahlt haben.
 
 Eine ausführlichere Beschreibung finden Sie unter [Registrierung und Onboarding von Mandanten in einer mehrmandantenfähigen Anwendung][signup].
 
