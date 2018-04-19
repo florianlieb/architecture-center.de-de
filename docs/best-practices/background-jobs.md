@@ -211,7 +211,7 @@ Beachten Sie die folgenden Punkte bei der Entscheidung, wie und wo Hintergrundau
 Web- und Workerrollen durchlaufen unterschiedliche Phasen, während sie gestartet, ausgeführt und beendet werden. Die **RoleEntryPoint** -Klasse stellt eine Reihe von Ereignissen zur Verfügung, die anzeigen, wann diese Phasen auftreten. Sie können diese Ereignisse zum Initialisieren, Ausführen und Beenden von benutzerdefinierten Hintergrundaufgaben verwenden. Der vollständige Zyklus sieht so aus:
 
 * Azure lädt die Rollenassembly und sucht nach einer von **RoleEntryPoint**abgeleiteten Klasse.
-* Wenn diese Klasse gefunden wird, wird **RoleEntryPoint.OnStart()**aufgerufen. Sie überschreiben diese Methode, um die Hintergrundaufgaben zu initialisieren.
+* Wenn diese Klasse gefunden wird, wird **RoleEntryPoint.OnStart()** aufgerufen. Sie überschreiben diese Methode, um die Hintergrundaufgaben zu initialisieren.
 * Nach Abschluss der **OnStart**-Methode ruft Azure in der globalen Datei der Anwendung **Application_Start()** auf, sofern die Datei vorhanden ist (z.B. „Global.asax“ in einer Webrolle unter ASP.NET).
 * Azure ruft **RoleEntryPoint.Run()** in einem neuen Vordergrundthread auf, der parallel zu **OnStart()** ausgeführt wird. Sie überschreiben diese Methode, um die Hintergrundaufgaben zu starten.
 * Wenn die Run-Methode beendet wird, ruft Azure zuerst **Application_End()** in der globalen Datei der Anwendung, sofern diese vorhanden ist, und anschließend **RoleEntryPoint.OnStop()** auf. Sie überschreiben die **OnStop** -Methode, um die Hintergrundaufgaben zu beenden, Ressourcen zu bereinigen, Objekte zu löschen und die Verbindungen zu schließen, die von den Aufgaben möglicherweise verwendet wurden.
