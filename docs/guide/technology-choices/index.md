@@ -4,10 +4,10 @@ description: Auswahl der richtigen Technologien für Azure-Anwendungen
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 7681aeb7a6064d06674e781292c444dba9d410f2
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/22/2018
 ---
 # <a name="choose-the-right-technologies-for-azure-applications"></a>Auswahl der richtigen Technologien für Azure-Anwendungen
 
