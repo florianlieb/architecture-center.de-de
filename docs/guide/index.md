@@ -1,15 +1,17 @@
 ---
 layout: LandingPage
 ms.topic: landing-page
-ms.openlocfilehash: 530844a0d3b1256cec807e7bad509a40dca304f6
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 80cb7fde0694257a5c413b702505e27f18aed8d3
+ms.sourcegitcommit: d702b4d27e96e7a5a248dc4f2f0e25cf6e82c134
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2018
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="azure-application-architecture-guide"></a>Azure-Anwendungsarchitekturleitfaden
 
 Dieser Leitfaden stellt eine strukturierte Vorgehensweise zum Entwerfen von Anwendungen in Azure vor, die skalierbar, resilient und hochverfügbar sind. Er basiert auf bewährten Methoden, die wir im Rahmen von Kundeninteraktionen erarbeitet haben.
+
+<br/>
 
 <img src="./images/guide-steps.svg" style="max-width:800px;"/>
 
@@ -53,25 +55,49 @@ Dieser Leitfaden richtet sich an Anwendungsarchitekten, Entwickler und Betriebst
 
 Der Azure-Anwendungsarchitekturleitfaden ist als Abfolge von Schritten aufgebaut, die sich von der Architektur über den Entwurf bis hin zur Implementierung erstrecken. Zu jedem Schritt werden unterstützende Anweisungen bereitgestellt, die Sie beim Entwurf der Anwendungsarchitektur unterstützen.
 
-**[Architekturstile][arch-styles]**: Der erste Entscheidungspunkt ist gleichzeitig der wichtigste. Welche Art von Architektur erstellen Sie? Ist eine Microservicearchitektur, eine konventionellere Anwendung mit n-Schichten oder eine Big Data-Lösung das Ziel? Wir haben sieben unterschiedliche Architekturstile ermittelt. Jeder Stil weist Vor- und Nachteile auf.
+### <a name="architecture-styles"></a>Architekturstile
 
-> &#10148; [Azure-Referenzarchitekturen][ref-archs] geben empfohlene Bereitstellungen in Azure und Überlegungen in Bezug auf die Skalierbarkeit, Verfügbarkeit, Verwaltbarkeit und Sicherheit an. Bei einem Großteil werden außerdem bereitstellbare Ressourcen-Manager-Vorlagen zur Verfügung gestellt.
+Der erste Entscheidungspunkt ist gleichzeitig der wichtigste. Welche Art von Architektur erstellen Sie? Ist eine Microservicearchitektur, eine konventionellere Anwendung mit n-Schichten oder eine Big Data-Lösung das Ziel? Wir haben unterschiedliche Architekturstile ermittelt. Jeder Stil weist Vor- und Nachteile auf.
 
-**[Auswahl der Technologie][technology-choices]**: Direkt am Anfang sollte eine Entscheidung für eine von zwei Technologieoptionen getroffen werden, da dies Auswirkungen auf die gesamte Architektur hat. Wählen Sie zwischen der Compute- und der Speichertechnologie. Die Benennung *Compute* bezieht sich auf das Hostingmodell für die Computeressourcen, mit der Ihre Anwendungen ausgeführt werden. Zu Speichern zählen Datenbanken, aber auch Speicher für Nachrichtenwarteschlangen, Caches, IoT-Daten, unstrukturierte Protokolldaten und sonstige Daten, die eine Anwendung in einem Speicher speichern kann. 
+Weitere Informationen:
 
-> &#10148; [Computeoptionen][compute-options] und [Speicheroptionen][storage-options] bieten ausführliche Vergleichskriterien für die Auswahl von Compute- und Speicherdiensten.
+- [Architekturstile][arch-styles]
+- [Azure-Referenzarchitekturen][ref-archs]
 
-**[Entwurfsprinzipien][design-principles]**: Beim Entwurfsprozess sollten Sie die folgenden zehn allgemeinen Entwurfsprinzipien berücksichtigen. 
+### <a name="technology-choices"></a>Auswahl der Technologie
 
-> &#10148; Die Artikel zu den [bewährten Methoden][best-practices] enthalten spezielle Anweisungen zu Themen wie etwa automatische Skalierung, Caching, Datenpartitionierung und API-Entwurf.   
+Direkt am Anfang sollte eine Entscheidung für eine von zwei Technologieoptionen getroffen werden, da dies Auswirkungen auf die gesamte Architektur hat. Wählen Sie zwischen Computediensten und Datenspeichern. *Compute* bezieht sich auf das Hostingmodell für die Computeressourcen, mit dem Ihre Anwendungen ausgeführt werden. Zu *Datenspeichern* zählen Datenbanken, aber auch Speicher für Nachrichtenwarteschlangen, Caches, Protokolle und sonstige Daten, die eine Anwendung in einem Speicher speichern kann. 
 
-**[Säulen][pillars]**: Eine gelungene Cloudanwendung basiert auf fünf Säulen der Softwarequalität, nämlich Skalierbarkeit, Verfügbarkeit, Resilienz, Verwaltung und Sicherheit. 
+Weitere Informationen:
 
-> &#10148; Verwenden Sie unsere [Checklisten zur Entwurfsüberprüfung][checklists], um Ihren Entwurf im Hinblick auf diese Qualitätssäulen zu überprüfen. 
+- [Wählen eines Computediensts](./technology-choices/compute-overview.md)
+- [Auswählen eines Datenspeichers](./technology-choices/data-store-overview.md)
 
-**[Cloudentwurfsmuster][patterns]**: Diese Entwurfsmuster können Ihnen dabei helfen, zuverlässige, skalierbare und sichere Anwendungen in Azure zu erstellen. Jedes Muster beschreibt ein Problem, einen Ansatz zu dessen Lösung und ein auf Azure basierendes Beispiel.
+### <a name="design-principles"></a>Entwurfsprinzipien
 
-> &#10148; Sehen Sie sich den vollständigen [Katalog von Cloudentwurfsmustern](../patterns/index.md) an.
+Wir haben zehn allgemeine Entwurfsprinzipien identifiziert, die die Skalierbarkeit, Resilienz und Verwaltbarkeit Ihrer Anwendung optimieren. Diese Entwurfsprinzipien gelten für alle Architekturstile. Beim Entwurfsprozess sollten Sie die folgenden zehn allgemeinen Entwurfsprinzipien berücksichtigen. Berücksichtigen Sie dann die bewährten Methoden für bestimmte Aspekte der Architektur, etwa automatische Skalierung, Caching, Datenpartitionierung, API-Design usw.
+
+Weitere Informationen:
+
+- [Entwurfsprinzipien für Azure-Anwendungen][design-principles]
+- [Bewährte Methoden für das Erstellen für die Cloud][best-practices]
+
+### <a name="quality-pillars"></a>Qualitätssäulen
+
+Eine gelungene Cloudanwendung basiert auf fünf Säulen der Softwarequalität, nämlich Skalierbarkeit, Verfügbarkeit, Resilienz, Verwaltung und Sicherheit. Verwenden Sie unsere Checklisten zur Entwurfsüberprüfung, um Ihre Architektur im Hinblick auf diese Qualitätssäulen zu überprüfen.
+
+Weitere Informationen:
+
+- [Säulen der Softwarequalität][pillars]
+- [Checklisten für die Entwurfsüberprüfung][checklists] 
+
+### <a name="cloud-design-patterns"></a>Cloudentwurfsmuster
+
+Entwurfsmuster bieten allgemeine Lösungen für häufige Probleme beim Softwareentwurf. Wir haben verschiedene Entwurfsmuster identifiziert, die insbesondere beim Entwerfen verteilter Anwendungen für die Cloud praktisch sind.
+
+Weitere Informationen:
+
+- [Katalog mit Cloudentwurfsmustern](../patterns/index.md)
 
 
 [arch-styles]: ./architecture-styles/index.md

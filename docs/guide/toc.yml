@@ -12,7 +12,7 @@
           href: architecture-styles/web-queue-worker.md
         - name: Microservices
           href: architecture-styles/microservices.md
-        - name: CQRS
+        - name: CQRS-Architektur
           href: architecture-styles/cqrs.md
         - name: Ereignisgesteuerte Architektur
           href: architecture-styles/event-driven.md
@@ -20,14 +20,17 @@
           href: architecture-styles/big-data.md
         - name: Big Compute
           href: architecture-styles/big-compute.md
-    - name: Auswahl der Technologie
-      href: technology-choices/index.md
+    - name: Wählen eines Computediensts
       items:
-        - name: Übersicht über Computeoptionen
+        - name: Übersicht
           href: technology-choices/compute-overview.md
+        - name: Entscheidungsstruktur
+          href: technology-choices/compute-decision-tree.md
         - name: Vergleich der Computeoptionen
           href: technology-choices/compute-comparison.md
-        - name: Übersicht über Datenspeicher
+    - name: Auswählen eines Datenspeichers
+      items:
+        - name: Übersicht
           href: technology-choices/data-store-overview.md
         - name: Vergleich der Datenspeicher
           href: technology-choices/data-store-comparison.md

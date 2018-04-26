@@ -10,9 +10,10 @@
   items:
     - name: Architekturstile
       href: guide/architecture-styles/index.md
-    - name: Auswahl der Technologie
-      href: guide/technology-choices/index.md
-      items: null
+    - name: Wählen eines Computediensts
+      href: guide/technology-choices/compute-overview.md
+    - name: Auswählen eines Datenspeichers
+      href: guide/technology-choices/data-store-overview.md
     - name: Entwurfsprinzipien
       href: guide/design-principles/index.md
     - name: Säulen der Softwarequalität
