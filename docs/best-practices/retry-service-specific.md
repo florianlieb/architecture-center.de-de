@@ -4,11 +4,11 @@ description: Spezifische Dienstanleitung für die Festlegung des Wiederholungsme
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 332f96e73def360926b6a934bbb1361b2254ec41
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: c80a4aa232cca1283d84368a36dd7341cab8a314
+ms.sourcegitcommit: 3846a0ab2b2b2552202a3c9c21af0097a145ffc6
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2018
+ms.lasthandoff: 04/29/2018
 ---
 # <a name="retry-guidance-for-specific-services"></a>Wiederholungsanleitung für bestimmte Dienste
 
@@ -924,7 +924,7 @@ In der Active Directory-Authentifizierungsbibliothek (ADAL) ist ein integrierter
 Berücksichtigen Sie Bei Verwendung von Azure Active Directory die folgenden Richtlinien:
 
 * Verwenden Sie nach Möglichkeit die ADAL-Bibliothek und die integrierte Unterstützung für Wiederholungsversuche.
-* Wenn Sie die REST-API für Azure Active Directory verwenden, sollten Sie den Vorgang nur wiederholen, wenn das Ergebnis ein Fehler im Bereich 5xx ist (z. B. 500 Interner Serverfehler, 502 ungültiges Gateway, 503 Dienst nicht verfügbar und 504 Gateway-Timeout). Bei anderen Fehlern den Vorgang nicht wiederholen.
+* Wenn Sie die REST-API für Azure Active Directory verwenden, wiederholen Sie den Vorgang, wenn der Ergebniscode 429 (Zu viele Anforderungen) lautet oder das Ergebnis ein Fehler im Bereich 5xx ist. Bei anderen Fehlern den Vorgang nicht wiederholen.
 * Eine exponentielle Backoff-Richtlinie wird für die Verwendung in Batch-Szenarien mit Azure Active Directory empfohlen.
 
 Erwägen Sie, mit den folgenden Einstellungen für Wiederholungsvorgänge zu beginnen. Hierbei handelt es sich um allgemeine Einstellungen und Sie sollten die Vorgänge überwachen und die Werte entsprechend Ihrem Szenario optimieren.
@@ -989,6 +989,7 @@ Berücksichtigen Sie beim Zugriff auf die Dienste von Azure oder von Drittanbiet
 * Die vorübergehende Erkennungslogik hängt von der tatsächlichen Client-API ab, die Sie verwenden, um die REST-Aufrufe aufzurufen. Einige Clients, z.B. die neuere **HttpClient**-Klasse, lösen keine Ausnahmen für abgeschlossene Anforderungen mit einem nicht erfolgreichen HTTP-Statuscode aus. Dies verbessert die Leistung, verhindert jedoch die Verwendung des Anwendungsblocks zur Handhabung vorübergehender Fehler. In diesem Fall können Sie den Aufruf der REST-API mit einem Code umschließen, der Ausnahmen für nicht erfolgreiche HTTP-Statuscodes erzeugt, die dann vom Block verarbeitet werden können. Alternativ können Sie einen anderen Mechanismus für die Durchführung der Wiederholungen verwenden.
 * Der vom Dienst zurückgegebene HTTP-Statuscode kann dabei helfen, zu erkennen, ob der Fehler vorübergehend ist. Möglicherweise müssen Sie die Ausnahmen, die von einem Client oder dem Wiederholungsframework erzeugt wurden untersuchen, um auf den Statuscode zuzugreifen oder um den entsprechenden Ausnahmetyp bestimmen zu können. Die folgenden HTTP-Codes geben in der Regel an, dass eine Wiederholung geeignet ist:
   * 408 Anforderungstimeout
+  * 429 – Zu viele Anforderungen
   * 500 Interner Serverfehler
   * 502 Ungültiges Gateway
   * 503 Dienst nicht verfügbar
