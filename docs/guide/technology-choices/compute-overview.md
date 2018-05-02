@@ -1,12 +1,13 @@
 ---
-title: Übersicht über Azure-Compute-Optionen
-description: Übersicht über Azure-Compute-Optionen
+title: Übersicht über Azure-Computeoptionen
+description: Übersicht über Azure-Computeoptionen
 author: MikeWasson
-ms.openlocfilehash: a23dd49f24bc52db6f357540e3ebccb19e0497ee
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.date: 04/21/2018
+ms.openlocfilehash: 6781e1f1f6e239e3853920cb544092538cccfc62
+ms.sourcegitcommit: d702b4d27e96e7a5a248dc4f2f0e25cf6e82c134
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="overview-of-azure-compute-options"></a>Übersicht über Azure-Compute-Optionen
 
@@ -16,7 +17,7 @@ An einem Ende des Spektrums befindet sich IaaS (**Infrastructure-as-a-Service**)
 
 Bei PaaS (**Platform-as-a-Service**) ist eine verwaltete Hostingumgebung vorhanden, in der Sie Ihre Anwendung bereitstellen können, ohne VMs oder Netzwerkressourcen verwalten zu müssen. Anstatt beispielsweise einzelne VMs zu erstellen, geben Sie eine Instanzanzahl an, und der Dienst übernimmt das Bereitstellen, Konfigurieren und Verwalten der erforderlichen Ressourcen. Azure App Service ist ein Beispiel für einen PaaS-Dienst.
 
-Es wird ein Spektrum von IaaS bis zu PaaS in Reinform abgedeckt. Für Azure-VMs kann beispielsweise die automatische Skalierung durchgeführt werden, indem VM-Skalierungsgruppen verwendet werden. Diese Funktion für die automatische Skalierung entspricht nicht genau PaaS, aber es handelt sich um die Art von Verwaltungsfeature, das Teil eines PaaS-Diensts sein kann.
+Es wird ein Spektrum von IaaS bis zu PaaS in Reinform abgedeckt. Für Azure-VMs kann beispielsweise mithilfe von VM Scale Sets die automatische Skalierung durchgeführt werden. Diese Funktion für die automatische Skalierung entspricht nicht genau PaaS, aber es handelt sich um die Art von Verwaltungsfeature, das Teil eines PaaS-Diensts sein kann.
 
 Bei FaaS (**Functions-as-a-Service**) geht dies noch weiter, da es auch nicht mehr erforderlich ist, sich um die Hostingumgebung zu kümmern. Anstatt Computeinstanzen zu erstellen und Code auf diesen Instanzen bereitzustellen, stellen Sie einfach Ihren Code bereit, der vom Dienst dann automatisch ausgeführt wird. Es ist nicht erforderlich, dass Sie die Computeressourcen verwalten. Für diese Dienste wird die serverlose Architektur genutzt, und das nahtlose zentrale Hoch- und Herunterskalieren auf die jeweilige Ebene, die zum Verarbeiten des Datenverkehrs erforderlich ist, kann durchgeführt werden. Bei Azure Functions handelt es sich um einen Dienst vom Typ „FaaS“.
 
@@ -42,4 +43,6 @@ Berücksichtigen Sie bei der Auswahl einer Compute-Option die folgenden Faktoren
 - Welche allgemeinen Beschränkungen gelten für die einzelnen Dienste? 
 - Welche Art von Anwendungsarchitekturen sind für diesen Dienst geeignet? 
 
-Ein ausführlicherer Vergleich von Compute-Optionen in Azure finden Sie unter [Criteria for choosing an Azure compute option](./compute-comparison.md) (Kriterien für die Wahl einer Azure-Compute-Option).
+Wählen Sie einen Computedienst für Ihre Anwendung mithilfe der [Entscheidungsstruktur für Azure-Computedienste](./compute-decision-tree.md) aus.
+
+Einen ausführlicheren Vergleich von Compute-Optionen in Azure finden Sie unter [Kriterien für die Auswahl einer Azure-Compute-Option](./compute-comparison.md).

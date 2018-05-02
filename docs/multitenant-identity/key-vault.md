@@ -5,11 +5,11 @@ author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: client-assertion
-ms.openlocfilehash: 45d1564c255f2450f68c5e92ebe0d7de0c40ae31
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: d49129a38d0413f6006095f03b817885e1ce6c92
+ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="use-azure-key-vault-to-protect-application-secrets"></a>Verwenden von Azure Key Vault zum Schützen von Anwendungsgeheimnissen
 
@@ -27,15 +27,15 @@ Eine sicherere Option ist es, diese Geheimnisse in [Azure Key Vault][KeyVault] z
 
 In der [Tailspin Surveys][Surveys]-Anwendung sind folgende Einstellungen vertraulich:
 
-* Die Datenbankverbindungszeichenfolge
-* Die Redis-Datenbankverbindungszeichenfolge
-* Der geheime Clientschlüssel für die Webanwendung
+* die Datenbankverbindungszeichenfolge
+* die Redis-Datenbankverbindungszeichenfolge
+* der geheime Clientschlüssel für die Webanwendung
 
 Die Surveys-Anwendung lädt die Konfigurationseinstellungen aus den folgenden Quellen:
 
-* Aus der Datei „appsettings.json“
+* aus der Datei „appsettings.json“
 * Aus dem [Speicher für Benutzergeheimnisse][user-secrets] (nur in Entwicklungsumgebungen, zu Testzwecken)
-* Aus der Hostingumgebung (App-Einstellungen in Azure-Web-Apps)
+* aus der Hostingumgebung (App-Einstellungen in Azure-Web-Apps)
 * Aus Key Vault (wenn aktiviert)
 
 Jeder dieser Einstellungen setzt die vorherige außer Kraft, daher haben in Key Vault gespeicherte Einstellungen Vorrang.
@@ -75,7 +75,7 @@ Erstellen Sie einen Administratorbenutzer in dem Azure AD-Mandanten, in dem die 
 3. Klicken Sie auf **Weitere Dienste** > **SICHERHEIT + IDENTITÄT** > **Azure Active Directory** > **Benutzer und Gruppen** > **Alle Benutzer**.
 4. Klicken Sie oben im Portal auf **Neuer Benutzer**.
 5. Füllen Sie die Felder aus, und weisen Sie den Benutzer zur Verzeichnisrolle **Globaler Administrator** hinzu.
-6. Klicken Sie auf **Erstellen**.
+6. Klicken Sie auf **Create**.
 
 ![Globaler Administratorbenutzer](./images/running-the-app/global-admin-user.png)
 
@@ -167,7 +167,7 @@ Weisen Sie diesen Benutzer jetzt als Abonnementbesitzer zu.
     ```
     .\Setup-KeyVault.ps1 -KeyVaultName <<key vault name> -KeyName Redis--Configuration -KeyValue "<<Redis DNS name>>.redis.cache.windows.net,password=<<Redis access key>>,ssl=true" 
     ```
-    ,wobei 
+    Hierbei gilt:
    
    * Schlüsseltresorname = der Name, den Sie dem Schlüsseltresor im vorherigen Schritt zugewiesen haben
    * Redis-DNS-Name = der DNS-Name Ihrer Redis Cache-Instanz
@@ -187,7 +187,7 @@ Weisen Sie diesen Benutzer jetzt als Abonnementbesitzer zu.
    
     wobei `<<DB connection string>>` der Wert der Datenbankverbindungszeichenfolge ist.
    
-    Für Tests mit der lokalen Datenbank kopieren Sie die Verbindungszeichenfolge aus der Datei „Tailspin.Surveys.Web/appsettings.json“. Ändern Sie dabei den doppelten umgekehrten Schrägstrich („\\\\“) in einen einfachen umgekehrten Schrägstrich. Der doppelte umgekehrte Schrägstrich ist ein Escapezeichen in der JSON-Datei.
+    Für Tests mit der lokalen Datenbank, kopieren Sie die Verbindungszeichenfolge aus der Datei „Tailspin.Surveys.Web/appsettings.json“. Ändern Sie dabei den doppelten umgekehrten Schrägstrich („\\\\“) in einen einfachen umgekehrten Schrägstrich. Der doppelte umgekehrte Schrägstrich ist ein Escapezeichen in der JSON-Datei.
    
     Beispiel:
    

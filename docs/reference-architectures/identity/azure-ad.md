@@ -7,11 +7,11 @@ ms.date: 11/28/2016
 pnp.series.next: adds-extend-domain
 pnp.series.prev: ./index
 cardTitle: Integrate on-premises AD with Azure AD
-ms.openlocfilehash: 431de4b2e08c79f70cc9830fda8315e07bf22c64
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: 9475d669b2cb8888a7ceabed7e36317fe63681fd
+ms.sourcegitcommit: d702b4d27e96e7a5a248dc4f2f0e25cf6e82c134
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/30/2018
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="integrate-on-premises-active-directory-domains-with-azure-active-directory"></a>Integrieren von lokalen Active Directory-Domänen in Azure Active Directory
 
@@ -119,9 +119,9 @@ Weitere Informationen zu diesen Topologien finden Sie unter [Topologien für Azu
 
 ### <a name="user-authentication"></a>Benutzerauthentifizierung
 
-Standardmäßig konfiguriert der Azure AD Connect-Synchronisierungsserver Kennwortsynchronisierung zwischen der lokalen Domäne und Azure AD, und für den Azure AD-Dienst wird davon ausgegangen, dass Benutzer sich authentifizieren, indem sie das Kennwort bereitstellen, dass sie lokal verwenden. Für viele Organisationen ist dies geeignet, Sie sollten aber die vorhandenen Richtlinien und die vorhandene Infrastruktur Ihres Unternehmens berücksichtigen. Beispiel: 
+Standardmäßig konfiguriert der Azure AD Connect-Synchronisierungsserver Kennworthashsynchronisierung zwischen der lokalen Domäne und Azure AD, und für den Azure AD-Dienst wird davon ausgegangen, dass Benutzer sich authentifizieren, indem sie das Kennwort bereitstellen, dass sie lokal verwenden. Für viele Organisationen ist dies geeignet, Sie sollten aber die vorhandenen Richtlinien und die vorhandene Infrastruktur Ihres Unternehmens berücksichtigen. Beispiel: 
 
-* Die Sicherheitsrichtlinie Ihrer Organisation könnte verhindern, dass Kennworthashes in der Cloud synchronisiert werden.
+* Die Sicherheitsrichtlinie Ihrer Organisation könnte verhindern, dass Kennworthashes in der Cloud synchronisiert werden. In diesem Fall sollte Ihre Organisation die [Passthrough-Authentifizierung](/azure/active-directory/connect/active-directory-aadconnect-pass-through-authentication) erwägen.
 * Sie könnten fordern, dass für Benutzer nahtloses einmaligen Anmelden verwendet wird, wenn sie im Unternehmensnetzwerk von Computern, die zur Domäne gehören, auf Cloudressourcen zugreifen.
 * Ihre Organisation hat möglicherweise bereits Active Directory-Verbunddienste (AD FS) oder einen Drittanbieter-Verbundanbieter bereitgestellt. Sie können Azure AD so konfigurieren, dass statt der in der Cloud gespeicherten Kennwortinformationen diese Infrastruktur zum Implementieren von Authentifizierung und SSO verwendet wird.
 

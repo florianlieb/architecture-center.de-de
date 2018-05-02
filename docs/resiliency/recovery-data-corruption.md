@@ -3,11 +3,11 @@ title: Wiederherstellung nach Datenbeschädigung oder unbeabsichtigtem Löschen
 description: In diesem Leitfaden erfahren Sie, wie Sie nach Datenbeschädigung oder versehentlichem Löschen eine Wiederherstellung ausführen, ausfallsichere, hochverfügbare und fehlertolerante Anwendungen erstellen und die Notfallwiederherstellung planen
 author: MikeWasson
 ms.date: 01/10/2018
-ms.openlocfilehash: 76d2f996750d5a67b67bd5dc4977580f3b8abbc3
-ms.sourcegitcommit: 3d6dba524cc7661740bdbaf43870de7728d60a01
+ms.openlocfilehash: b0716de39fe69d607b9a63e51356d28bbcdbfeae
+ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/11/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="recover-from-data-corruption-or-accidental-deletion"></a>Wiederherstellung nach Datenbeschädigung oder unbeabsichtigtem Löschen 
 
@@ -23,13 +23,13 @@ Azure Storage bietet Datenresilienz durch automatisierte Replikate. Allerdings v
 
 - **Blockblobs.** Erstellen Sie eine Zeitpunkt-Momentaufnahme von jedem Blockblob. Weitere Informationen finden Sie unter [Erstellen einer Momentaufnahme eines Blobs](/rest/api/storageservices/creating-a-snapshot-of-a-blob). Bei jeder Momentaufnahme wird Ihnen nur die erforderliche Speicherkapazität berechnet, die Sie benötigen, um die Veränderungen innerhalb des Blobs seit der letzten Momentaufnahme zu speichern. Die Momentaufnahmen sind von der Existenz des zugrunde liegenden Originalblobs abhängig, sodass ein Kopiervorgang in ein anderes Blob oder sogar in ein anderes Speicherkonto empfohlen wird. Dadurch sind die Sicherungsdaten dann ordnungsgemäß vor versehentlichem Löschen geschützt. Verwenden Sie [AzCopy](/azure/storage/common/storage-use-azcopy) oder [Azure PowerShell](/azure/storage/common/storage-powershell-guide-full), um die Blobs in ein anderes Speicherkonto zu kopieren.
 
-- **Dateien.** Verwenden Sie [Freigabemomentaufnahmen (Vorschauversion)](/azure/storage/files/storage-how-to-use-files-snapshots) oder AzCopy bzw. PowerShell, um die Dateien in ein anderes Speicherkonto zu kopieren.
+- **Dateien.** Verwenden Sie [Freigabemomentaufnahmen](/azure/storage/files/storage-snapshots-files) oder AzCopy bzw. PowerShell, um die Dateien in ein anderes Speicherkonto zu kopieren.
 
 - **Tabellen.** Verwenden Sie AzCopy, um die Tabellendaten in ein anderes Speicherkonto in einer anderen Region zu exportieren.
 
 ## <a name="database"></a>Datenbank
 
-### <a name="azure-sql-database"></a>Azure SQL-Datenbank 
+### <a name="azure-sql-database"></a>Azure SQL-Datenbank 
 
 SQL-Datenbank führt automatisch eine Kombination aus wöchentlichen vollständigen Datenbanksicherungen, stündlichen differenziellen Datenbanksicherungen sowie Transaktionsprotokollsicherungen im Abstand von fünf bis zehn Minuten durch, um Ihr Unternehmen vor Datenverlusten zu schützen. Verwenden Sie die Point-in-Time-Wiederherstellung, um eine Datenbank zu einem früheren Zeitpunkt wiederherzustellen. Weitere Informationen finden Sie unter 
 

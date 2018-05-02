@@ -3,11 +3,11 @@ title: Migrieren einer Azure Cloud Services-Anwendung zu Azure Service Fabric
 description: Informationen zum Migrieren einer Anwendung von Azure Cloud Services zu Azure Service Fabric.
 author: MikeWasson
 ms.date: 04/27/2017
-ms.openlocfilehash: ce9c138a6b093fb7f0329c619c75bd4f4aacc2e7
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: b9ecbc88ae74da99a0ff3bb8814a9cb3422f79d5
+ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/23/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="migrate-an-azure-cloud-services-application-to-azure-service-fabric"></a>Migrieren einer Azure Cloud Services-Anwendung zu Azure Service Fabric 
 
@@ -141,9 +141,9 @@ Die ursprüngliche Surveys-Anwendung verwendet ASP.NET MVC. Da ASP.NET MVC in Se
 
 - Portieren Sie die Webrollen zu ASP. NET Core, das selbstgehostet werden kann.
 - Konvertieren Sie die Website in eine einseitige Anwendung (SPA), die eine Web-API aufruft, die mit der ASP.NET-Web-API implementiert wurde. Dies hätte eine komplette Neugestaltung des Web-Front-Ends erforderlich gemacht.
-- Behalten Sie den vorhandenen ASP.NET MVC-Code bei, und stellen Sie IIS in einem Windows Server-Container für Service Fabric bereit. Dieser Ansatz würde nur eine geringe oder gar keine Codeänderung erfordern. Die [Containerunterstützung][sf-containers] in Service Fabric befindet sich derzeit jedoch noch in der Vorschauversion.
+- Behalten Sie den vorhandenen ASP.NET MVC-Code bei, und stellen Sie IIS in einem Windows Server-Container für Service Fabric bereit. Dieser Ansatz würde nur eine geringe oder gar keine Codeänderung erfordern. 
 
-Auf der Grundlage dieser Überlegungen haben wir uns für die erste Option entschieden, die Portierung zu ASP.NET Core. Dazu haben wir die Schritte befolgt, die in [Migrieren von ASP.NET MVC zu ASP.NET Core MVC][aspnet-migration] beschrieben sind. 
+Dank der ersten Option, Portieren zu ASP.NET Core, konnten wir die neuesten Features in ASP.NET Core nutzen. Für die Konvertierung haben wir die Schritte befolgt, die in [Migrieren von ASP.NET MVC zu ASP.NET Core MVC][aspnet-migration] beschrieben sind. 
 
 > [!NOTE]
 > Wenn Sie ASP.NET Core mit Kestrel verwenden, sollten Sie aus Sicherheitsgründen einen Reverseproxy vor Kestrel platzieren, um den Datenverkehr aus dem Internet zu verarbeiten. Weitere Informationen finden Sie unter [Einführung in die Kestrel-Webserverimplementierung in ASP.NET Core][kestrel]. Der Abschnitt [Bereitstellen der Anwendung](#deploying-the-application) beschreibt eine empfohlene Azure-Bereitstellung.
@@ -176,7 +176,7 @@ Ein Dienst muss für jeden Endpunkt explizit Listener erstellen. Der Grund dafü
 
  Ein Clouddienst enthält die folgenden Konfigurations- und Paketdateien:
 
-| File | BESCHREIBUNG |
+| Datei | BESCHREIBUNG |
 |------|-------------|
 | Dienstdefinitionsdatei (.csdef) | Einstellungen, die von Azure verwendet werden, um den Clouddienst zu konfigurieren. Definiert die Rollen, Endpunkte, Startaufgaben und die Namen von Konfigurationseinstellungen. |
 | Dienstkonfigurationsschema (.cscfg) | Bereitstellungsabhängige Einstellungen, einschließlich der Anzahl der Rolleninstanzen, der Portnummern der Endpunkte und der Werte der Konfigurationseinstellungen. 
@@ -198,7 +198,7 @@ Das Anwendungspaket ist das, was Sie bereitstellen. Es enthält mindestens ein D
 
 Eine Service Fabric-Anwendung enthält die folgenden Konfigurationsdateien:
 
-| File | Speicherort | BESCHREIBUNG |
+| Datei | Speicherort | BESCHREIBUNG |
 |------|----------|-------------|
 | ApplicationManifest.xml | Anwendungspaket | Definiert die Dienste, aus denen sich die Anwendung zusammensetzt. |
 | ServiceManifest.xml | Dienstpaket| Beschreibt mindestens einen Dienst. |
