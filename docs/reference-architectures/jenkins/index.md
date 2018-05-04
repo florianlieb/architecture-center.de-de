@@ -3,11 +3,11 @@ title: Ausführen eines Jenkins-Servers in Azure
 description: Diese Referenzarchitektur veranschaulicht, wie Sie einen für Unternehmen konzipierten skalierbaren Jenkins-Server in Azure bereitstellen und betreiben, der durch einmaliges Anmelden (Single Sign-On, SSO) geschützt ist.
 author: njray
 ms.date: 01/21/18
-ms.openlocfilehash: c07a341bbe4d0304087e4535408967c45d36199e
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 5f9c54e71a8750e88de1ae633ccc1316f8375d3a
+ms.sourcegitcommit: 0de300b6570e9990e5c25efc060946cb9d079954
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2018
+ms.lasthandoff: 05/03/2018
 ---
 # <a name="run-a-jenkins-server-on-azure"></a>Ausführen eines Jenkins-Servers in Azure
 
@@ -58,7 +58,7 @@ Die folgenden Empfehlungen gelten für die meisten Szenarios. Sofern Sie keine b
 
 Mit dem [Azure AD][azure-ad]-Mandanten für Ihr Azure-Abonnement wird SSO für Jenkins-Benutzer aktiviert. Darüber hinaus wird er zum Einrichten von [Dienstprinzipalen][service-principal] verwendet, die Jenkins-Aufträgen den Zugriff auf Azure-Ressourcen ermöglichen.
 
-SSO-Authentifizierung und -Autorisierung werden von dem auf dem Jenkins-Server installierten Azure AD-Plug-In implementiert. SSO ermöglicht bei der Anmeldung beim Jenkins-Server die Authentifizierung mit Ihren Organisationsanmeldeinformationen aus Azure AD. Beim Konfigurieren des Azure AD-Plug-Ins können Sie die Ebene des autorisierten Zugriffs eines Benutzers auf den Jenkin-Server angeben.
+SSO-Authentifizierung und -Autorisierung werden von dem auf dem Jenkins-Server installierten Azure AD-Plug-In implementiert. SSO ermöglicht bei der Anmeldung beim Jenkins-Server die Authentifizierung mit Ihren Organisationsanmeldeinformationen aus Azure AD. Beim Konfigurieren des Azure AD-Plug-Ins können Sie die Ebene des autorisierten Zugriffs eines Benutzers auf den Jenkins-Server angeben.
 
 Um Jenkins-Aufträgen den Zugriff auf Azure-Ressourcen zu gewähren, erstellt ein Azure AD-Administrator Dienstprinzipale. Diese gewähren Anwendungen – in diesem Fall den Jenkins-Aufträgen – [authentifizierten, autorisierten Zugriff][ad-sp] auf Azure-Ressourcen.
 
@@ -74,7 +74,7 @@ Mit der Lösungsvorlage für Jenkins in Azure werden mehrere Azure-Plug-Ins inst
 
 -   Das [Azure AD-Plug-In][configure-azure-ad] ermöglicht dem Jenkins-Server auf der Grundlage von Azure AD die Unterstützung von SSO für Benutzer.
 
--   Das Plug-In für [Azure-VM-Agents][configure-agent] nutzt eine Azure Resource Manager-Vorlage (ARM) zum Erstellen von Jenkins-Agents auf virtuellen Azure-Computern.
+-   Das Plug-In für [Azure-VM-Agents][configure-agent] nutzt eine Azure Resource Manager-Vorlage zum Erstellen von Jenkins-Agents auf virtuellen Azure-Computern.
 
 -   Das [Azure-Anmeldeinformationen-Plug-In][configure-credential] ermöglicht Ihnen das Speichern von Anmeldeinformationen des Azure-Dienstprinzipals in Jenkins.
 
@@ -113,13 +113,13 @@ Die Auswahl der richtigen Servergröße hängt von der Größe der erwarteten Wo
 
 ## <a name="availability-considerations"></a>Überlegungen zur Verfügbarkeit
 
-Bewerten Sie die Verfügbarkeitsanforderungen für Ihren Workflow sowie die Vorgehensweise zum Wiederherstellen des Jenkin-Zustands, sollte der Jenkin-Server ausfallen. Berücksichtigen Sie beim Bewerten der Verfügbarkeitsanforderungen zwei allgemeine Metriken:
+Verfügbarkeit im Kontext eines Jenkins-Servers bedeutet Folgendes: Sie können jegliche Zustandsinformationen im Zusammenhang mit Ihrem Workflow (etwa Testergebnisse, von Ihnen erstellte Bibliotheken oder andere Artefakte) wiederherstellen. Entscheidende Workflowzustände oder Artefakte müssen zur Wiederherstellung des Workflows beibehalten werden, falls der Jenkins-Server ausfällt. Berücksichtigen Sie beim Bewerten der Verfügbarkeitsanforderungen zwei allgemeine Metriken:
 
 -   RTO (Recovery Time Objective) gibt an, wie lange Sie Vorgänge ohne Jenkins ausführen können.
 
 -   RPO (Recovery Point Objective) gibt an, wie viele Daten verloren gehen dürfen, wenn sich eine Dienstunterbrechung auf Jenkins auswirkt.
 
-In der Praxis geben RTO und RPO Redundanz und Sicherung an. Bei der Verfügbarkeit geht es nicht um Hardwarewiederherstellung (diese ist Teil von Azure), sondern darum sicherzustellen, dass der Zustand des Jenkins-Servers gespeichert wird. Diese Referenzarchitektur verwendet die [Azure-Vereinbarung zum Servicelevel][sla] (SLA), die eine Verfügbarkeit von 99,9 Prozent für einen einzelnen virtuellen Computer garantiert. Falls diese SLA Ihre Verfügbarkeitsanforderungen nicht erfüllt, stellen Sie sicher, dass Sie einen Tarif für die Notfallwiederherstellung besitzen, oder ziehen Sie die Bereitstellung eines [Jenkins-Servers mit mehreren Mastern ][multi-master] (nicht in diesem Dokument behandelt) in Betracht.
+In der Praxis geben RTO und RPO Redundanz und Sicherung an. Bei der Verfügbarkeit geht es nicht um Hardwarewiederherstellung (diese ist Teil von Azure), sondern darum sicherzustellen, dass der Zustand des Jenkins-Servers gespeichert wird. Microsoft bietet eine [Vereinbarung zum Servicelevel][sla] (Service Level Agreement, SLA) für einzelne VM-Instanzen an. Falls diese SLA Ihre Verfügbarkeitsanforderungen nicht erfüllt, stellen Sie sicher, dass Sie einen Tarif für die Notfallwiederherstellung besitzen, oder ziehen Sie die Bereitstellung eines [Jenkins-Servers mit mehreren Mastern ][multi-master] (nicht in diesem Dokument behandelt) in Betracht.
 
 Erwägen Sie die Verwendung der [Skripts][disaster] für die Notfallwiederherstellung in Schritt 7 der Bereitstellung, um ein Azure Storage-Konto mit verwalteten Datenträgern zum Speichern des Jenkins-Serverzustands zu erstellen. Wenn Jenkins ausfällt, kann der Systemzustand wiederhergestellt werden, der in diesem separaten Speicherkonto gespeichert ist.
 
@@ -127,7 +127,7 @@ Erwägen Sie die Verwendung der [Skripts][disaster] für die Notfallwiederherste
 
 Verwenden Sie zum Schutz eines grundlegenden Jenkins-Servers die folgenden Vorgehensweisen, da ein Jenkins-Server in seinem Grundzustand nicht sicher ist.
 
--   Richten Sie eine Option zum Sichern der Anmeldung beim Jenkin-Server ein. HTTP ist nicht standardmäßig sicher. Diese Architektur verwendet HTTP und besitzt eine öffentliche IP. Ziehen Sie die Einrichtung von [HTTPS auf dem Nginx-Server][nginx] in Betracht, der für die sichere Anmeldung verwendet wird.
+-   Richten Sie eine sichere Methode für die Anmeldung beim Jenkins-Server ein. Diese Architektur verwendet HTTP und besitzt eine öffentliche IP, HTTP ist jedoch nicht standardmäßig sicher. Ziehen Sie die Einrichtung von [HTTPS auf dem Nginx-Server][nginx] in Betracht, der für die sichere Anmeldung verwendet wird.
 
     > [!NOTE]
     > Wenn Sie Ihrem Server SSL hinzufügen, erstellen Sie eine NSG-Regel für das Jenkins-Subnetz, damit Port 443 geöffnet wird. Weitere Informationen finden Sie unter [Öffnen von Ports zu einem virtuellen Computer mit dem Azure-Portal][port443].
@@ -185,7 +185,7 @@ Ausführliche Informationen finden Sie unter [Erstellen eines Jenkins-Servers au
 
 Dieser Schritt wird vom Jenkins-Administrator ausgeführt, der außerdem ein Benutzerkonto im Azure AD-Verzeichnis des Abonnements besitzen und der Rolle „Mitwirkender“ zugewiesen sein muss.
 
-Verwenden Sie das [Azure AD-Plug-In][configure-azure-ad] aus dem Jenkins Update Center auf dem Jenkin-Server, und befolgen Sie die Anweisungen zum Einrichten von SSO.
+Verwenden Sie das [Azure AD-Plug-In][configure-azure-ad] aus dem Jenkins Update Center auf dem Jenkins-Server, und befolgen Sie die Anweisungen zum Einrichten von SSO.
 
 ### <a name="step-3-provision-jenkins-server-with-azure-vm-agent-plugin"></a>Schritt 3: Bereitstellen des Jenkins-Servers mit dem Azure-VM-Agent-Plug-In
 
