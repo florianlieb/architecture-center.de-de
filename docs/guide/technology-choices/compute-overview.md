@@ -3,11 +3,11 @@ title: Übersicht über Azure-Computeoptionen
 description: Übersicht über Azure-Computeoptionen
 author: MikeWasson
 ms.date: 04/21/2018
-ms.openlocfilehash: 6781e1f1f6e239e3853920cb544092538cccfc62
-ms.sourcegitcommit: d702b4d27e96e7a5a248dc4f2f0e25cf6e82c134
+ms.openlocfilehash: 8ee508aaa07d87ac77ef484e20d572fdf2b9fb40
+ms.sourcegitcommit: 3846a0ab2b2b2552202a3c9c21af0097a145ffc6
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/23/2018
+ms.lasthandoff: 04/29/2018
 ---
 # <a name="overview-of-azure-compute-options"></a>Übersicht über Azure-Compute-Optionen
 
