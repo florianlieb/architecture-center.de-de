@@ -33,16 +33,14 @@
       href: reference-architectures/identity/index.md
     - name: Jenkins-Server
       href: reference-architectures/jenkins/index.md
+    - name: Anwendung mit n-Schichten
+      href: reference-architectures/n-tier/index.md
     - name: Netzwerk-DMZ
       href: reference-architectures/dmz/index.md
     - name: SAP NetWeaver und SAP HANA
       href: reference-architectures/sap/index.md
     - name: SharePoint Server 2016
       href: reference-architectures/sharepoint/index.md
-    - name: VM-Workloads (Linux)
-      href: reference-architectures/virtual-machines-linux/index.md
-    - name: VM-Workloads (Windows)
-      href: reference-architectures/virtual-machines-windows/index.md
 - name: Cloudentwurfsmuster
   href: patterns/index.md
   items:

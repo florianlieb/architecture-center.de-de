@@ -2,11 +2,11 @@
 title: Architekturstile
 description: Allgemeine Architekturstile für Cloudanwendungen
 layout: LandingPage
-ms.openlocfilehash: 15a316f9ebf7cfe4e72a6992f264a68abb904819
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: e647d1a0f3305e7754859e5ab8a9a3b46c3d4fb6
+ms.sourcegitcommit: d08f6ee27e1e8a623aeee32d298e616bc9bb87ff
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 05/07/2018
 ---
 # <a name="architecture-styles"></a>Architekturstile
 
@@ -65,6 +65,7 @@ Der CQRS-Stil ist am sinnvollsten, wenn er auf ein Subsystem einer größeren Ar
 Ziehen Sie eine ereignisgesteuerte Architektur bei Anwendungen in Betracht, die große Datenmengen mit sehr geringer Latenz erfassen und verarbeiten, wie etwa IoT-Lösungen. Dieser Stil ist auch nützlich, wenn verschiedene Subsysteme unterschiedliche Verarbeitungstypen für die gleichen Ereignisdaten durchführen müssen.
 
 <br />
+
 ### <a name="big-data-big-compute"></a>Big Data, Big Compute
 
 **[Big Data](./big-data.md)** und **[Big Compute](./big-compute.md)** sind besondere Architekturstile für Workloads, die bestimmten speziellen Profilen entsprechen. Bei Big Data wird ein sehr großes Dataset in Blöcke unterteilt, die ein gesamtes Dataset für die Analyse und Berichterstellung parallel verarbeiten. Big Compute, auch als „High Performance Computing“ (HPC) bezeichnet, führt parallele Berechnungen über eine große Anzahl (Tausenden) von Kernen durch. Zu Domänen zählen Simulationen, Modellierung und 3D-Rendering.
@@ -91,7 +92,7 @@ In der folgenden Tabelle wird zusammengefasst, wie die einzelnen Stile Abhängig
 | n-Schichten | Horizontale in Subnetze unterteilte Schichten | Konventioneller Geschäftsbereich, niedrige Aktualisierungshäufigkeit |
 | Web-Warteschlange-Worker | Front- und Back-End-Aufträge, die von asynchronen Nachrichten entkoppelt sind | Relativ einfache Domäne mit einigen ressourcenintensiven Aufgaben |
 | Microservices | Vertikal (funktional) zerlegte Dienste, die sich über APIs gegenseitig aufrufen | Komplexe Domäne, häufige Aktualisierungen |
-| CQRS | Trennung von Lese-/Schreibvorgängen, Schema und Skalierung werden getrennt voneinander optimiert | Kollaborative Domäne, bei denen viele Benutzer auf die gleichen Daten zugreifen |
+| CQRS-Architektur | Trennung von Lese-/Schreibvorgängen, Schema und Skalierung werden getrennt voneinander optimiert | Kollaborative Domäne, bei denen viele Benutzer auf die gleichen Daten zugreifen |
 | Ereignisgesteuert | Produzent/Konsument, unabhängige Ansicht pro Subsystem | IoT- und Echtzeitsysteme |
 | Große Datenmengen | Unterteilung riesiger Datasets in kleine Blöcke, parallele Verarbeitung lokaler Datasets | Batch- und Echtzeit-Datenanalysen, Predictive Analytics durch ML |
 | Big Compute| Datenzuordnung zu Tausenden von Kernen | Rechenintensive Bereiche wie Simulationen |
