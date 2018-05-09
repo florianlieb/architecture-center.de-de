@@ -3,11 +3,11 @@ title: Azure-Referenzarchitekturen
 description: Referenzarchitekturen, Blaupausen und reglementierende Implementierungsanweisungen für gängige Workloads in Azure
 layout: LandingPage
 ms.topic: landing-page
-ms.openlocfilehash: 9708c975e543a04cafe22f38194e833be44d7b81
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 4c0006404ed0c0f603e9599cd9c04e6d02fdbfeb
+ms.sourcegitcommit: a5e549c15a948f6fb5cec786dbddc8578af3be66
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/06/2018
+ms.lasthandoff: 05/06/2018
 ---
 <!-- This file is generated! -->
 <!-- See the templates in ./build/reference-architectures  -->
@@ -19,47 +19,30 @@ Unsere Referenzarchitekturen sind nach Szenarien angeordnet, wobei verwandte Arc
 
 <section class="series">
     <ul class="panelContent">
-    <!-- Windows VM workloads -->
+
+<!-- N-tier -->
 <li style="display: flex; flex-direction: column;">
-    <a href="./virtual-machines-windows/index.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+    <a href="./n-tier/index.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
             <div class="cardPadding" style="display: flex;">
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="./virtual-machines-windows/images/n-tier.svg" height="140px" />
+                            <img src="./n-tier/images/n-tier-sql-server.svg" />
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Windows-VM-Workloads</h3>
-                        <p>Diese Serie beginnt mit bewährten Methoden für die Ausführung einer einzelnen Windows-VM, anschließend mehrerer VMs mit Lastenausgleich und schließlich einer Anwendung mit n-Schichten in mehreren Regionen.</p>
+                        <h3>Anwendung mit n-Schichten</h3>
+                        <p>Stellen Sie in Azure eine n-schichtige Anwendung für Windows oder Linux bereit.</p>
+                        <p>Konfigurationen werden für SQL Server und Apache Cassandra dargestellt. Stellen Sie für Hochverfügbarkeit eine Aktiv/Passiv-Konfiguration in zwei Regionen bereit.</p>
                     </div>
                 </div>
             </div>
         </div>
     </a>
 </li>
-    <!-- Linux VM workloads -->
-<li style="display: flex; flex-direction: column;">
-    <a href="./virtual-machines-linux/index.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardImageOuter">
-                        <div class="cardImage">
-                            <img src="./virtual-machines-linux/images/n-tier.svg" height="140px" />
-                        </div>
-                    </div>
-                    <div class="cardText">
-                        <h3>Linux-VM-Workloads</h3>
-                        <p>Diese Serie beginnt mit bewährten Methoden für die Ausführung einer einzelnen Linux-VM, anschließend mehrerer VMs mit Lastenausgleich und schließlich einer Anwendung mit n-Schichten in mehreren Regionen.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-    <!-- Hybrid network -->
+
+<!-- Hybrid network -->
 <li style="display: flex; flex-direction: column;">
     <a href="./hybrid-networking/index.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -73,6 +56,7 @@ Unsere Referenzarchitekturen sind nach Szenarien angeordnet, wobei verwandte Arc
                     <div class="cardText">
                         <h3>Hybrides Netzwerk</h3>
                         <p>Diese Serie zeigt Optionen zum Erstellen einer Netzwerkverbindung zwischen einem lokalen Netzwerk und Azure.</p>
+                        <p>Konfigurationen beinhalten S2S-VPN oder Azure ExpressRoute für eine private, dedizierte Verbindung.</p>
                     </div>
                 </div>
             </div>
