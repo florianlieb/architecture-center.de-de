@@ -87,7 +87,7 @@ Verwenden Sie dieses Muster in folgenden Situationen:
 
 - Bei der Integration in andere Systeme, insbesondere in Kombination mit Ereignisquellen, bei denen der vorübergehende Ausfall eines Subsystems nicht die Verfügbarkeit der anderen Systeme beeinträchtigen soll.
 
-Dieses Muster wird in folgenden Situationen empfohlen:
+Dieses Muster wird in folgenden Situationen nicht empfohlen:
 
 - Situationen, in denen die Domäne oder die Geschäftsregeln einfach sind
 
